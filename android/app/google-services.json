@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "374195929862",
+    "project_id": "hr-solutions-bf540",
+    "storage_bucket": "hr-solutions-bf540.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:374195929862:android:c8ae7e5be6bddb1d88d487",
+        "android_client_info": {
+          "package_name": "com.mealplanner.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2HnC2Red8A7Md82kbJ3A2jbD6Cherrec"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
