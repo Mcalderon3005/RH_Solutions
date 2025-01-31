@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'solicitude_desc_widget.dart' show SolicitudeDescWidget;
+import 'menu_usuario_widget.dart' show MenuUsuarioWidget;
 import 'package:flutter/material.dart';
 
-class SolicitudeDescModel extends FlutterFlowModel<SolicitudeDescWidget> {
+class MenuUsuarioModel extends FlutterFlowModel<MenuUsuarioWidget> {
   @override
   void initState(BuildContext context) {}
 

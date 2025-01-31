@@ -13,6 +13,8 @@ import 'schema/pagos_record.dart';
 import 'schema/pago_salario_record.dart';
 import 'schema/reuniones_record.dart';
 import 'schema/empleados_agendados_record.dart';
+import 'schema/log_sesion_record.dart';
+import 'schema/log_managed_error_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -29,6 +31,8 @@ export 'schema/pagos_record.dart';
 export 'schema/pago_salario_record.dart';
 export 'schema/reuniones_record.dart';
 export 'schema/empleados_agendados_record.dart';
+export 'schema/log_sesion_record.dart';
+export 'schema/log_managed_error_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -330,6 +334,80 @@ Future<List<EmpleadosAgendadosRecord>> queryEmpleadosAgendadosRecordOnce({
     queryCollectionOnce(
       EmpleadosAgendadosRecord.collection(parent),
       EmpleadosAgendadosRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query LogSesionRecords (as a Stream and as a Future).
+Future<int> queryLogSesionRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      LogSesionRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<LogSesionRecord>> queryLogSesionRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      LogSesionRecord.collection,
+      LogSesionRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<LogSesionRecord>> queryLogSesionRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      LogSesionRecord.collection,
+      LogSesionRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query LogManagedErrorRecords (as a Stream and as a Future).
+Future<int> queryLogManagedErrorRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      LogManagedErrorRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<LogManagedErrorRecord>> queryLogManagedErrorRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      LogManagedErrorRecord.collection,
+      LogManagedErrorRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<LogManagedErrorRecord>> queryLogManagedErrorRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      LogManagedErrorRecord.collection,
+      LogManagedErrorRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

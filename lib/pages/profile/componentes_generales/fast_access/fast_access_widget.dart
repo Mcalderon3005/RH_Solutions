@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'fast_access_model.dart';
 export 'fast_access_model.dart';
 
+/// Quiero que me generes una barra en la parte inferior que muestre 5
+/// opciones
 class FastAccessWidget extends StatefulWidget {
-  /// Quiero que me generes una barra en la parte inferior que muestre 5
-  /// opciones
   const FastAccessWidget({super.key});
 
   @override

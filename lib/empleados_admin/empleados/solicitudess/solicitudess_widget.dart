@@ -1,6 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -8,28 +7,28 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:text_search/text_search.dart';
-import 'index_empleados_model.dart';
-export 'index_empleados_model.dart';
+import 'solicitudess_model.dart';
+export 'solicitudess_model.dart';
 
-class IndexEmpleadosWidget extends StatefulWidget {
-  const IndexEmpleadosWidget({super.key});
+class SolicitudessWidget extends StatefulWidget {
+  const SolicitudessWidget({super.key});
 
   @override
-  State<IndexEmpleadosWidget> createState() => _IndexEmpleadosWidgetState();
+  State<SolicitudessWidget> createState() => _SolicitudessWidgetState();
 }
 
-class _IndexEmpleadosWidgetState extends State<IndexEmpleadosWidget> {
-  late IndexEmpleadosModel _model;
+class _SolicitudessWidgetState extends State<SolicitudessWidget> {
+  late SolicitudessModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => IndexEmpleadosModel());
+    _model = createModel(context, () => SolicitudessModel());
 
     logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'Index_Empleados'});
+        parameters: {'screen_name': 'solicitudess'});
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
 
@@ -47,8 +46,8 @@ class _IndexEmpleadosWidgetState extends State<IndexEmpleadosWidget> {
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return StreamBuilder<List<UsersRecord>>(
-      stream: queryUsersRecord(
+    return StreamBuilder<List<SolicitudVacacionesRecord>>(
+      stream: querySolicitudVacacionesRecord(
         singleRecord: true,
       ),
       builder: (context, snapshot) {
@@ -69,14 +68,15 @@ class _IndexEmpleadosWidgetState extends State<IndexEmpleadosWidget> {
             ),
           );
         }
-        List<UsersRecord> indexEmpleadosUsersRecordList = snapshot.data!;
+        List<SolicitudVacacionesRecord>
+            solicitudessSolicitudVacacionesRecordList = snapshot.data!;
         // Return an empty Container when the item does not exist.
         if (snapshot.data!.isEmpty) {
           return Container();
         }
-        final indexEmpleadosUsersRecord =
-            indexEmpleadosUsersRecordList.isNotEmpty
-                ? indexEmpleadosUsersRecordList.first
+        final solicitudessSolicitudVacacionesRecord =
+            solicitudessSolicitudVacacionesRecordList.isNotEmpty
+                ? solicitudessSolicitudVacacionesRecordList.first
                 : null;
 
         return GestureDetector(
@@ -102,7 +102,7 @@ class _IndexEmpleadosWidgetState extends State<IndexEmpleadosWidget> {
                         FFButtonWidget(
                           onPressed: () async {
                             logFirebaseEvent(
-                                'INDEX_EMPLEADOS_PAGE_VOLVER_BTN_ON_TAP');
+                                'SOLICITUDESS_PAGE_VOLVER_BTN_ON_TAP');
                             logFirebaseEvent('Button_navigate_to');
 
                             context.pushNamed('HomeAdminPage');
@@ -127,30 +127,10 @@ class _IndexEmpleadosWidgetState extends State<IndexEmpleadosWidget> {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                         ),
-                        Flexible(
-                          child: FlutterFlowIconButton(
-                            borderColor: Colors.transparent,
-                            borderRadius: 8.0,
-                            buttonSize: 40.0,
-                            fillColor: FlutterFlowTheme.of(context).primary,
-                            icon: Icon(
-                              Icons.add_circle_outline_sharp,
-                              color: FlutterFlowTheme.of(context).info,
-                              size: 24.0,
-                            ),
-                            onPressed: () async {
-                              logFirebaseEvent(
-                                  'INDEX_EMPLEADOS_add_circle_outline_sharp');
-                              logFirebaseEvent('IconButton_navigate_to');
-
-                              context.pushNamed('Crear_Empleado');
-                            },
-                          ),
-                        ),
                       ],
                     ),
                     Text(
-                      'Empleados',
+                      'Solicitudes',
                       style: FlutterFlowTheme.of(context).displaySmall.override(
                             fontFamily: 'Outfit',
                             letterSpacing: 0.0,
@@ -184,7 +164,7 @@ class _IndexEmpleadosWidgetState extends State<IndexEmpleadosWidget> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      'Lista de Empleados',
+                                      'Lista de Solicitudes',
                                       style: FlutterFlowTheme.of(context)
                                           .headlineSmall
                                           .override(
@@ -202,7 +182,7 @@ class _IndexEmpleadosWidgetState extends State<IndexEmpleadosWidget> {
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
                                             logFirebaseEvent(
-                                                'INDEX_EMPLEADOS_Container_spmo8wg4_ON_TA');
+                                                'SOLICITUDESS_Container_wy1ipx6a_ON_TAP');
                                             logFirebaseEvent(
                                                 'Container_simple_search');
                                             await queryUsersRecordOnce()
@@ -271,7 +251,7 @@ class _IndexEmpleadosWidgetState extends State<IndexEmpleadosWidget> {
                                                                   2000),
                                                           () async {
                                                             logFirebaseEvent(
-                                                                'INDEX_EMPLEADOS_TextField_0zlryb3j_ON_TE');
+                                                                'SOLICITUDESS_TextField_rhuq6yrs_ON_TEXTF');
                                                             logFirebaseEvent(
                                                                 'TextField_update_app_state');
                                                             FFAppState()
@@ -644,7 +624,7 @@ class _IndexEmpleadosWidgetState extends State<IndexEmpleadosWidget> {
                                                         Colors.transparent,
                                                     onTap: () async {
                                                       logFirebaseEvent(
-                                                          'INDEX_EMPLEADOS_Container_h0hv9ds8_ON_TA');
+                                                          'SOLICITUDESS_Container_z8u9e1tb_ON_TAP');
                                                       logFirebaseEvent(
                                                           'Container_update_app_state');
                                                       FFAppState()
@@ -778,7 +758,7 @@ class _IndexEmpleadosWidgetState extends State<IndexEmpleadosWidget> {
                                                                           5.0),
                                                               child: Container(
                                                                 width: 115.0,
-                                                                height: 61.25,
+                                                                height: 61.3,
                                                                 decoration:
                                                                     BoxDecoration(
                                                                   color: FlutterFlowTheme.of(

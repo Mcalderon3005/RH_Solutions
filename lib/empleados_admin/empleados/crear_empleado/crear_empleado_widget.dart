@@ -1,8 +1,12 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
+import '/backend/firebase_storage/storage.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/upload_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'crear_empleado_model.dart';
@@ -45,23 +49,17 @@ class _CrearEmpleadoWidgetState extends State<CrearEmpleadoWidget>
     _model.txtCargoTextController ??= TextEditingController();
     _model.txtCargoFocusNode ??= FocusNode();
 
-    _model.txtFechaContraTextController ??= TextEditingController();
-    _model.txtFechaContraFocusNode ??= FocusNode();
-
     _model.txtCedTextController ??= TextEditingController();
     _model.txtCedFocusNode ??= FocusNode();
 
     _model.txtNumTextController ??= TextEditingController();
     _model.txtNumFocusNode ??= FocusNode();
 
-    _model.txtFechaNacimientoTextController ??= TextEditingController();
-    _model.txtFechaNacimientoFocusNode ??= FocusNode();
+    _model.txtRoleTextController ??= TextEditingController();
+    _model.txtRoleFocusNode ??= FocusNode();
 
     _model.txtSalarioTextController ??= TextEditingController();
     _model.txtSalarioFocusNode ??= FocusNode();
-
-    _model.fotoTextController ??= TextEditingController();
-    _model.fotoFocusNode ??= FocusNode();
 
     animationsMap.addAll({
       'containerOnPageLoadAnimation': AnimationInfo(
@@ -475,67 +473,6 @@ class _CrearEmpleadoWidgetState extends State<CrearEmpleadoWidget>
                           validator: _model.txtCargoTextControllerValidator
                               .asValidator(context),
                         ),
-                        TextFormField(
-                          controller: _model.txtFechaContraTextController,
-                          focusNode: _model.txtFechaContraFocusNode,
-                          autofocus: true,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            labelText: 'Fecha Contratacion',
-                            labelStyle: FlutterFlowTheme.of(context)
-                                .labelMedium
-                                .override(
-                                  fontFamily: 'Manrope',
-                                  letterSpacing: 0.0,
-                                ),
-                            hintStyle: FlutterFlowTheme.of(context)
-                                .labelMedium
-                                .override(
-                                  fontFamily: 'Manrope',
-                                  letterSpacing: 0.0,
-                                ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).alternate,
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).primary,
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            contentPadding: const EdgeInsetsDirectional.fromSTEB(
-                                16.0, 12.0, 16.0, 12.0),
-                          ),
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Manrope',
-                                    letterSpacing: 0.0,
-                                  ),
-                          keyboardType: TextInputType.datetime,
-                          cursorColor: FlutterFlowTheme.of(context).primary,
-                          validator: _model
-                              .txtFechaContraTextControllerValidator
-                              .asValidator(context),
-                        ),
                         Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
@@ -605,19 +542,6 @@ class _CrearEmpleadoWidgetState extends State<CrearEmpleadoWidget>
                                     .asValidator(context),
                               ),
                             ),
-                            FlutterFlowIconButton(
-                              borderRadius: 8.0,
-                              buttonSize: 40.0,
-                              fillColor: FlutterFlowTheme.of(context).primary,
-                              icon: Icon(
-                                Icons.check_circle_sharp,
-                                color: FlutterFlowTheme.of(context).info,
-                                size: 24.0,
-                              ),
-                              onPressed: () {
-                                print('IconButton pressed ...');
-                              },
-                            ),
                           ],
                         ),
                         TextFormField(
@@ -680,12 +604,12 @@ class _CrearEmpleadoWidgetState extends State<CrearEmpleadoWidget>
                               .asValidator(context),
                         ),
                         TextFormField(
-                          controller: _model.txtFechaNacimientoTextController,
-                          focusNode: _model.txtFechaNacimientoFocusNode,
+                          controller: _model.txtRoleTextController,
+                          focusNode: _model.txtRoleFocusNode,
                           autofocus: true,
                           obscureText: false,
                           decoration: InputDecoration(
-                            labelText: 'Fecha de nacimiento',
+                            labelText: 'Role (Empleado o Administrador)',
                             labelStyle: FlutterFlowTheme.of(context)
                                 .labelMedium
                                 .override(
@@ -734,11 +658,251 @@ class _CrearEmpleadoWidgetState extends State<CrearEmpleadoWidget>
                                     fontFamily: 'Manrope',
                                     letterSpacing: 0.0,
                                   ),
-                          keyboardType: TextInputType.datetime,
                           cursorColor: FlutterFlowTheme.of(context).primary,
-                          validator: _model
-                              .txtFechaNacimientoTextControllerValidator
+                          validator: _model.txtRoleTextControllerValidator
                               .asValidator(context),
+                        ),
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 15.0, 0.0, 0.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    30.0, 0.0, 0.0, 0.0),
+                                child: Text(
+                                  'Fecha de Nacimiento',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Manrope',
+                                        fontSize: 18.0,
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    35.0, 0.0, 0.0, 0.0),
+                                child: Text(
+                                  valueOrDefault<String>(
+                                    dateTimeFormat(
+                                      "d/M/y",
+                                      _model.datePicked1,
+                                      locale: FFLocalizations.of(context)
+                                          .languageCode,
+                                    ),
+                                    '00/00/00',
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Manrope',
+                                        fontSize: 18.0,
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    50.0, 0.0, 50.0, 0.0),
+                                child: FlutterFlowIconButton(
+                                  borderRadius: 8.0,
+                                  buttonSize: 44.0,
+                                  fillColor:
+                                      FlutterFlowTheme.of(context).primary,
+                                  icon: Icon(
+                                    Icons.calendar_month,
+                                    color: FlutterFlowTheme.of(context).info,
+                                    size: 24.0,
+                                  ),
+                                  onPressed: () async {
+                                    logFirebaseEvent(
+                                        'CREAR_EMPLEADO_PAGE_datePicker2_ON_TAP');
+                                    logFirebaseEvent(
+                                        'datePicker2_date_time_picker');
+                                    final datePicked1Date =
+                                        await showDatePicker(
+                                      context: context,
+                                      initialDate: getCurrentTimestamp,
+                                      firstDate:
+                                          (DateTime.fromMicrosecondsSinceEpoch(
+                                                  -946749600000000) ??
+                                              DateTime(1900)),
+                                      lastDate: DateTime(2050),
+                                      builder: (context, child) {
+                                        return wrapInMaterialDatePickerTheme(
+                                          context,
+                                          child!,
+                                          headerBackgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                          headerForegroundColor:
+                                              FlutterFlowTheme.of(context).info,
+                                          headerTextStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .headlineLarge
+                                                  .override(
+                                                    fontFamily: 'Outfit',
+                                                    fontSize: 32.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                          pickerBackgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryBackground,
+                                          pickerForegroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryText,
+                                          selectedDateTimeBackgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                          selectedDateTimeForegroundColor:
+                                              FlutterFlowTheme.of(context).info,
+                                          actionButtonForegroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryText,
+                                          iconSize: 24.0,
+                                        );
+                                      },
+                                    );
+
+                                    if (datePicked1Date != null) {
+                                      safeSetState(() {
+                                        _model.datePicked1 = DateTime(
+                                          datePicked1Date.year,
+                                          datePicked1Date.month,
+                                          datePicked1Date.day,
+                                        );
+                                      });
+                                    }
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 15.0, 0.0, 15.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    30.0, 0.0, 0.0, 0.0),
+                                child: Text(
+                                  'Fecha de Contratacion',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Manrope',
+                                        fontSize: 18.0,
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    35.0, 0.0, 0.0, 0.0),
+                                child: Text(
+                                  valueOrDefault<String>(
+                                    dateTimeFormat(
+                                      "d/M/y",
+                                      _model.datePicked2,
+                                      locale: FFLocalizations.of(context)
+                                          .languageCode,
+                                    ),
+                                    '00/00/00',
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Manrope',
+                                        fontSize: 18.0,
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    50.0, 0.0, 50.0, 0.0),
+                                child: FlutterFlowIconButton(
+                                  borderRadius: 8.0,
+                                  buttonSize: 44.0,
+                                  fillColor:
+                                      FlutterFlowTheme.of(context).primary,
+                                  icon: Icon(
+                                    Icons.calendar_month,
+                                    color: FlutterFlowTheme.of(context).info,
+                                    size: 24.0,
+                                  ),
+                                  onPressed: () async {
+                                    logFirebaseEvent(
+                                        'CREAR_EMPLEADO_PAGE_datePicker2_ON_TAP');
+                                    logFirebaseEvent(
+                                        'datePicker2_date_time_picker');
+                                    final datePicked2Date =
+                                        await showDatePicker(
+                                      context: context,
+                                      initialDate: getCurrentTimestamp,
+                                      firstDate:
+                                          (DateTime.fromMicrosecondsSinceEpoch(
+                                                  -946749600000000) ??
+                                              DateTime(1900)),
+                                      lastDate: DateTime(2050),
+                                      builder: (context, child) {
+                                        return wrapInMaterialDatePickerTheme(
+                                          context,
+                                          child!,
+                                          headerBackgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                          headerForegroundColor:
+                                              FlutterFlowTheme.of(context).info,
+                                          headerTextStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .headlineLarge
+                                                  .override(
+                                                    fontFamily: 'Outfit',
+                                                    fontSize: 32.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                          pickerBackgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryBackground,
+                                          pickerForegroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryText,
+                                          selectedDateTimeBackgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                          selectedDateTimeForegroundColor:
+                                              FlutterFlowTheme.of(context).info,
+                                          actionButtonForegroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryText,
+                                          iconSize: 24.0,
+                                        );
+                                      },
+                                    );
+
+                                    if (datePicked2Date != null) {
+                                      safeSetState(() {
+                                        _model.datePicked2 = DateTime(
+                                          datePicked2Date.year,
+                                          datePicked2Date.month,
+                                          datePicked2Date.day,
+                                        );
+                                      });
+                                    }
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                         TextFormField(
                           controller: _model.txtSalarioTextController,
@@ -746,7 +910,7 @@ class _CrearEmpleadoWidgetState extends State<CrearEmpleadoWidget>
                           autofocus: true,
                           obscureText: false,
                           decoration: InputDecoration(
-                            labelText: 'Salario',
+                            labelText: '₡',
                             labelStyle: FlutterFlowTheme.of(context)
                                 .labelMedium
                                 .override(
@@ -799,64 +963,88 @@ class _CrearEmpleadoWidgetState extends State<CrearEmpleadoWidget>
                           validator: _model.txtSalarioTextControllerValidator
                               .asValidator(context),
                         ),
-                        TextFormField(
-                          controller: _model.fotoTextController,
-                          focusNode: _model.fotoFocusNode,
-                          autofocus: true,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            labelText: 'Foto ',
-                            labelStyle: FlutterFlowTheme.of(context)
-                                .labelMedium
-                                .override(
-                                  fontFamily: 'Manrope',
-                                  letterSpacing: 0.0,
-                                ),
-                            hintStyle: FlutterFlowTheme.of(context)
-                                .labelMedium
-                                .override(
-                                  fontFamily: 'Manrope',
-                                  letterSpacing: 0.0,
-                                ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).alternate,
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: Image.network(
+                            valueOrDefault<String>(
+                              _model.uploadedFileUrl,
+                              'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/analisis-y-modelado-9287nf/assets/lgqkpau84057/imagen_2024-11-28_195022565.png',
                             ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).primary,
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            contentPadding: const EdgeInsetsDirectional.fromSTEB(
-                                16.0, 12.0, 16.0, 12.0),
+                            width: 200.0,
+                            height: 200.0,
+                            fit: BoxFit.cover,
                           ),
+                        ),
+                        Text(
+                          'Seleccione el icono para \n      cargar una imagen',
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Manrope',
                                     letterSpacing: 0.0,
                                   ),
-                          cursorColor: FlutterFlowTheme.of(context).primary,
-                          validator: _model.fotoTextControllerValidator
-                              .asValidator(context),
+                        ),
+                        FlutterFlowIconButton(
+                          borderRadius: 8.0,
+                          buttonSize: 40.0,
+                          fillColor: FlutterFlowTheme.of(context).primary,
+                          icon: Icon(
+                            Icons.upload_sharp,
+                            color: FlutterFlowTheme.of(context).info,
+                            size: 24.0,
+                          ),
+                          onPressed: () async {
+                            logFirebaseEvent(
+                                'CREAR_EMPLEADO_upload_sharp_ICN_ON_TAP');
+                            logFirebaseEvent(
+                                'IconButton_upload_media_to_firebase');
+                            final selectedMedia = await selectMedia(
+                              mediaSource: MediaSource.photoGallery,
+                              multiImage: false,
+                            );
+                            if (selectedMedia != null &&
+                                selectedMedia.every((m) => validateFileFormat(
+                                    m.storagePath, context))) {
+                              safeSetState(() => _model.isDataUploading = true);
+                              var selectedUploadedFiles = <FFUploadedFile>[];
+
+                              var downloadUrls = <String>[];
+                              try {
+                                selectedUploadedFiles = selectedMedia
+                                    .map((m) => FFUploadedFile(
+                                          name: m.storagePath.split('/').last,
+                                          bytes: m.bytes,
+                                          height: m.dimensions?.height,
+                                          width: m.dimensions?.width,
+                                          blurHash: m.blurHash,
+                                        ))
+                                    .toList();
+
+                                downloadUrls = (await Future.wait(
+                                  selectedMedia.map(
+                                    (m) async => await uploadData(
+                                        m.storagePath, m.bytes),
+                                  ),
+                                ))
+                                    .where((u) => u != null)
+                                    .map((u) => u!)
+                                    .toList();
+                              } finally {
+                                _model.isDataUploading = false;
+                              }
+                              if (selectedUploadedFiles.length ==
+                                      selectedMedia.length &&
+                                  downloadUrls.length == selectedMedia.length) {
+                                safeSetState(() {
+                                  _model.uploadedLocalFile =
+                                      selectedUploadedFiles.first;
+                                  _model.uploadedFileUrl = downloadUrls.first;
+                                });
+                              } else {
+                                safeSetState(() {});
+                                return;
+                              }
+                            }
+                          },
                         ),
                       ].divide(const SizedBox(height: 12.0)),
                     ),
@@ -884,8 +1072,45 @@ class _CrearEmpleadoWidgetState extends State<CrearEmpleadoWidget>
                     padding:
                         const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 12.0),
                     child: FFButtonWidget(
-                      onPressed: () {
-                        print('Button pressed ...');
+                      onPressed: () async {
+                        logFirebaseEvent(
+                            'CREAR_EMPLEADO_REGISTRAR_EMPLEADO_BTN_ON');
+                        logFirebaseEvent('Button_auth');
+                        GoRouter.of(context).prepareAuthEvent();
+
+                        final user = await authManager.createAccountWithEmail(
+                          context,
+                          _model.txtEmailTextController.text,
+                          _model.txtPasswordTextController.text,
+                        );
+                        if (user == null) {
+                          return;
+                        }
+
+                        await UsersRecord.collection
+                            .doc(user.uid)
+                            .update(createUsersRecordData(
+                              displayName: _model.txtNombreTextController.text,
+                              apellidos: _model.txtApellidosTextController.text,
+                              cargo: _model.txtCargoTextController.text,
+                              cedula: _model.txtCedTextController.text,
+                              createdTime: getCurrentTimestamp,
+                              estaActivo: true,
+                              fecahContratacion: _model.datePicked2,
+                              fechaNacimiento: _model.datePicked1,
+                              phoneNumber: _model.txtNumTextController.text,
+                              photoUrl: _model.uploadedFileUrl,
+                              role: _model.txtRoleTextController.text,
+                              salario: double.tryParse(
+                                  _model.txtSalarioTextController.text),
+                            ));
+
+                        logFirebaseEvent('Button_auth');
+                        GoRouter.of(context).prepareAuthEvent();
+                        await authManager.signOut();
+                        GoRouter.of(context).clearRedirectLocation();
+
+                        context.goNamedAuth('paginaPrincipal', context.mounted);
                       },
                       text: 'Registrar Empleado',
                       icon: const Icon(

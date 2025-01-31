@@ -1,9 +1,11 @@
 import '/components/custom_appbar_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'home_widget.dart' show HomeWidget;
+import 'solicitud_vacaciones_admin_widget.dart'
+    show SolicitudVacacionesAdminWidget;
 import 'package:flutter/material.dart';
 
-class HomeModel extends FlutterFlowModel<HomeWidget> {
+class SolicitudVacacionesAdminModel
+    extends FlutterFlowModel<SolicitudVacacionesAdminWidget> {
   ///  State fields for stateful widgets in this page.
 
   // Model for customAppbar component.

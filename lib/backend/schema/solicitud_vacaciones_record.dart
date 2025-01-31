@@ -20,38 +20,50 @@ class SolicitudVacacionesRecord extends FirestoreRecord {
   DateTime? get fechaSolicitud => _fechaSolicitud;
   bool hasFechaSolicitud() => _fechaSolicitud != null;
 
-  // "diasSolicitados" field.
-  int? _diasSolicitados;
-  int get diasSolicitados => _diasSolicitados ?? 0;
-  bool hasDiasSolicitados() => _diasSolicitados != null;
-
   // "fechaInicio" field.
   DateTime? _fechaInicio;
   DateTime? get fechaInicio => _fechaInicio;
   bool hasFechaInicio() => _fechaInicio != null;
-
-  // "fechaFin" field.
-  DateTime? _fechaFin;
-  DateTime? get fechaFin => _fechaFin;
-  bool hasFechaFin() => _fechaFin != null;
-
-  // "aprobado" field.
-  bool? _aprobado;
-  bool get aprobado => _aprobado ?? false;
-  bool hasAprobado() => _aprobado != null;
 
   // "comentarios" field.
   String? _comentarios;
   String get comentarios => _comentarios ?? '';
   bool hasComentarios() => _comentarios != null;
 
+  // "empleadoNombre" field.
+  String? _empleadoNombre;
+  String get empleadoNombre => _empleadoNombre ?? '';
+  bool hasEmpleadoNombre() => _empleadoNombre != null;
+
+  // "empleadoCorreo" field.
+  String? _empleadoCorreo;
+  String get empleadoCorreo => _empleadoCorreo ?? '';
+  bool hasEmpleadoCorreo() => _empleadoCorreo != null;
+
+  // "estadoAprobacion" field.
+  bool? _estadoAprobacion;
+  bool get estadoAprobacion => _estadoAprobacion ?? false;
+  bool hasEstadoAprobacion() => _estadoAprobacion != null;
+
+  // "estadoRevision" field.
+  bool? _estadoRevision;
+  bool get estadoRevision => _estadoRevision ?? false;
+  bool hasEstadoRevision() => _estadoRevision != null;
+
+  // "fechaFin" field.
+  DateTime? _fechaFin;
+  DateTime? get fechaFin => _fechaFin;
+  bool hasFechaFin() => _fechaFin != null;
+
   void _initializeFields() {
     _fechaSolicitud = snapshotData['fechaSolicitud'] as DateTime?;
-    _diasSolicitados = castToType<int>(snapshotData['diasSolicitados']);
     _fechaInicio = snapshotData['fechaInicio'] as DateTime?;
-    _fechaFin = snapshotData['fechaFin'] as DateTime?;
-    _aprobado = snapshotData['aprobado'] as bool?;
     _comentarios = snapshotData['comentarios'] as String?;
+    _empleadoNombre = snapshotData['empleadoNombre'] as String?;
+    _empleadoCorreo = snapshotData['empleadoCorreo'] as String?;
+    _estadoAprobacion = snapshotData['estadoAprobacion'] as bool?;
+    _estadoRevision = snapshotData['estadoRevision'] as bool?;
+    _fechaFin = snapshotData['fechaFin'] as DateTime?;
   }
 
   static CollectionReference get collection =>
@@ -91,20 +103,24 @@ class SolicitudVacacionesRecord extends FirestoreRecord {
 
 Map<String, dynamic> createSolicitudVacacionesRecordData({
   DateTime? fechaSolicitud,
-  int? diasSolicitados,
   DateTime? fechaInicio,
-  DateTime? fechaFin,
-  bool? aprobado,
   String? comentarios,
+  String? empleadoNombre,
+  String? empleadoCorreo,
+  bool? estadoAprobacion,
+  bool? estadoRevision,
+  DateTime? fechaFin,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'fechaSolicitud': fechaSolicitud,
-      'diasSolicitados': diasSolicitados,
       'fechaInicio': fechaInicio,
-      'fechaFin': fechaFin,
-      'aprobado': aprobado,
       'comentarios': comentarios,
+      'empleadoNombre': empleadoNombre,
+      'empleadoCorreo': empleadoCorreo,
+      'estadoAprobacion': estadoAprobacion,
+      'estadoRevision': estadoRevision,
+      'fechaFin': fechaFin,
     }.withoutNulls,
   );
 
@@ -118,21 +134,25 @@ class SolicitudVacacionesRecordDocumentEquality
   @override
   bool equals(SolicitudVacacionesRecord? e1, SolicitudVacacionesRecord? e2) {
     return e1?.fechaSolicitud == e2?.fechaSolicitud &&
-        e1?.diasSolicitados == e2?.diasSolicitados &&
         e1?.fechaInicio == e2?.fechaInicio &&
-        e1?.fechaFin == e2?.fechaFin &&
-        e1?.aprobado == e2?.aprobado &&
-        e1?.comentarios == e2?.comentarios;
+        e1?.comentarios == e2?.comentarios &&
+        e1?.empleadoNombre == e2?.empleadoNombre &&
+        e1?.empleadoCorreo == e2?.empleadoCorreo &&
+        e1?.estadoAprobacion == e2?.estadoAprobacion &&
+        e1?.estadoRevision == e2?.estadoRevision &&
+        e1?.fechaFin == e2?.fechaFin;
   }
 
   @override
   int hash(SolicitudVacacionesRecord? e) => const ListEquality().hash([
         e?.fechaSolicitud,
-        e?.diasSolicitados,
         e?.fechaInicio,
-        e?.fechaFin,
-        e?.aprobado,
-        e?.comentarios
+        e?.comentarios,
+        e?.empleadoNombre,
+        e?.empleadoCorreo,
+        e?.estadoAprobacion,
+        e?.estadoRevision,
+        e?.fechaFin
       ]);
 
   @override

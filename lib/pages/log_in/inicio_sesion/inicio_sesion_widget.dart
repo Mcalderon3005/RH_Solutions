@@ -1,9 +1,9 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/components/custom_appbar_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
@@ -321,7 +321,78 @@ class _InicioSesionWidgetState extends State<InicioSesionWidget> {
                               return;
                             }
 
-                            context.goNamedAuth('Profile', context.mounted);
+                            if ((valueOrDefault(
+                                            currentUserDocument?.role, '') ==
+                                        'Administrador') &&
+                                    (valueOrDefault<bool>(
+                                            currentUserDocument?.estaActivo,
+                                            false) ==
+                                        true)
+                                ? true
+                                : false) {
+                              logFirebaseEvent('Button_navigate_to');
+
+                              context.pushNamedAuth(
+                                  'HomeAdminPage', context.mounted);
+
+                              logFirebaseEvent('Button_backend_call');
+
+                              await LogSesionRecord.collection
+                                  .doc()
+                                  .set(createLogSesionRecordData(
+                                    correo: currentUserEmail,
+                                    timestamp: getCurrentTimestamp,
+                                    location: 'Pagina de Inicio de Sesion',
+                                  ));
+                            } else {
+                              if (valueOrDefault<bool>(
+                                      currentUserDocument?.estaActivo, false) ==
+                                  true) {
+                                logFirebaseEvent('Button_navigate_to');
+
+                                context.pushNamedAuth(
+                                    'menuUsuario', context.mounted);
+
+                                logFirebaseEvent('Button_backend_call');
+
+                                await LogSesionRecord.collection
+                                    .doc()
+                                    .set(createLogSesionRecordData(
+                                      correo: currentUserEmail,
+                                      timestamp: getCurrentTimestamp,
+                                      location: 'Pagina de Inicio de Sesion',
+                                    ));
+                              } else {
+                                logFirebaseEvent('Button_alert_dialog');
+                                await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: const Text('Error'),
+                                      content: const Text(
+                                          'Por favor contacte al administrador'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(alertDialogContext),
+                                          child: const Text('Aceptar'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                                logFirebaseEvent('Button_backend_call');
+
+                                await LogManagedErrorRecord.collection
+                                    .doc()
+                                    .set(createLogManagedErrorRecordData(
+                                      timeStamp: getCurrentTimestamp,
+                                      resumenAccion: 'UsuarioInactivo',
+                                      user: _model
+                                          .emailAddressTextController.text,
+                                    ));
+                              }
+                            }
                           },
                           text: 'Iniciar sesión',
                           options: FFButtonOptions(

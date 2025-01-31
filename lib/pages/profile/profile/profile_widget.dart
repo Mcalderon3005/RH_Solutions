@@ -68,27 +68,25 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 24.0, 0.0, 6.0),
-                          child: Text(
-                            'Buen dia...',
-                            style: FlutterFlowTheme.of(context)
-                                .labelLarge
-                                .override(
-                                  fontFamily: 'Manrope',
-                                  letterSpacing: 0.0,
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Align(
+                              alignment: const AlignmentDirectional(0.0, 0.0),
+                              child: AuthUserStreamWidget(
+                                builder: (context) => Text(
+                                  currentUserDisplayName,
+                                  style: FlutterFlowTheme.of(context)
+                                      .displaySmall
+                                      .override(
+                                        fontFamily: 'Outfit',
+                                        letterSpacing: 0.0,
+                                      ),
                                 ),
-                          ),
-                        ),
-                        Text(
-                          'Will Hobick',
-                          style: FlutterFlowTheme.of(context)
-                              .displaySmall
-                              .override(
-                                fontFamily: 'Outfit',
-                                letterSpacing: 0.0,
                               ),
+                            ),
+                          ],
                         ),
                         Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
@@ -108,14 +106,18 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                 mainAxisSize: MainAxisSize.max,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    'Bienvenido a tu perfil',
-                                    style: FlutterFlowTheme.of(context)
-                                        .titleMedium
-                                        .override(
-                                          fontFamily: 'Manrope',
-                                          letterSpacing: 0.0,
-                                        ),
+                                  Stack(
+                                    children: [
+                                      Text(
+                                        'Bienvenido a tu perfil',
+                                        style: FlutterFlowTheme.of(context)
+                                            .titleMedium
+                                            .override(
+                                              fontFamily: 'Manrope',
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
@@ -190,7 +192,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   logFirebaseEvent(
                                       'EatingPrefsTile_navigate_to');
 
-                                  context.pushNamed('Home');
+                                  context.pushNamed('menuUsuario');
                                 },
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,

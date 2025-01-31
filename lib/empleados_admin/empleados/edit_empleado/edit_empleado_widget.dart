@@ -1,17 +1,46 @@
+import '/backend/backend.dart';
+import '/backend/firebase_storage/storage.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
-import '/flutter_flow/flutter_flow_radio_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/form_field_controller.dart';
+import '/flutter_flow/upload_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:provider/provider.dart';
 import 'edit_empleado_model.dart';
 export 'edit_empleado_model.dart';
 
 class EditEmpleadoWidget extends StatefulWidget {
-  const EditEmpleadoWidget({super.key});
+  const EditEmpleadoWidget({
+    super.key,
+    required this.nombre,
+    required this.apellido,
+    required this.email,
+    required this.salario,
+    required this.estaActivo,
+    required this.userRef,
+    required this.img,
+    required this.cedula,
+    required this.numTel,
+    required this.fechaNacimiento,
+    required this.fechaContratacion,
+    required this.role,
+  });
+
+  final String? nombre;
+  final String? apellido;
+  final String? email;
+  final double? salario;
+  final bool? estaActivo;
+  final DocumentReference? userRef;
+  final String? img;
+  final String? cedula;
+  final String? numTel;
+  final DateTime? fechaNacimiento;
+  final DateTime? fechaContratacion;
+  final String? role;
 
   @override
   State<EditEmpleadoWidget> createState() => _EditEmpleadoWidgetState();
@@ -32,30 +61,29 @@ class _EditEmpleadoWidgetState extends State<EditEmpleadoWidget>
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'Edit_Empleado'});
-    _model.textController1 ??= TextEditingController();
+    _model.textController1 ??= TextEditingController(text: widget.nombre);
     _model.textFieldFocusNode1 ??= FocusNode();
 
-    _model.textController2 ??= TextEditingController();
+    _model.textController2 ??= TextEditingController(text: widget.apellido);
     _model.textFieldFocusNode2 ??= FocusNode();
 
-    _model.textController3 ??= TextEditingController();
+    _model.textController3 ??= TextEditingController(text: widget.email);
     _model.textFieldFocusNode3 ??= FocusNode();
 
-    _model.textController4 ??= TextEditingController();
+    _model.textController4 ??= TextEditingController(text: widget.cedula);
     _model.textFieldFocusNode4 ??= FocusNode();
 
-    _model.textController5 ??= TextEditingController();
+    _model.textController5 ??= TextEditingController(text: widget.role);
     _model.textFieldFocusNode5 ??= FocusNode();
 
-    _model.textController6 ??= TextEditingController();
+    _model.textController6 ??= TextEditingController(text: widget.numTel);
     _model.textFieldFocusNode6 ??= FocusNode();
 
-    _model.textController7 ??= TextEditingController();
+    _model.textController7 ??=
+        TextEditingController(text: '₡${widget.salario?.toString()}');
     _model.textFieldFocusNode7 ??= FocusNode();
 
-    _model.textController8 ??= TextEditingController();
-    _model.textFieldFocusNode8 ??= FocusNode();
-
+    _model.switchValue = widget.estaActivo!;
     animationsMap.addAll({
       'containerOnPageLoadAnimation': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
@@ -96,6 +124,8 @@ class _EditEmpleadoWidgetState extends State<EditEmpleadoWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -282,9 +312,10 @@ class _EditEmpleadoWidgetState extends State<EditEmpleadoWidget>
                           controller: _model.textController3,
                           focusNode: _model.textFieldFocusNode3,
                           autofocus: true,
+                          readOnly: true,
                           obscureText: false,
                           decoration: InputDecoration(
-                            labelText: 'Cedula',
+                            labelText: 'Email',
                             labelStyle: FlutterFlowTheme.of(context)
                                 .labelMedium
                                 .override(
@@ -343,7 +374,7 @@ class _EditEmpleadoWidgetState extends State<EditEmpleadoWidget>
                           autofocus: true,
                           obscureText: false,
                           decoration: InputDecoration(
-                            labelText: 'Numero de Telefono',
+                            labelText: 'Cedula',
                             labelStyle: FlutterFlowTheme.of(context)
                                 .labelMedium
                                 .override(
@@ -402,7 +433,7 @@ class _EditEmpleadoWidgetState extends State<EditEmpleadoWidget>
                           autofocus: true,
                           obscureText: false,
                           decoration: InputDecoration(
-                            labelText: 'Fecha de nacimiento',
+                            labelText: 'Role',
                             labelStyle: FlutterFlowTheme.of(context)
                                 .labelMedium
                                 .override(
@@ -461,7 +492,7 @@ class _EditEmpleadoWidgetState extends State<EditEmpleadoWidget>
                           autofocus: true,
                           obscureText: false,
                           decoration: InputDecoration(
-                            labelText: 'Fecha de contrato',
+                            labelText: 'Numero de Telefono',
                             labelStyle: FlutterFlowTheme.of(context)
                                 .labelMedium
                                 .override(
@@ -573,94 +604,475 @@ class _EditEmpleadoWidgetState extends State<EditEmpleadoWidget>
                           validator: _model.textController7Validator
                               .asValidator(context),
                         ),
-                        TextFormField(
-                          controller: _model.textController8,
-                          focusNode: _model.textFieldFocusNode8,
-                          autofocus: true,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            labelText: 'Foto',
-                            labelStyle: FlutterFlowTheme.of(context)
-                                .labelMedium
-                                .override(
-                                  fontFamily: 'Manrope',
-                                  letterSpacing: 0.0,
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 15.0, 0.0, 15.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    30.0, 0.0, 0.0, 0.0),
+                                child: Text(
+                                  'Fecha de Nacimiento',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Manrope',
+                                        fontSize: 18.0,
+                                        letterSpacing: 0.0,
+                                      ),
                                 ),
-                            hintStyle: FlutterFlowTheme.of(context)
-                                .labelMedium
-                                .override(
-                                  fontFamily: 'Manrope',
-                                  letterSpacing: 0.0,
-                                ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).alternate,
-                                width: 2.0,
                               ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).primary,
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            contentPadding: const EdgeInsetsDirectional.fromSTEB(
-                                16.0, 12.0, 16.0, 12.0),
-                          ),
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Manrope',
-                                    letterSpacing: 0.0,
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    35.0, 0.0, 0.0, 0.0),
+                                child: Text(
+                                  valueOrDefault<String>(
+                                    _model.datePicked1 == null
+                                        ? valueOrDefault<String>(
+                                            dateTimeFormat(
+                                              "d/M/y",
+                                              widget.fechaNacimiento,
+                                              locale:
+                                                  FFLocalizations.of(context)
+                                                      .languageCode,
+                                            ),
+                                            '00/00/00',
+                                          )
+                                        : valueOrDefault<String>(
+                                            dateTimeFormat(
+                                              "d/M/y",
+                                              _model.datePicked1,
+                                              locale:
+                                                  FFLocalizations.of(context)
+                                                      .languageCode,
+                                            ),
+                                            '00/00/00',
+                                          ),
+                                    '00/00/00',
                                   ),
-                          cursorColor: FlutterFlowTheme.of(context).primary,
-                          validator: _model.textController8Validator
-                              .asValidator(context),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Manrope',
+                                        fontSize: 18.0,
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    50.0, 0.0, 50.0, 0.0),
+                                child: FlutterFlowIconButton(
+                                  borderRadius: 8.0,
+                                  buttonSize: 44.0,
+                                  fillColor:
+                                      FlutterFlowTheme.of(context).primary,
+                                  icon: Icon(
+                                    Icons.calendar_month,
+                                    color: FlutterFlowTheme.of(context).info,
+                                    size: 24.0,
+                                  ),
+                                  onPressed: () async {
+                                    logFirebaseEvent(
+                                        'EDIT_EMPLEADO_PAGE_datePicker2_ON_TAP');
+                                    logFirebaseEvent(
+                                        'datePicker2_date_time_picker');
+                                    final datePicked1Date =
+                                        await showDatePicker(
+                                      context: context,
+                                      initialDate: getCurrentTimestamp,
+                                      firstDate:
+                                          (DateTime.fromMicrosecondsSinceEpoch(
+                                                  -946749600000000) ??
+                                              DateTime(1900)),
+                                      lastDate: DateTime(2050),
+                                      builder: (context, child) {
+                                        return wrapInMaterialDatePickerTheme(
+                                          context,
+                                          child!,
+                                          headerBackgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                          headerForegroundColor:
+                                              FlutterFlowTheme.of(context).info,
+                                          headerTextStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .headlineLarge
+                                                  .override(
+                                                    fontFamily: 'Outfit',
+                                                    fontSize: 32.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                          pickerBackgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryBackground,
+                                          pickerForegroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryText,
+                                          selectedDateTimeBackgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                          selectedDateTimeForegroundColor:
+                                              FlutterFlowTheme.of(context).info,
+                                          actionButtonForegroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryText,
+                                          iconSize: 24.0,
+                                        );
+                                      },
+                                    );
+
+                                    if (datePicked1Date != null) {
+                                      safeSetState(() {
+                                        _model.datePicked1 = DateTime(
+                                          datePicked1Date.year,
+                                          datePicked1Date.month,
+                                          datePicked1Date.day,
+                                        );
+                                      });
+                                    }
+                                    logFirebaseEvent(
+                                        'datePicker2_update_app_state');
+                                    FFAppState().fechaNacimiento =
+                                        _model.datePicked1;
+                                    safeSetState(() {});
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 15.0, 0.0, 15.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    30.0, 0.0, 0.0, 0.0),
+                                child: Text(
+                                  'Fecha de Contratacion',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Manrope',
+                                        fontSize: 18.0,
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    35.0, 0.0, 0.0, 0.0),
+                                child: Text(
+                                  valueOrDefault<String>(
+                                    _model.datePicked2 == null
+                                        ? dateTimeFormat(
+                                            "d/M/y",
+                                            widget.fechaContratacion,
+                                            locale: FFLocalizations.of(context)
+                                                .languageCode,
+                                          )
+                                        : dateTimeFormat(
+                                            "d/M/y",
+                                            _model.datePicked2,
+                                            locale: FFLocalizations.of(context)
+                                                .languageCode,
+                                          ),
+                                    '00/00/00',
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Manrope',
+                                        fontSize: 18.0,
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    50.0, 0.0, 50.0, 0.0),
+                                child: FlutterFlowIconButton(
+                                  borderRadius: 8.0,
+                                  buttonSize: 44.0,
+                                  fillColor:
+                                      FlutterFlowTheme.of(context).primary,
+                                  icon: Icon(
+                                    Icons.calendar_month,
+                                    color: FlutterFlowTheme.of(context).info,
+                                    size: 24.0,
+                                  ),
+                                  onPressed: () async {
+                                    logFirebaseEvent(
+                                        'EDIT_EMPLEADO_PAGE_datePicker2_ON_TAP');
+                                    logFirebaseEvent(
+                                        'datePicker2_date_time_picker');
+                                    final datePicked2Date =
+                                        await showDatePicker(
+                                      context: context,
+                                      initialDate: getCurrentTimestamp,
+                                      firstDate:
+                                          (DateTime.fromMicrosecondsSinceEpoch(
+                                                  -946749600000000) ??
+                                              DateTime(1900)),
+                                      lastDate: DateTime(2050),
+                                      builder: (context, child) {
+                                        return wrapInMaterialDatePickerTheme(
+                                          context,
+                                          child!,
+                                          headerBackgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                          headerForegroundColor:
+                                              FlutterFlowTheme.of(context).info,
+                                          headerTextStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .headlineLarge
+                                                  .override(
+                                                    fontFamily: 'Outfit',
+                                                    fontSize: 32.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                          pickerBackgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryBackground,
+                                          pickerForegroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryText,
+                                          selectedDateTimeBackgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                          selectedDateTimeForegroundColor:
+                                              FlutterFlowTheme.of(context).info,
+                                          actionButtonForegroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryText,
+                                          iconSize: 24.0,
+                                        );
+                                      },
+                                    );
+
+                                    if (datePicked2Date != null) {
+                                      safeSetState(() {
+                                        _model.datePicked2 = DateTime(
+                                          datePicked2Date.year,
+                                          datePicked2Date.month,
+                                          datePicked2Date.day,
+                                        );
+                                      });
+                                    }
+                                    logFirebaseEvent(
+                                        'datePicker2_update_app_state');
+                                    FFAppState().fechaContratacion =
+                                        _model.datePicked2;
+                                    safeSetState(() {});
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              10.0, 0.0, 0.0, 0.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Text(
+                                'Estado',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Manrope',
+                                      letterSpacing: 0.0,
+                                    ),
+                              ),
+                              Align(
+                                alignment: const AlignmentDirectional(-1.0, 0.0),
+                                child: Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      10.0, 0.0, 0.0, 0.0),
+                                  child: Switch.adaptive(
+                                    value: _model.switchValue!,
+                                    onChanged: (newValue) async {
+                                      safeSetState(
+                                          () => _model.switchValue = newValue);
+                                    },
+                                    activeColor:
+                                        FlutterFlowTheme.of(context).primary,
+                                    activeTrackColor:
+                                        FlutterFlowTheme.of(context).primary,
+                                    inactiveTrackColor:
+                                        FlutterFlowTheme.of(context).alternate,
+                                    inactiveThumbColor:
+                                        FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Text(
+                                  'Imagen Actual',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Manrope',
+                                        fontSize: 16.0,
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                                InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    logFirebaseEvent(
+                                        'EDIT_EMPLEADO_PAGE_Image_2cm0hh1y_ON_TAP');
+                                    logFirebaseEvent(
+                                        'Image_upload_media_to_firebase');
+                                    final selectedMedia = await selectMedia(
+                                      mediaSource: MediaSource.photoGallery,
+                                      multiImage: false,
+                                    );
+                                    if (selectedMedia != null &&
+                                        selectedMedia.every((m) =>
+                                            validateFileFormat(
+                                                m.storagePath, context))) {
+                                      safeSetState(
+                                          () => _model.isDataUploading = true);
+                                      var selectedUploadedFiles =
+                                          <FFUploadedFile>[];
+
+                                      var downloadUrls = <String>[];
+                                      try {
+                                        selectedUploadedFiles = selectedMedia
+                                            .map((m) => FFUploadedFile(
+                                                  name: m.storagePath
+                                                      .split('/')
+                                                      .last,
+                                                  bytes: m.bytes,
+                                                  height: m.dimensions?.height,
+                                                  width: m.dimensions?.width,
+                                                  blurHash: m.blurHash,
+                                                ))
+                                            .toList();
+
+                                        downloadUrls = (await Future.wait(
+                                          selectedMedia.map(
+                                            (m) async => await uploadData(
+                                                m.storagePath, m.bytes),
+                                          ),
+                                        ))
+                                            .where((u) => u != null)
+                                            .map((u) => u!)
+                                            .toList();
+                                      } finally {
+                                        _model.isDataUploading = false;
+                                      }
+                                      if (selectedUploadedFiles.length ==
+                                              selectedMedia.length &&
+                                          downloadUrls.length ==
+                                              selectedMedia.length) {
+                                        safeSetState(() {
+                                          _model.uploadedLocalFile =
+                                              selectedUploadedFiles.first;
+                                          _model.uploadedFileUrl =
+                                              downloadUrls.first;
+                                        });
+                                      } else {
+                                        safeSetState(() {});
+                                        return;
+                                      }
+                                    }
+                                  },
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    child: Image.network(
+                                      widget.img!,
+                                      width: 200.0,
+                                      height: 200.0,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Text(
+                                  'Nueva Imagen',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Manrope',
+                                        fontSize: 16.0,
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: Image.network(
+                                    _model.uploadedFileUrl,
+                                    width: 200.0,
+                                    height: 200.0,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                         Align(
-                          alignment: const AlignmentDirectional(-1.0, 0.0),
-                          child: FlutterFlowRadioButton(
-                            options: ['Activo'].toList(),
-                            onChanged: (val) => safeSetState(() {}),
-                            controller: _model.radioButtonValueController ??=
-                                FormFieldController<String>(null),
-                            optionHeight: 32.0,
-                            textStyle: FlutterFlowTheme.of(context)
-                                .labelMedium
-                                .override(
-                                  fontFamily: 'Manrope',
-                                  letterSpacing: 0.0,
-                                ),
-                            selectedTextStyle: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Manrope',
-                                  letterSpacing: 0.0,
-                                ),
-                            buttonPosition: RadioButtonPosition.left,
-                            direction: Axis.vertical,
-                            radioButtonColor:
-                                FlutterFlowTheme.of(context).primary,
-                            inactiveRadioButtonColor:
-                                FlutterFlowTheme.of(context).secondaryText,
-                            toggleable: false,
-                            horizontalAlignment: WrapAlignment.start,
-                            verticalAlignment: WrapCrossAlignment.start,
+                          alignment: const AlignmentDirectional(1.0, 0.0),
+                          child: Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0.0, 20.0, 0.0, 0.0),
+                            child: FFButtonWidget(
+                              onPressed: () async {
+                                logFirebaseEvent(
+                                    'EDIT_EMPLEADO_ELIMINAR_USUARIO_BTN_ON_TA');
+                                logFirebaseEvent('Button_backend_call');
+                                await widget.userRef!.delete();
+                                logFirebaseEvent('Button_navigate_back');
+                                context.safePop();
+                              },
+                              text: 'Eliminar Usuario',
+                              options: FFButtonOptions(
+                                height: 40.0,
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    16.0, 0.0, 16.0, 0.0),
+                                iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 0.0),
+                                color: const Color(0xFFFF273A),
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .override(
+                                      fontFamily: 'Manrope',
+                                      color: Colors.white,
+                                      fontSize: 18.0,
+                                      letterSpacing: 0.0,
+                                    ),
+                                elevation: 0.0,
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                            ),
                           ),
                         ),
                       ].divide(const SizedBox(height: 12.0)),
@@ -688,35 +1100,89 @@ class _EditEmpleadoWidgetState extends State<EditEmpleadoWidget>
                   Padding(
                     padding:
                         const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 12.0),
-                    child: FFButtonWidget(
-                      onPressed: () {
-                        print('Button pressed ...');
-                      },
-                      text: 'Actualizar Empleado',
-                      icon: const Icon(
-                        Icons.receipt_long,
-                        size: 15.0,
+                    child: StreamBuilder<List<UsersRecord>>(
+                      stream: queryUsersRecord(
+                        singleRecord: true,
                       ),
-                      options: FFButtonOptions(
-                        width: double.infinity,
-                        height: 48.0,
-                        padding: const EdgeInsets.all(0.0),
-                        iconPadding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).primary,
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleSmall.override(
+                      builder: (context, snapshot) {
+                        // Customize what your widget looks like when it's loading.
+                        if (!snapshot.hasData) {
+                          return Center(
+                            child: SizedBox(
+                              width: 50.0,
+                              height: 50.0,
+                              child: CircularProgressIndicator(
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  FlutterFlowTheme.of(context).primary,
+                                ),
+                              ),
+                            ),
+                          );
+                        }
+                        List<UsersRecord> buttonUsersRecordList =
+                            snapshot.data!;
+                        // Return an empty Container when the item does not exist.
+                        if (snapshot.data!.isEmpty) {
+                          return Container();
+                        }
+                        final buttonUsersRecord =
+                            buttonUsersRecordList.isNotEmpty
+                                ? buttonUsersRecordList.first
+                                : null;
+
+                        return FFButtonWidget(
+                          onPressed: () async {
+                            logFirebaseEvent(
+                                'EDIT_EMPLEADO_ACTUALIZAR_EMPLEADO_BTN_ON');
+                            logFirebaseEvent('Button_backend_call');
+
+                            await widget.userRef!.update(createUsersRecordData(
+                              displayName: _model.textController1.text,
+                              estaActivo: _model.switchValue,
+                              email: widget.email,
+                              photoUrl: _model.uploadedFileUrl == ''
+                                  ? widget.img
+                                  : _model.uploadedFileUrl,
+                              phoneNumber: _model.textController6.text,
+                              cedula: _model.textController4.text,
+                              role: _model.textController5.text,
+                              apellidos: _model.textController2.text,
+                              salario:
+                                  double.tryParse(_model.textController7.text),
+                              fechaNacimiento: FFAppState().fechaNacimiento,
+                              fecahContratacion: FFAppState().fechaContratacion,
+                            ));
+                            logFirebaseEvent('Button_navigate_back');
+                            context.safePop();
+                          },
+                          text: 'Actualizar Empleado',
+                          icon: const Icon(
+                            Icons.receipt_long,
+                            size: 15.0,
+                          ),
+                          options: FFButtonOptions(
+                            width: double.infinity,
+                            height: 48.0,
+                            padding: const EdgeInsets.all(0.0),
+                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 0.0),
+                            color: FlutterFlowTheme.of(context).primary,
+                            textStyle: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .override(
                                   fontFamily: 'Manrope',
                                   color: Colors.white,
                                   letterSpacing: 0.0,
                                 ),
-                        elevation: 4.0,
-                        borderSide: const BorderSide(
-                          color: Colors.transparent,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(60.0),
-                      ),
+                            elevation: 4.0,
+                            borderSide: const BorderSide(
+                              color: Colors.transparent,
+                              width: 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(60.0),
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ],

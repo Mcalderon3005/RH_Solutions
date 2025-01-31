@@ -65,14 +65,31 @@ class _RecuperarPassWidgetState extends State<RecuperarPassWidget> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        wrapWithModel(
-                          model: _model.customAppbarModel,
-                          updateCallback: () => safeSetState(() {}),
-                          child: CustomAppbarWidget(
-                            backButton: true,
-                            actionButton: false,
-                            actionButtonAction: () async {},
-                            optionsButtonAction: () async {},
+                        InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            logFirebaseEvent(
+                                'RECUPERAR_PASS_Container_xtbbi5tm_ON_TAP');
+                            logFirebaseEvent('customAppbar_auth');
+                            GoRouter.of(context).prepareAuthEvent();
+                            await authManager.signOut();
+                            GoRouter.of(context).clearRedirectLocation();
+
+                            context.goNamedAuth(
+                                'paginaPrincipal', context.mounted);
+                          },
+                          child: wrapWithModel(
+                            model: _model.customAppbarModel,
+                            updateCallback: () => safeSetState(() {}),
+                            child: CustomAppbarWidget(
+                              backButton: true,
+                              actionButton: false,
+                              actionButtonAction: () async {},
+                              optionsButtonAction: () async {},
+                            ),
                           ),
                         ),
                         Padding(

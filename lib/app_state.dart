@@ -20,67 +20,45 @@ class FFAppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  String _userDiet = '';
-  String get userDiet => _userDiet;
-  set userDiet(String value) {
-    _userDiet = value;
+  String _busqueda = '';
+  String get busqueda => _busqueda;
+  set busqueda(String value) {
+    _busqueda = value;
   }
 
-  List<String> _userAllergens = [];
-  List<String> get userAllergens => _userAllergens;
-  set userAllergens(List<String> value) {
-    _userAllergens = value;
+  DateTime? _fechaNacimiento;
+  DateTime? get fechaNacimiento => _fechaNacimiento;
+  set fechaNacimiento(DateTime? value) {
+    _fechaNacimiento = value;
   }
 
-  void addToUserAllergens(String value) {
-    userAllergens.add(value);
+  DateTime? _fechaContratacion;
+  DateTime? get fechaContratacion => _fechaContratacion;
+  set fechaContratacion(DateTime? value) {
+    _fechaContratacion = value;
   }
 
-  void removeFromUserAllergens(String value) {
-    userAllergens.remove(value);
+  String _logSesion = '';
+  String get logSesion => _logSesion;
+  set logSesion(String value) {
+    _logSesion = value;
   }
 
-  void removeAtIndexFromUserAllergens(int index) {
-    userAllergens.removeAt(index);
+  String _logerror = '';
+  String get logerror => _logerror;
+  set logerror(String value) {
+    _logerror = value;
   }
 
-  void updateUserAllergensAtIndex(
-    int index,
-    String Function(String) updateFn,
-  ) {
-    userAllergens[index] = updateFn(_userAllergens[index]);
+  DateTime? _fechaInicio;
+  DateTime? get fechaInicio => _fechaInicio;
+  set fechaInicio(DateTime? value) {
+    _fechaInicio = value;
   }
 
-  void insertAtIndexInUserAllergens(int index, String value) {
-    userAllergens.insert(index, value);
-  }
-
-  List<String> _userIngredientDislikes = [];
-  List<String> get userIngredientDislikes => _userIngredientDislikes;
-  set userIngredientDislikes(List<String> value) {
-    _userIngredientDislikes = value;
-  }
-
-  void addToUserIngredientDislikes(String value) {
-    userIngredientDislikes.add(value);
-  }
-
-  void removeFromUserIngredientDislikes(String value) {
-    userIngredientDislikes.remove(value);
-  }
-
-  void removeAtIndexFromUserIngredientDislikes(int index) {
-    userIngredientDislikes.removeAt(index);
-  }
-
-  void updateUserIngredientDislikesAtIndex(
-    int index,
-    String Function(String) updateFn,
-  ) {
-    userIngredientDislikes[index] = updateFn(_userIngredientDislikes[index]);
-  }
-
-  void insertAtIndexInUserIngredientDislikes(int index, String value) {
-    userIngredientDislikes.insert(index, value);
+  DateTime? _fechaFin;
+  DateTime? get fechaFin => _fechaFin;
+  set fechaFin(DateTime? value) {
+    _fechaFin = value;
   }
 }

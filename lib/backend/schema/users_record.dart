@@ -70,11 +70,6 @@ class UsersRecord extends FirestoreRecord {
   String get cargo => _cargo ?? '';
   bool hasCargo() => _cargo != null;
 
-  // "fechaContratacion" field.
-  String? _fechaContratacion;
-  String get fechaContratacion => _fechaContratacion ?? '';
-  bool hasFechaContratacion() => _fechaContratacion != null;
-
   // "cedula" field.
   String? _cedula;
   String get cedula => _cedula ?? '';
@@ -90,6 +85,16 @@ class UsersRecord extends FirestoreRecord {
   bool get estaActivo => _estaActivo ?? false;
   bool hasEstaActivo() => _estaActivo != null;
 
+  // "fechaNacimiento" field.
+  DateTime? _fechaNacimiento;
+  DateTime? get fechaNacimiento => _fechaNacimiento;
+  bool hasFechaNacimiento() => _fechaNacimiento != null;
+
+  // "fecahContratacion" field.
+  DateTime? _fecahContratacion;
+  DateTime? get fecahContratacion => _fecahContratacion;
+  bool hasFecahContratacion() => _fecahContratacion != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -102,10 +107,11 @@ class UsersRecord extends FirestoreRecord {
     _estaPresenteReunion = snapshotData['estaPresenteReunion'] as bool?;
     _apellidos = snapshotData['apellidos'] as String?;
     _cargo = snapshotData['cargo'] as String?;
-    _fechaContratacion = snapshotData['fechaContratacion'] as String?;
     _cedula = snapshotData['cedula'] as String?;
     _salario = castToType<double>(snapshotData['salario']);
     _estaActivo = snapshotData['estaActivo'] as bool?;
+    _fechaNacimiento = snapshotData['fechaNacimiento'] as DateTime?;
+    _fecahContratacion = snapshotData['fecahContratacion'] as DateTime?;
   }
 
   static CollectionReference get collection =>
@@ -153,10 +159,11 @@ Map<String, dynamic> createUsersRecordData({
   bool? estaPresenteReunion,
   String? apellidos,
   String? cargo,
-  String? fechaContratacion,
   String? cedula,
   double? salario,
   bool? estaActivo,
+  DateTime? fechaNacimiento,
+  DateTime? fecahContratacion,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -171,10 +178,11 @@ Map<String, dynamic> createUsersRecordData({
       'estaPresenteReunion': estaPresenteReunion,
       'apellidos': apellidos,
       'cargo': cargo,
-      'fechaContratacion': fechaContratacion,
       'cedula': cedula,
       'salario': salario,
       'estaActivo': estaActivo,
+      'fechaNacimiento': fechaNacimiento,
+      'fecahContratacion': fecahContratacion,
     }.withoutNulls,
   );
 
@@ -197,10 +205,11 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.estaPresenteReunion == e2?.estaPresenteReunion &&
         e1?.apellidos == e2?.apellidos &&
         e1?.cargo == e2?.cargo &&
-        e1?.fechaContratacion == e2?.fechaContratacion &&
         e1?.cedula == e2?.cedula &&
         e1?.salario == e2?.salario &&
-        e1?.estaActivo == e2?.estaActivo;
+        e1?.estaActivo == e2?.estaActivo &&
+        e1?.fechaNacimiento == e2?.fechaNacimiento &&
+        e1?.fecahContratacion == e2?.fecahContratacion;
   }
 
   @override
@@ -216,10 +225,11 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.estaPresenteReunion,
         e?.apellidos,
         e?.cargo,
-        e?.fechaContratacion,
         e?.cedula,
         e?.salario,
-        e?.estaActivo
+        e?.estaActivo,
+        e?.fechaNacimiento,
+        e?.fecahContratacion
       ]);
 
   @override

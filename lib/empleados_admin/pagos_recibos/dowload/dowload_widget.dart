@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'dowload_model.dart';
 export 'dowload_model.dart';
 
+/// Quiero que me generes un componente que muestre 3 opciones 1 - Descargar
+/// PDF  2- Descargar DOCS  3- Descargar XML
 class DowloadWidget extends StatefulWidget {
-  /// Quiero que me generes un componente que muestre 3 opciones 1 - Descargar
-  /// PDF  2- Descargar DOCS  3- Descargar XML
   const DowloadWidget({super.key});
 
   @override

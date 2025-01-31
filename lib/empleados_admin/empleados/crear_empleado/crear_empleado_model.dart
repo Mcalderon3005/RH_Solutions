@@ -26,11 +26,6 @@ class CrearEmpleadoModel extends FlutterFlowModel<CrearEmpleadoWidget> {
   FocusNode? txtCargoFocusNode;
   TextEditingController? txtCargoTextController;
   String? Function(BuildContext, String?)? txtCargoTextControllerValidator;
-  // State field(s) for txtFechaContra widget.
-  FocusNode? txtFechaContraFocusNode;
-  TextEditingController? txtFechaContraTextController;
-  String? Function(BuildContext, String?)?
-      txtFechaContraTextControllerValidator;
   // State field(s) for txtCed widget.
   FocusNode? txtCedFocusNode;
   TextEditingController? txtCedTextController;
@@ -39,19 +34,20 @@ class CrearEmpleadoModel extends FlutterFlowModel<CrearEmpleadoWidget> {
   FocusNode? txtNumFocusNode;
   TextEditingController? txtNumTextController;
   String? Function(BuildContext, String?)? txtNumTextControllerValidator;
-  // State field(s) for txtFechaNacimiento widget.
-  FocusNode? txtFechaNacimientoFocusNode;
-  TextEditingController? txtFechaNacimientoTextController;
-  String? Function(BuildContext, String?)?
-      txtFechaNacimientoTextControllerValidator;
+  // State field(s) for txtRole widget.
+  FocusNode? txtRoleFocusNode;
+  TextEditingController? txtRoleTextController;
+  String? Function(BuildContext, String?)? txtRoleTextControllerValidator;
+  DateTime? datePicked1;
+  DateTime? datePicked2;
   // State field(s) for txtSalario widget.
   FocusNode? txtSalarioFocusNode;
   TextEditingController? txtSalarioTextController;
   String? Function(BuildContext, String?)? txtSalarioTextControllerValidator;
-  // State field(s) for Foto widget.
-  FocusNode? fotoFocusNode;
-  TextEditingController? fotoTextController;
-  String? Function(BuildContext, String?)? fotoTextControllerValidator;
+  bool isDataUploading = false;
+  FFUploadedFile uploadedLocalFile =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+  String uploadedFileUrl = '';
 
   @override
   void initState(BuildContext context) {
@@ -75,22 +71,16 @@ class CrearEmpleadoModel extends FlutterFlowModel<CrearEmpleadoWidget> {
     txtCargoFocusNode?.dispose();
     txtCargoTextController?.dispose();
 
-    txtFechaContraFocusNode?.dispose();
-    txtFechaContraTextController?.dispose();
-
     txtCedFocusNode?.dispose();
     txtCedTextController?.dispose();
 
     txtNumFocusNode?.dispose();
     txtNumTextController?.dispose();
 
-    txtFechaNacimientoFocusNode?.dispose();
-    txtFechaNacimientoTextController?.dispose();
+    txtRoleFocusNode?.dispose();
+    txtRoleTextController?.dispose();
 
     txtSalarioFocusNode?.dispose();
     txtSalarioTextController?.dispose();
-
-    fotoFocusNode?.dispose();
-    fotoTextController?.dispose();
   }
 }

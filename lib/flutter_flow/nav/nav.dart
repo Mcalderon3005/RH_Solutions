@@ -76,14 +76,15 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
-      errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? const ProfileWidget() : const PaginaPrincipalWidget(),
+      errorBuilder: (context, state) => appStateNotifier.loggedIn
+          ? const InicioSesionWidget()
+          : const PaginaPrincipalWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) => appStateNotifier.loggedIn
-              ? const ProfileWidget()
+              ? const InicioSesionWidget()
               : const PaginaPrincipalWidget(),
           routes: [
             FFRoute(
@@ -109,10 +110,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => const AboutUsWidget(),
             ),
             FFRoute(
-              name: 'Home',
+              name: 'menuUsuario',
               path: 'eating-preferences',
               requireAuth: true,
-              builder: (context, params) => const HomeWidget(),
+              builder: (context, params) => const MenuUsuarioWidget(),
             ),
             FFRoute(
               name: 'moduloVacaciones',
@@ -162,7 +163,58 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'Edit_Empleado',
               path: 'editEmpleado',
-              builder: (context, params) => const EditEmpleadoWidget(),
+              builder: (context, params) => EditEmpleadoWidget(
+                nombre: params.getParam(
+                  'nombre',
+                  ParamType.String,
+                ),
+                apellido: params.getParam(
+                  'apellido',
+                  ParamType.String,
+                ),
+                email: params.getParam(
+                  'email',
+                  ParamType.String,
+                ),
+                salario: params.getParam(
+                  'salario',
+                  ParamType.double,
+                ),
+                estaActivo: params.getParam(
+                  'estaActivo',
+                  ParamType.bool,
+                ),
+                userRef: params.getParam(
+                  'userRef',
+                  ParamType.DocumentReference,
+                  isList: false,
+                  collectionNamePath: ['users'],
+                ),
+                img: params.getParam(
+                  'img',
+                  ParamType.String,
+                ),
+                cedula: params.getParam(
+                  'cedula',
+                  ParamType.String,
+                ),
+                numTel: params.getParam(
+                  'numTel',
+                  ParamType.String,
+                ),
+                fechaNacimiento: params.getParam(
+                  'fechaNacimiento',
+                  ParamType.DateTime,
+                ),
+                fechaContratacion: params.getParam(
+                  'fechaContratacion',
+                  ParamType.DateTime,
+                ),
+                role: params.getParam(
+                  'role',
+                  ParamType.String,
+                ),
+              ),
             ),
             FFRoute(
               name: 'Index_Empleados',
@@ -173,11 +225,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'Detalle_Empleado',
               path: 'detalleEmpleado',
               builder: (context, params) => const DetalleEmpleadoWidget(),
-            ),
-            FFRoute(
-              name: 'logEmpleado',
-              path: 'logEmpleado',
-              builder: (context, params) => const LogEmpleadoWidget(),
             ),
             FFRoute(
               name: 'DefinirActividad',
@@ -198,6 +245,44 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'Facturacion',
               path: 'facturacion',
               builder: (context, params) => const FacturacionWidget(),
+            ),
+            FFRoute(
+              name: 'logSesiones',
+              path: 'logSesiones',
+              builder: (context, params) => const LogSesionesWidget(),
+            ),
+            FFRoute(
+              name: 'logErrores',
+              path: 'logErrores',
+              builder: (context, params) => const LogErroresWidget(),
+            ),
+            FFRoute(
+              name: 'solicitudess',
+              path: 'solicitudess',
+              builder: (context, params) => const SolicitudessWidget(),
+            ),
+            FFRoute(
+              name: 'solicitudVacaciones',
+              path: 'solicitudVacaciones',
+              requireAuth: true,
+              builder: (context, params) => const SolicitudVacacionesWidget(),
+            ),
+            FFRoute(
+              name: 'indexSolicitudes',
+              path: 'indexSolicitudes',
+              requireAuth: true,
+              builder: (context, params) => const IndexSolicitudesWidget(),
+            ),
+            FFRoute(
+              name: 'solicitudVacacionesAdmin',
+              path: 'solicitudVacacionesAdmin',
+              requireAuth: true,
+              builder: (context, params) => const SolicitudVacacionesAdminWidget(),
+            ),
+            FFRoute(
+              name: 'indexVacionesAdmin',
+              path: 'indexVacionesAdmin',
+              builder: (context, params) => const IndexVacionesAdminWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),

@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'link_reunion_model.dart';
 export 'link_reunion_model.dart';
 
+/// Generar un componente que diga "Unirse a la reunion" y una X para cerrar
 class LinkReunionWidget extends StatefulWidget {
-  /// Generar un componente que diga "Unirse a la reunion" y una X para cerrar
   const LinkReunionWidget({super.key});
 
   @override

@@ -1,9 +1,9 @@
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'index_empleados_widget.dart' show IndexEmpleadosWidget;
+import 'solicitudess_widget.dart' show SolicitudessWidget;
 import 'package:flutter/material.dart';
 
-class IndexEmpleadosModel extends FlutterFlowModel<IndexEmpleadosWidget> {
+class SolicitudessModel extends FlutterFlowModel<SolicitudessWidget> {
   ///  State fields for stateful widgets in this page.
 
   List<UsersRecord> simpleSearchResults = [];

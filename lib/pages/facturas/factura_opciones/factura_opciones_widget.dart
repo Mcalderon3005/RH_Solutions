@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'factura_opciones_model.dart';
 export 'factura_opciones_model.dart';
 
+/// Quiero que me generes un componente con 4 botones y una X en rojo para
+/// cerrarlo
 class FacturaOpcionesWidget extends StatefulWidget {
-  /// Quiero que me generes un componente con 4 botones y una X en rojo para
-  /// cerrarlo
   const FacturaOpcionesWidget({super.key});
 
   @override

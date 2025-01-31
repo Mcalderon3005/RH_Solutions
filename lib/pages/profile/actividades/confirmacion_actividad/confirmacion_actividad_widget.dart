@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'confirmacion_actividad_model.dart';
 export 'confirmacion_actividad_model.dart';
 
+/// Quiero que me generes un componente que tenga un mensaje que diga
+/// "Descripcion: Dia libre por festividad" y un boton que diga OK
 class ConfirmacionActividadWidget extends StatefulWidget {
-  /// Quiero que me generes un componente que tenga un mensaje que diga
-  /// "Descripcion: Dia libre por festividad" y un boton que diga OK
   const ConfirmacionActividadWidget({super.key});
 
   @override

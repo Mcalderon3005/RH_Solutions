@@ -45,10 +45,20 @@ class _ModuloVacacionesWidgetState extends State<ModuloVacacionesWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: SafeArea(
-          top: true,
-          child: Align(
-            alignment: const AlignmentDirectional(1.0, 0.0),
+        body: Align(
+          alignment: const AlignmentDirectional(1.0, 0.0),
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  FlutterFlowTheme.of(context).primary,
+                  const Color(0xFF9E4882)
+                ],
+                stops: const [0.0, 1.0],
+                begin: const AlignmentDirectional(0.0, -1.0),
+                end: const AlignmentDirectional(0, 1.0),
+              ),
+            ),
             child: Padding(
               padding: const EdgeInsets.all(24.0),
               child: Column(
@@ -56,14 +66,27 @@ class _ModuloVacacionesWidgetState extends State<ModuloVacacionesWidget> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  wrapWithModel(
-                    model: _model.customAppbarModel,
-                    updateCallback: () => safeSetState(() {}),
-                    child: CustomAppbarWidget(
-                      backButton: true,
-                      actionButton: false,
-                      actionButtonAction: () async {},
-                      optionsButtonAction: () async {},
+                  InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      logFirebaseEvent(
+                          'MODULO_VACACIONES_Container_flstdb3c_ON_');
+                      logFirebaseEvent('customAppbar_navigate_to');
+
+                      context.pushNamed('menuUsuario');
+                    },
+                    child: wrapWithModel(
+                      model: _model.customAppbarModel,
+                      updateCallback: () => safeSetState(() {}),
+                      child: CustomAppbarWidget(
+                        backButton: true,
+                        actionButton: false,
+                        actionButtonAction: () async {},
+                        optionsButtonAction: () async {},
+                      ),
                     ),
                   ),
                   Align(
@@ -76,6 +99,7 @@ class _ModuloVacacionesWidgetState extends State<ModuloVacacionesWidget> {
                         style:
                             FlutterFlowTheme.of(context).displaySmall.override(
                                   fontFamily: 'Outfit',
+                                  color: Colors.white,
                                   letterSpacing: 0.0,
                                 ),
                       ),
@@ -87,41 +111,14 @@ class _ModuloVacacionesWidgetState extends State<ModuloVacacionesWidget> {
                       padding:
                           const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 15.0),
                       child: FFButtonWidget(
-                        onPressed: () {
-                          print('Button pressed ...');
+                        onPressed: () async {
+                          logFirebaseEvent(
+                              'MODULO_VACACIONES_SOLICITAR_VACACIONES_B');
+                          logFirebaseEvent('Button_navigate_to');
+
+                          context.pushNamed('solicitudVacaciones');
                         },
                         text: 'Solicitar  Vacaciones',
-                        options: FFButtonOptions(
-                          width: 450.0,
-                          height: 50.0,
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              16.0, 0.0, 16.0, 0.0),
-                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          color: FlutterFlowTheme.of(context).primary,
-                          textStyle:
-                              FlutterFlowTheme.of(context).titleSmall.override(
-                                    fontFamily: 'Manrope',
-                                    color: Colors.white,
-                                    fontSize: 18.0,
-                                    letterSpacing: 0.0,
-                                  ),
-                          elevation: 0.0,
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Align(
-                    alignment: const AlignmentDirectional(0.0, 0.0),
-                    child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 15.0),
-                      child: FFButtonWidget(
-                        onPressed: () {
-                          print('Button pressed ...');
-                        },
-                        text: 'Ver Vacaciones Disponibles',
                         options: FFButtonOptions(
                           width: 450.0,
                           height: 50.0,

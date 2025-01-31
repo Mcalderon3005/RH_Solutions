@@ -1,5 +1,4 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/form_field_controller.dart';
 import 'edit_empleado_widget.dart' show EditEmpleadoWidget;
 import 'package:flutter/material.dart';
 
@@ -34,12 +33,14 @@ class EditEmpleadoModel extends FlutterFlowModel<EditEmpleadoWidget> {
   FocusNode? textFieldFocusNode7;
   TextEditingController? textController7;
   String? Function(BuildContext, String?)? textController7Validator;
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode8;
-  TextEditingController? textController8;
-  String? Function(BuildContext, String?)? textController8Validator;
-  // State field(s) for RadioButton widget.
-  FormFieldController<String>? radioButtonValueController;
+  DateTime? datePicked1;
+  DateTime? datePicked2;
+  // State field(s) for Switch widget.
+  bool? switchValue;
+  bool isDataUploading = false;
+  FFUploadedFile uploadedLocalFile =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+  String uploadedFileUrl = '';
 
   @override
   void initState(BuildContext context) {}
@@ -66,11 +67,5 @@ class EditEmpleadoModel extends FlutterFlowModel<EditEmpleadoWidget> {
 
     textFieldFocusNode7?.dispose();
     textController7?.dispose();
-
-    textFieldFocusNode8?.dispose();
-    textController8?.dispose();
   }
-
-  /// Additional helper methods.
-  String? get radioButtonValue => radioButtonValueController?.value;
 }

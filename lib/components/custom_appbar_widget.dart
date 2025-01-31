@@ -65,12 +65,12 @@ class _CustomAppbarWidgetState extends State<CustomAppbarWidget> {
             borderColor: FlutterFlowTheme.of(context).secondaryBackground,
             borderRadius: 24.0,
             borderWidth: 1.0,
-            buttonSize: 44.0,
+            buttonSize: 50.0,
             fillColor: FlutterFlowTheme.of(context).secondaryBackground,
             icon: Icon(
               Icons.keyboard_arrow_left,
               color: FlutterFlowTheme.of(context).primaryText,
-              size: 18.0,
+              size: 28.0,
             ),
             onPressed: () async {
               logFirebaseEvent('CUSTOM_APPBAR_keyboard_arrow_left_ICN_ON');
