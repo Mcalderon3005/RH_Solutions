@@ -1,5 +1,6 @@
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'log_sesiones_widget.dart' show LogSesionesWidget;
 import 'package:flutter/material.dart';
 

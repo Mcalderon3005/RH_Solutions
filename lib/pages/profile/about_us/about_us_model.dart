@@ -7,15 +7,19 @@ class AboutUsModel extends FlutterFlowModel<AboutUsWidget> {
   ///  State fields for stateful widgets in this page.
 
   // Model for customAppbar component.
-  late CustomAppbarModel customAppbarModel;
+  late CustomAppbarModel customAppbarModel1;
+  // Model for customAppbar component.
+  late CustomAppbarModel customAppbarModel2;
 
   @override
   void initState(BuildContext context) {
-    customAppbarModel = createModel(context, () => CustomAppbarModel());
+    customAppbarModel1 = createModel(context, () => CustomAppbarModel());
+    customAppbarModel2 = createModel(context, () => CustomAppbarModel());
   }
 
   @override
   void dispose() {
-    customAppbarModel.dispose();
+    customAppbarModel1.dispose();
+    customAppbarModel2.dispose();
   }
 }

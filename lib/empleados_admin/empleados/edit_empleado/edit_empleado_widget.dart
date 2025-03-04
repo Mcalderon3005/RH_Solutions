@@ -42,6 +42,9 @@ class EditEmpleadoWidget extends StatefulWidget {
   final DateTime? fechaContratacion;
   final String? role;
 
+  static String routeName = 'Edit_Empleado';
+  static String routePath = 'editEmpleado';
+
   @override
   State<EditEmpleadoWidget> createState() => _EditEmpleadoWidgetState();
 }
@@ -99,8 +102,8 @@ class _EditEmpleadoWidgetState extends State<EditEmpleadoWidget>
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 110.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 110.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -160,21 +163,21 @@ class _EditEmpleadoWidgetState extends State<EditEmpleadoWidget>
                   letterSpacing: 0.0,
                 ),
           ),
-          actions: const [],
+          actions: [],
           centerTitle: false,
           elevation: 0.0,
         ),
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
+            padding: EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
                     child: Text(
                       'Formulario de Edición',
                       style:
@@ -186,7 +189,7 @@ class _EditEmpleadoWidgetState extends State<EditEmpleadoWidget>
                   ),
                   Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -237,7 +240,7 @@ class _EditEmpleadoWidgetState extends State<EditEmpleadoWidget>
                               ),
                               borderRadius: BorderRadius.circular(12.0),
                             ),
-                            contentPadding: const EdgeInsetsDirectional.fromSTEB(
+                            contentPadding: EdgeInsetsDirectional.fromSTEB(
                                 16.0, 12.0, 16.0, 12.0),
                           ),
                           style:
@@ -296,7 +299,7 @@ class _EditEmpleadoWidgetState extends State<EditEmpleadoWidget>
                               ),
                               borderRadius: BorderRadius.circular(12.0),
                             ),
-                            contentPadding: const EdgeInsetsDirectional.fromSTEB(
+                            contentPadding: EdgeInsetsDirectional.fromSTEB(
                                 16.0, 12.0, 16.0, 12.0),
                           ),
                           style:
@@ -356,7 +359,7 @@ class _EditEmpleadoWidgetState extends State<EditEmpleadoWidget>
                               ),
                               borderRadius: BorderRadius.circular(12.0),
                             ),
-                            contentPadding: const EdgeInsetsDirectional.fromSTEB(
+                            contentPadding: EdgeInsetsDirectional.fromSTEB(
                                 16.0, 12.0, 16.0, 12.0),
                           ),
                           style:
@@ -415,7 +418,7 @@ class _EditEmpleadoWidgetState extends State<EditEmpleadoWidget>
                               ),
                               borderRadius: BorderRadius.circular(12.0),
                             ),
-                            contentPadding: const EdgeInsetsDirectional.fromSTEB(
+                            contentPadding: EdgeInsetsDirectional.fromSTEB(
                                 16.0, 12.0, 16.0, 12.0),
                           ),
                           style:
@@ -474,7 +477,7 @@ class _EditEmpleadoWidgetState extends State<EditEmpleadoWidget>
                               ),
                               borderRadius: BorderRadius.circular(12.0),
                             ),
-                            contentPadding: const EdgeInsetsDirectional.fromSTEB(
+                            contentPadding: EdgeInsetsDirectional.fromSTEB(
                                 16.0, 12.0, 16.0, 12.0),
                           ),
                           style:
@@ -533,7 +536,7 @@ class _EditEmpleadoWidgetState extends State<EditEmpleadoWidget>
                               ),
                               borderRadius: BorderRadius.circular(12.0),
                             ),
-                            contentPadding: const EdgeInsetsDirectional.fromSTEB(
+                            contentPadding: EdgeInsetsDirectional.fromSTEB(
                                 16.0, 12.0, 16.0, 12.0),
                           ),
                           style:
@@ -592,7 +595,7 @@ class _EditEmpleadoWidgetState extends State<EditEmpleadoWidget>
                               ),
                               borderRadius: BorderRadius.circular(12.0),
                             ),
-                            contentPadding: const EdgeInsetsDirectional.fromSTEB(
+                            contentPadding: EdgeInsetsDirectional.fromSTEB(
                                 16.0, 12.0, 16.0, 12.0),
                           ),
                           style:
@@ -605,13 +608,13 @@ class _EditEmpleadoWidgetState extends State<EditEmpleadoWidget>
                               .asValidator(context),
                         ),
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 15.0, 0.0, 15.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     30.0, 0.0, 0.0, 0.0),
                                 child: Text(
                                   'Fecha de Nacimiento',
@@ -625,7 +628,7 @@ class _EditEmpleadoWidgetState extends State<EditEmpleadoWidget>
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     35.0, 0.0, 0.0, 0.0),
                                 child: Text(
                                   valueOrDefault<String>(
@@ -662,7 +665,7 @@ class _EditEmpleadoWidgetState extends State<EditEmpleadoWidget>
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     50.0, 0.0, 50.0, 0.0),
                                 child: FlutterFlowIconButton(
                                   borderRadius: 8.0,
@@ -679,7 +682,7 @@ class _EditEmpleadoWidgetState extends State<EditEmpleadoWidget>
                                         'EDIT_EMPLEADO_PAGE_datePicker2_ON_TAP');
                                     logFirebaseEvent(
                                         'datePicker2_date_time_picker');
-                                    final datePicked1Date =
+                                    final _datePicked1Date =
                                         await showDatePicker(
                                       context: context,
                                       initialDate: getCurrentTimestamp,
@@ -725,13 +728,18 @@ class _EditEmpleadoWidgetState extends State<EditEmpleadoWidget>
                                       },
                                     );
 
-                                    if (datePicked1Date != null) {
+                                    if (_datePicked1Date != null) {
                                       safeSetState(() {
                                         _model.datePicked1 = DateTime(
-                                          datePicked1Date.year,
-                                          datePicked1Date.month,
-                                          datePicked1Date.day,
+                                          _datePicked1Date.year,
+                                          _datePicked1Date.month,
+                                          _datePicked1Date.day,
                                         );
+                                      });
+                                    } else if (_model.datePicked1 != null) {
+                                      safeSetState(() {
+                                        _model.datePicked1 =
+                                            getCurrentTimestamp;
                                       });
                                     }
                                     logFirebaseEvent(
@@ -746,13 +754,13 @@ class _EditEmpleadoWidgetState extends State<EditEmpleadoWidget>
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 15.0, 0.0, 15.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     30.0, 0.0, 0.0, 0.0),
                                 child: Text(
                                   'Fecha de Contratacion',
@@ -766,7 +774,7 @@ class _EditEmpleadoWidgetState extends State<EditEmpleadoWidget>
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     35.0, 0.0, 0.0, 0.0),
                                 child: Text(
                                   valueOrDefault<String>(
@@ -795,7 +803,7 @@ class _EditEmpleadoWidgetState extends State<EditEmpleadoWidget>
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     50.0, 0.0, 50.0, 0.0),
                                 child: FlutterFlowIconButton(
                                   borderRadius: 8.0,
@@ -812,7 +820,7 @@ class _EditEmpleadoWidgetState extends State<EditEmpleadoWidget>
                                         'EDIT_EMPLEADO_PAGE_datePicker2_ON_TAP');
                                     logFirebaseEvent(
                                         'datePicker2_date_time_picker');
-                                    final datePicked2Date =
+                                    final _datePicked2Date =
                                         await showDatePicker(
                                       context: context,
                                       initialDate: getCurrentTimestamp,
@@ -858,13 +866,18 @@ class _EditEmpleadoWidgetState extends State<EditEmpleadoWidget>
                                       },
                                     );
 
-                                    if (datePicked2Date != null) {
+                                    if (_datePicked2Date != null) {
                                       safeSetState(() {
                                         _model.datePicked2 = DateTime(
-                                          datePicked2Date.year,
-                                          datePicked2Date.month,
-                                          datePicked2Date.day,
+                                          _datePicked2Date.year,
+                                          _datePicked2Date.month,
+                                          _datePicked2Date.day,
                                         );
+                                      });
+                                    } else if (_model.datePicked2 != null) {
+                                      safeSetState(() {
+                                        _model.datePicked2 =
+                                            getCurrentTimestamp;
                                       });
                                     }
                                     logFirebaseEvent(
@@ -879,7 +892,7 @@ class _EditEmpleadoWidgetState extends State<EditEmpleadoWidget>
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               10.0, 0.0, 0.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -894,9 +907,9 @@ class _EditEmpleadoWidgetState extends State<EditEmpleadoWidget>
                                     ),
                               ),
                               Align(
-                                alignment: const AlignmentDirectional(-1.0, 0.0),
+                                alignment: AlignmentDirectional(-1.0, 0.0),
                                 child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       10.0, 0.0, 0.0, 0.0),
                                   child: Switch.adaptive(
                                     value: _model.switchValue!,
@@ -1040,9 +1053,9 @@ class _EditEmpleadoWidgetState extends State<EditEmpleadoWidget>
                           ],
                         ),
                         Align(
-                          alignment: const AlignmentDirectional(1.0, 0.0),
+                          alignment: AlignmentDirectional(1.0, 0.0),
                           child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 20.0, 0.0, 0.0),
                             child: FFButtonWidget(
                               onPressed: () async {
@@ -1056,11 +1069,11 @@ class _EditEmpleadoWidgetState extends State<EditEmpleadoWidget>
                               text: 'Eliminar Usuario',
                               options: FFButtonOptions(
                                 height: 40.0,
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     16.0, 0.0, 16.0, 0.0),
-                                iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                iconPadding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 0.0),
-                                color: const Color(0xFFFF273A),
+                                color: Color(0xFFFF273A),
                                 textStyle: FlutterFlowTheme.of(context)
                                     .titleSmall
                                     .override(
@@ -1075,15 +1088,15 @@ class _EditEmpleadoWidgetState extends State<EditEmpleadoWidget>
                             ),
                           ),
                         ),
-                      ].divide(const SizedBox(height: 12.0)),
+                      ].divide(SizedBox(height: 12.0)),
                     ),
                   ),
                   Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                     child: Container(
                       width: double.infinity,
-                      constraints: const BoxConstraints(
+                      constraints: BoxConstraints(
                         maxWidth: 500.0,
                       ),
                       decoration: BoxDecoration(
@@ -1099,7 +1112,7 @@ class _EditEmpleadoWidgetState extends State<EditEmpleadoWidget>
                   ),
                   Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 12.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 12.0),
                     child: StreamBuilder<List<UsersRecord>>(
                       stream: queryUsersRecord(
                         singleRecord: true,
@@ -1156,15 +1169,15 @@ class _EditEmpleadoWidgetState extends State<EditEmpleadoWidget>
                             context.safePop();
                           },
                           text: 'Actualizar Empleado',
-                          icon: const Icon(
+                          icon: Icon(
                             Icons.receipt_long,
                             size: 15.0,
                           ),
                           options: FFButtonOptions(
                             width: double.infinity,
                             height: 48.0,
-                            padding: const EdgeInsets.all(0.0),
-                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsets.all(0.0),
+                            iconPadding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
                             color: FlutterFlowTheme.of(context).primary,
                             textStyle: FlutterFlowTheme.of(context)
@@ -1175,7 +1188,7 @@ class _EditEmpleadoWidgetState extends State<EditEmpleadoWidget>
                                   letterSpacing: 0.0,
                                 ),
                             elevation: 4.0,
-                            borderSide: const BorderSide(
+                            borderSide: BorderSide(
                               color: Colors.transparent,
                               width: 1.0,
                             ),

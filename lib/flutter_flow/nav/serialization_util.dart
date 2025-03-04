@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 
 import '/backend/backend.dart';
+import '/backend/schema/enums/enums.dart';
 
 import '../../flutter_flow/place.dart';
 import '../../flutter_flow/uploaded_file.dart';
@@ -90,6 +91,9 @@ String? serializeParam(
 
       case ParamType.DataStruct:
         data = param is BaseStruct ? param.serialize() : null;
+
+      case ParamType.Enum:
+        data = (param is Enum) ? param.serialize() : null;
 
       default:
         data = null;
@@ -182,6 +186,7 @@ enum ParamType {
   Document,
   DocumentReference,
   DataStruct,
+  Enum,
 }
 
 dynamic deserializeParam<T>(
@@ -201,8 +206,8 @@ dynamic deserializeParam<T>(
         return null;
       }
       return paramValues
-          .whereType<String>()
-          .map((p) => p)
+          .where((p) => p is String)
+          .map((p) => p as String)
           .map((p) => deserializeParam<T>(
                 p,
                 paramType,
@@ -247,6 +252,9 @@ dynamic deserializeParam<T>(
         final data = json.decode(param) as Map<String, dynamic>? ?? {};
         return structBuilder != null ? structBuilder(data) : null;
 
+      case ParamType.Enum:
+        return deserializeEnum<T>(param);
+
       default:
         return null;
     }
@@ -273,7 +281,7 @@ Future<List<T>> Function(String) getDocList<T>(
     List<String> docIds = [];
     try {
       final ids = json.decode(idsList) as Iterable;
-      docIds = ids.whereType<String>().map((d) => d).toList();
+      docIds = ids.where((d) => d is String).map((d) => d as String).toList();
     } catch (_) {}
     return Future.wait(
       docIds.map(

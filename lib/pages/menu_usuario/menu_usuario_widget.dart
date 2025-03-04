@@ -2,12 +2,16 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'menu_usuario_model.dart';
 export 'menu_usuario_model.dart';
 
 class MenuUsuarioWidget extends StatefulWidget {
   const MenuUsuarioWidget({super.key});
+
+  static String routeName = 'menuUsuario';
+  static String routePath = 'eating-preferences';
 
   @override
   State<MenuUsuarioWidget> createState() => _MenuUsuarioWidgetState();
@@ -45,9 +49,9 @@ class _MenuUsuarioWidgetState extends State<MenuUsuarioWidget> {
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         body: Align(
-          alignment: const AlignmentDirectional(0.0, 0.0),
+          alignment: AlignmentDirectional(0.0, 0.0),
           child: Container(
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [Color(0xFF2797FF), Color(0xFF9E4882)],
                 stops: [0.0, 1.0],
@@ -56,17 +60,17 @@ class _MenuUsuarioWidgetState extends State<MenuUsuarioWidget> {
               ),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(24.0),
+              padding: EdgeInsets.all(24.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Align(
-                    alignment: const AlignmentDirectional(0.0, 0.0),
+                    alignment: AlignmentDirectional(0.0, 0.0),
                     child: Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 20.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 20.0),
                       child: Text(
                         'Menú Principal',
                         style:
@@ -79,10 +83,10 @@ class _MenuUsuarioWidgetState extends State<MenuUsuarioWidget> {
                     ),
                   ),
                   Align(
-                    alignment: const AlignmentDirectional(0.0, 0.0),
+                    alignment: AlignmentDirectional(0.0, 0.0),
                     child: Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -90,7 +94,7 @@ class _MenuUsuarioWidgetState extends State<MenuUsuarioWidget> {
                             width: 592.3,
                             height: 100.0,
                             decoration: BoxDecoration(
-                              color: const Color(0xFF63BCEA),
+                              color: Color(0xFF63BCEA),
                               borderRadius: BorderRadius.circular(20.0),
                               shape: BoxShape.rectangle,
                               border: Border.all(
@@ -109,7 +113,7 @@ class _MenuUsuarioWidgetState extends State<MenuUsuarioWidget> {
                                   size: 30.0,
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       5.0, 0.0, 0.0, 0.0),
                                   child: Text(
                                     'Ver Facturas',
@@ -127,13 +131,13 @@ class _MenuUsuarioWidgetState extends State<MenuUsuarioWidget> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 15.0, 0.0, 0.0),
                             child: Container(
                               width: 592.3,
                               height: 100.0,
                               decoration: BoxDecoration(
-                                color: const Color(0xFF63BCEA),
+                                color: Color(0xFF63BCEA),
                                 borderRadius: BorderRadius.circular(20.0),
                                 border: Border.all(
                                   color: Colors.black,
@@ -150,7 +154,8 @@ class _MenuUsuarioWidgetState extends State<MenuUsuarioWidget> {
                                       'MENU_USUARIO_PAGE_Row_vyuhqas4_ON_TAP');
                                   logFirebaseEvent('Row_navigate_to');
 
-                                  context.pushNamed('moduloVacaciones');
+                                  context.pushNamed(
+                                      ModuloVacacionesWidget.routeName);
                                 },
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
@@ -163,7 +168,7 @@ class _MenuUsuarioWidgetState extends State<MenuUsuarioWidget> {
                                       size: 30.0,
                                     ),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           5.0, 0.0, 0.0, 0.0),
                                       child: Text(
                                         'Vacaciones',
@@ -183,56 +188,70 @@ class _MenuUsuarioWidgetState extends State<MenuUsuarioWidget> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 15.0, 0.0, 0.0),
-                            child: Container(
-                              width: 592.3,
-                              height: 100.0,
-                              decoration: BoxDecoration(
-                                color: const Color(0xFF63BCEA),
-                                borderRadius: BorderRadius.circular(20.0),
-                                border: Border.all(
-                                  color: Colors.black,
-                                  width: 2.0,
+                            child: InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                logFirebaseEvent(
+                                    'MENU_USUARIO_Container_40u7ynsn_ON_TAP');
+                                logFirebaseEvent('Container_navigate_to');
+
+                                context.pushNamed(
+                                    IndexActividadesWidget.routeName);
+                              },
+                              child: Container(
+                                width: 592.3,
+                                height: 100.0,
+                                decoration: BoxDecoration(
+                                  color: Color(0xFF63BCEA),
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  border: Border.all(
+                                    color: Colors.black,
+                                    width: 2.0,
+                                  ),
                                 ),
-                              ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    Icons.local_activity,
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    size: 30.0,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        5.0, 0.0, 0.0, 0.0),
-                                    child: Text(
-                                      'Actividades',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Manrope',
-                                            color: Colors.white,
-                                            fontSize: 18.0,
-                                            letterSpacing: 0.0,
-                                          ),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.local_activity,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      size: 30.0,
                                     ),
-                                  ),
-                                ],
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          5.0, 0.0, 0.0, 0.0),
+                                      child: Text(
+                                        'Actividades',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Manrope',
+                                              color: Colors.white,
+                                              fontSize: 18.0,
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 15.0, 0.0, 0.0),
                             child: Container(
                               width: 592.3,
                               height: 100.0,
                               decoration: BoxDecoration(
-                                color: const Color(0xFF63BCEA),
+                                color: Color(0xFF63BCEA),
                                 borderRadius: BorderRadius.circular(20.0),
                                 border: Border.all(
                                   color: Colors.black,
@@ -249,7 +268,7 @@ class _MenuUsuarioWidgetState extends State<MenuUsuarioWidget> {
                                       'MENU_USUARIO_PAGE_Row_8cwabkfz_ON_TAP');
                                   logFirebaseEvent('Row_navigate_to');
 
-                                  context.pushNamed('Profile');
+                                  context.pushNamed(ProfileWidget.routeName);
                                 },
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
@@ -262,7 +281,7 @@ class _MenuUsuarioWidgetState extends State<MenuUsuarioWidget> {
                                       size: 30.0,
                                     ),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           5.0, 0.0, 0.0, 0.0),
                                       child: Text(
                                         'Perfil',
@@ -282,12 +301,12 @@ class _MenuUsuarioWidgetState extends State<MenuUsuarioWidget> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 15.0, 0.0, 0.0),
                             child: FlutterFlowIconButton(
                               borderRadius: 8.0,
                               buttonSize: 50.0,
-                              fillColor: const Color(0xFFDD475A),
+                              fillColor: Color(0xFFDD475A),
                               icon: Icon(
                                 Icons.login_outlined,
                                 color: FlutterFlowTheme.of(context).info,
@@ -302,7 +321,8 @@ class _MenuUsuarioWidgetState extends State<MenuUsuarioWidget> {
                                 GoRouter.of(context).clearRedirectLocation();
 
                                 context.goNamedAuth(
-                                    'paginaPrincipal', context.mounted);
+                                    PaginaPrincipalWidget.routeName,
+                                    context.mounted);
                               },
                             ),
                           ),

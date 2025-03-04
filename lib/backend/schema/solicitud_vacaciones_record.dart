@@ -9,9 +9,9 @@ import '/flutter_flow/flutter_flow_util.dart';
 
 class SolicitudVacacionesRecord extends FirestoreRecord {
   SolicitudVacacionesRecord._(
-    super.reference,
-    super.data,
-  ) {
+    DocumentReference reference,
+    Map<String, dynamic> data,
+  ) : super(reference, data) {
     _initializeFields();
   }
 
@@ -55,6 +55,11 @@ class SolicitudVacacionesRecord extends FirestoreRecord {
   DateTime? get fechaFin => _fechaFin;
   bool hasFechaFin() => _fechaFin != null;
 
+  // "tipoSolicitudes" field.
+  String? _tipoSolicitudes;
+  String get tipoSolicitudes => _tipoSolicitudes ?? '';
+  bool hasTipoSolicitudes() => _tipoSolicitudes != null;
+
   void _initializeFields() {
     _fechaSolicitud = snapshotData['fechaSolicitud'] as DateTime?;
     _fechaInicio = snapshotData['fechaInicio'] as DateTime?;
@@ -64,6 +69,7 @@ class SolicitudVacacionesRecord extends FirestoreRecord {
     _estadoAprobacion = snapshotData['estadoAprobacion'] as bool?;
     _estadoRevision = snapshotData['estadoRevision'] as bool?;
     _fechaFin = snapshotData['fechaFin'] as DateTime?;
+    _tipoSolicitudes = snapshotData['tipoSolicitudes'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -110,6 +116,7 @@ Map<String, dynamic> createSolicitudVacacionesRecordData({
   bool? estadoAprobacion,
   bool? estadoRevision,
   DateTime? fechaFin,
+  String? tipoSolicitudes,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -121,6 +128,7 @@ Map<String, dynamic> createSolicitudVacacionesRecordData({
       'estadoAprobacion': estadoAprobacion,
       'estadoRevision': estadoRevision,
       'fechaFin': fechaFin,
+      'tipoSolicitudes': tipoSolicitudes,
     }.withoutNulls,
   );
 
@@ -140,7 +148,8 @@ class SolicitudVacacionesRecordDocumentEquality
         e1?.empleadoCorreo == e2?.empleadoCorreo &&
         e1?.estadoAprobacion == e2?.estadoAprobacion &&
         e1?.estadoRevision == e2?.estadoRevision &&
-        e1?.fechaFin == e2?.fechaFin;
+        e1?.fechaFin == e2?.fechaFin &&
+        e1?.tipoSolicitudes == e2?.tipoSolicitudes;
   }
 
   @override
@@ -152,7 +161,8 @@ class SolicitudVacacionesRecordDocumentEquality
         e?.empleadoCorreo,
         e?.estadoAprobacion,
         e?.estadoRevision,
-        e?.fechaFin
+        e?.fechaFin,
+        e?.tipoSolicitudes
       ]);
 
   @override

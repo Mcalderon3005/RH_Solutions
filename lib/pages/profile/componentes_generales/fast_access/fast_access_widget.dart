@@ -44,7 +44,7 @@ class _FastAccessWidgetState extends State<FastAccessWidget> {
       height: 80.0,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).secondaryBackground,
-        boxShadow: const [
+        boxShadow: [
           BoxShadow(
             blurRadius: 4.0,
             color: Color(0x33000000),
@@ -57,7 +57,7 @@ class _FastAccessWidgetState extends State<FastAccessWidget> {
         ],
       ),
       child: Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
+        padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
         child: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -78,7 +78,7 @@ class _FastAccessWidgetState extends State<FastAccessWidget> {
                         letterSpacing: 0.0,
                       ),
                 ),
-              ].divide(const SizedBox(height: 4.0)),
+              ].divide(SizedBox(height: 4.0)),
             ),
             Column(
               mainAxisSize: MainAxisSize.max,
@@ -97,7 +97,7 @@ class _FastAccessWidgetState extends State<FastAccessWidget> {
                         letterSpacing: 0.0,
                       ),
                 ),
-              ].divide(const SizedBox(height: 4.0)),
+              ].divide(SizedBox(height: 4.0)),
             ),
             Column(
               mainAxisSize: MainAxisSize.max,
@@ -124,7 +124,7 @@ class _FastAccessWidgetState extends State<FastAccessWidget> {
                         letterSpacing: 0.0,
                       ),
                 ),
-              ].divide(const SizedBox(height: 4.0)),
+              ].divide(SizedBox(height: 4.0)),
             ),
             Column(
               mainAxisSize: MainAxisSize.max,
@@ -143,7 +143,7 @@ class _FastAccessWidgetState extends State<FastAccessWidget> {
                         letterSpacing: 0.0,
                       ),
                 ),
-              ].divide(const SizedBox(height: 4.0)),
+              ].divide(SizedBox(height: 4.0)),
             ),
             Column(
               mainAxisSize: MainAxisSize.max,
@@ -162,7 +162,7 @@ class _FastAccessWidgetState extends State<FastAccessWidget> {
                         letterSpacing: 0.0,
                       ),
                 ),
-              ].divide(const SizedBox(height: 4.0)),
+              ].divide(SizedBox(height: 4.0)),
             ),
           ],
         ),

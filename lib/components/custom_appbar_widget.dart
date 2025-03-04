@@ -16,8 +16,8 @@ class CustomAppbarWidget extends StatefulWidget {
     this.actionButtonAction,
     bool? optionsButton,
     required this.optionsButtonAction,
-  })  : actionButton = actionButton ?? false,
-        optionsButton = optionsButton ?? false;
+  })  : this.actionButton = actionButton ?? false,
+        this.optionsButton = optionsButton ?? false;
 
   final bool? backButton;
   final bool actionButton;
@@ -72,10 +72,8 @@ class _CustomAppbarWidgetState extends State<CustomAppbarWidget> {
               color: FlutterFlowTheme.of(context).primaryText,
               size: 28.0,
             ),
-            onPressed: () async {
-              logFirebaseEvent('CUSTOM_APPBAR_keyboard_arrow_left_ICN_ON');
-              logFirebaseEvent('IconButton_navigate_back');
-              context.safePop();
+            onPressed: () {
+              print('IconButton pressed ...');
             },
           ),
         Row(
@@ -94,9 +92,9 @@ class _CustomAppbarWidgetState extends State<CustomAppbarWidget> {
                 ),
                 options: FFButtonOptions(
                   height: 44.0,
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   iconPadding:
-                      const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   color: FlutterFlowTheme.of(context).primary,
                   textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
                         fontFamily: 'Manrope',
@@ -105,7 +103,7 @@ class _CustomAppbarWidgetState extends State<CustomAppbarWidget> {
                         fontWeight: FontWeight.w600,
                       ),
                   elevation: 0.0,
-                  borderSide: const BorderSide(
+                  borderSide: BorderSide(
                     color: Colors.transparent,
                     width: 1.0,
                   ),
@@ -130,7 +128,7 @@ class _CustomAppbarWidgetState extends State<CustomAppbarWidget> {
                   await widget.optionsButtonAction?.call();
                 },
               ),
-          ].divide(const SizedBox(width: 8.0)),
+          ].divide(SizedBox(width: 8.0)),
         ),
       ],
     );

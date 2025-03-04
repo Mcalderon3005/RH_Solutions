@@ -3,6 +3,7 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/index.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,6 +13,9 @@ export 'solicitudess_model.dart';
 
 class SolicitudessWidget extends StatefulWidget {
   const SolicitudessWidget({super.key});
+
+  static String routeName = 'solicitudess';
+  static String routePath = 'solicitudess';
 
   @override
   State<SolicitudessWidget> createState() => _SolicitudessWidgetState();
@@ -90,7 +94,7 @@ class _SolicitudessWidgetState extends State<SolicitudessWidget> {
             body: SafeArea(
               top: true,
               child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(24.0, 24.0, 24.0, 24.0),
+                padding: EdgeInsetsDirectional.fromSTEB(24.0, 24.0, 24.0, 24.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -105,14 +109,14 @@ class _SolicitudessWidgetState extends State<SolicitudessWidget> {
                                 'SOLICITUDESS_PAGE_VOLVER_BTN_ON_TAP');
                             logFirebaseEvent('Button_navigate_to');
 
-                            context.pushNamed('HomeAdminPage');
+                            context.pushNamed(HomeAdminPageWidget.routeName);
                           },
                           text: 'Volver',
                           options: FFButtonOptions(
                             height: 40.0,
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 16.0, 0.0, 16.0, 0.0),
-                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                            iconPadding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
                             color: FlutterFlowTheme.of(context).primary,
                             textStyle: FlutterFlowTheme.of(context)
@@ -150,13 +154,13 @@ class _SolicitudessWidgetState extends State<SolicitudessWidget> {
                           borderRadius: BorderRadius.circular(12.0),
                         ),
                         child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               16.0, 16.0, 16.0, 16.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     12.0, 0.0, 12.0, 0.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
@@ -221,7 +225,7 @@ class _SolicitudessWidgetState extends State<SolicitudessWidget> {
                                                   BorderRadius.circular(25.0),
                                             ),
                                             child: Padding(
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       8.0, 12.0, 8.0, 12.0),
                                               child: Row(
@@ -235,7 +239,7 @@ class _SolicitudessWidgetState extends State<SolicitudessWidget> {
                                                     size: 20.0,
                                                   ),
                                                   Expanded(
-                                                    child: SizedBox(
+                                                    child: Container(
                                                       width: 200.0,
                                                       child: TextFormField(
                                                         controller: _model
@@ -246,7 +250,7 @@ class _SolicitudessWidgetState extends State<SolicitudessWidget> {
                                                             EasyDebounce
                                                                 .debounce(
                                                           '_model.textController',
-                                                          const Duration(
+                                                          Duration(
                                                               milliseconds:
                                                                   2000),
                                                           () async {
@@ -291,7 +295,7 @@ class _SolicitudessWidgetState extends State<SolicitudessWidget> {
                                                           enabledBorder:
                                                               OutlineInputBorder(
                                                             borderSide:
-                                                                const BorderSide(
+                                                                BorderSide(
                                                               color: Color(
                                                                   0x00000000),
                                                               width: 1.0,
@@ -304,7 +308,7 @@ class _SolicitudessWidgetState extends State<SolicitudessWidget> {
                                                           focusedBorder:
                                                               OutlineInputBorder(
                                                             borderSide:
-                                                                const BorderSide(
+                                                                BorderSide(
                                                               color: Color(
                                                                   0x00000000),
                                                               width: 1.0,
@@ -368,7 +372,7 @@ class _SolicitudessWidgetState extends State<SolicitudessWidget> {
                                                       ),
                                                     ),
                                                   ),
-                                                ].divide(const SizedBox(width: 8.0)),
+                                                ].divide(SizedBox(width: 8.0)),
                                               ),
                                             ),
                                           ),
@@ -379,9 +383,9 @@ class _SolicitudessWidgetState extends State<SolicitudessWidget> {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     12.0, 0.0, 12.0, 0.0),
-                                child: SizedBox(
+                                child: Container(
                                   width: MediaQuery.sizeOf(context).width * 1.0,
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
@@ -393,7 +397,7 @@ class _SolicitudessWidgetState extends State<SolicitudessWidget> {
                                         decoration: BoxDecoration(
                                           color: FlutterFlowTheme.of(context)
                                               .primary,
-                                          borderRadius: const BorderRadius.only(
+                                          borderRadius: BorderRadius.only(
                                             bottomLeft: Radius.circular(0.0),
                                             bottomRight: Radius.circular(0.0),
                                             topLeft: Radius.circular(8.0),
@@ -402,7 +406,7 @@ class _SolicitudessWidgetState extends State<SolicitudessWidget> {
                                         ),
                                         child: Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   15.0, 12.0, 12.0, 12.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -412,11 +416,11 @@ class _SolicitudessWidgetState extends State<SolicitudessWidget> {
                                               Expanded(
                                                 child: Align(
                                                   alignment:
-                                                      const AlignmentDirectional(
+                                                      AlignmentDirectional(
                                                           -1.0, 0.0),
                                                   child: Padding(
                                                     padding:
-                                                        const EdgeInsetsDirectional
+                                                        EdgeInsetsDirectional
                                                             .fromSTEB(20.0, 0.0,
                                                                 0.0, 0.0),
                                                     child: Text(
@@ -441,11 +445,11 @@ class _SolicitudessWidgetState extends State<SolicitudessWidget> {
                                               Expanded(
                                                 child: Align(
                                                   alignment:
-                                                      const AlignmentDirectional(
+                                                      AlignmentDirectional(
                                                           -1.0, 0.0),
                                                   child: Padding(
                                                     padding:
-                                                        const EdgeInsetsDirectional
+                                                        EdgeInsetsDirectional
                                                             .fromSTEB(20.0, 0.0,
                                                                 0.0, 0.0),
                                                     child: Text(
@@ -469,7 +473,7 @@ class _SolicitudessWidgetState extends State<SolicitudessWidget> {
                                               ),
                                               Expanded(
                                                 child: Padding(
-                                                  padding: const EdgeInsetsDirectional
+                                                  padding: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           100.0, 0.0, 0.0, 0.0),
                                                   child: Text(
@@ -491,7 +495,7 @@ class _SolicitudessWidgetState extends State<SolicitudessWidget> {
                                               ),
                                               Expanded(
                                                 child: Padding(
-                                                  padding: const EdgeInsetsDirectional
+                                                  padding: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           140.0, 0.0, 0.0, 0.0),
                                                   child: Text(
@@ -513,7 +517,7 @@ class _SolicitudessWidgetState extends State<SolicitudessWidget> {
                                               ),
                                               Expanded(
                                                 child: Padding(
-                                                  padding: const EdgeInsetsDirectional
+                                                  padding: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           180.0, 0.0, 0.0, 0.0),
                                                   child: Text(
@@ -538,7 +542,7 @@ class _SolicitudessWidgetState extends State<SolicitudessWidget> {
                                         ),
                                       ),
                                       Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 10.0, 0.0, 0.0),
                                         child: StreamBuilder<List<UsersRecord>>(
                                           stream: queryUsersRecord(
@@ -610,7 +614,7 @@ class _SolicitudessWidgetState extends State<SolicitudessWidget> {
                                                     listViewUsersRecordList[
                                                         listViewIndex];
                                                 return Padding(
-                                                  padding: const EdgeInsetsDirectional
+                                                  padding: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 10.0, 0.0, 0.0),
                                                   child: InkWell(
@@ -642,7 +646,8 @@ class _SolicitudessWidgetState extends State<SolicitudessWidget> {
                                                           'Container_navigate_to');
 
                                                       context.pushNamed(
-                                                        'Edit_Empleado',
+                                                        EditEmpleadoWidget
+                                                            .routeName,
                                                         queryParameters: {
                                                           'nombre':
                                                               serializeParam(
@@ -735,7 +740,7 @@ class _SolicitudessWidgetState extends State<SolicitudessWidget> {
                                                       ),
                                                       child: Padding(
                                                         padding:
-                                                            const EdgeInsetsDirectional
+                                                            EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     12.0,
                                                                     5.0,
@@ -750,7 +755,7 @@ class _SolicitudessWidgetState extends State<SolicitudessWidget> {
                                                           children: [
                                                             Padding(
                                                               padding:
-                                                                  const EdgeInsetsDirectional
+                                                                  EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           0.0,
                                                                           0.0,
@@ -767,7 +772,7 @@ class _SolicitudessWidgetState extends State<SolicitudessWidget> {
                                                                 ),
                                                                 child: Align(
                                                                   alignment:
-                                                                      const AlignmentDirectional(
+                                                                      AlignmentDirectional(
                                                                           0.0,
                                                                           0.0),
                                                                   child: Text(
@@ -794,7 +799,7 @@ class _SolicitudessWidgetState extends State<SolicitudessWidget> {
                                                             ),
                                                             Padding(
                                                               padding:
-                                                                  const EdgeInsetsDirectional
+                                                                  EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           0.0,
                                                                           0.0,
@@ -811,7 +816,7 @@ class _SolicitudessWidgetState extends State<SolicitudessWidget> {
                                                                 ),
                                                                 child: Align(
                                                                   alignment:
-                                                                      const AlignmentDirectional(
+                                                                      AlignmentDirectional(
                                                                           0.0,
                                                                           0.0),
                                                                   child: Text(
@@ -838,7 +843,7 @@ class _SolicitudessWidgetState extends State<SolicitudessWidget> {
                                                             ),
                                                             Padding(
                                                               padding:
-                                                                  const EdgeInsetsDirectional
+                                                                  EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           0.0,
                                                                           0.0,
@@ -855,7 +860,7 @@ class _SolicitudessWidgetState extends State<SolicitudessWidget> {
                                                                 ),
                                                                 child: Align(
                                                                   alignment:
-                                                                      const AlignmentDirectional(
+                                                                      AlignmentDirectional(
                                                                           0.0,
                                                                           0.0),
                                                                   child: Text(
@@ -882,7 +887,7 @@ class _SolicitudessWidgetState extends State<SolicitudessWidget> {
                                                             ),
                                                             Padding(
                                                               padding:
-                                                                  const EdgeInsetsDirectional
+                                                                  EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           0.0,
                                                                           0.0,
@@ -899,7 +904,7 @@ class _SolicitudessWidgetState extends State<SolicitudessWidget> {
                                                                 ),
                                                                 child: Align(
                                                                   alignment:
-                                                                      const AlignmentDirectional(
+                                                                      AlignmentDirectional(
                                                                           0.0,
                                                                           0.0),
                                                                   child: Text(
@@ -929,7 +934,7 @@ class _SolicitudessWidgetState extends State<SolicitudessWidget> {
                                                             ),
                                                             Padding(
                                                               padding:
-                                                                  const EdgeInsetsDirectional
+                                                                  EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           0.0,
                                                                           0.0,
@@ -946,7 +951,7 @@ class _SolicitudessWidgetState extends State<SolicitudessWidget> {
                                                                 ),
                                                                 child: Align(
                                                                   alignment:
-                                                                      const AlignmentDirectional(
+                                                                      AlignmentDirectional(
                                                                           0.0,
                                                                           0.0),
                                                                   child: Text(
@@ -977,16 +982,16 @@ class _SolicitudessWidgetState extends State<SolicitudessWidget> {
                                           },
                                         ),
                                       ),
-                                    ].divide(const SizedBox(height: 0.0)),
+                                    ].divide(SizedBox(height: 0.0)),
                                   ),
                                 ),
                               ),
-                            ].divide(const SizedBox(height: 16.0)),
+                            ].divide(SizedBox(height: 16.0)),
                           ),
                         ),
                       ),
                     ),
-                  ].divide(const SizedBox(height: 24.0)),
+                  ].divide(SizedBox(height: 24.0)),
                 ),
               ),
             ),

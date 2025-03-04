@@ -1,6 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'pagina_principal_model.dart';
@@ -8,6 +9,9 @@ export 'pagina_principal_model.dart';
 
 class PaginaPrincipalWidget extends StatefulWidget {
   const PaginaPrincipalWidget({super.key});
+
+  static String routeName = 'paginaPrincipal';
+  static String routePath = 'paginaPrincipal';
 
   @override
   State<PaginaPrincipalWidget> createState() => _PaginaPrincipalWidgetState();
@@ -52,7 +56,7 @@ class _PaginaPrincipalWidgetState extends State<PaginaPrincipalWidget> {
             children: [
               Expanded(
                 child: Align(
-                  alignment: const AlignmentDirectional(0.0, 0.0),
+                  alignment: AlignmentDirectional(0.0, 0.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -74,7 +78,7 @@ class _PaginaPrincipalWidgetState extends State<PaginaPrincipalWidget> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
                         child: RichText(
                           textScaler: MediaQuery.of(context).textScaler,
                           text: TextSpan(
@@ -112,7 +116,7 @@ class _PaginaPrincipalWidgetState extends State<PaginaPrincipalWidget> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
                         child: FFButtonWidget(
                           onPressed: () async {
                             logFirebaseEvent(
@@ -121,15 +125,15 @@ class _PaginaPrincipalWidgetState extends State<PaginaPrincipalWidget> {
                             HapticFeedback.lightImpact();
                             logFirebaseEvent('Button_navigate_to');
 
-                            context.pushNamed('inicioSesion');
+                            context.pushNamed(InicioSesionWidget.routeName);
                           },
                           text: 'Iniciar Sesión',
                           options: FFButtonOptions(
-                            width: MediaQuery.sizeOf(context).width * 0.252,
+                            width: MediaQuery.sizeOf(context).width * 0.41,
                             height: MediaQuery.sizeOf(context).height * 0.05,
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
-                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                            iconPadding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
                             color: FlutterFlowTheme.of(context).primary,
                             textStyle: FlutterFlowTheme.of(context)
@@ -141,7 +145,7 @@ class _PaginaPrincipalWidgetState extends State<PaginaPrincipalWidget> {
                                   fontWeight: FontWeight.w500,
                                 ),
                             elevation: 0.0,
-                            borderSide: const BorderSide(
+                            borderSide: BorderSide(
                               color: Colors.transparent,
                               width: 0.0,
                             ),

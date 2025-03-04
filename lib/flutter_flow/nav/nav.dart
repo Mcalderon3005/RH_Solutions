@@ -7,9 +7,10 @@ import '/backend/schema/structs/index.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
-import '/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+
+import '/index.dart';
 
 export 'package:go_router/go_router.dart';
 export 'serialization_util.dart';
@@ -77,92 +78,80 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
       errorBuilder: (context, state) => appStateNotifier.loggedIn
-          ? const InicioSesionWidget()
-          : const PaginaPrincipalWidget(),
+          ? InicioSesionWidget()
+          : PaginaPrincipalWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) => appStateNotifier.loggedIn
-              ? const InicioSesionWidget()
-              : const PaginaPrincipalWidget(),
+              ? InicioSesionWidget()
+              : PaginaPrincipalWidget(),
           routes: [
             FFRoute(
-              name: 'paginaPrincipal',
-              path: 'paginaPrincipal',
-              builder: (context, params) => const PaginaPrincipalWidget(),
+              name: PaginaPrincipalWidget.routeName,
+              path: PaginaPrincipalWidget.routePath,
+              builder: (context, params) => PaginaPrincipalWidget(),
             ),
             FFRoute(
-              name: 'inicioSesion',
-              path: 'sign-in',
-              builder: (context, params) => const InicioSesionWidget(),
+              name: InicioSesionWidget.routeName,
+              path: InicioSesionWidget.routePath,
+              builder: (context, params) => InicioSesionWidget(),
             ),
             FFRoute(
-              name: 'Profile',
-              path: 'profile',
+              name: ProfileWidget.routeName,
+              path: ProfileWidget.routePath,
               requireAuth: true,
-              builder: (context, params) => const ProfileWidget(),
+              builder: (context, params) => ProfileWidget(),
             ),
             FFRoute(
-              name: 'AboutUs',
-              path: 'about-us',
+              name: AboutUsWidget.routeName,
+              path: AboutUsWidget.routePath,
               requireAuth: true,
-              builder: (context, params) => const AboutUsWidget(),
+              builder: (context, params) => AboutUsWidget(),
             ),
             FFRoute(
-              name: 'menuUsuario',
-              path: 'eating-preferences',
+              name: MenuUsuarioWidget.routeName,
+              path: MenuUsuarioWidget.routePath,
               requireAuth: true,
-              builder: (context, params) => const MenuUsuarioWidget(),
+              builder: (context, params) => MenuUsuarioWidget(),
             ),
             FFRoute(
-              name: 'moduloVacaciones',
-              path: 'support-center',
+              name: ModuloVacacionesWidget.routeName,
+              path: ModuloVacacionesWidget.routePath,
               requireAuth: true,
-              builder: (context, params) => const ModuloVacacionesWidget(),
+              builder: (context, params) => ModuloVacacionesWidget(),
             ),
             FFRoute(
-              name: 'recuperarPass',
-              path: 'forgot-password',
-              builder: (context, params) => const RecuperarPassWidget(),
+              name: RecuperarPassWidget.routeName,
+              path: RecuperarPassWidget.routePath,
+              builder: (context, params) => RecuperarPassWidget(),
             ),
             FFRoute(
-              name: 'moduloActividades',
-              path: 'moduloActividades',
+              name: ModuloFacturasWidget.routeName,
+              path: ModuloFacturasWidget.routePath,
               requireAuth: true,
-              builder: (context, params) => const ModuloActividadesWidget(),
+              builder: (context, params) => ModuloFacturasWidget(),
             ),
             FFRoute(
-              name: 'moduloFacturas',
-              path: 'moduloFacturas',
+              name: HomeAdminPageWidget.routeName,
+              path: HomeAdminPageWidget.routePath,
+              builder: (context, params) => HomeAdminPageWidget(),
+            ),
+            FFRoute(
+              name: CrearEmpleadoWidget.routeName,
+              path: CrearEmpleadoWidget.routePath,
+              builder: (context, params) => CrearEmpleadoWidget(),
+            ),
+            FFRoute(
+              name: VerActividadesWidget.routeName,
+              path: VerActividadesWidget.routePath,
               requireAuth: true,
-              builder: (context, params) => const ModuloFacturasWidget(),
+              builder: (context, params) => VerActividadesWidget(),
             ),
             FFRoute(
-              name: 'HomeAdminPage',
-              path: 'homeAdminPage',
-              builder: (context, params) => const HomeAdminPageWidget(),
-            ),
-            FFRoute(
-              name: 'Crear_Empleado',
-              path: 'crearEmpleado',
-              builder: (context, params) => const CrearEmpleadoWidget(),
-            ),
-            FFRoute(
-              name: 'ReunionesAgendadas',
-              path: 'ReunionesAgendadas',
-              requireAuth: true,
-              builder: (context, params) => const ReunionesAgendadasWidget(),
-            ),
-            FFRoute(
-              name: 'VerActividades',
-              path: 'VerActividades',
-              requireAuth: true,
-              builder: (context, params) => const VerActividadesWidget(),
-            ),
-            FFRoute(
-              name: 'Edit_Empleado',
-              path: 'editEmpleado',
+              name: EditEmpleadoWidget.routeName,
+              path: EditEmpleadoWidget.routePath,
               builder: (context, params) => EditEmpleadoWidget(
                 nombre: params.getParam(
                   'nombre',
@@ -217,72 +206,226 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ),
             ),
             FFRoute(
-              name: 'Index_Empleados',
-              path: 'indexEmpleados',
-              builder: (context, params) => const IndexEmpleadosWidget(),
+              name: IndexEmpleadosWidget.routeName,
+              path: IndexEmpleadosWidget.routePath,
+              builder: (context, params) => IndexEmpleadosWidget(),
             ),
             FFRoute(
-              name: 'Detalle_Empleado',
-              path: 'detalleEmpleado',
-              builder: (context, params) => const DetalleEmpleadoWidget(),
+              name: DefinirActividadWidget.routeName,
+              path: DefinirActividadWidget.routePath,
+              builder: (context, params) => DefinirActividadWidget(),
             ),
             FFRoute(
-              name: 'DefinirActividad',
-              path: 'definirActividad',
-              builder: (context, params) => const DefinirActividadWidget(),
+              name: CrearActividadWidget.routeName,
+              path: CrearActividadWidget.routePath,
+              builder: (context, params) => CrearActividadWidget(),
             ),
             FFRoute(
-              name: 'CrearActividad',
-              path: 'crearActividad',
-              builder: (context, params) => const CrearActividadWidget(),
+              name: SolicitudesAdminWidget.routeName,
+              path: SolicitudesAdminWidget.routePath,
+              builder: (context, params) => SolicitudesAdminWidget(),
             ),
             FFRoute(
-              name: 'Solicitudes',
-              path: 'solicitudes',
-              builder: (context, params) => const SolicitudesWidget(),
+              name: FacturacionWidget.routeName,
+              path: FacturacionWidget.routePath,
+              builder: (context, params) => FacturacionWidget(),
             ),
             FFRoute(
-              name: 'Facturacion',
-              path: 'facturacion',
-              builder: (context, params) => const FacturacionWidget(),
+              name: LogSesionesWidget.routeName,
+              path: LogSesionesWidget.routePath,
+              builder: (context, params) => LogSesionesWidget(),
             ),
             FFRoute(
-              name: 'logSesiones',
-              path: 'logSesiones',
-              builder: (context, params) => const LogSesionesWidget(),
+              name: LogErroresWidget.routeName,
+              path: LogErroresWidget.routePath,
+              builder: (context, params) => LogErroresWidget(),
             ),
             FFRoute(
-              name: 'logErrores',
-              path: 'logErrores',
-              builder: (context, params) => const LogErroresWidget(),
+              name: SolicitudessWidget.routeName,
+              path: SolicitudessWidget.routePath,
+              builder: (context, params) => SolicitudessWidget(),
             ),
             FFRoute(
-              name: 'solicitudess',
-              path: 'solicitudess',
-              builder: (context, params) => const SolicitudessWidget(),
-            ),
-            FFRoute(
-              name: 'solicitudVacaciones',
-              path: 'solicitudVacaciones',
+              name: SolicitudVacacionesWidget.routeName,
+              path: SolicitudVacacionesWidget.routePath,
               requireAuth: true,
-              builder: (context, params) => const SolicitudVacacionesWidget(),
+              builder: (context, params) => SolicitudVacacionesWidget(),
             ),
             FFRoute(
-              name: 'indexSolicitudes',
-              path: 'indexSolicitudes',
+              name: IndexSolicitudesWidget.routeName,
+              path: IndexSolicitudesWidget.routePath,
               requireAuth: true,
-              builder: (context, params) => const IndexSolicitudesWidget(),
+              builder: (context, params) => IndexSolicitudesWidget(),
             ),
             FFRoute(
-              name: 'solicitudVacacionesAdmin',
-              path: 'solicitudVacacionesAdmin',
+              name: IndexIncapacidadesAdminWidget.routeName,
+              path: IndexIncapacidadesAdminWidget.routePath,
+              builder: (context, params) => IndexIncapacidadesAdminWidget(),
+            ),
+            FFRoute(
+              name: IndexIncapacidadesWidget.routeName,
+              path: IndexIncapacidadesWidget.routePath,
               requireAuth: true,
-              builder: (context, params) => const SolicitudVacacionesAdminWidget(),
+              builder: (context, params) => IndexIncapacidadesWidget(),
             ),
             FFRoute(
-              name: 'indexVacionesAdmin',
-              path: 'indexVacionesAdmin',
-              builder: (context, params) => const IndexVacionesAdminWidget(),
+              name: SolicitudesDetalleWidget.routeName,
+              path: SolicitudesDetalleWidget.routePath,
+              builder: (context, params) => SolicitudesDetalleWidget(
+                nombre: params.getParam(
+                  'nombre',
+                  ParamType.String,
+                ),
+                email: params.getParam(
+                  'email',
+                  ParamType.String,
+                ),
+                userRef: params.getParam(
+                  'userRef',
+                  ParamType.DocumentReference,
+                  isList: false,
+                  collectionNamePath: ['solicitud_vacaciones'],
+                ),
+                estadoAprobacion: params.getParam(
+                  'estadoAprobacion',
+                  ParamType.bool,
+                ),
+                estadoRevision: params.getParam(
+                  'estadoRevision',
+                  ParamType.bool,
+                ),
+                fechaCreacion: params.getParam(
+                  'fechaCreacion',
+                  ParamType.DateTime,
+                ),
+                fechaInicio: params.getParam(
+                  'fechaInicio',
+                  ParamType.DateTime,
+                ),
+                fechaFin: params.getParam(
+                  'fechaFin',
+                  ParamType.DateTime,
+                ),
+                tipoSolicitud: params.getParam(
+                  'tipoSolicitud',
+                  ParamType.String,
+                ),
+                comentarios: params.getParam(
+                  'comentarios',
+                  ParamType.String,
+                ),
+              ),
+            ),
+            FFRoute(
+              name: SolicitudesIncapacidadesDetalleWidget.routeName,
+              path: SolicitudesIncapacidadesDetalleWidget.routePath,
+              builder: (context, params) =>
+                  SolicitudesIncapacidadesDetalleWidget(
+                nombre: params.getParam(
+                  'nombre',
+                  ParamType.String,
+                ),
+                email: params.getParam(
+                  'email',
+                  ParamType.String,
+                ),
+                estadoRevision: params.getParam(
+                  'estadoRevision',
+                  ParamType.bool,
+                ),
+                fechaCreacion: params.getParam(
+                  'fechaCreacion',
+                  ParamType.DateTime,
+                ),
+                fechaInicio: params.getParam(
+                  'fechaInicio',
+                  ParamType.DateTime,
+                ),
+                fechaFin: params.getParam(
+                  'fechaFin',
+                  ParamType.DateTime,
+                ),
+                tipoSolicitud: params.getParam(
+                  'tipoSolicitud',
+                  ParamType.String,
+                ),
+                comentarios: params.getParam(
+                  'comentarios',
+                  ParamType.String,
+                ),
+                incapacidadImg: params.getParam(
+                  'incapacidadImg',
+                  ParamType.String,
+                ),
+                documentRef: params.getParam(
+                  'documentRef',
+                  ParamType.DocumentReference,
+                  isList: false,
+                  collectionNamePath: ['Incapacidades'],
+                ),
+              ),
+            ),
+            FFRoute(
+              name: SolicitudesHomeAdminWidget.routeName,
+              path: SolicitudesHomeAdminWidget.routePath,
+              builder: (context, params) => SolicitudesHomeAdminWidget(),
+            ),
+            FFRoute(
+              name: IndexActividadesWidget.routeName,
+              path: IndexActividadesWidget.routePath,
+              requireAuth: true,
+              builder: (context, params) => IndexActividadesWidget(),
+            ),
+            FFRoute(
+              name: EditarActividadWidget.routeName,
+              path: EditarActividadWidget.routePath,
+              builder: (context, params) => EditarActividadWidget(
+                fechaReunion: params.getParam(
+                  'fechaReunion',
+                  ParamType.DateTime,
+                ),
+                enlaceReunion: params.getParam(
+                  'enlaceReunion',
+                  ParamType.String,
+                ),
+                asuntoReunion: params.getParam(
+                  'asuntoReunion',
+                  ParamType.String,
+                ),
+                descripcionReunion: params.getParam(
+                  'descripcionReunion',
+                  ParamType.String,
+                ),
+                asistentesReunion: params.getParam<String>(
+                  'asistentesReunion',
+                  ParamType.String,
+                  isList: true,
+                ),
+                reuRef: params.getParam(
+                  'reuRef',
+                  ParamType.DocumentReference,
+                  isList: false,
+                  collectionNamePath: ['Reuniones'],
+                ),
+                nombreCreador: params.getParam(
+                  'nombreCreador',
+                  ParamType.String,
+                ),
+                estadoActividad: params.getParam(
+                  'estadoActividad',
+                  ParamType.bool,
+                ),
+              ),
+            ),
+            FFRoute(
+              name: CrearPagoWidget.routeName,
+              path: CrearPagoWidget.routePath,
+              builder: (context, params) => CrearPagoWidget(),
+            ),
+            FFRoute(
+              name: ActividadesHomeAdminWidget.routeName,
+              path: ActividadesHomeAdminWidget.routePath,
+              builder: (context, params) => ActividadesHomeAdminWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
@@ -523,7 +666,7 @@ class TransitionInfo {
   final Duration duration;
   final Alignment? alignment;
 
-  static TransitionInfo appDefault() => const TransitionInfo(hasTransition: false);
+  static TransitionInfo appDefault() => TransitionInfo(hasTransition: false);
 }
 
 class RootPageContext {

@@ -1,4 +1,6 @@
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/form_field_controller.dart';
+import '/index.dart';
 import 'crear_empleado_widget.dart' show CrearEmpleadoWidget;
 import 'package:flutter/material.dart';
 
@@ -34,10 +36,9 @@ class CrearEmpleadoModel extends FlutterFlowModel<CrearEmpleadoWidget> {
   FocusNode? txtNumFocusNode;
   TextEditingController? txtNumTextController;
   String? Function(BuildContext, String?)? txtNumTextControllerValidator;
-  // State field(s) for txtRole widget.
-  FocusNode? txtRoleFocusNode;
-  TextEditingController? txtRoleTextController;
-  String? Function(BuildContext, String?)? txtRoleTextControllerValidator;
+  // State field(s) for drdRole widget.
+  String? drdRoleValue;
+  FormFieldController<String>? drdRoleValueController;
   DateTime? datePicked1;
   DateTime? datePicked2;
   // State field(s) for txtSalario widget.
@@ -76,9 +77,6 @@ class CrearEmpleadoModel extends FlutterFlowModel<CrearEmpleadoWidget> {
 
     txtNumFocusNode?.dispose();
     txtNumTextController?.dispose();
-
-    txtRoleFocusNode?.dispose();
-    txtRoleTextController?.dispose();
 
     txtSalarioFocusNode?.dispose();
     txtSalarioTextController?.dispose();

@@ -9,9 +9,9 @@ import '/flutter_flow/flutter_flow_util.dart';
 
 class PagoSalarioRecord extends FirestoreRecord {
   PagoSalarioRecord._(
-    super.reference,
-    super.data,
-  ) {
+    DocumentReference reference,
+    Map<String, dynamic> data,
+  ) : super(reference, data) {
     _initializeFields();
   }
 
@@ -25,23 +25,23 @@ class PagoSalarioRecord extends FirestoreRecord {
   double get monto => _monto ?? 0.0;
   bool hasMonto() => _monto != null;
 
-  // "empleado" field.
-  DocumentReference? _empleado;
-  DocumentReference? get empleado => _empleado;
-  bool hasEmpleado() => _empleado != null;
-
   // "comentarios" field.
   String? _comentarios;
   String get comentarios => _comentarios ?? '';
   bool hasComentarios() => _comentarios != null;
+
+  // "empleado" field.
+  String? _empleado;
+  String get empleado => _empleado ?? '';
+  bool hasEmpleado() => _empleado != null;
 
   DocumentReference get parentReference => reference.parent.parent!;
 
   void _initializeFields() {
     _fechaPago = snapshotData['fechaPago'] as DateTime?;
     _monto = castToType<double>(snapshotData['monto']);
-    _empleado = snapshotData['empleado'] as DocumentReference?;
     _comentarios = snapshotData['comentarios'] as String?;
+    _empleado = snapshotData['empleado'] as String?;
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -86,15 +86,15 @@ class PagoSalarioRecord extends FirestoreRecord {
 Map<String, dynamic> createPagoSalarioRecordData({
   DateTime? fechaPago,
   double? monto,
-  DocumentReference? empleado,
   String? comentarios,
+  String? empleado,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'fechaPago': fechaPago,
       'monto': monto,
-      'empleado': empleado,
       'comentarios': comentarios,
+      'empleado': empleado,
     }.withoutNulls,
   );
 
@@ -108,13 +108,13 @@ class PagoSalarioRecordDocumentEquality implements Equality<PagoSalarioRecord> {
   bool equals(PagoSalarioRecord? e1, PagoSalarioRecord? e2) {
     return e1?.fechaPago == e2?.fechaPago &&
         e1?.monto == e2?.monto &&
-        e1?.empleado == e2?.empleado &&
-        e1?.comentarios == e2?.comentarios;
+        e1?.comentarios == e2?.comentarios &&
+        e1?.empleado == e2?.empleado;
   }
 
   @override
   int hash(PagoSalarioRecord? e) => const ListEquality()
-      .hash([e?.fechaPago, e?.monto, e?.empleado, e?.comentarios]);
+      .hash([e?.fechaPago, e?.monto, e?.comentarios, e?.empleado]);
 
   @override
   bool isValidKey(Object? o) => o is PagoSalarioRecord;
