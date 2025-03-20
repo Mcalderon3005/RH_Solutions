@@ -7,7 +7,8 @@ import '/backend/schema/structs/index.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
-import '/flutter_flow/flutter_flow_theme.dart';
+import '/backend/push_notifications/push_notifications_handler.dart'
+    show PushNotificationsHandler;
 import '/flutter_flow/flutter_flow_util.dart';
 
 import '/index.dart';
@@ -72,20 +73,21 @@ class AppStateNotifier extends ChangeNotifier {
   }
 }
 
-GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
+GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
+    GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
       errorBuilder: (context, state) => appStateNotifier.loggedIn
-          ? InicioSesionWidget()
+          ? entryPage ?? InicioSesionWidget()
           : PaginaPrincipalWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) => appStateNotifier.loggedIn
-              ? InicioSesionWidget()
+              ? entryPage ?? InicioSesionWidget()
               : PaginaPrincipalWidget(),
           routes: [
             FFRoute(
@@ -123,15 +125,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => ModuloVacacionesWidget(),
             ),
             FFRoute(
-              name: RecuperarPassWidget.routeName,
-              path: RecuperarPassWidget.routePath,
-              builder: (context, params) => RecuperarPassWidget(),
+              name: RecuperarContrasenaWidget.routeName,
+              path: RecuperarContrasenaWidget.routePath,
+              builder: (context, params) => RecuperarContrasenaWidget(),
             ),
             FFRoute(
-              name: ModuloFacturasWidget.routeName,
-              path: ModuloFacturasWidget.routePath,
-              requireAuth: true,
-              builder: (context, params) => ModuloFacturasWidget(),
+              name: IndexEmpleadoWidget.routeName,
+              path: IndexEmpleadoWidget.routePath,
+              builder: (context, params) => IndexEmpleadoWidget(),
             ),
             FFRoute(
               name: HomeAdminPageWidget.routeName,
@@ -206,9 +207,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ),
             ),
             FFRoute(
-              name: IndexEmpleadosWidget.routeName,
-              path: IndexEmpleadosWidget.routePath,
-              builder: (context, params) => IndexEmpleadosWidget(),
+              name: IndexEmpleadosBUWidget.routeName,
+              path: IndexEmpleadosBUWidget.routePath,
+              builder: (context, params) => IndexEmpleadosBUWidget(),
             ),
             FFRoute(
               name: DefinirActividadWidget.routeName,
@@ -221,9 +222,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => CrearActividadWidget(),
             ),
             FFRoute(
-              name: SolicitudesAdminWidget.routeName,
-              path: SolicitudesAdminWidget.routePath,
-              builder: (context, params) => SolicitudesAdminWidget(),
+              name: SolicitudesVacacionesAdminBUWidget.routeName,
+              path: SolicitudesVacacionesAdminBUWidget.routePath,
+              builder: (context, params) =>
+                  SolicitudesVacacionesAdminBUWidget(),
             ),
             FFRoute(
               name: FacturacionWidget.routeName,
@@ -231,14 +233,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => FacturacionWidget(),
             ),
             FFRoute(
-              name: LogSesionesWidget.routeName,
-              path: LogSesionesWidget.routePath,
-              builder: (context, params) => LogSesionesWidget(),
+              name: LogSesionesBUWidget.routeName,
+              path: LogSesionesBUWidget.routePath,
+              builder: (context, params) => LogSesionesBUWidget(),
             ),
             FFRoute(
-              name: LogErroresWidget.routeName,
-              path: LogErroresWidget.routePath,
-              builder: (context, params) => LogErroresWidget(),
+              name: LogErroresSesionBUWidget.routeName,
+              path: LogErroresSesionBUWidget.routePath,
+              builder: (context, params) => LogErroresSesionBUWidget(),
             ),
             FFRoute(
               name: SolicitudessWidget.routeName,
@@ -252,26 +254,26 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => SolicitudVacacionesWidget(),
             ),
             FFRoute(
-              name: IndexSolicitudesWidget.routeName,
-              path: IndexSolicitudesWidget.routePath,
+              name: IndexSolicitudesBUWidget.routeName,
+              path: IndexSolicitudesBUWidget.routePath,
               requireAuth: true,
-              builder: (context, params) => IndexSolicitudesWidget(),
+              builder: (context, params) => IndexSolicitudesBUWidget(),
             ),
             FFRoute(
-              name: IndexIncapacidadesAdminWidget.routeName,
-              path: IndexIncapacidadesAdminWidget.routePath,
-              builder: (context, params) => IndexIncapacidadesAdminWidget(),
+              name: IndexIncapacidadesAdminBUWidget.routeName,
+              path: IndexIncapacidadesAdminBUWidget.routePath,
+              builder: (context, params) => IndexIncapacidadesAdminBUWidget(),
             ),
             FFRoute(
-              name: IndexIncapacidadesWidget.routeName,
-              path: IndexIncapacidadesWidget.routePath,
+              name: IndexIncapacidadesBUWidget.routeName,
+              path: IndexIncapacidadesBUWidget.routePath,
               requireAuth: true,
-              builder: (context, params) => IndexIncapacidadesWidget(),
+              builder: (context, params) => IndexIncapacidadesBUWidget(),
             ),
             FFRoute(
-              name: SolicitudesDetalleWidget.routeName,
-              path: SolicitudesDetalleWidget.routePath,
-              builder: (context, params) => SolicitudesDetalleWidget(
+              name: SolicitudesVacacionesDetalleWidget.routeName,
+              path: SolicitudesVacacionesDetalleWidget.routePath,
+              builder: (context, params) => SolicitudesVacacionesDetalleWidget(
                 nombre: params.getParam(
                   'nombre',
                   ParamType.String,
@@ -371,10 +373,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => SolicitudesHomeAdminWidget(),
             ),
             FFRoute(
-              name: IndexActividadesWidget.routeName,
-              path: IndexActividadesWidget.routePath,
+              name: IndexActividadesBUWidget.routeName,
+              path: IndexActividadesBUWidget.routePath,
               requireAuth: true,
-              builder: (context, params) => IndexActividadesWidget(),
+              builder: (context, params) => IndexActividadesBUWidget(),
             ),
             FFRoute(
               name: EditarActividadWidget.routeName,
@@ -426,6 +428,59 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: ActividadesHomeAdminWidget.routeName,
               path: ActividadesHomeAdminWidget.routePath,
               builder: (context, params) => ActividadesHomeAdminWidget(),
+            ),
+            FFRoute(
+              name: IndexIncapacidadAdminWidget.routeName,
+              path: IndexIncapacidadAdminWidget.routePath,
+              builder: (context, params) => IndexIncapacidadAdminWidget(),
+            ),
+            FFRoute(
+              name: SolicitudesVacacionesAdminWidget.routeName,
+              path: SolicitudesVacacionesAdminWidget.routePath,
+              builder: (context, params) => SolicitudesVacacionesAdminWidget(),
+            ),
+            FFRoute(
+              name: LogErroresSesionWidget.routeName,
+              path: LogErroresSesionWidget.routePath,
+              builder: (context, params) => LogErroresSesionWidget(),
+            ),
+            FFRoute(
+              name: ReportesHomeAdminWidget.routeName,
+              path: ReportesHomeAdminWidget.routePath,
+              builder: (context, params) => ReportesHomeAdminWidget(),
+            ),
+            FFRoute(
+              name: LogSesionesWidget.routeName,
+              path: LogSesionesWidget.routePath,
+              builder: (context, params) => LogSesionesWidget(),
+            ),
+            FFRoute(
+              name: LogUsuariosCreacionWidget.routeName,
+              path: LogUsuariosCreacionWidget.routePath,
+              builder: (context, params) => LogUsuariosCreacionWidget(),
+            ),
+            FFRoute(
+              name: LogUsuariosActualizacionWidget.routeName,
+              path: LogUsuariosActualizacionWidget.routePath,
+              builder: (context, params) => LogUsuariosActualizacionWidget(),
+            ),
+            FFRoute(
+              name: IndexSolicitudesWidget.routeName,
+              path: IndexSolicitudesWidget.routePath,
+              requireAuth: true,
+              builder: (context, params) => IndexSolicitudesWidget(),
+            ),
+            FFRoute(
+              name: IndexIncapacidadesWidget.routeName,
+              path: IndexIncapacidadesWidget.routePath,
+              requireAuth: true,
+              builder: (context, params) => IndexIncapacidadesWidget(),
+            ),
+            FFRoute(
+              name: IndexActividadesWidget.routeName,
+              path: IndexActividadesWidget.routePath,
+              requireAuth: true,
+              builder: (context, params) => IndexActividadesWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
@@ -615,16 +670,13 @@ class FFRoute {
               : builder(context, ffParams);
           final child = appStateNotifier.loading
               ? Container(
-                  color: FlutterFlowTheme.of(context).primaryBackground,
-                  child: Center(
-                    child: Image.asset(
-                      'assets/images/MealPlanner_Rounded.png',
-                      width: 175.0,
-                      fit: BoxFit.cover,
-                    ),
+                  color: Colors.transparent,
+                  child: Image.asset(
+                    'assets/images/imagen_2024-11-28_195022565.png',
+                    fit: BoxFit.contain,
                   ),
                 )
-              : page;
+              : PushNotificationsHandler(child: page);
 
           final transitionInfo = state.transitionInfo;
           return transitionInfo.hasTransition

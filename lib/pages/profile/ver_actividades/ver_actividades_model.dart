@@ -1,6 +1,6 @@
 import '/components/custom_appbar_widget.dart';
+import '/components/fast_access_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/pages/profile/componentes_generales/fast_access/fast_access_widget.dart';
 import 'ver_actividades_widget.dart' show VerActividadesWidget;
 import 'package:flutter/material.dart';
 

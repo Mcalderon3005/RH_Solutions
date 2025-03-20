@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'facturacion_model.dart';
 export 'facturacion_model.dart';
@@ -1142,6 +1143,23 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                   borderRadius: BorderRadius.circular(8.0),
                                 ),
                               ),
+                              FlutterFlowIconButton(
+                                borderRadius: 8.0,
+                                buttonSize: 40.0,
+                                fillColor: FlutterFlowTheme.of(context).primary,
+                                icon: Icon(
+                                  Icons.add_circle_outlined,
+                                  color: FlutterFlowTheme.of(context).info,
+                                  size: 24.0,
+                                ),
+                                onPressed: () async {
+                                  logFirebaseEvent(
+                                      'FACTURACION_add_circle_outlined_ICN_ON_T');
+                                  logFirebaseEvent('IconButton_navigate_to');
+
+                                  context.pushNamed(CrearPagoWidget.routeName);
+                                },
+                              ),
                             ],
                           ),
                           Align(
@@ -1243,9 +1261,8 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
-                                            StreamBuilder<
-                                                List<PagoSalarioRecord>>(
-                                              stream: queryPagoSalarioRecord(),
+                                            StreamBuilder<List<PagosRecord>>(
+                                              stream: queryPagosRecord(),
                                               builder: (context, snapshot) {
                                                 // Customize what your widget looks like when it's loading.
                                                 if (!snapshot.hasData) {
@@ -1266,8 +1283,8 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                                     ),
                                                   );
                                                 }
-                                                List<PagoSalarioRecord>
-                                                    listViewPagoSalarioRecordList =
+                                                List<PagosRecord>
+                                                    listViewPagosRecordList =
                                                     snapshot.data!;
 
                                                 return ListView.builder(
@@ -1276,12 +1293,12 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                                   scrollDirection:
                                                       Axis.vertical,
                                                   itemCount:
-                                                      listViewPagoSalarioRecordList
+                                                      listViewPagosRecordList
                                                           .length,
                                                   itemBuilder:
                                                       (context, listViewIndex) {
-                                                    final listViewPagoSalarioRecord =
-                                                        listViewPagoSalarioRecordList[
+                                                    final listViewPagosRecord =
+                                                        listViewPagosRecordList[
                                                             listViewIndex];
                                                     return Padding(
                                                       padding:
@@ -1341,62 +1358,18 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                                                               0.0,
                                                                         ),
                                                                   ),
-                                                                  StreamBuilder<
-                                                                      List<
-                                                                          UsersRecord>>(
-                                                                    stream:
-                                                                        queryUsersRecord(
-                                                                      singleRecord:
-                                                                          true,
-                                                                    ),
-                                                                    builder:
-                                                                        (context,
-                                                                            snapshot) {
-                                                                      // Customize what your widget looks like when it's loading.
-                                                                      if (!snapshot
-                                                                          .hasData) {
-                                                                        return Center(
-                                                                          child:
-                                                                              SizedBox(
-                                                                            width:
-                                                                                50.0,
-                                                                            height:
-                                                                                50.0,
-                                                                            child:
-                                                                                CircularProgressIndicator(
-                                                                              valueColor: AlwaysStoppedAnimation<Color>(
-                                                                                FlutterFlowTheme.of(context).primary,
-                                                                              ),
-                                                                            ),
-                                                                          ),
-                                                                        );
-                                                                      }
-                                                                      List<UsersRecord>
-                                                                          textUsersRecordList =
-                                                                          snapshot
-                                                                              .data!;
-                                                                      // Return an empty Container when the item does not exist.
-                                                                      if (snapshot
-                                                                          .data!
-                                                                          .isEmpty) {
-                                                                        return Container();
-                                                                      }
-                                                                      final textUsersRecord = textUsersRecordList
-                                                                              .isNotEmpty
-                                                                          ? textUsersRecordList
-                                                                              .first
-                                                                          : null;
-
-                                                                      return Text(
-                                                                        'Hello World',
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .bodyMedium
-                                                                            .override(
-                                                                              fontFamily: 'Manrope',
-                                                                              letterSpacing: 0.0,
-                                                                            ),
-                                                                      );
-                                                                    },
+                                                                  Text(
+                                                                    listViewPagosRecord
+                                                                        .empleado,
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Manrope',
+                                                                          letterSpacing:
+                                                                              0.0,
+                                                                        ),
                                                                   ),
                                                                 ],
                                                               ),
@@ -1428,9 +1401,9 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                                                   ),
                                                                   Text(
                                                                     dateTimeFormat(
-                                                                      "yMMMd",
-                                                                      listViewPagoSalarioRecord
-                                                                          .fechaPago!,
+                                                                      "d/M/y",
+                                                                      listViewPagosRecord
+                                                                          .fechaCreacion!,
                                                                       locale: FFLocalizations.of(
                                                                               context)
                                                                           .languageCode,
@@ -1462,7 +1435,7 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                                                         .max,
                                                                 children: [
                                                                   Text(
-                                                                    'Comentarios:  ',
+                                                                    'Tipo de Pago:  ',
                                                                     style: FlutterFlowTheme.of(
                                                                             context)
                                                                         .bodyMedium
@@ -1474,8 +1447,8 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                                                         ),
                                                                   ),
                                                                   Text(
-                                                                    listViewPagoSalarioRecord
-                                                                        .comentarios,
+                                                                    listViewPagosRecord
+                                                                        .tipo,
                                                                     style: FlutterFlowTheme.of(
                                                                             context)
                                                                         .bodyMedium
@@ -1493,10 +1466,47 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                                               padding:
                                                                   EdgeInsetsDirectional
                                                                       .fromSTEB(
+                                                                          10.0,
+                                                                          5.0,
                                                                           0.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          20.0),
+                                                                          5.0),
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Text(
+                                                                    'Detalles:  ',
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Manrope',
+                                                                          letterSpacing:
+                                                                              0.0,
+                                                                        ),
+                                                                  ),
+                                                                  Text(
+                                                                    listViewPagosRecord
+                                                                        .detalle,
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Manrope',
+                                                                          letterSpacing:
+                                                                              0.0,
+                                                                        ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            Align(
+                                                              alignment:
+                                                                  AlignmentDirectional(
+                                                                      1.0, 0.0),
                                                               child: Row(
                                                                 mainAxisSize:
                                                                     MainAxisSize
@@ -1505,12 +1515,12 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                                                   Align(
                                                                     alignment:
                                                                         AlignmentDirectional(
-                                                                            0.0,
+                                                                            1.0,
                                                                             0.0),
                                                                     child:
                                                                         Padding(
                                                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                                                          10.0,
+                                                                          225.0,
                                                                           0.0,
                                                                           0.0,
                                                                           0.0),
@@ -1523,20 +1533,28 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                                                         buttonSize:
                                                                             40.0,
                                                                         fillColor:
-                                                                            FlutterFlowTheme.of(context).primary,
+                                                                            Color(0xFFEC2B45),
                                                                         icon:
                                                                             Icon(
                                                                           Icons
-                                                                              .cloud_download,
+                                                                              .download_sharp,
                                                                           color:
-                                                                              FlutterFlowTheme.of(context).info,
+                                                                              Color(0xFFFFFFFD),
                                                                           size:
                                                                               24.0,
                                                                         ),
                                                                         onPressed:
-                                                                            () {
-                                                                          print(
-                                                                              'IconButton pressed ...');
+                                                                            () async {
+                                                                          logFirebaseEvent(
+                                                                              'FACTURACION_download_sharp_ICN_ON_TAP');
+                                                                          logFirebaseEvent(
+                                                                              'IconButton_download_file');
+                                                                          await downloadFile(
+                                                                            filename:
+                                                                                'Comprobante',
+                                                                            url:
+                                                                                listViewPagosRecord.comprobanrte,
+                                                                          );
                                                                         },
                                                                       ),
                                                                     ),

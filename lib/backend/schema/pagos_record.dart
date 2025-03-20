@@ -20,8 +20,38 @@ class PagosRecord extends FirestoreRecord {
   DateTime? get fechaCreacion => _fechaCreacion;
   bool hasFechaCreacion() => _fechaCreacion != null;
 
+  // "detalle" field.
+  String? _detalle;
+  String get detalle => _detalle ?? '';
+  bool hasDetalle() => _detalle != null;
+
+  // "empleado" field.
+  String? _empleado;
+  String get empleado => _empleado ?? '';
+  bool hasEmpleado() => _empleado != null;
+
+  // "monto" field.
+  double? _monto;
+  double get monto => _monto ?? 0.0;
+  bool hasMonto() => _monto != null;
+
+  // "comprobanrte" field.
+  String? _comprobanrte;
+  String get comprobanrte => _comprobanrte ?? '';
+  bool hasComprobanrte() => _comprobanrte != null;
+
+  // "tipo" field.
+  String? _tipo;
+  String get tipo => _tipo ?? '';
+  bool hasTipo() => _tipo != null;
+
   void _initializeFields() {
     _fechaCreacion = snapshotData['fechaCreacion'] as DateTime?;
+    _detalle = snapshotData['detalle'] as String?;
+    _empleado = snapshotData['empleado'] as String?;
+    _monto = castToType<double>(snapshotData['monto']);
+    _comprobanrte = snapshotData['comprobanrte'] as String?;
+    _tipo = snapshotData['tipo'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -59,10 +89,20 @@ class PagosRecord extends FirestoreRecord {
 
 Map<String, dynamic> createPagosRecordData({
   DateTime? fechaCreacion,
+  String? detalle,
+  String? empleado,
+  double? monto,
+  String? comprobanrte,
+  String? tipo,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'fechaCreacion': fechaCreacion,
+      'detalle': detalle,
+      'empleado': empleado,
+      'monto': monto,
+      'comprobanrte': comprobanrte,
+      'tipo': tipo,
     }.withoutNulls,
   );
 
@@ -74,11 +114,23 @@ class PagosRecordDocumentEquality implements Equality<PagosRecord> {
 
   @override
   bool equals(PagosRecord? e1, PagosRecord? e2) {
-    return e1?.fechaCreacion == e2?.fechaCreacion;
+    return e1?.fechaCreacion == e2?.fechaCreacion &&
+        e1?.detalle == e2?.detalle &&
+        e1?.empleado == e2?.empleado &&
+        e1?.monto == e2?.monto &&
+        e1?.comprobanrte == e2?.comprobanrte &&
+        e1?.tipo == e2?.tipo;
   }
 
   @override
-  int hash(PagosRecord? e) => const ListEquality().hash([e?.fechaCreacion]);
+  int hash(PagosRecord? e) => const ListEquality().hash([
+        e?.fechaCreacion,
+        e?.detalle,
+        e?.empleado,
+        e?.monto,
+        e?.comprobanrte,
+        e?.tipo
+      ]);
 
   @override
   bool isValidKey(Object? o) => o is PagosRecord;

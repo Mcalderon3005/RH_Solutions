@@ -87,7 +87,7 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       525.0, 24.0, 0.0, 24.0),
                                   child: Text(
-                                    'Acerca de Nosotros',
+                                    'Acerca de nosotros',
                                     textAlign: TextAlign.start,
                                     style: FlutterFlowTheme.of(context)
                                         .displaySmall
@@ -191,17 +191,20 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
                                   optionsButtonAction: () async {},
                                 ),
                               ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 24.0, 0.0, 24.0),
-                                child: Text(
-                                  'Acerca de Nosotros',
-                                  style: FlutterFlowTheme.of(context)
-                                      .displaySmall
-                                      .override(
-                                        fontFamily: 'Outfit',
-                                        letterSpacing: 0.0,
-                                      ),
+                              Align(
+                                alignment: AlignmentDirectional(0.0, 0.0),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 24.0, 0.0, 24.0),
+                                  child: Text(
+                                    'Acerca de nosotros',
+                                    style: FlutterFlowTheme.of(context)
+                                        .displaySmall
+                                        .override(
+                                          fontFamily: 'Outfit',
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
                                 ),
                               ),
                             ],

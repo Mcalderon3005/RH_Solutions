@@ -1,4 +1,5 @@
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'solicitudes_incapacidades_detalle_widget.dart'
     show SolicitudesIncapacidadesDetalleWidget;
 import 'package:flutter/material.dart';

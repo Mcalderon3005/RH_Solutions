@@ -9,10 +9,10 @@ class InicioSesionModel extends FlutterFlowModel<InicioSesionWidget> {
   final formKey1 = GlobalKey<FormState>();
   final formKey2 = GlobalKey<FormState>();
   // State field(s) for emailAddress widget.
-  FocusNode? emailAddressFocusNode1;
-  TextEditingController? emailAddressTextController1;
-  String? Function(BuildContext, String?)? emailAddressTextController1Validator;
-  String? _emailAddressTextController1Validator(
+  FocusNode? emailAddressFocusNode;
+  TextEditingController? emailAddressTextController;
+  String? Function(BuildContext, String?)? emailAddressTextControllerValidator;
+  String? _emailAddressTextControllerValidator(
       BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return 'Email is required.';
@@ -25,11 +25,11 @@ class InicioSesionModel extends FlutterFlowModel<InicioSesionWidget> {
   }
 
   // State field(s) for password widget.
-  FocusNode? passwordFocusNode1;
-  TextEditingController? passwordTextController1;
-  late bool passwordVisibility1;
-  String? Function(BuildContext, String?)? passwordTextController1Validator;
-  String? _passwordTextController1Validator(BuildContext context, String? val) {
+  FocusNode? passwordFocusNode;
+  TextEditingController? passwordTextController;
+  late bool passwordVisibility;
+  String? Function(BuildContext, String?)? passwordTextControllerValidator;
+  String? _passwordTextControllerValidator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return 'Passsword is required.';
     }
@@ -37,11 +37,12 @@ class InicioSesionModel extends FlutterFlowModel<InicioSesionWidget> {
     return null;
   }
 
-  // State field(s) for emailAddress widget.
-  FocusNode? emailAddressFocusNode2;
-  TextEditingController? emailAddressTextController2;
-  String? Function(BuildContext, String?)? emailAddressTextController2Validator;
-  String? _emailAddressTextController2Validator(
+  // State field(s) for emailAddresstxt1 widget.
+  FocusNode? emailAddresstxt1FocusNode;
+  TextEditingController? emailAddresstxt1TextController;
+  String? Function(BuildContext, String?)?
+      emailAddresstxt1TextControllerValidator;
+  String? _emailAddresstxt1TextControllerValidator(
       BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return 'Email is required.';
@@ -53,12 +54,13 @@ class InicioSesionModel extends FlutterFlowModel<InicioSesionWidget> {
     return null;
   }
 
-  // State field(s) for password widget.
-  FocusNode? passwordFocusNode2;
-  TextEditingController? passwordTextController2;
-  late bool passwordVisibility2;
-  String? Function(BuildContext, String?)? passwordTextController2Validator;
-  String? _passwordTextController2Validator(BuildContext context, String? val) {
+  // State field(s) for passwordtxt1 widget.
+  FocusNode? passwordtxt1FocusNode;
+  TextEditingController? passwordtxt1TextController;
+  late bool passwordtxt1Visibility;
+  String? Function(BuildContext, String?)? passwordtxt1TextControllerValidator;
+  String? _passwordtxt1TextControllerValidator(
+      BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return 'Passsword is required.';
     }
@@ -68,28 +70,27 @@ class InicioSesionModel extends FlutterFlowModel<InicioSesionWidget> {
 
   @override
   void initState(BuildContext context) {
-    emailAddressTextController1Validator =
-        _emailAddressTextController1Validator;
-    passwordVisibility1 = false;
-    passwordTextController1Validator = _passwordTextController1Validator;
-    emailAddressTextController2Validator =
-        _emailAddressTextController2Validator;
-    passwordVisibility2 = false;
-    passwordTextController2Validator = _passwordTextController2Validator;
+    emailAddressTextControllerValidator = _emailAddressTextControllerValidator;
+    passwordVisibility = false;
+    passwordTextControllerValidator = _passwordTextControllerValidator;
+    emailAddresstxt1TextControllerValidator =
+        _emailAddresstxt1TextControllerValidator;
+    passwordtxt1Visibility = false;
+    passwordtxt1TextControllerValidator = _passwordtxt1TextControllerValidator;
   }
 
   @override
   void dispose() {
-    emailAddressFocusNode1?.dispose();
-    emailAddressTextController1?.dispose();
+    emailAddressFocusNode?.dispose();
+    emailAddressTextController?.dispose();
 
-    passwordFocusNode1?.dispose();
-    passwordTextController1?.dispose();
+    passwordFocusNode?.dispose();
+    passwordTextController?.dispose();
 
-    emailAddressFocusNode2?.dispose();
-    emailAddressTextController2?.dispose();
+    emailAddresstxt1FocusNode?.dispose();
+    emailAddresstxt1TextController?.dispose();
 
-    passwordFocusNode2?.dispose();
-    passwordTextController2?.dispose();
+    passwordtxt1FocusNode?.dispose();
+    passwordtxt1TextController?.dispose();
   }
 }

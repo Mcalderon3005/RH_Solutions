@@ -9,6 +9,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 export 'package:collection/collection.dart' show ListEquality;
 export 'package:flutter/material.dart' show Color, Colors;
 export 'package:from_css_color/from_css_color.dart';
+export '/backend/schema/enums/enums.dart' show FFEnumExtensions;
 
 typedef StructBuilder<T> = T Function(Map<String, dynamic> data);
 

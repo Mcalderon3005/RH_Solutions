@@ -10,7 +10,7 @@ export 'pagina_principal_model.dart';
 class PaginaPrincipalWidget extends StatefulWidget {
   const PaginaPrincipalWidget({super.key});
 
-  static String routeName = 'paginaPrincipal';
+  static String routeName = 'PaginaPrincipal';
   static String routePath = 'paginaPrincipal';
 
   @override
@@ -28,7 +28,7 @@ class _PaginaPrincipalWidgetState extends State<PaginaPrincipalWidget> {
     _model = createModel(context, () => PaginaPrincipalModel());
 
     logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'paginaPrincipal'});
+        parameters: {'screen_name': 'PaginaPrincipal'});
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
@@ -127,9 +127,9 @@ class _PaginaPrincipalWidgetState extends State<PaginaPrincipalWidget> {
 
                             context.pushNamed(InicioSesionWidget.routeName);
                           },
-                          text: 'Iniciar Sesión',
+                          text: 'Iniciar sesión',
                           options: FFButtonOptions(
-                            width: MediaQuery.sizeOf(context).width * 0.41,
+                            width: MediaQuery.sizeOf(context).width * 0.45,
                             height: MediaQuery.sizeOf(context).height * 0.05,
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
@@ -154,7 +154,7 @@ class _PaginaPrincipalWidgetState extends State<PaginaPrincipalWidget> {
                         ),
                       ),
                       Text(
-                        'Problemas? Contactenos.',
+                        '¿Problemas? Contactenos.',
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Manrope',
                               letterSpacing: 0.0,

@@ -151,12 +151,15 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               children: [
                                 Column(
                                   mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 12.0, 0.0, 12.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
                                         children: [
                                           Container(
                                             width: 40.0,
@@ -183,7 +186,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     18.0, 0.0, 0.0, 0.0),
                                             child: Text(
-                                              'Editar Perfil',
+                                              'Editar perfil',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyLarge
@@ -219,12 +222,16 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   },
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: [
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 12.0, 0.0, 12.0),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
                                           children: [
                                             Container(
                                               width: 40.0,
@@ -251,7 +258,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                   .fromSTEB(
                                                       18.0, 0.0, 0.0, 0.0),
                                               child: Text(
-                                                'Cambiar Contraseña',
+                                                'Cambiar contraseña',
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyLarge
@@ -286,12 +293,16 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   },
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 12.0, 0.0, 12.0),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
                                           children: [
                                             Container(
                                               width: 40.0,
@@ -318,7 +329,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                   .fromSTEB(
                                                       18.0, 0.0, 0.0, 0.0),
                                               child: Text(
-                                                'Reportar un Problema',
+                                                'Reportar un problema',
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyLarge
@@ -387,7 +398,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                   .fromSTEB(
                                                       18.0, 0.0, 0.0, 0.0),
                                               child: Text(
-                                                'Centro de Ayuda',
+                                                'Centro de ayuda',
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyLarge
@@ -442,7 +453,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     18.0, 0.0, 0.0, 0.0),
                                             child: Text(
-                                              'Contactar con el Administrador',
+                                              'Contactar con el administrador',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyLarge
@@ -496,7 +507,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     18.0, 0.0, 0.0, 0.0),
                                             child: Text(
-                                              'Acerca de Nosotros',
+                                              'Acerca de nosotros',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyLarge
@@ -564,7 +575,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                               EdgeInsetsDirectional.fromSTEB(
                                                   18.0, 0.0, 0.0, 0.0),
                                           child: Text(
-                                            'Cerrar Sesian',
+                                            'Cerrar sesión',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyLarge
                                                 .override(
@@ -702,7 +713,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     18.0, 0.0, 0.0, 0.0),
                                             child: Text(
-                                              'Editar Perfil',
+                                              'Editar perfil',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyLarge
@@ -770,7 +781,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                   .fromSTEB(
                                                       18.0, 0.0, 0.0, 0.0),
                                               child: Text(
-                                                'Cambiar Contraseña',
+                                                'Cambiar contraseña',
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyLarge
@@ -837,7 +848,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                   .fromSTEB(
                                                       18.0, 0.0, 0.0, 0.0),
                                               child: Text(
-                                                'Reportar un Problema',
+                                                'Reportar un problema',
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyLarge
@@ -906,7 +917,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                   .fromSTEB(
                                                       18.0, 0.0, 0.0, 0.0),
                                               child: Text(
-                                                'Centro de Ayuda',
+                                                'Centro de ayuda',
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyLarge
@@ -961,7 +972,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     18.0, 0.0, 0.0, 0.0),
                                             child: Text(
-                                              'Contactar con el Administrador',
+                                              'Contactar con el administrador',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyLarge
@@ -1015,7 +1026,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     18.0, 0.0, 0.0, 0.0),
                                             child: Text(
-                                              'Acerca de Nosotros',
+                                              'Acerca de nosotros',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyLarge
@@ -1083,7 +1094,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                               EdgeInsetsDirectional.fromSTEB(
                                                   18.0, 0.0, 0.0, 0.0),
                                           child: Text(
-                                            'Cerrar Sesian',
+                                            'Cerrar sesión',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyLarge
                                                 .override(

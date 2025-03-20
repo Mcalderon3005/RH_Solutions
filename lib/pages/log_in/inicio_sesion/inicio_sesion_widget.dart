@@ -3,6 +3,7 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -31,17 +32,17 @@ class _InicioSesionWidgetState extends State<InicioSesionWidget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'inicioSesion'});
-    _model.emailAddressTextController1 ??= TextEditingController();
-    _model.emailAddressFocusNode1 ??= FocusNode();
+    _model.emailAddressTextController ??= TextEditingController();
+    _model.emailAddressFocusNode ??= FocusNode();
 
-    _model.passwordTextController1 ??= TextEditingController();
-    _model.passwordFocusNode1 ??= FocusNode();
+    _model.passwordTextController ??= TextEditingController();
+    _model.passwordFocusNode ??= FocusNode();
 
-    _model.emailAddressTextController2 ??= TextEditingController();
-    _model.emailAddressFocusNode2 ??= FocusNode();
+    _model.emailAddresstxt1TextController ??= TextEditingController();
+    _model.emailAddresstxt1FocusNode ??= FocusNode();
 
-    _model.passwordTextController2 ??= TextEditingController();
-    _model.passwordFocusNode2 ??= FocusNode();
+    _model.passwordtxt1TextController ??= TextEditingController();
+    _model.passwordtxt1FocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -144,9 +145,9 @@ class _InicioSesionWidgetState extends State<InicioSesionWidget> {
                                                         0.45,
                                                 child: TextFormField(
                                                   controller: _model
-                                                      .emailAddressTextController1,
+                                                      .emailAddressTextController,
                                                   focusNode: _model
-                                                      .emailAddressFocusNode1,
+                                                      .emailAddressFocusNode,
                                                   autofocus: false,
                                                   autofillHints: [
                                                     AutofillHints.email
@@ -223,7 +224,7 @@ class _InicioSesionWidgetState extends State<InicioSesionWidget> {
                                                               context)
                                                           .primary,
                                                   validator: _model
-                                                      .emailAddressTextController1Validator
+                                                      .emailAddressTextControllerValidator
                                                       .asValidator(context),
                                                 ),
                                               ),
@@ -264,10 +265,10 @@ class _InicioSesionWidgetState extends State<InicioSesionWidget> {
                                                     .width *
                                                 0.45,
                                             child: TextFormField(
-                                              controller: _model
-                                                  .passwordTextController1,
+                                              controller:
+                                                  _model.passwordTextController,
                                               focusNode:
-                                                  _model.passwordFocusNode1,
+                                                  _model.passwordFocusNode,
                                               autofocus: false,
                                               autofillHints: [
                                                 AutofillHints.password
@@ -275,7 +276,7 @@ class _InicioSesionWidgetState extends State<InicioSesionWidget> {
                                               textInputAction:
                                                   TextInputAction.done,
                                               obscureText:
-                                                  !_model.passwordVisibility1,
+                                                  !_model.passwordVisibility,
                                               decoration: InputDecoration(
                                                 enabledBorder:
                                                     OutlineInputBorder(
@@ -323,14 +324,14 @@ class _InicioSesionWidgetState extends State<InicioSesionWidget> {
                                                 suffixIcon: InkWell(
                                                   onTap: () => safeSetState(
                                                     () => _model
-                                                            .passwordVisibility1 =
+                                                            .passwordVisibility =
                                                         !_model
-                                                            .passwordVisibility1,
+                                                            .passwordVisibility,
                                                   ),
                                                   focusNode: FocusNode(
                                                       skipTraversal: true),
                                                   child: Icon(
-                                                    _model.passwordVisibility1
+                                                    _model.passwordVisibility
                                                         ? Icons
                                                             .visibility_outlined
                                                         : Icons
@@ -357,7 +358,7 @@ class _InicioSesionWidgetState extends State<InicioSesionWidget> {
                                                   FlutterFlowTheme.of(context)
                                                       .primary,
                                               validator: _model
-                                                  .passwordTextController1Validator
+                                                  .passwordTextControllerValidator
                                                   .asValidator(context),
                                             ),
                                           ),
@@ -385,13 +386,15 @@ class _InicioSesionWidgetState extends State<InicioSesionWidget> {
                                       final user =
                                           await authManager.signInWithEmail(
                                         context,
-                                        _model.emailAddressTextController1.text,
-                                        _model.passwordTextController1.text,
+                                        _model.emailAddressTextController.text,
+                                        _model.passwordTextController.text,
                                       );
                                       if (user == null) {
                                         return;
                                       }
 
+                                      logFirebaseEvent('Button_custom_action');
+                                      await actions.loginUser();
                                       if ((valueOrDefault(
                                                       currentUserDocument?.role,
                                                       '') ==
@@ -474,7 +477,7 @@ class _InicioSesionWidgetState extends State<InicioSesionWidget> {
                                                 resumenAccion:
                                                     'UsuarioInactivo',
                                                 user: _model
-                                                    .emailAddressTextController1
+                                                    .emailAddressTextController
                                                     .text,
                                               ));
                                         }
@@ -522,7 +525,7 @@ class _InicioSesionWidgetState extends State<InicioSesionWidget> {
                                     logFirebaseEvent('Row_navigate_to');
 
                                     context.pushNamed(
-                                        RecuperarPassWidget.routeName);
+                                        RecuperarContrasenaWidget.routeName);
                                   },
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -531,15 +534,31 @@ class _InicioSesionWidgetState extends State<InicioSesionWidget> {
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 12.0, 0.0, 12.0),
-                                        child: Text(
-                                          'No recuerdo mi contraseña',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodySmall
-                                              .override(
-                                                fontFamily: 'Manrope',
-                                                fontSize: 14.0,
-                                                letterSpacing: 0.0,
-                                              ),
+                                        child: InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            logFirebaseEvent(
+                                                'INICIO_SESION_PAGE_Text_rpq4cq3t_ON_TAP');
+                                            logFirebaseEvent(
+                                                'Text_navigate_to');
+
+                                            context.pushNamed(
+                                                RecuperarContrasenaWidget
+                                                    .routeName);
+                                          },
+                                          child: Text(
+                                            'No recuerdo mi contraseña',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodySmall
+                                                .override(
+                                                  fontFamily: 'Manrope',
+                                                  fontSize: 14.0,
+                                                  letterSpacing: 0.0,
+                                                ),
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -608,8 +627,8 @@ class _InicioSesionWidgetState extends State<InicioSesionWidget> {
                                   ),
                                   TextFormField(
                                     controller:
-                                        _model.emailAddressTextController2,
-                                    focusNode: _model.emailAddressFocusNode2,
+                                        _model.emailAddresstxt1TextController,
+                                    focusNode: _model.emailAddresstxt1FocusNode,
                                     autofocus: false,
                                     autofillHints: [AutofillHints.email],
                                     textInputAction: TextInputAction.next,
@@ -665,7 +684,7 @@ class _InicioSesionWidgetState extends State<InicioSesionWidget> {
                                     cursorColor:
                                         FlutterFlowTheme.of(context).primary,
                                     validator: _model
-                                        .emailAddressTextController2Validator
+                                        .emailAddresstxt1TextControllerValidator
                                         .asValidator(context),
                                   ),
                                 ],
@@ -693,12 +712,13 @@ class _InicioSesionWidgetState extends State<InicioSesionWidget> {
                                     ),
                                   ),
                                   TextFormField(
-                                    controller: _model.passwordTextController2,
-                                    focusNode: _model.passwordFocusNode2,
+                                    controller:
+                                        _model.passwordtxt1TextController,
+                                    focusNode: _model.passwordtxt1FocusNode,
                                     autofocus: false,
                                     autofillHints: [AutofillHints.password],
                                     textInputAction: TextInputAction.done,
-                                    obscureText: !_model.passwordVisibility2,
+                                    obscureText: !_model.passwordtxt1Visibility,
                                     decoration: InputDecoration(
                                       enabledBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
@@ -737,13 +757,13 @@ class _InicioSesionWidgetState extends State<InicioSesionWidget> {
                                           .secondaryBackground,
                                       suffixIcon: InkWell(
                                         onTap: () => safeSetState(
-                                          () => _model.passwordVisibility2 =
-                                              !_model.passwordVisibility2,
+                                          () => _model.passwordtxt1Visibility =
+                                              !_model.passwordtxt1Visibility,
                                         ),
                                         focusNode:
                                             FocusNode(skipTraversal: true),
                                         child: Icon(
-                                          _model.passwordVisibility2
+                                          _model.passwordtxt1Visibility
                                               ? Icons.visibility_outlined
                                               : Icons.visibility_off_outlined,
                                           color: FlutterFlowTheme.of(context)
@@ -764,7 +784,7 @@ class _InicioSesionWidgetState extends State<InicioSesionWidget> {
                                     cursorColor:
                                         FlutterFlowTheme.of(context).primary,
                                     validator: _model
-                                        .passwordTextController2Validator
+                                        .passwordtxt1TextControllerValidator
                                         .asValidator(context),
                                   ),
                                 ],
@@ -777,6 +797,7 @@ class _InicioSesionWidgetState extends State<InicioSesionWidget> {
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
                         child: FFButtonWidget(
+                          key: ValueKey('Button_4p36'),
                           onPressed: () async {
                             logFirebaseEvent(
                                 'INICIO_SESION_INICIAR_SESIN_BTN_ON_TAP');
@@ -787,13 +808,15 @@ class _InicioSesionWidgetState extends State<InicioSesionWidget> {
 
                             final user = await authManager.signInWithEmail(
                               context,
-                              _model.emailAddressTextController2.text,
-                              _model.passwordTextController2.text,
+                              _model.emailAddresstxt1TextController.text,
+                              _model.passwordtxt1TextController.text,
                             );
                             if (user == null) {
                               return;
                             }
 
+                            logFirebaseEvent('Button_custom_action');
+                            await actions.loginUser();
                             if ((valueOrDefault(
                                             currentUserDocument?.role, '') ==
                                         'Administrador') &&
@@ -864,15 +887,15 @@ class _InicioSesionWidgetState extends State<InicioSesionWidget> {
                                       timeStamp: getCurrentTimestamp,
                                       resumenAccion: 'UsuarioInactivo',
                                       user: _model
-                                          .emailAddressTextController2.text,
+                                          .emailAddressTextController.text,
                                     ));
                               }
                             }
                           },
                           text: 'Iniciar sesión',
                           options: FFButtonOptions(
-                            width: double.infinity,
-                            height: 50.0,
+                            width: MediaQuery.sizeOf(context).width * 0.5,
+                            height: MediaQuery.sizeOf(context).height * 0.05,
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
                             iconPadding: EdgeInsetsDirectional.fromSTEB(
@@ -906,7 +929,8 @@ class _InicioSesionWidgetState extends State<InicioSesionWidget> {
                                 'INICIO_SESION_PAGE_Row_8yx9n9q0_ON_TAP');
                             logFirebaseEvent('Row_navigate_to');
 
-                            context.pushNamed(RecuperarPassWidget.routeName);
+                            context
+                                .pushNamed(RecuperarContrasenaWidget.routeName);
                           },
                           child: Row(
                             mainAxisSize: MainAxisSize.max,

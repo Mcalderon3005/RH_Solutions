@@ -1,7 +1,7 @@
 import '/components/custom_appbar_widget.dart';
+import '/components/fast_access_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/pages/profile/componentes_generales/fast_access/fast_access_widget.dart';
 import 'package:flutter/material.dart';
 import 'ver_actividades_model.dart';
 export 'ver_actividades_model.dart';
@@ -89,7 +89,7 @@ class _VerActividadesWidgetState extends State<VerActividadesWidget> {
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 5.0, 0.0, 0.0),
                                 child: Text(
-                                  'Actividades Proximas',
+                                  'Actividades proximas',
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -206,7 +206,7 @@ class _VerActividadesWidgetState extends State<VerActividadesWidget> {
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 5.0, 0.0, 0.0),
                                 child: Text(
-                                  'Actividades Proximas',
+                                  'Actividades proximas',
                                   textAlign: TextAlign.center,
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium

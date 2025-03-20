@@ -3,7 +3,7 @@ service cloud.firestore {
   match /databases/{database}/documents {
     match /users/{document} {
       allow create: if request.auth != null;
-      allow read: if request.auth != null;
+      allow read: if true;
       allow write: if request.auth != null;
       allow delete: if request.auth != null;
     }
@@ -28,18 +28,6 @@ service cloud.firestore {
       allow write: if false;
       allow delete: if false;
     }
-
-    match /Pagos/{parent}/pagoSalario/{document} {
-      allow create: if true;
-      allow read: if true;
-      allow write: if false;
-      allow delete: if false;
-    }
-
-    match /{path=**}/pagoSalario/{document} {
-      allow read: if true;
-    }
-
 
     match /Reuniones/{document} {
       allow create: if true;
@@ -67,6 +55,20 @@ service cloud.firestore {
       allow read: if true;
       allow write: if false;
       allow delete: if false;
+    }
+
+    match /usuarioCreacion/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if true;
+      allow delete: if true;
+    }
+
+    match /logActualizacionUsuarios/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if true;
+      allow delete: if true;
     }
   }
 }

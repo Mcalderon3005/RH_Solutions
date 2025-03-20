@@ -11,6 +11,10 @@ import 'package:intl/intl.dart';
 import 'package:json_path/json_path.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:url_launcher/url_launcher.dart';
+import 'package:file_saver/file_saver.dart';
+import 'package:http/http.dart' as http;
+import 'package:mime/mime.dart' as mime;
+import 'uploaded_file.dart';
 
 import '../main.dart';
 
@@ -201,6 +205,79 @@ Future launchURL(String url) async {
     await launchUrl(uri);
   } catch (e) {
     throw 'Could not launch $uri: $e';
+  }
+}
+
+String? getExtensionFromFilename(String filename) {
+  return filename.contains('.') ? filename.split('.').last : null;
+}
+
+/*
+ * Downloads/Saves a file from a URL or file bytes. If the filename contains an
+ * extension (e.g. 'file.pdf'), the extension will be used to determine the
+ * file type, otherwise the response header (url case) or file header bytes will
+ * be used to infer the file's type. 
+ */
+Future downloadFile({
+  required String filename,
+  String? url,
+  FFUploadedFile? uploadedFile,
+}) async {
+  var bytes = uploadedFile?.bytes;
+  var extension = getExtensionFromFilename(filename) ??
+      getExtensionFromFilename(uploadedFile?.name ?? '');
+
+  if (url == null && bytes == null) {
+    throw 'No file/url to download';
+  }
+  if (url != null && bytes != null) {
+    throw 'Only one of url or bytes can be provided';
+  }
+
+  String? mimeType;
+
+  // First, check if the extension is specified in the filename to avoid needing
+  // to scan the file to determine the mime type and extension
+  mimeType = mime.lookupMimeType(filename) ??
+      mime.lookupMimeType(uploadedFile?.name ?? '');
+
+  // If a URL is provided, download the file and determine the mime type from
+  // the response headers.
+  if (url != null && url.isNotEmpty) {
+    final response = await http.get(Uri.parse(url));
+    bytes = response.bodyBytes;
+    mimeType ??= response.headers['content-type'];
+  }
+
+  // If a file is provided and the filename does not have an extension, scan the
+  // file header bytes to determine the mime type and extension.
+  if (bytes != null && bytes.isNotEmpty) {
+    // Grab the first 32 bytes of the file to determine the mime type
+    if (mimeType == null) {
+      final headerBytes = bytes.take(32).toList();
+      mimeType ??= mime.lookupMimeType(filename, headerBytes: headerBytes);
+    }
+  }
+
+  MimeType mimeTypeObj =
+      MimeType.values.firstWhereOrNull((e) => e.type == mimeType) ??
+          MimeType.other;
+
+  if (kIsWeb) {
+    await FileSaver.instance.saveFile(
+      bytes: bytes,
+      name: filename.substring(0,
+          filename.contains('.') ? filename.lastIndexOf('.') : filename.length),
+      ext: extension ?? mime.extensionFromMime(mimeType ?? ''),
+      mimeType: mimeTypeObj,
+    );
+  } else {
+    await FileSaver.instance.saveAs(
+      bytes: bytes,
+      name: filename,
+      ext: extension ?? mime.extensionFromMime(mimeType ?? ''),
+      mimeType: mimeTypeObj,
+    );
   }
 }
 

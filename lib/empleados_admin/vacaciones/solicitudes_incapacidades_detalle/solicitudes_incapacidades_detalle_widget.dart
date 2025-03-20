@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'solicitudes_incapacidades_detalle_model.dart';
@@ -177,7 +178,7 @@ class _SolicitudesIncapacidadesDetalleWidgetState
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
                         child: Text(
-                          'Formulario de Edición',
+                          'Formulario de edición',
                           style: FlutterFlowTheme.of(context)
                               .headlineMedium
                               .override(
@@ -305,7 +306,7 @@ class _SolicitudesIncapacidadesDetalleWidgetState
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Text(
-                                      'Fecha de Creacion',
+                                      'Fecha de creacion',
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
@@ -342,7 +343,7 @@ class _SolicitudesIncapacidadesDetalleWidgetState
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Text(
-                                    'Fecha de Inicio',
+                                    'Fecha de inicio',
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
@@ -378,7 +379,7 @@ class _SolicitudesIncapacidadesDetalleWidgetState
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Text(
-                                    'Fecha Final',
+                                    'Fecha final',
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
@@ -414,7 +415,7 @@ class _SolicitudesIncapacidadesDetalleWidgetState
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Text(
-                                    'Estado de Revision',
+                                    'Estado de revision',
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
@@ -465,7 +466,7 @@ class _SolicitudesIncapacidadesDetalleWidgetState
                                     logFirebaseEvent('Button_navigate_back');
                                     context.safePop();
                                   },
-                                  text: 'Eliminar Solicitud',
+                                  text: 'Eliminar solicitud',
                                   options: FFButtonOptions(
                                     height: 40.0,
                                     padding: EdgeInsetsDirectional.fromSTEB(
@@ -531,10 +532,12 @@ class _SolicitudesIncapacidadesDetalleWidgetState
                               tipoSolicitud: '',
                               estadoRevision: _model.switchValue,
                             ));
-                            logFirebaseEvent('Button_navigate_back');
-                            context.safePop();
+                            logFirebaseEvent('Button_navigate_to');
+
+                            context.pushNamed(
+                                IndexIncapacidadAdminWidget.routeName);
                           },
-                          text: 'Actualizar Solicitud',
+                          text: 'Actualizar solicitud',
                           icon: Icon(
                             Icons.receipt_long,
                             size: 15.0,
