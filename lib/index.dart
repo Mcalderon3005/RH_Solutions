@@ -79,3 +79,5 @@ export '/pages/vacaciones_e_incapacidades/index_incapacidades/index_incapacidade
     show IndexIncapacidadesWidget;
 export '/pages/actividades/index_actividades/index_actividades_widget.dart'
     show IndexActividadesWidget;
+export '/empleados_admin/pagos_recibos/editar_pago/editar_pago_widget.dart'
+    show EditarPagoWidget;

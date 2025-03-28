@@ -11,26 +11,38 @@ import 'package:flutter/material.dart';
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
-Future<void> loginUser() async {
+Future<String> loginUser() async {
+  // Add your function code here!
   try {
     final User? user = FirebaseAuth.instance.currentUser;
-
-    // Verificar si el usuario está autenticado y tiene email
-    if (user == null || user.email == null) {
-      print('Usuario no autenticado o sin email registrado');
-      return;
+    if (user == null) {
+      return 'Error: Usuario no autenticado.';
     }
 
-    final String userEmail = user.email!;
+    // Obtener el documento del usuario en Firestore
+    final DocumentSnapshot userDoc = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.uid)
+        .get();
 
-    // Configurar OneSignal con el email como alias
-    await OneSignal.login(user.uid); // External User ID sigue siendo el UID
+    // Verificar si el documento existe y tiene un email
+    if (!userDoc.exists || userDoc['email'] == null) {
+      return 'Error: Usuario no encontrado en Firestore o sin email registrado.';
+    }
+
+    final String userEmail = userDoc['email'];
+
+    // Configurar OneSignal con el UID y el email como alias
+    await OneSignal.login(user.uid); // External User ID
     await OneSignal.User.addAlias("user_email", userEmail);
 
-    print('Alias configurado con email: $userEmail');
+    // Mensaje de confirmación
+    return 'OneSignal configurado correctamente para el usuario: ${user.uid} con email: $userEmail';
   } catch (e) {
-    print('Error en login de OneSignal: $e');
+    // Mensaje de error
+    return 'Error en OneSignal login: $e';
   }
 }

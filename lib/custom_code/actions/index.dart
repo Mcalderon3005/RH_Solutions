@@ -5,3 +5,4 @@ export 'logout_user.dart' show logoutUser;
 export 'login_user.dart' show loginUser;
 export 'delete_incapacidades.dart' show deleteIncapacidades;
 export 'delete_vacaciones.dart' show deleteVacaciones;
+export 'get_onesignal_user_info.dart' show getOnesignalUserInfo;

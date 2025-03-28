@@ -1,4 +1,4 @@
-package com.mealplanner.app;
+package com.hrsolutions.app;
 
 import androidx.test.rule.ActivityTestRule;
 import dev.flutter.plugins.integration_test.FlutterTestRunner;

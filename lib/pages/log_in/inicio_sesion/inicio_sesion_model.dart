@@ -37,6 +37,8 @@ class InicioSesionModel extends FlutterFlowModel<InicioSesionWidget> {
     return null;
   }
 
+  // Stores action output result for [Custom Action - loginUser] action in Button widget.
+  String? mensajeRespuesta;
   // State field(s) for emailAddresstxt1 widget.
   FocusNode? emailAddresstxt1FocusNode;
   TextEditingController? emailAddresstxt1TextController;
@@ -67,6 +69,9 @@ class InicioSesionModel extends FlutterFlowModel<InicioSesionWidget> {
 
     return null;
   }
+
+  // Stores action output result for [Custom Action - loginUser] action in Button widget.
+  String? mensajeRespuesta1;
 
   @override
   void initState(BuildContext context) {

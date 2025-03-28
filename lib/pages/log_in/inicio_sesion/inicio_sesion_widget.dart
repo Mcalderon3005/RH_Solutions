@@ -394,7 +394,26 @@ class _InicioSesionWidgetState extends State<InicioSesionWidget> {
                                       }
 
                                       logFirebaseEvent('Button_custom_action');
-                                      await actions.loginUser();
+                                      _model.mensajeRespuesta =
+                                          await actions.loginUser();
+                                      logFirebaseEvent('Button_alert_dialog');
+                                      await showDialog(
+                                        context: context,
+                                        builder: (alertDialogContext) {
+                                          return AlertDialog(
+                                            title: Text('Inicio Sesion'),
+                                            content:
+                                                Text(_model.mensajeRespuesta!),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext),
+                                                child: Text('Ok'),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
                                       if ((valueOrDefault(
                                                       currentUserDocument?.role,
                                                       '') ==
@@ -482,6 +501,8 @@ class _InicioSesionWidgetState extends State<InicioSesionWidget> {
                                               ));
                                         }
                                       }
+
+                                      safeSetState(() {});
                                     },
                                     text: 'Iniciar sesión',
                                     options: FFButtonOptions(
@@ -816,7 +837,25 @@ class _InicioSesionWidgetState extends State<InicioSesionWidget> {
                             }
 
                             logFirebaseEvent('Button_custom_action');
-                            await actions.loginUser();
+                            _model.mensajeRespuesta1 =
+                                await actions.loginUser();
+                            logFirebaseEvent('Button_alert_dialog');
+                            await showDialog(
+                              context: context,
+                              builder: (alertDialogContext) {
+                                return AlertDialog(
+                                  title: Text('Inicio Sesion'),
+                                  content: Text(_model.mensajeRespuesta1!),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(alertDialogContext),
+                                      child: Text('Ok'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
                             if ((valueOrDefault(
                                             currentUserDocument?.role, '') ==
                                         'Administrador') &&
@@ -891,6 +930,8 @@ class _InicioSesionWidgetState extends State<InicioSesionWidget> {
                                     ));
                               }
                             }
+
+                            safeSetState(() {});
                           },
                           text: 'Iniciar sesión',
                           options: FFButtonOptions(

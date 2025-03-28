@@ -481,6 +481,18 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
               path: IndexActividadesWidget.routePath,
               requireAuth: true,
               builder: (context, params) => IndexActividadesWidget(),
+            ),
+            FFRoute(
+              name: EditarPagoWidget.routeName,
+              path: EditarPagoWidget.routePath,
+              builder: (context, params) => EditarPagoWidget(
+                pago: params.getParam(
+                  'pago',
+                  ParamType.DocumentReference,
+                  isList: false,
+                  collectionNamePath: ['Pagos'],
+                ),
+              ),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),

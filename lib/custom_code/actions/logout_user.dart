@@ -16,7 +16,7 @@ Future logoutUser() async {
   // Add your function code here!
   try {
     await OneSignal.logout();
-    await OneSignal.User.removeAlias("fb_id");
+    await OneSignal.User.removeAlias("user_email");
 
     print('OneSignal logout exitoso');
   } catch (e) {

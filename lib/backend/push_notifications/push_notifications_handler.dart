@@ -205,6 +205,11 @@ final parametersBuilderMap =
   'IndexSolicitudes': ParameterData.none(),
   'indexIncapacidades': ParameterData.none(),
   'indexActividades': ParameterData.none(),
+  'editarPago': (data) async => ParameterData(
+        allParams: {
+          'pago': getParameter<DocumentReference>(data, 'pago'),
+        },
+      ),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

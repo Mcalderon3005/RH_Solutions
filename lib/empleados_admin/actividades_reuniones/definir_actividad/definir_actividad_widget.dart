@@ -142,6 +142,7 @@ class _DefinirActividadWidgetState extends State<DefinirActividadWidget> {
                           ),
                           child: Container(
                             width: MediaQuery.sizeOf(context).width * 1.0,
+                            height: 723.52,
                             decoration: BoxDecoration(
                               color: FlutterFlowTheme.of(context)
                                   .secondaryBackground,
@@ -356,7 +357,7 @@ class _DefinirActividadWidgetState extends State<DefinirActividadWidget> {
                                         ),
                                         Container(
                                           width: 1340.0,
-                                          height: 100.0,
+                                          height: 568.15,
                                           decoration: BoxDecoration(
                                             color: FlutterFlowTheme.of(context)
                                                 .secondaryBackground,

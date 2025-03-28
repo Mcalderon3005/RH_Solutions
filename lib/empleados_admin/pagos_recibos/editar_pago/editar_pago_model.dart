@@ -1,9 +1,9 @@
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
-import 'crear_pago_widget.dart' show CrearPagoWidget;
+import 'editar_pago_widget.dart' show EditarPagoWidget;
 import 'package:flutter/material.dart';
 
-class CrearPagoModel extends FlutterFlowModel<CrearPagoWidget> {
+class EditarPagoModel extends FlutterFlowModel<EditarPagoWidget> {
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for drdEmpleado widget.

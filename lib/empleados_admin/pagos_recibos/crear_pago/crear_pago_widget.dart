@@ -1,5 +1,4 @@
 import '/backend/backend.dart';
-import '/backend/firebase_storage/storage.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -7,8 +6,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
-import '/flutter_flow/upload_data.dart';
-import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'crear_pago_model.dart';
@@ -330,126 +327,168 @@ class _CrearPagoWidgetState extends State<CrearPagoWidget>
                                       ),
                                     ],
                                   ),
-                                  Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Text(
-                                        'Fecha:',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Manrope',
-                                              letterSpacing: 0.0,
-                                            ),
-                                      ),
-                                      Text(
-                                        valueOrDefault<String>(
-                                          dateTimeFormat(
-                                            "d/M/y ",
-                                            _model.datePicked,
-                                            locale: FFLocalizations.of(context)
-                                                .languageCode,
-                                          ),
-                                          '00/00/00',
-                                        ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Manrope',
-                                              color: valueOrDefault<Color>(
-                                                (Theme.of(context).brightness ==
-                                                            Brightness.light) ==
-                                                        true
-                                                    ? Colors.black
-                                                    : Colors.white,
-                                                Colors.black,
-                                              ),
-                                              letterSpacing: 0.0,
-                                            ),
-                                      ),
-                                      FlutterFlowIconButton(
-                                        borderRadius: 8.0,
-                                        buttonSize: 40.0,
-                                        fillColor: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        icon: Icon(
-                                          Icons.calendar_month,
-                                          color:
-                                              FlutterFlowTheme.of(context).info,
-                                          size: 24.0,
-                                        ),
-                                        onPressed: () async {
-                                          logFirebaseEvent(
-                                              'CREAR_PAGO_calendar_month_ICN_ON_TAP');
-                                          logFirebaseEvent(
-                                              'IconButton_date_time_picker');
-                                          final _datePickedDate =
-                                              await showDatePicker(
-                                            context: context,
-                                            initialDate: getCurrentTimestamp,
-                                            firstDate: (getCurrentTimestamp ??
-                                                DateTime(1900)),
-                                            lastDate: DateTime(2050),
-                                            builder: (context, child) {
-                                              return wrapInMaterialDatePickerTheme(
-                                                context,
-                                                child!,
-                                                headerBackgroundColor:
+                                  Align(
+                                    alignment: AlignmentDirectional(-1.0, 0.0),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 15.0, 0.0, 0.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Align(
+                                            alignment:
+                                                AlignmentDirectional(-1.0, 0.0),
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      0.0, 0.0, 15.0, 0.0),
+                                              child: Text(
+                                                'Fecha:',
+                                                style:
                                                     FlutterFlowTheme.of(context)
-                                                        .primary,
-                                                headerForegroundColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .info,
-                                                headerTextStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .headlineLarge
+                                                        .bodyMedium
                                                         .override(
-                                                          fontFamily: 'Outfit',
-                                                          fontSize: 32.0,
+                                                          fontFamily: 'Manrope',
                                                           letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.w600,
                                                         ),
-                                                pickerBackgroundColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryBackground,
-                                                pickerForegroundColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                                selectedDateTimeBackgroundColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
-                                                selectedDateTimeForegroundColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .info,
-                                                actionButtonForegroundColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                                iconSize: 24.0,
+                                              ),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 15.0, 0.0),
+                                            child: Text(
+                                              valueOrDefault<String>(
+                                                dateTimeFormat(
+                                                  "d/M/y ",
+                                                  _model.datePicked,
+                                                  locale: FFLocalizations.of(
+                                                          context)
+                                                      .languageCode,
+                                                ),
+                                                '00/00/00',
+                                              ),
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    fontFamily: 'Manrope',
+                                                    color:
+                                                        valueOrDefault<Color>(
+                                                      (Theme.of(context)
+                                                                      .brightness ==
+                                                                  Brightness
+                                                                      .light) ==
+                                                              true
+                                                          ? Colors.black
+                                                          : Colors.white,
+                                                      Colors.black,
+                                                    ),
+                                                    letterSpacing: 0.0,
+                                                  ),
+                                            ),
+                                          ),
+                                          FlutterFlowIconButton(
+                                            borderRadius: 8.0,
+                                            buttonSize: 40.0,
+                                            fillColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .primary,
+                                            icon: Icon(
+                                              Icons.calendar_month,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .info,
+                                              size: 24.0,
+                                            ),
+                                            onPressed: () async {
+                                              logFirebaseEvent(
+                                                  'CREAR_PAGO_calendar_month_ICN_ON_TAP');
+                                              logFirebaseEvent(
+                                                  'IconButton_date_time_picker');
+                                              final _datePickedDate =
+                                                  await showDatePicker(
+                                                context: context,
+                                                initialDate:
+                                                    getCurrentTimestamp,
+                                                firstDate:
+                                                    (getCurrentTimestamp ??
+                                                        DateTime(1900)),
+                                                lastDate: DateTime(2050),
+                                                builder: (context, child) {
+                                                  return wrapInMaterialDatePickerTheme(
+                                                    context,
+                                                    child!,
+                                                    headerBackgroundColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primary,
+                                                    headerForegroundColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .info,
+                                                    headerTextStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .headlineLarge
+                                                            .override(
+                                                              fontFamily:
+                                                                  'Outfit',
+                                                              fontSize: 32.0,
+                                                              letterSpacing:
+                                                                  0.0,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                            ),
+                                                    pickerBackgroundColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .secondaryBackground,
+                                                    pickerForegroundColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primaryText,
+                                                    selectedDateTimeBackgroundColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primary,
+                                                    selectedDateTimeForegroundColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .info,
+                                                    actionButtonForegroundColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primaryText,
+                                                    iconSize: 24.0,
+                                                  );
+                                                },
                                               );
-                                            },
-                                          );
 
-                                          if (_datePickedDate != null) {
-                                            safeSetState(() {
-                                              _model.datePicked = DateTime(
-                                                _datePickedDate.year,
-                                                _datePickedDate.month,
-                                                _datePickedDate.day,
-                                              );
-                                            });
-                                          } else if (_model.datePicked !=
-                                              null) {
-                                            safeSetState(() {
-                                              _model.datePicked =
-                                                  getCurrentTimestamp;
-                                            });
-                                          }
-                                        },
+                                              if (_datePickedDate != null) {
+                                                safeSetState(() {
+                                                  _model.datePicked = DateTime(
+                                                    _datePickedDate.year,
+                                                    _datePickedDate.month,
+                                                    _datePickedDate.day,
+                                                  );
+                                                });
+                                              } else if (_model.datePicked !=
+                                                  null) {
+                                                safeSetState(() {
+                                                  _model.datePicked =
+                                                      getCurrentTimestamp;
+                                                });
+                                              }
+                                            },
+                                          ),
+                                        ],
                                       ),
-                                    ],
+                                    ),
                                   ),
                                   TextFormField(
                                     controller: _model.txtMontoTextController,
@@ -634,82 +673,8 @@ class _CrearPagoWidgetState extends State<CrearPagoWidget>
                                                 .info,
                                             size: 24.0,
                                           ),
-                                          onPressed: () async {
-                                            logFirebaseEvent(
-                                                'CREAR_PAGO_PAGE_upload_file_ICN_ON_TAP');
-                                            logFirebaseEvent(
-                                                'IconButton_upload_file_to_firebase');
-                                            final selectedFiles =
-                                                await selectFiles(
-                                              multiFile: false,
-                                            );
-                                            if (selectedFiles != null) {
-                                              safeSetState(() => _model
-                                                  .isDataUploading = true);
-                                              var selectedUploadedFiles =
-                                                  <FFUploadedFile>[];
-
-                                              var downloadUrls = <String>[];
-                                              try {
-                                                showUploadMessage(
-                                                  context,
-                                                  'Uploading file...',
-                                                  showLoading: true,
-                                                );
-                                                selectedUploadedFiles =
-                                                    selectedFiles
-                                                        .map((m) =>
-                                                            FFUploadedFile(
-                                                              name: m
-                                                                  .storagePath
-                                                                  .split('/')
-                                                                  .last,
-                                                              bytes: m.bytes,
-                                                            ))
-                                                        .toList();
-
-                                                downloadUrls =
-                                                    (await Future.wait(
-                                                  selectedFiles.map(
-                                                    (f) async =>
-                                                        await uploadData(
-                                                            f.storagePath,
-                                                            f.bytes),
-                                                  ),
-                                                ))
-                                                        .where((u) => u != null)
-                                                        .map((u) => u!)
-                                                        .toList();
-                                              } finally {
-                                                ScaffoldMessenger.of(context)
-                                                    .hideCurrentSnackBar();
-                                                _model.isDataUploading = false;
-                                              }
-                                              if (selectedUploadedFiles
-                                                          .length ==
-                                                      selectedFiles.length &&
-                                                  downloadUrls.length ==
-                                                      selectedFiles.length) {
-                                                safeSetState(() {
-                                                  _model.uploadedLocalFile =
-                                                      selectedUploadedFiles
-                                                          .first;
-                                                  _model.uploadedFileUrl =
-                                                      downloadUrls.first;
-                                                });
-                                                showUploadMessage(
-                                                  context,
-                                                  'Success!',
-                                                );
-                                              } else {
-                                                safeSetState(() {});
-                                                showUploadMessage(
-                                                  context,
-                                                  'Failed to upload file',
-                                                );
-                                                return;
-                                              }
-                                            }
+                                          onPressed: () {
+                                            print('IconButton pressed ...');
                                           },
                                         ),
                                         Padding(
@@ -717,9 +682,7 @@ class _CrearPagoWidgetState extends State<CrearPagoWidget>
                                               EdgeInsetsDirectional.fromSTEB(
                                                   12.0, 0.0, 0.0, 0.0),
                                           child: Text(
-                                            _model.uploadedFileUrl != ''
-                                                ? 'Archivo cargado  ✔'
-                                                : 'Archivo no cargado',
+                                            '',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
@@ -759,27 +722,8 @@ class _CrearPagoWidgetState extends State<CrearPagoWidget>
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 24.0, 0.0, 12.0),
                               child: FFButtonWidget(
-                                onPressed: () async {
-                                  logFirebaseEvent(
-                                      'CREAR_PAGO_REGISTRAR_PAGO_BTN_ON_TAP');
-                                  logFirebaseEvent('Button_backend_call');
-
-                                  await PagosRecord.collection
-                                      .doc()
-                                      .set(createPagosRecordData(
-                                        fechaCreacion: _model.datePicked,
-                                        detalle: _model
-                                            .txtDetalleTextController.text,
-                                        empleado: _model.drdEmpleadoValue,
-                                        monto: double.tryParse(
-                                            _model.txtMontoTextController.text),
-                                        comprobanrte: _model.uploadedFileUrl,
-                                        tipo: _model.drdTipoValue,
-                                      ));
-                                  logFirebaseEvent('Button_navigate_to');
-
-                                  context
-                                      .pushNamed(FacturacionWidget.routeName);
+                                onPressed: () {
+                                  print('Button pressed ...');
                                 },
                                 text: 'Registrar Pago',
                                 icon: Icon(
