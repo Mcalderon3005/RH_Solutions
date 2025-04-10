@@ -1,5 +1,6 @@
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_data_table.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -7,6 +8,7 @@ import '/index.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:text_search/text_search.dart';
 import 'log_usuarios_actualizacion_model.dart';
 export 'log_usuarios_actualizacion_model.dart';
@@ -123,23 +125,27 @@ class _LogUsuariosActualizacionWidgetState
                           30.0, 10.0, 30.0, 15.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
-                            'Usuarios Actualizados',
-                            style: FlutterFlowTheme.of(context)
-                                .titleLarge
-                                .override(
-                                  fontFamily: 'Outfit',
-                                  letterSpacing: 0.0,
-                                ),
+                          Align(
+                            alignment: AlignmentDirectional(0.0, 0.0),
+                            child: Text(
+                              'Usuarios Actualizados',
+                              style: FlutterFlowTheme.of(context)
+                                  .titleLarge
+                                  .override(
+                                    fontFamily: 'Outfit',
+                                    fontSize: 30.0,
+                                    letterSpacing: 0.0,
+                                  ),
+                            ),
                           ),
                         ],
                       ),
                     ),
                     Container(
                       width: 1312.4,
-                      height: 723.7,
+                      height: 712.5,
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).secondaryBackground,
                       ),
@@ -163,6 +169,7 @@ class _LogUsuariosActualizacionWidgetState
                                         .override(
                                           fontFamily: 'Manrope',
                                           color: Colors.white,
+                                          fontSize: 20.0,
                                           letterSpacing: 0.0,
                                         ),
                                   ),
@@ -178,6 +185,7 @@ class _LogUsuariosActualizacionWidgetState
                                         .override(
                                           fontFamily: 'Manrope',
                                           color: Colors.white,
+                                          fontSize: 22.0,
                                           letterSpacing: 0.0,
                                         ),
                                   ),
@@ -193,6 +201,7 @@ class _LogUsuariosActualizacionWidgetState
                                         .override(
                                           fontFamily: 'Manrope',
                                           color: Colors.white,
+                                          fontSize: 22.0,
                                           letterSpacing: 0.0,
                                         ),
                                   ),
@@ -221,6 +230,7 @@ class _LogUsuariosActualizacionWidgetState
                                       .bodyMedium
                                       .override(
                                         fontFamily: 'Manrope',
+                                        fontSize: 20.0,
                                         letterSpacing: 0.0,
                                       ),
                                 ),
@@ -233,6 +243,7 @@ class _LogUsuariosActualizacionWidgetState
                                       .bodyMedium
                                       .override(
                                         fontFamily: 'Manrope',
+                                        fontSize: 20.0,
                                         letterSpacing: 0.0,
                                       ),
                                 ),
@@ -246,6 +257,7 @@ class _LogUsuariosActualizacionWidgetState
                                       .bodyMedium
                                       .override(
                                         fontFamily: 'Manrope',
+                                        fontSize: 20.0,
                                         letterSpacing: 0.0,
                                       ),
                                 ),
@@ -273,6 +285,26 @@ class _LogUsuariosActualizacionWidgetState
                             verticalDividerThickness: 1.0,
                           );
                         },
+                      ),
+                    ),
+                    Align(
+                      alignment: AlignmentDirectional(1.0, 0.0),
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            0.0, 15.0, 30.0, 0.0),
+                        child: FlutterFlowIconButton(
+                          borderRadius: 8.0,
+                          buttonSize: 40.0,
+                          fillColor: FlutterFlowTheme.of(context).primary,
+                          icon: FaIcon(
+                            FontAwesomeIcons.question,
+                            color: FlutterFlowTheme.of(context).info,
+                            size: 24.0,
+                          ),
+                          onPressed: () {
+                            print('IconButton pressed ...');
+                          },
+                        ),
                       ),
                     ),
                   ],

@@ -3,6 +3,8 @@ import '/flutter_flow/flutter_flow_data_table.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'index_solicitudes_widget.dart' show IndexSolicitudesWidget;
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
+    show TutorialCoachMark;
 import 'package:flutter/material.dart';
 
 class IndexSolicitudesModel extends FlutterFlowModel<IndexSolicitudesWidget> {
@@ -24,6 +26,7 @@ class IndexSolicitudesModel extends FlutterFlowModel<IndexSolicitudesWidget> {
 
   ///  State fields for stateful widgets in this page.
 
+  TutorialCoachMark? ttlindexSolicitudesController;
   // Stores action output result for [Firestore Query - Query a collection] action in IndexSolicitudes widget.
   List<SolicitudVacacionesRecord>? vacacionesList;
   // State field(s) for PaginatedDataTable widget.
@@ -35,6 +38,7 @@ class IndexSolicitudesModel extends FlutterFlowModel<IndexSolicitudesWidget> {
 
   @override
   void dispose() {
+    ttlindexSolicitudesController?.finish();
     paginatedDataTableController.dispose();
   }
 }

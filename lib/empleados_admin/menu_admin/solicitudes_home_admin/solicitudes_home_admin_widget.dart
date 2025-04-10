@@ -1,8 +1,10 @@
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'solicitudes_home_admin_model.dart';
 export 'solicitudes_home_admin_model.dart';
 
@@ -104,7 +106,7 @@ class _SolicitudesHomeAdminWidgetState
                         padding: EdgeInsetsDirectional.fromSTEB(
                             24.0, 0.0, 24.0, 10.0),
                         child: Text(
-                          'Página de administrador  \nsolicitudes',
+                          'ADMINISTRAR  SOLICITUDES',
                           textAlign: TextAlign.center,
                           style: FlutterFlowTheme.of(context)
                               .displaySmall
@@ -185,6 +187,7 @@ class _SolicitudesHomeAdminWidgetState
                                                       .bodyLarge
                                                       .override(
                                                         fontFamily: 'Manrope',
+                                                        fontSize: 20.0,
                                                         letterSpacing: 0.0,
                                                         fontWeight:
                                                             FontWeight.w500,
@@ -201,6 +204,7 @@ class _SolicitudesHomeAdminWidgetState
                                                             FlutterFlowTheme.of(
                                                                     context)
                                                                 .secondaryText,
+                                                        fontSize: 20.0,
                                                         letterSpacing: 0.0,
                                                       ),
                                                 ),
@@ -278,6 +282,7 @@ class _SolicitudesHomeAdminWidgetState
                                                       .bodyLarge
                                                       .override(
                                                         fontFamily: 'Manrope',
+                                                        fontSize: 20.0,
                                                         letterSpacing: 0.0,
                                                         fontWeight:
                                                             FontWeight.w500,
@@ -294,6 +299,7 @@ class _SolicitudesHomeAdminWidgetState
                                                             FlutterFlowTheme.of(
                                                                     context)
                                                                 .secondaryText,
+                                                        fontSize: 20.0,
                                                         letterSpacing: 0.0,
                                                       ),
                                                 ),
@@ -308,6 +314,26 @@ class _SolicitudesHomeAdminWidgetState
                               ),
                             ),
                           ].divide(SizedBox(height: 16.0)),
+                        ),
+                      ),
+                      Align(
+                        alignment: AlignmentDirectional(1.0, 0.0),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 410.0, 30.0, 0.0),
+                          child: FlutterFlowIconButton(
+                            borderRadius: 8.0,
+                            buttonSize: 40.0,
+                            fillColor: FlutterFlowTheme.of(context).primary,
+                            icon: FaIcon(
+                              FontAwesomeIcons.question,
+                              color: FlutterFlowTheme.of(context).info,
+                              size: 24.0,
+                            ),
+                            onPressed: () {
+                              print('IconButton pressed ...');
+                            },
+                          ),
                         ),
                       ),
                     ],

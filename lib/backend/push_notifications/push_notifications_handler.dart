@@ -139,8 +139,7 @@ final parametersBuilderMap =
           'role': getParameter<String>(data, 'role'),
         },
       ),
-  'Index_EmpleadosBU': ParameterData.none(),
-  'DefinirActividad': ParameterData.none(),
+  'DefinirActividadBU': ParameterData.none(),
   'CrearActividad': ParameterData.none(),
   'solicitudesVacacionesAdminBU': ParameterData.none(),
   'Facturacion': ParameterData.none(),
@@ -180,7 +179,6 @@ final parametersBuilderMap =
         },
       ),
   'solicitudesHomeAdmin': ParameterData.none(),
-  'indexActividadesBU': ParameterData.none(),
   'editarActividad': (data) async => ParameterData(
         allParams: {
           'fechaReunion': getParameter<DateTime>(data, 'fechaReunion'),
@@ -210,6 +208,13 @@ final parametersBuilderMap =
           'pago': getParameter<DocumentReference>(data, 'pago'),
         },
       ),
+  'GestionHorarios': ParameterData.none(),
+  'ResolucionProblemas': ParameterData.none(),
+  'Horario': ParameterData.none(),
+  'DefinirActividadAdmin': ParameterData.none(),
+  'logHorariosErrores': ParameterData.none(),
+  'editarPerfil': ParameterData.none(),
+  'CambiarContrasena': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

@@ -3,6 +3,8 @@ import '/flutter_flow/flutter_flow_data_table.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'index_incapacidades_widget.dart' show IndexIncapacidadesWidget;
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
+    show TutorialCoachMark;
 import 'package:flutter/material.dart';
 
 class IndexIncapacidadesModel
@@ -24,6 +26,7 @@ class IndexIncapacidadesModel
 
   ///  State fields for stateful widgets in this page.
 
+  TutorialCoachMark? ttlIndexincapacidadesController;
   // Stores action output result for [Firestore Query - Query a collection] action in indexIncapacidades widget.
   List<IncapacidadesRecord>? incapacidadesList;
   // State field(s) for PaginatedDataTable widget.
@@ -35,6 +38,7 @@ class IndexIncapacidadesModel
 
   @override
   void dispose() {
+    ttlIndexincapacidadesController?.finish();
     paginatedDataTableController.dispose();
   }
 }

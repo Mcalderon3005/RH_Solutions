@@ -207,14 +207,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
               ),
             ),
             FFRoute(
-              name: IndexEmpleadosBUWidget.routeName,
-              path: IndexEmpleadosBUWidget.routePath,
-              builder: (context, params) => IndexEmpleadosBUWidget(),
-            ),
-            FFRoute(
-              name: DefinirActividadWidget.routeName,
-              path: DefinirActividadWidget.routePath,
-              builder: (context, params) => DefinirActividadWidget(),
+              name: DefinirActividadBUWidget.routeName,
+              path: DefinirActividadBUWidget.routePath,
+              builder: (context, params) => DefinirActividadBUWidget(),
             ),
             FFRoute(
               name: CrearActividadWidget.routeName,
@@ -373,14 +368,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
               builder: (context, params) => SolicitudesHomeAdminWidget(),
             ),
             FFRoute(
-              name: IndexActividadesBUWidget.routeName,
-              path: IndexActividadesBUWidget.routePath,
-              requireAuth: true,
-              builder: (context, params) => IndexActividadesBUWidget(),
-            ),
-            FFRoute(
               name: EditarActividadWidget.routeName,
               path: EditarActividadWidget.routePath,
+              requireAuth: true,
               builder: (context, params) => EditarActividadWidget(
                 fechaReunion: params.getParam(
                   'fechaReunion',
@@ -442,6 +432,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
             FFRoute(
               name: LogErroresSesionWidget.routeName,
               path: LogErroresSesionWidget.routePath,
+              requireAuth: true,
               builder: (context, params) => LogErroresSesionWidget(),
             ),
             FFRoute(
@@ -452,6 +443,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
             FFRoute(
               name: LogSesionesWidget.routeName,
               path: LogSesionesWidget.routePath,
+              requireAuth: true,
               builder: (context, params) => LogSesionesWidget(),
             ),
             FFRoute(
@@ -462,6 +454,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
             FFRoute(
               name: LogUsuariosActualizacionWidget.routeName,
               path: LogUsuariosActualizacionWidget.routePath,
+              requireAuth: true,
               builder: (context, params) => LogUsuariosActualizacionWidget(),
             ),
             FFRoute(
@@ -493,6 +486,48 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
                   collectionNamePath: ['Pagos'],
                 ),
               ),
+            ),
+            FFRoute(
+              name: GestionHorariosWidget.routeName,
+              path: GestionHorariosWidget.routePath,
+              requireAuth: true,
+              builder: (context, params) => GestionHorariosWidget(),
+            ),
+            FFRoute(
+              name: ResolucionProblemasWidget.routeName,
+              path: ResolucionProblemasWidget.routePath,
+              requireAuth: true,
+              builder: (context, params) => ResolucionProblemasWidget(),
+            ),
+            FFRoute(
+              name: HorarioWidget.routeName,
+              path: HorarioWidget.routePath,
+              requireAuth: true,
+              builder: (context, params) => HorarioWidget(),
+            ),
+            FFRoute(
+              name: DefinirActividadAdminWidget.routeName,
+              path: DefinirActividadAdminWidget.routePath,
+              requireAuth: true,
+              builder: (context, params) => DefinirActividadAdminWidget(),
+            ),
+            FFRoute(
+              name: LogHorariosErroresWidget.routeName,
+              path: LogHorariosErroresWidget.routePath,
+              requireAuth: true,
+              builder: (context, params) => LogHorariosErroresWidget(),
+            ),
+            FFRoute(
+              name: EditarPerfilWidget.routeName,
+              path: EditarPerfilWidget.routePath,
+              requireAuth: true,
+              builder: (context, params) => EditarPerfilWidget(),
+            ),
+            FFRoute(
+              name: CambiarContrasenaWidget.routeName,
+              path: CambiarContrasenaWidget.routePath,
+              requireAuth: true,
+              builder: (context, params) => CambiarContrasenaWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),

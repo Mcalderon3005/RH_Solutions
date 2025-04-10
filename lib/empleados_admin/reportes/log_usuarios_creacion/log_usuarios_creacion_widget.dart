@@ -1,8 +1,10 @@
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_data_table.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
@@ -117,13 +119,14 @@ class _LogUsuariosCreacionWidgetState extends State<LogUsuariosCreacionWidget> {
                         EdgeInsetsDirectional.fromSTEB(30.0, 10.0, 30.0, 15.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
                           'Usuarios Creados',
                           style:
                               FlutterFlowTheme.of(context).titleLarge.override(
                                     fontFamily: 'Outfit',
+                                    fontSize: 30.0,
                                     letterSpacing: 0.0,
                                   ),
                         ),
@@ -132,7 +135,7 @@ class _LogUsuariosCreacionWidgetState extends State<LogUsuariosCreacionWidget> {
                   ),
                   Container(
                     width: 1312.4,
-                    height: 723.7,
+                    height: 701.25,
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,
                     ),
@@ -154,10 +157,12 @@ class _LogUsuariosCreacionWidgetState extends State<LogUsuariosCreacionWidget> {
                                       .override(
                                         fontFamily: 'Manrope',
                                         color: Colors.white,
+                                        fontSize: 22.0,
                                         letterSpacing: 0.0,
                                       ),
                                 ),
                               ),
+                              onSort: onSortChanged,
                             ),
                             DataColumn2(
                               label: DefaultTextStyle.merge(
@@ -169,10 +174,12 @@ class _LogUsuariosCreacionWidgetState extends State<LogUsuariosCreacionWidget> {
                                       .override(
                                         fontFamily: 'Manrope',
                                         color: Colors.white,
+                                        fontSize: 22.0,
                                         letterSpacing: 0.0,
                                       ),
                                 ),
                               ),
+                              onSort: onSortChanged,
                             ),
                             DataColumn2(
                               label: DefaultTextStyle.merge(
@@ -184,10 +191,12 @@ class _LogUsuariosCreacionWidgetState extends State<LogUsuariosCreacionWidget> {
                                       .override(
                                         fontFamily: 'Manrope',
                                         color: Colors.white,
+                                        fontSize: 22.0,
                                         letterSpacing: 0.0,
                                       ),
                                 ),
                               ),
+                              onSort: onSortChanged,
                             ),
                           ],
                           dataRowBuilder: (erroresListUItem, erroresListUIndex,
@@ -210,6 +219,7 @@ class _LogUsuariosCreacionWidgetState extends State<LogUsuariosCreacionWidget> {
                                     .bodyMedium
                                     .override(
                                       fontFamily: 'Manrope',
+                                      fontSize: 20.0,
                                       letterSpacing: 0.0,
                                     ),
                               ),
@@ -222,6 +232,7 @@ class _LogUsuariosCreacionWidgetState extends State<LogUsuariosCreacionWidget> {
                                     .bodyMedium
                                     .override(
                                       fontFamily: 'Manrope',
+                                      fontSize: 20.0,
                                       letterSpacing: 0.0,
                                     ),
                               ),
@@ -234,11 +245,26 @@ class _LogUsuariosCreacionWidgetState extends State<LogUsuariosCreacionWidget> {
                                     .bodyMedium
                                     .override(
                                       fontFamily: 'Manrope',
+                                      fontSize: 20.0,
                                       letterSpacing: 0.0,
                                     ),
                               ),
                             ].map((c) => DataCell(c)).toList(),
                           ),
+                          onSortChanged: (columnIndex, ascending) async {
+                            logFirebaseEvent(
+                                'LOG_USUARIOS_CREACION_PaginatedDataTable');
+                            logFirebaseEvent(
+                                'PaginatedDataTable_update_page_state');
+                            _model.usserCreatedListT = functions
+                                .usuarioCreacionRecord(
+                                    _model.usserCreatedListT.toList(),
+                                    columnIndex,
+                                    ascending)!
+                                .toList()
+                                .cast<UsuarioCreacionRecord>();
+                            safeSetState(() {});
+                          },
                           paginated: true,
                           selectable: false,
                           hidePaginator: false,
@@ -247,6 +273,7 @@ class _LogUsuariosCreacionWidgetState extends State<LogUsuariosCreacionWidget> {
                           dataRowHeight: 48.0,
                           columnSpacing: 20.0,
                           headingRowColor: FlutterFlowTheme.of(context).primary,
+                          sortIconColor: FlutterFlowTheme.of(context).primary,
                           borderRadius: BorderRadius.circular(10.0),
                           addHorizontalDivider: true,
                           addTopAndBottomDivider: false,
@@ -260,6 +287,26 @@ class _LogUsuariosCreacionWidgetState extends State<LogUsuariosCreacionWidget> {
                           verticalDividerThickness: 1.0,
                         );
                       },
+                    ),
+                  ),
+                  Align(
+                    alignment: AlignmentDirectional(1.0, 0.0),
+                    child: Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 30.0, 0.0),
+                      child: FlutterFlowIconButton(
+                        borderRadius: 8.0,
+                        buttonSize: 40.0,
+                        fillColor: FlutterFlowTheme.of(context).primary,
+                        icon: Icon(
+                          Icons.arrow_back,
+                          color: FlutterFlowTheme.of(context).info,
+                          size: 24.0,
+                        ),
+                        onPressed: () {
+                          print('IconButton pressed ...');
+                        },
+                      ),
                     ),
                   ),
                 ],

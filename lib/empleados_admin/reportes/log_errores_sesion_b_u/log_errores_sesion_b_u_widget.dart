@@ -1,10 +1,12 @@
 import '/backend/backend.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/index.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:provider/provider.dart';
 import 'package:text_search/text_search.dart';
@@ -100,12 +102,16 @@ class _LogErroresSesionBUWidgetState extends State<LogErroresSesionBUWidget> {
                     ),
                   ],
                 ),
-                Text(
-                  'Registros',
-                  style: FlutterFlowTheme.of(context).displaySmall.override(
-                        fontFamily: 'Outfit',
-                        letterSpacing: 0.0,
-                      ),
+                Align(
+                  alignment: AlignmentDirectional(0.0, 0.0),
+                  child: Text(
+                    'RESGISTROS',
+                    style: FlutterFlowTheme.of(context).displaySmall.override(
+                          fontFamily: 'Outfit',
+                          fontSize: 30.0,
+                          letterSpacing: 0.0,
+                        ),
+                  ),
                 ),
                 Material(
                   color: Colors.transparent,
@@ -655,6 +661,26 @@ class _LogErroresSesionBUWidgetState extends State<LogErroresSesionBUWidget> {
                           ),
                         ].divide(SizedBox(height: 16.0)),
                       ),
+                    ),
+                  ),
+                ),
+                Align(
+                  alignment: AlignmentDirectional(1.0, 0.0),
+                  child: Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 160.0, 10.0, 0.0),
+                    child: FlutterFlowIconButton(
+                      borderRadius: 8.0,
+                      buttonSize: 40.0,
+                      fillColor: FlutterFlowTheme.of(context).primary,
+                      icon: FaIcon(
+                        FontAwesomeIcons.question,
+                        color: FlutterFlowTheme.of(context).info,
+                        size: 24.0,
+                      ),
+                      onPressed: () {
+                        print('IconButton pressed ...');
+                      },
                     ),
                   ),
                 ),

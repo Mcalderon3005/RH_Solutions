@@ -2,12 +2,15 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'crear_actividad_widget.dart' show CrearActividadWidget;
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
+    show TutorialCoachMark;
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class CrearActividadModel extends FlutterFlowModel<CrearActividadWidget> {
   ///  State fields for stateful widgets in this page.
 
+  TutorialCoachMark? ttlCrearActividadController;
   DateTime? datePicked1;
   // State field(s) for txtEnlace widget.
   FocusNode? txtEnlaceFocusNode1;
@@ -72,6 +75,7 @@ class CrearActividadModel extends FlutterFlowModel<CrearActividadWidget> {
 
   @override
   void dispose() {
+    ttlCrearActividadController?.finish();
     txtEnlaceFocusNode1?.dispose();
     txtEnlaceTextController1?.dispose();
 

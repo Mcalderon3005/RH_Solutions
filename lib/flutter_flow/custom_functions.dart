@@ -25,3 +25,105 @@ String returnProfileGreeting(DateTime timestamp) {
     return "Goodnight,";
   }
 }
+
+List<HorariosRecord>? horariosRecord(
+  List<HorariosRecord> horarios,
+  int index,
+  bool order,
+) {
+  // sort list of horarios based on InicioHorario, FinHorario y Usuario
+  horarios.sort((a, b) {
+    int comparison;
+    switch (index) {
+      case 0: // Sort by HoraInicio
+        comparison = a.horaInicio!.compareTo(b.horaInicio!);
+        break;
+      case 1: // Sort by HoraFinal
+        comparison = a.horaFinal!.compareTo(b.horaFinal!);
+        break;
+      case 2: // Sort by Usuario
+        comparison = a.usuario.compareTo(b.usuario);
+        break;
+      default:
+        comparison = 0;
+    }
+    return order ? comparison : -comparison;
+  });
+  return horarios;
+}
+
+List<ReunionesRecord>? reunionesRecord(
+  List<ReunionesRecord> horarios,
+  int index,
+  bool order,
+) {
+  // sort list of reuniones based on nombreCreador, fechaCreacion, fechaReunion
+  horarios.sort((a, b) {
+    int comparison;
+    switch (index) {
+      case 0: // Sort by nombreCreador
+        comparison = a.nombreCreador.compareTo(b.nombreCreador);
+        break;
+      case 1: // Sort by fechaCreacion
+        comparison = a.fechaCreacion!.compareTo(b.fechaCreacion!);
+        break;
+      case 3: // Sort by fechaReunion
+        comparison = a.fechaReunion!.compareTo(b.fechaReunion!);
+        break;
+      default:
+        comparison = 0;
+    }
+    return order ? comparison : -comparison;
+  });
+  return horarios;
+}
+
+List<ReunionesRecord>? reunionesRecordAdmin(
+  List<ReunionesRecord> reuniones,
+  int index,
+  bool order,
+) {
+  // sort list of reuniones based on nombreCreador, fechaCreacion, fechaReunion
+  reuniones.sort((a, b) {
+    int comparison;
+    switch (index) {
+      case 0: // Sort by nombreCreador
+        comparison = a.nombreCreador.compareTo(b.nombreCreador);
+        break;
+      case 1: // Sort by fechaCreacion
+        comparison = a.fechaCreacion!.compareTo(b.fechaCreacion!);
+        break;
+      case 2: // Sort by fechaReunion
+        comparison = a.fechaReunion!.compareTo(b.fechaReunion!);
+        break;
+      default:
+        comparison = 0;
+    }
+    return order ? comparison : -comparison;
+  });
+  return reuniones;
+}
+
+List<UsuarioCreacionRecord>? usuarioCreacionRecord(
+  List<UsuarioCreacionRecord> usuarioCreacion,
+  int index,
+  bool order,
+) {
+  // // sort list of usuarioCreacion based on usuarioCreador, nuevoUsuario, fechaCreacion
+  usuarioCreacion.sort((a, b) {
+    int comparison = 0;
+
+    if (index == 0) {
+      comparison = a.usuarioCreador.compareTo(b.usuarioCreador);
+    } else if (index == 1) {
+      comparison = a.nuevoUsuario.compareTo(b.nuevoUsuario);
+    } else if (index == 2) {
+      comparison =
+          a.fechaCreacion?.compareTo(b.fechaCreacion ?? DateTime.now()) ?? 0;
+    }
+
+    return order ? comparison : -comparison;
+  });
+
+  return usuarioCreacion;
+}

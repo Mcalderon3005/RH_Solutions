@@ -1,11 +1,14 @@
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'inicio_sesion_widget.dart' show InicioSesionWidget;
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
+    show TutorialCoachMark;
 import 'package:flutter/material.dart';
 
 class InicioSesionModel extends FlutterFlowModel<InicioSesionWidget> {
   ///  State fields for stateful widgets in this page.
 
+  TutorialCoachMark? ttlinicioSesionController;
   final formKey1 = GlobalKey<FormState>();
   final formKey2 = GlobalKey<FormState>();
   // State field(s) for emailAddress widget.
@@ -86,6 +89,7 @@ class InicioSesionModel extends FlutterFlowModel<InicioSesionWidget> {
 
   @override
   void dispose() {
+    ttlinicioSesionController?.finish();
     emailAddressFocusNode?.dispose();
     emailAddressTextController?.dispose();
 

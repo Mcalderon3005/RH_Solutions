@@ -4,10 +4,17 @@ import '/flutter_flow/flutter_flow_data_table.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/pages/actividades/reunion_acceso/reunion_acceso_widget.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
+import '/pages/reunion_acceso/reunion_acceso_widget.dart';
+import '/walkthroughs/t_t_lindex_actividades.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
+    show TutorialCoachMark;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:text_search/text_search.dart';
 import 'index_actividades_model.dart';
 export 'index_actividades_model.dart';
 
@@ -48,6 +55,12 @@ class _IndexActividadesWidgetState extends State<IndexActividadesWidget> {
           _model.actividadesList!.toList().cast<ReunionesRecord>();
       safeSetState(() {});
     });
+
+    _model.txtBuscarTextController1 ??= TextEditingController();
+    _model.txtBuscarFocusNode1 ??= FocusNode();
+
+    _model.txtBuscarTextController2 ??= TextEditingController();
+    _model.txtBuscarFocusNode2 ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -94,6 +107,7 @@ class _IndexActividadesWidgetState extends State<IndexActividadesWidget> {
                       ),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Padding(
                             padding: EdgeInsets.all(24.0),
@@ -126,7 +140,7 @@ class _IndexActividadesWidgetState extends State<IndexActividadesWidget> {
                                           'IconButton_navigate_to');
 
                                       context.pushNamed(
-                                          ModuloVacacionesWidget.routeName);
+                                          MenuUsuarioWidget.routeName);
                                     },
                                   ),
                                 ),
@@ -136,23 +150,185 @@ class _IndexActividadesWidgetState extends State<IndexActividadesWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 24.0, 0.0, 20.0),
                                     child: Text(
-                                      'Actividades',
+                                      'ACTIVIDADES',
                                       style: FlutterFlowTheme.of(context)
                                           .displaySmall
                                           .override(
                                             fontFamily: 'Outfit',
                                             color: Colors.white,
+                                            fontSize: 30.0,
                                             letterSpacing: 0.0,
                                           ),
                                     ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 30.0, 0.0, 30.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 10.0, 0.0),
+                                        child: Container(
+                                          width: 200.0,
+                                          child: TextFormField(
+                                            controller:
+                                                _model.txtBuscarTextController1,
+                                            focusNode:
+                                                _model.txtBuscarFocusNode1,
+                                            autofocus: false,
+                                            obscureText: false,
+                                            decoration: InputDecoration(
+                                              isDense: true,
+                                              labelStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelMedium
+                                                      .override(
+                                                        fontFamily: 'Manrope',
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                              hintText: 'Buscar por Creador',
+                                              hintStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelMedium
+                                                      .override(
+                                                        fontFamily: 'Manrope',
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                              enabledBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: Color(0x00000000),
+                                                  width: 1.0,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                              ),
+                                              focusedBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: Color(0x00000000),
+                                                  width: 1.0,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                              ),
+                                              errorBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .error,
+                                                  width: 1.0,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                              ),
+                                              focusedErrorBorder:
+                                                  OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .error,
+                                                  width: 1.0,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                              ),
+                                              filled: true,
+                                              fillColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Manrope',
+                                                  letterSpacing: 0.0,
+                                                ),
+                                            cursorColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .primaryText,
+                                            validator: _model
+                                                .txtBuscarTextController1Validator
+                                                .asValidator(context),
+                                          ),
+                                        ),
+                                      ),
+                                      FFButtonWidget(
+                                        onPressed: () async {
+                                          logFirebaseEvent(
+                                              'INDEX_ACTIVIDADES_btnBu8uscar_ON_TAP');
+                                          logFirebaseEvent(
+                                              'btnBu8uscar_simple_search');
+                                          safeSetState(() {
+                                            _model.simpleSearchResults1 =
+                                                TextSearch(
+                                              _model.actividadesList!
+                                                  .map(
+                                                    (record) => TextSearchItem
+                                                        .fromTerms(record, [
+                                                      record.nombreCreador
+                                                    ]),
+                                                  )
+                                                  .toList(),
+                                            )
+                                                    .search(_model
+                                                        .txtBuscarTextController1
+                                                        .text)
+                                                    .map((r) => r.object)
+                                                    .toList();
+                                            ;
+                                          });
+                                          logFirebaseEvent(
+                                              'btnBu8uscar_update_page_state');
+                                          _model.busquedaActividades = _model
+                                              .simpleSearchResults1
+                                              .toList()
+                                              .cast<ReunionesRecord>();
+                                          safeSetState(() {});
+                                        },
+                                        text: 'Filtrar',
+                                        options: FFButtonOptions(
+                                          height: 40.0,
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  16.0, 0.0, 16.0, 0.0),
+                                          iconPadding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 0.0, 0.0),
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          textStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmall
+                                                  .override(
+                                                    fontFamily: 'Manrope',
+                                                    color: Colors.white,
+                                                    fontSize: 18.0,
+                                                    letterSpacing: 0.0,
+                                                  ),
+                                          elevation: 0.0,
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                        ),
+                                      ),
+                                    ],
+                                  ).addWalkthrough(
+                                    rowAlrsvw8p,
+                                    _model.tTLindexActividadesController,
                                   ),
                                 ),
                                 Container(
                                   height: 361.01,
                                   child: Builder(
                                     builder: (context) {
-                                      final actividadesListUM =
-                                          _model.actividadesListU.toList();
+                                      final actividadesListUM = (_model.txtBuscarTextController1
+                                                          .text ==
+                                                      ''
+                                              ? _model.actividadesListU
+                                              : _model.busquedaActividades)
+                                          .toList();
 
                                       return FlutterFlowDataTable<
                                           ReunionesRecord>(
@@ -177,6 +353,7 @@ class _IndexActividadesWidgetState extends State<IndexActividadesWidget> {
                                                         ),
                                               ),
                                             ),
+                                            onSort: onSortChanged,
                                           ),
                                           DataColumn2(
                                             label: DefaultTextStyle.merge(
@@ -195,6 +372,7 @@ class _IndexActividadesWidgetState extends State<IndexActividadesWidget> {
                                                         ),
                                               ),
                                             ),
+                                            onSort: onSortChanged,
                                           ),
                                           DataColumn2(
                                             label: DefaultTextStyle.merge(
@@ -213,6 +391,7 @@ class _IndexActividadesWidgetState extends State<IndexActividadesWidget> {
                                                         ),
                                               ),
                                             ),
+                                            onSort: onSortChanged,
                                           ),
                                           DataColumn2(
                                             label: DefaultTextStyle.merge(
@@ -231,6 +410,7 @@ class _IndexActividadesWidgetState extends State<IndexActividadesWidget> {
                                                         ),
                                               ),
                                             ),
+                                            onSort: onSortChanged,
                                           ),
                                         ],
                                         dataRowBuilder: (actividadesListUMItem,
@@ -382,19 +562,42 @@ class _IndexActividadesWidgetState extends State<IndexActividadesWidget> {
                                                     ).then((value) =>
                                                         safeSetState(() {}));
                                                   },
+                                                ).addWalkthrough(
+                                                  iconButtonBvm6qcn0,
+                                                  _model
+                                                      .tTLindexActividadesController,
                                                 ),
                                               ],
                                             ),
                                           ].map((c) => DataCell(c)).toList(),
                                         ),
+                                        onSortChanged:
+                                            (columnIndex, ascending) async {
+                                          logFirebaseEvent(
+                                              'INDEX_ACTIVIDADES_PaginatedDataTable_2kk');
+                                          logFirebaseEvent(
+                                              'PaginatedDataTable_update_page_state');
+                                          _model.actividadesListU = functions
+                                              .reunionesRecord(
+                                                  _model.actividadesListU
+                                                      .toList(),
+                                                  columnIndex,
+                                                  ascending)!
+                                              .toList()
+                                              .cast<ReunionesRecord>();
+                                          safeSetState(() {});
+                                        },
                                         paginated: true,
                                         selectable: false,
                                         hidePaginator: false,
-                                        showFirstLastButtons: false,
+                                        showFirstLastButtons: true,
                                         headingRowHeight: 56.0,
                                         dataRowHeight: 48.0,
                                         columnSpacing: 20.0,
                                         headingRowColor: Color(0x00F4EDED),
+                                        sortIconColor:
+                                            FlutterFlowTheme.of(context)
+                                                .primary,
                                         borderRadius:
                                             BorderRadius.circular(8.0),
                                         addHorizontalDivider: true,
@@ -403,11 +606,59 @@ class _IndexActividadesWidgetState extends State<IndexActividadesWidget> {
                                         horizontalDividerColor: Colors.white,
                                         horizontalDividerThickness: 2.0,
                                         addVerticalDivider: false,
+                                      ).addWalkthrough(
+                                        paginatedDataTable2kkr3s02,
+                                        _model.tTLindexActividadesController,
                                       );
                                     },
                                   ),
                                 ),
                               ],
+                            ).addWalkthrough(
+                              column4obgbcqb,
+                              _model.tTLindexActividadesController,
+                            ),
+                          ),
+                          Align(
+                            alignment: AlignmentDirectional(1.0, 1.0),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 180.0, 30.0, 0.0),
+                              child: FFButtonWidget(
+                                onPressed: () async {
+                                  logFirebaseEvent(
+                                      'INDEX_ACTIVIDADES_PAGE__BTN_ON_TAP');
+                                  logFirebaseEvent('Button_start_walkthrough');
+                                  safeSetState(() =>
+                                      _model.tTLindexActividadesController =
+                                          createPageWalkthrough(context));
+                                  _model.tTLindexActividadesController
+                                      ?.show(context: context);
+                                },
+                                text: '',
+                                icon: FaIcon(
+                                  FontAwesomeIcons.question,
+                                  size: 15.0,
+                                ),
+                                options: FFButtonOptions(
+                                  width: 46.3,
+                                  height: 40.0,
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      16.0, 0.0, 16.0, 0.0),
+                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 0.0),
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .override(
+                                        fontFamily: 'Manrope',
+                                        color: Colors.white,
+                                        letterSpacing: 0.0,
+                                      ),
+                                  elevation: 0.0,
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                              ),
                             ),
                           ),
                         ],
@@ -438,334 +689,509 @@ class _IndexActividadesWidgetState extends State<IndexActividadesWidget> {
                           end: AlignmentDirectional(0, 1.0),
                         ),
                       ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.all(24.0),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  width:
-                                      MediaQuery.sizeOf(context).width * 0.12,
-                                  height:
-                                      MediaQuery.sizeOf(context).height * 0.05,
-                                  decoration: BoxDecoration(
-                                    color: Color(0x00FFFFFF),
-                                  ),
-                                  child: FlutterFlowIconButton(
-                                    borderRadius: 10.0,
-                                    buttonSize: 850.0,
-                                    fillColor: Color(0x00FFFFFF),
-                                    icon: Icon(
-                                      Icons.arrow_back,
-                                      color: Colors.white,
-                                      size: 28.0,
-                                    ),
-                                    onPressed: () async {
-                                      logFirebaseEvent(
-                                          'INDEX_ACTIVIDADES_arrow_back_ICN_ON_TAP');
-                                      logFirebaseEvent(
-                                          'IconButton_navigate_to');
-
-                                      context.pushNamed(
-                                          MenuUsuarioWidget.routeName);
-                                    },
-                                  ),
-                                ),
-                                Align(
-                                  alignment: AlignmentDirectional(0.0, 0.0),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 24.0, 0.0, 20.0),
-                                    child: Text(
-                                      'Actividades',
-                                      style: FlutterFlowTheme.of(context)
-                                          .displaySmall
-                                          .override(
-                                            fontFamily: 'Outfit',
-                                            color: Colors.white,
-                                            letterSpacing: 0.0,
-                                          ),
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  height:
-                                      MediaQuery.sizeOf(context).height * 0.745,
-                                  decoration: BoxDecoration(),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 30.0, 0.0, 0.0),
-                                    child: AuthUserStreamWidget(
-                                      builder: (context) =>
-                                          StreamBuilder<List<ReunionesRecord>>(
-                                        stream: queryReunionesRecord(
-                                          queryBuilder: (reunionesRecord) =>
-                                              reunionesRecord.where(
-                                            'AsistentesReunion',
-                                            arrayContains:
-                                                currentUserDisplayName,
-                                            isNull: (currentUserDisplayName) ==
-                                                null,
-                                          ),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.all(24.0),
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      width: MediaQuery.sizeOf(context).width *
+                                          0.12,
+                                      height:
+                                          MediaQuery.sizeOf(context).height *
+                                              0.05,
+                                      decoration: BoxDecoration(
+                                        color: Color(0x00FFFFFF),
+                                      ),
+                                      child: FlutterFlowIconButton(
+                                        borderRadius: 10.0,
+                                        buttonSize: 850.0,
+                                        fillColor: Color(0x00FFFFFF),
+                                        icon: Icon(
+                                          Icons.arrow_back,
+                                          color: Colors.white,
+                                          size: 28.0,
                                         ),
-                                        builder: (context, snapshot) {
-                                          // Customize what your widget looks like when it's loading.
-                                          if (!snapshot.hasData) {
-                                            return Center(
-                                              child: SizedBox(
-                                                width: 50.0,
-                                                height: 50.0,
-                                                child:
-                                                    CircularProgressIndicator(
-                                                  valueColor:
-                                                      AlwaysStoppedAnimation<
-                                                          Color>(
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
-                                                  ),
-                                                ),
-                                              ),
-                                            );
-                                          }
-                                          List<ReunionesRecord>
-                                              listViewReunionesRecordList =
-                                              snapshot.data!;
+                                        onPressed: () async {
+                                          logFirebaseEvent(
+                                              'INDEX_ACTIVIDADES_arrow_back_ICN_ON_TAP');
+                                          logFirebaseEvent(
+                                              'IconButton_navigate_to');
 
-                                          return ListView.builder(
-                                            padding: EdgeInsets.zero,
-                                            shrinkWrap: true,
-                                            scrollDirection: Axis.vertical,
-                                            itemCount:
-                                                listViewReunionesRecordList
-                                                    .length,
-                                            itemBuilder:
-                                                (context, listViewIndex) {
-                                              final listViewReunionesRecord =
-                                                  listViewReunionesRecordList[
-                                                      listViewIndex];
-                                              return Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        0.0, 20.0, 0.0, 0.0),
-                                                child: InkWell(
-                                                  splashColor:
-                                                      Colors.transparent,
-                                                  focusColor:
-                                                      Colors.transparent,
-                                                  hoverColor:
-                                                      Colors.transparent,
-                                                  highlightColor:
-                                                      Colors.transparent,
-                                                  onTap: () async {
-                                                    logFirebaseEvent(
-                                                        'INDEX_ACTIVIDADES_Container_pybk6c2u_ON_');
-                                                    logFirebaseEvent(
-                                                        'Container_bottom_sheet');
-                                                    await showModalBottomSheet(
-                                                      isScrollControlled: true,
-                                                      backgroundColor:
-                                                          Colors.transparent,
-                                                      enableDrag: false,
-                                                      context: context,
-                                                      builder: (context) {
-                                                        return GestureDetector(
-                                                          onTap: () {
-                                                            FocusScope.of(
-                                                                    context)
-                                                                .unfocus();
-                                                            FocusManager
-                                                                .instance
-                                                                .primaryFocus
-                                                                ?.unfocus();
-                                                          },
-                                                          child: Padding(
-                                                            padding: MediaQuery
-                                                                .viewInsetsOf(
-                                                                    context),
-                                                            child:
-                                                                ReunionAccesoWidget(
-                                                              reuRef:
-                                                                  listViewReunionesRecord
-                                                                      .reference,
-                                                              descripcion:
-                                                                  listViewReunionesRecord
-                                                                      .descripcion,
-                                                              enlace: listViewReunionesRecord
-                                                                  .enlaceReunion,
-                                                            ),
-                                                          ),
-                                                        );
-                                                      },
-                                                    ).then((value) =>
-                                                        safeSetState(() {}));
-                                                  },
-                                                  child: Container(
-                                                    width: 0.0,
-                                                    height: 142.5,
-                                                    decoration: BoxDecoration(
-                                                      color: Color(0x64FFFFFF),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              22.0),
+                                          context.pushNamed(
+                                              MenuUsuarioWidget.routeName);
+                                        },
+                                      ),
+                                    ),
+                                    Align(
+                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 24.0, 0.0, 20.0),
+                                        child: Text(
+                                          'Actividades',
+                                          style: FlutterFlowTheme.of(context)
+                                              .displaySmall
+                                              .override(
+                                                fontFamily: 'Outfit',
+                                                color: Colors.white,
+                                                letterSpacing: 0.0,
+                                              ),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 30.0, 0.0, 30.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 10.0, 0.0),
+                                            child: Container(
+                                              width: 200.0,
+                                              child: TextFormField(
+                                                controller: _model
+                                                    .txtBuscarTextController2,
+                                                focusNode:
+                                                    _model.txtBuscarFocusNode2,
+                                                autofocus: false,
+                                                obscureText: false,
+                                                decoration: InputDecoration(
+                                                  isDense: true,
+                                                  labelStyle: FlutterFlowTheme
+                                                          .of(context)
+                                                      .labelMedium
+                                                      .override(
+                                                        fontFamily: 'Manrope',
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                                  hintText:
+                                                      'Buscar por Creador',
+                                                  hintStyle: FlutterFlowTheme
+                                                          .of(context)
+                                                      .labelMedium
+                                                      .override(
+                                                        fontFamily: 'Manrope',
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                                  enabledBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Color(0x00000000),
+                                                      width: 1.0,
                                                     ),
-                                                    child: Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      0.0,
-                                                                      0.0,
-                                                                      0.0,
-                                                                      10.0),
-                                                          child: Row(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Padding(
-                                                                padding: EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        10.0,
-                                                                        0.0,
-                                                                        15.0,
-                                                                        0.0),
-                                                                child: Text(
-                                                                  'Creador de la actividad:',
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMedium
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Manrope',
-                                                                        color: Colors
-                                                                            .white,
-                                                                        letterSpacing:
-                                                                            0.0,
-                                                                      ),
-                                                                ),
-                                                              ),
-                                                              Text(
-                                                                valueOrDefault<
-                                                                    String>(
-                                                                  listViewReunionesRecord
-                                                                      .nombreCreador,
-                                                                  'Name',
-                                                                ),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Manrope',
-                                                                      color: Colors
-                                                                          .white,
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                    ),
-                                                              ),
-                                                            ],
-                                                          ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                  ),
+                                                  focusedBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Color(0x00000000),
+                                                      width: 1.0,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                  ),
+                                                  errorBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .error,
+                                                      width: 1.0,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                  ),
+                                                  focusedErrorBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .error,
+                                                      width: 1.0,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                  ),
+                                                  filled: true,
+                                                  fillColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .secondaryBackground,
+                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Manrope',
+                                                          letterSpacing: 0.0,
                                                         ),
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      0.0,
-                                                                      0.0,
-                                                                      0.0,
-                                                                      10.0),
-                                                          child: Row(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Padding(
-                                                                padding: EdgeInsetsDirectional
+                                                cursorColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                                validator: _model
+                                                    .txtBuscarTextController2Validator
+                                                    .asValidator(context),
+                                              ),
+                                            ),
+                                          ),
+                                          FFButtonWidget(
+                                            onPressed: () async {
+                                              logFirebaseEvent(
+                                                  'INDEX_ACTIVIDADES_btnBu8uscar_ON_TAP');
+                                              logFirebaseEvent(
+                                                  'btnBu8uscar_simple_search');
+                                              await queryReunionesRecordOnce()
+                                                  .then(
+                                                    (records) => _model
+                                                            .simpleSearchResults2 =
+                                                        TextSearch(
+                                                      records
+                                                          .map(
+                                                            (record) =>
+                                                                TextSearchItem
+                                                                    .fromTerms(
+                                                                        record,
+                                                                        [
+                                                                  record
+                                                                      .nombreCreador
+                                                                ]),
+                                                          )
+                                                          .toList(),
+                                                    )
+                                                            .search(_model
+                                                                .txtBuscarTextController2
+                                                                .text)
+                                                            .map(
+                                                                (r) => r.object)
+                                                            .toList(),
+                                                  )
+                                                  .onError((_, __) => _model
+                                                          .simpleSearchResults2 =
+                                                      [])
+                                                  .whenComplete(() =>
+                                                      safeSetState(() {}));
+
+                                              logFirebaseEvent(
+                                                  'btnBu8uscar_update_page_state');
+                                              _model.busquedaActividades =
+                                                  _model.simpleSearchResults2
+                                                      .toList()
+                                                      .cast<ReunionesRecord>();
+                                              safeSetState(() {});
+                                            },
+                                            text: 'Filtrar',
+                                            options: FFButtonOptions(
+                                              height: 40.0,
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      16.0, 0.0, 16.0, 0.0),
+                                              iconPadding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmall
+                                                      .override(
+                                                        fontFamily: 'Manrope',
+                                                        color: Colors.white,
+                                                        fontSize: 18.0,
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                              elevation: 0.0,
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      height:
+                                          MediaQuery.sizeOf(context).height *
+                                              0.775,
+                                      decoration: BoxDecoration(),
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 30.0, 0.0, 5.0),
+                                        child: Builder(
+                                          builder: (context) {
+                                            final actividadesListUMII = _model
+                                                .simpleSearchResults2
+                                                .toList();
+
+                                            return ListView.builder(
+                                              padding: EdgeInsets.zero,
+                                              shrinkWrap: true,
+                                              scrollDirection: Axis.vertical,
+                                              itemCount:
+                                                  actividadesListUMII.length,
+                                              itemBuilder: (context,
+                                                  actividadesListUMIIIndex) {
+                                                final actividadesListUMIIItem =
+                                                    actividadesListUMII[
+                                                        actividadesListUMIIIndex];
+                                                return Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 20.0, 0.0, 0.0),
+                                                  child: InkWell(
+                                                    splashColor:
+                                                        Colors.transparent,
+                                                    focusColor:
+                                                        Colors.transparent,
+                                                    hoverColor:
+                                                        Colors.transparent,
+                                                    highlightColor:
+                                                        Colors.transparent,
+                                                    onTap: () async {
+                                                      logFirebaseEvent(
+                                                          'INDEX_ACTIVIDADES_Container_pybk6c2u_ON_');
+                                                      logFirebaseEvent(
+                                                          'Container_bottom_sheet');
+                                                      await showModalBottomSheet(
+                                                        isScrollControlled:
+                                                            true,
+                                                        backgroundColor:
+                                                            Colors.transparent,
+                                                        enableDrag: false,
+                                                        context: context,
+                                                        builder: (context) {
+                                                          return GestureDetector(
+                                                            onTap: () {
+                                                              FocusScope.of(
+                                                                      context)
+                                                                  .unfocus();
+                                                              FocusManager
+                                                                  .instance
+                                                                  .primaryFocus
+                                                                  ?.unfocus();
+                                                            },
+                                                            child: Padding(
+                                                              padding: MediaQuery
+                                                                  .viewInsetsOf(
+                                                                      context),
+                                                              child:
+                                                                  ReunionAccesoWidget(
+                                                                reuRef:
+                                                                    actividadesListUMIIItem
+                                                                        .reference,
+                                                                descripcion:
+                                                                    actividadesListUMIIItem
+                                                                        .descripcion,
+                                                                enlace: actividadesListUMIIItem
+                                                                    .enlaceReunion,
+                                                              ),
+                                                            ),
+                                                          );
+                                                        },
+                                                      ).then((value) =>
+                                                          safeSetState(() {}));
+                                                    },
+                                                    child: Container(
+                                                      width: 0.0,
+                                                      height: 142.5,
+                                                      decoration: BoxDecoration(
+                                                        color:
+                                                            Color(0x64FFFFFF),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(22.0),
+                                                      ),
+                                                      child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
                                                                     .fromSTEB(
-                                                                        10.0,
                                                                         0.0,
-                                                                        15.0,
-                                                                        0.0),
-                                                                child: Text(
-                                                                  'Fecha:',
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMedium
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Manrope',
-                                                                        color: Colors
-                                                                            .white,
-                                                                        letterSpacing:
-                                                                            0.0,
-                                                                      ),
-                                                                ),
-                                                              ),
-                                                              Text(
-                                                                valueOrDefault<
-                                                                    String>(
-                                                                  dateTimeFormat(
-                                                                    "M/d H:mm",
-                                                                    listViewReunionesRecord
-                                                                        .fechaReunion,
-                                                                    locale: FFLocalizations.of(
-                                                                            context)
-                                                                        .languageCode,
-                                                                  ),
-                                                                  '00/00/00',
-                                                                ),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Manrope',
-                                                                      color: Colors
-                                                                          .white,
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                    ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
+                                                                        0.0,
+                                                                        0.0,
+                                                                        10.0),
+                                                            child: Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Padding(
+                                                                  padding: EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           10.0,
                                                                           0.0,
                                                                           15.0,
                                                                           0.0),
-                                                              child: Text(
-                                                                'Asunto:',
+                                                                  child: Text(
+                                                                    'Creador de la actividad:',
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Manrope',
+                                                                          color:
+                                                                              Colors.white,
+                                                                          letterSpacing:
+                                                                              0.0,
+                                                                        ),
+                                                                  ),
+                                                                ),
+                                                                Text(
+                                                                  actividadesListUMIIItem
+                                                                      .nombreCreador,
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Manrope',
+                                                                        color: Colors
+                                                                            .white,
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                      ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0.0,
+                                                                        0.0,
+                                                                        0.0,
+                                                                        10.0),
+                                                            child: Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          10.0,
+                                                                          0.0,
+                                                                          15.0,
+                                                                          0.0),
+                                                                  child: Text(
+                                                                    'Fecha:',
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Manrope',
+                                                                          color:
+                                                                              Colors.white,
+                                                                          letterSpacing:
+                                                                              0.0,
+                                                                        ),
+                                                                  ),
+                                                                ),
+                                                                Text(
+                                                                  valueOrDefault<
+                                                                      String>(
+                                                                    dateTimeFormat(
+                                                                      "d/M h:mm a",
+                                                                      actividadesListUMIIItem
+                                                                          .fechaReunion,
+                                                                      locale: FFLocalizations.of(
+                                                                              context)
+                                                                          .languageCode,
+                                                                    ),
+                                                                    '0/0/0',
+                                                                  ),
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Manrope',
+                                                                        color: Colors
+                                                                            .white,
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                      ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Padding(
+                                                                padding: EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        10.0,
+                                                                        0.0,
+                                                                        15.0,
+                                                                        0.0),
+                                                                child: Text(
+                                                                  'Asunto:',
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Manrope',
+                                                                        color: Colors
+                                                                            .white,
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                      ),
+                                                                ),
+                                                              ),
+                                                              Text(
+                                                                valueOrDefault<
+                                                                    String>(
+                                                                  actividadesListUMIIItem
+                                                                      .asunto,
+                                                                  'Asunto',
+                                                                ).maybeHandleOverflow(
+                                                                  maxChars: 25,
+                                                                  replacement:
+                                                                      '…',
+                                                                ),
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
                                                                     .bodyMedium
@@ -778,48 +1204,25 @@ class _IndexActividadesWidgetState extends State<IndexActividadesWidget> {
                                                                           0.0,
                                                                     ),
                                                               ),
-                                                            ),
-                                                            Text(
-                                                              valueOrDefault<
-                                                                  String>(
-                                                                listViewReunionesRecord
-                                                                    .asunto,
-                                                                'default',
-                                                              ).maybeHandleOverflow(
-                                                                maxChars: 25,
-                                                                replacement:
-                                                                    '…',
-                                                              ),
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyMedium
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'Manrope',
-                                                                    color: Colors
-                                                                        .white,
-                                                                    letterSpacing:
-                                                                        0.0,
-                                                                  ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ],
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                              );
-                                            },
-                                          );
-                                        },
+                                                );
+                                              },
+                                            );
+                                          },
+                                        ),
                                       ),
                                     ),
-                                  ),
+                                  ],
                                 ),
-                              ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -830,4 +1233,15 @@ class _IndexActividadesWidgetState extends State<IndexActividadesWidget> {
       ),
     );
   }
+
+  TutorialCoachMark createPageWalkthrough(BuildContext context) =>
+      TutorialCoachMark(
+        targets: createWalkthroughTargets(context),
+        onFinish: () async {
+          safeSetState(() => _model.tTLindexActividadesController = null);
+        },
+        onSkip: () {
+          return true;
+        },
+      );
 }

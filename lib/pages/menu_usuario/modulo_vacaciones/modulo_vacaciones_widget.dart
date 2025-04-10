@@ -2,8 +2,12 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/walkthroughs/ttl_modulo_vacaciones.dart';
 import '/index.dart';
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
+    show TutorialCoachMark;
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'modulo_vacaciones_model.dart';
 export 'modulo_vacaciones_model.dart';
 
@@ -109,8 +113,12 @@ class _ModuloVacacionesWidgetState extends State<ModuloVacacionesWidget> {
                                   .override(
                                     fontFamily: 'Outfit',
                                     color: Colors.white,
+                                    fontSize: 40.0,
                                     letterSpacing: 0.0,
                                   ),
+                            ).addWalkthrough(
+                              textEjqvvh5y,
+                              _model.ttlModuloVacacionesController,
                             ),
                           ),
                         ),
@@ -130,8 +138,8 @@ class _ModuloVacacionesWidgetState extends State<ModuloVacacionesWidget> {
                               },
                               text: 'Solicitar  Vacaciones o Dias Libres',
                               options: FFButtonOptions(
-                                width: 450.0,
-                                height: 50.0,
+                                width: MediaQuery.sizeOf(context).width * 0.4,
+                                height: MediaQuery.sizeOf(context).height * 0.1,
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     16.0, 0.0, 16.0, 0.0),
                                 iconPadding: EdgeInsetsDirectional.fromSTEB(
@@ -142,12 +150,15 @@ class _ModuloVacacionesWidgetState extends State<ModuloVacacionesWidget> {
                                     .override(
                                       fontFamily: 'Manrope',
                                       color: Colors.white,
-                                      fontSize: 14.0,
+                                      fontSize: 20.0,
                                       letterSpacing: 0.0,
                                     ),
                                 elevation: 0.0,
-                                borderRadius: BorderRadius.circular(8.0),
+                                borderRadius: BorderRadius.circular(20.0),
                               ),
+                            ).addWalkthrough(
+                              buttonPd15ywax,
+                              _model.ttlModuloVacacionesController,
                             ),
                           ),
                         ),
@@ -168,8 +179,8 @@ class _ModuloVacacionesWidgetState extends State<ModuloVacacionesWidget> {
                               text:
                                   'Ver solicitudes de Vacaciones y Dias Libres',
                               options: FFButtonOptions(
-                                width: 450.0,
-                                height: 50.0,
+                                width: MediaQuery.sizeOf(context).width * 0.4,
+                                height: MediaQuery.sizeOf(context).height * 0.1,
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     16.0, 0.0, 16.0, 0.0),
                                 iconPadding: EdgeInsetsDirectional.fromSTEB(
@@ -180,12 +191,15 @@ class _ModuloVacacionesWidgetState extends State<ModuloVacacionesWidget> {
                                     .override(
                                       fontFamily: 'Manrope',
                                       color: Colors.white,
-                                      fontSize: 14.0,
+                                      fontSize: 20.0,
                                       letterSpacing: 0.0,
                                     ),
                                 elevation: 0.0,
-                                borderRadius: BorderRadius.circular(8.0),
+                                borderRadius: BorderRadius.circular(20.0),
                               ),
+                            ).addWalkthrough(
+                              buttonAdiaqhye,
+                              _model.ttlModuloVacacionesController,
                             ),
                           ),
                         ),
@@ -205,8 +219,8 @@ class _ModuloVacacionesWidgetState extends State<ModuloVacacionesWidget> {
                               },
                               text: 'Ver incapacidades',
                               options: FFButtonOptions(
-                                width: 450.0,
-                                height: 50.0,
+                                width: MediaQuery.sizeOf(context).width * 0.4,
+                                height: MediaQuery.sizeOf(context).height * 0.1,
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     16.0, 0.0, 16.0, 0.0),
                                 iconPadding: EdgeInsetsDirectional.fromSTEB(
@@ -217,12 +231,35 @@ class _ModuloVacacionesWidgetState extends State<ModuloVacacionesWidget> {
                                     .override(
                                       fontFamily: 'Manrope',
                                       color: Colors.white,
-                                      fontSize: 14.0,
+                                      fontSize: 20.0,
                                       letterSpacing: 0.0,
                                     ),
                                 elevation: 0.0,
-                                borderRadius: BorderRadius.circular(8.0),
+                                borderRadius: BorderRadius.circular(20.0),
                               ),
+                            ).addWalkthrough(
+                              button6rd93gku,
+                              _model.ttlModuloVacacionesController,
+                            ),
+                          ),
+                        ),
+                        Align(
+                          alignment: AlignmentDirectional(1.0, 1.0),
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 325.0, 10.0, 0.0),
+                            child: FlutterFlowIconButton(
+                              borderRadius: 8.0,
+                              buttonSize: 40.0,
+                              fillColor: FlutterFlowTheme.of(context).primary,
+                              icon: FaIcon(
+                                FontAwesomeIcons.question,
+                                color: FlutterFlowTheme.of(context).info,
+                                size: 24.0,
+                              ),
+                              onPressed: () {
+                                print('IconButton pressed ...');
+                              },
                             ),
                           ),
                         ),
@@ -271,7 +308,7 @@ class _ModuloVacacionesWidgetState extends State<ModuloVacacionesWidget> {
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 24.0, 0.0, 20.0),
                             child: Text(
-                              'Dias libres e incapacidades',
+                              'DIAS LIBRES E INCAPACIDADES',
                               textAlign: TextAlign.center,
                               style: FlutterFlowTheme.of(context)
                                   .displaySmall
@@ -311,7 +348,7 @@ class _ModuloVacacionesWidgetState extends State<ModuloVacacionesWidget> {
                                     .override(
                                       fontFamily: 'Manrope',
                                       color: Colors.white,
-                                      fontSize: 14.0,
+                                      fontSize: 18.0,
                                       letterSpacing: 0.0,
                                     ),
                                 elevation: 0.0,
@@ -349,7 +386,7 @@ class _ModuloVacacionesWidgetState extends State<ModuloVacacionesWidget> {
                                     .override(
                                       fontFamily: 'Manrope',
                                       color: Colors.white,
-                                      fontSize: 14.0,
+                                      fontSize: 18.0,
                                       letterSpacing: 0.0,
                                     ),
                                 elevation: 0.0,
@@ -386,7 +423,7 @@ class _ModuloVacacionesWidgetState extends State<ModuloVacacionesWidget> {
                                     .override(
                                       fontFamily: 'Manrope',
                                       color: Colors.white,
-                                      fontSize: 14.0,
+                                      fontSize: 18.0,
                                       letterSpacing: 0.0,
                                     ),
                                 elevation: 0.0,
@@ -405,4 +442,15 @@ class _ModuloVacacionesWidgetState extends State<ModuloVacacionesWidget> {
       ),
     );
   }
+
+  TutorialCoachMark createPageWalkthrough(BuildContext context) =>
+      TutorialCoachMark(
+        targets: createWalkthroughTargets(context),
+        onFinish: () async {
+          safeSetState(() => _model.ttlModuloVacacionesController = null);
+        },
+        onSkip: () {
+          return true;
+        },
+      );
 }

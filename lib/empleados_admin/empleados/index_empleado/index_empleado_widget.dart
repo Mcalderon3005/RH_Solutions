@@ -80,312 +80,360 @@ class _IndexEmpleadoWidgetState extends State<IndexEmpleadoWidget> {
                 context: context,
                 phone: false,
               ))
-                Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Align(
-                      alignment: AlignmentDirectional(-1.0, 0.0),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            30.0, 15.0, 0.0, 0.0),
-                        child: FFButtonWidget(
-                          onPressed: () async {
-                            logFirebaseEvent(
-                                'INDEX_EMPLEADO_PAGE_VOLVER_BTN_ON_TAP');
-                            logFirebaseEvent('Button_navigate_to');
+                SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Align(
+                        alignment: AlignmentDirectional(-1.0, 0.0),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              30.0, 15.0, 0.0, 0.0),
+                          child: FFButtonWidget(
+                            onPressed: () async {
+                              logFirebaseEvent(
+                                  'INDEX_EMPLEADO_PAGE_VOLVER_BTN_ON_TAP');
+                              logFirebaseEvent('Button_navigate_to');
 
-                            context.pushNamed(HomeAdminPageWidget.routeName);
-                          },
-                          text: 'Volver',
-                          options: FFButtonOptions(
-                            height: 46.63,
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 0.0, 16.0, 0.0),
-                            iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context).primary,
-                            textStyle: FlutterFlowTheme.of(context)
-                                .titleSmall
-                                .override(
-                                  fontFamily: 'Manrope',
-                                  color: Colors.white,
-                                  fontSize: 16.0,
-                                  letterSpacing: 0.0,
-                                ),
-                            elevation: 0.0,
-                            borderRadius: BorderRadius.circular(8.0),
+                              context.pushNamed(HomeAdminPageWidget.routeName);
+                            },
+                            text: 'Volver',
+                            options: FFButtonOptions(
+                              height: 46.63,
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  16.0, 0.0, 16.0, 0.0),
+                              iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              color: FlutterFlowTheme.of(context).primary,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .titleSmall
+                                  .override(
+                                    fontFamily: 'Manrope',
+                                    color: Colors.white,
+                                    fontSize: 18.0,
+                                    letterSpacing: 0.0,
+                                  ),
+                              elevation: 0.0,
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(
-                          30.0, 10.0, 30.0, 15.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Empleados',
-                            style: FlutterFlowTheme.of(context)
-                                .titleLarge
-                                .override(
-                                  fontFamily: 'Outfit',
-                                  letterSpacing: 0.0,
-                                ),
-                          ),
-                          Align(
-                            alignment: AlignmentDirectional(1.0, 0.0),
-                            child: FlutterFlowIconButton(
-                              borderRadius: 8.0,
-                              buttonSize: 40.0,
-                              fillColor: FlutterFlowTheme.of(context).primary,
-                              icon: Icon(
-                                Icons.add,
-                                color: FlutterFlowTheme.of(context).info,
-                                size: 24.0,
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            30.0, 10.0, 30.0, 15.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Align(
+                              alignment: AlignmentDirectional(0.0, 0.0),
+                              child: Text(
+                                'Empleados',
+                                style: FlutterFlowTheme.of(context)
+                                    .titleLarge
+                                    .override(
+                                      fontFamily: 'Outfit',
+                                      fontSize: 32.0,
+                                      letterSpacing: 0.0,
+                                    ),
                               ),
-                              onPressed: () async {
-                                logFirebaseEvent(
-                                    'INDEX_EMPLEADO_PAGE_add_ICN_ON_TAP');
-                                logFirebaseEvent('IconButton_navigate_to');
-
-                                context
-                                    .pushNamed(CrearEmpleadoWidget.routeName);
-                              },
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                    Container(
-                      width: 1312.4,
-                      height: 723.7,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
-                      child: Builder(
-                        builder: (context) {
-                          final usersListU = _model.usersListT.toList();
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            65.0, 10.0, 30.0, 15.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Align(
+                              alignment: AlignmentDirectional(1.0, 0.0),
+                              child: FlutterFlowIconButton(
+                                borderRadius: 8.0,
+                                buttonSize: 40.0,
+                                fillColor: FlutterFlowTheme.of(context).primary,
+                                icon: Icon(
+                                  Icons.add,
+                                  color: FlutterFlowTheme.of(context).info,
+                                  size: 24.0,
+                                ),
+                                onPressed: () async {
+                                  logFirebaseEvent(
+                                      'INDEX_EMPLEADO_PAGE_add_ICN_ON_TAP');
+                                  logFirebaseEvent('IconButton_navigate_to');
 
-                          return FlutterFlowDataTable<UsersRecord>(
-                            controller: _model.paginatedDataTableController,
-                            data: usersListU,
-                            columnsBuilder: (onSortChanged) => [
-                              DataColumn2(
-                                label: DefaultTextStyle.merge(
-                                  softWrap: true,
-                                  child: Text(
-                                    'Nombre',
-                                    style: FlutterFlowTheme.of(context)
-                                        .labelLarge
-                                        .override(
-                                          fontFamily: 'Manrope',
-                                          color: Colors.white,
-                                          letterSpacing: 0.0,
-                                        ),
-                                  ),
-                                ),
+                                  context
+                                      .pushNamed(CrearEmpleadoWidget.routeName);
+                                },
                               ),
-                              DataColumn2(
-                                label: DefaultTextStyle.merge(
-                                  softWrap: true,
-                                  child: Text(
-                                    'Correo',
-                                    style: FlutterFlowTheme.of(context)
-                                        .labelLarge
-                                        .override(
-                                          fontFamily: 'Manrope',
-                                          color: Colors.white,
-                                          letterSpacing: 0.0,
-                                        ),
-                                  ),
-                                ),
-                              ),
-                              DataColumn2(
-                                label: DefaultTextStyle.merge(
-                                  softWrap: true,
-                                  child: Text(
-                                    'Cargo',
-                                    style: FlutterFlowTheme.of(context)
-                                        .labelLarge
-                                        .override(
-                                          fontFamily: 'Manrope',
-                                          color: Colors.white,
-                                          letterSpacing: 0.0,
-                                        ),
-                                  ),
-                                ),
-                              ),
-                              DataColumn2(
-                                label: DefaultTextStyle.merge(
-                                  softWrap: true,
-                                  child: Text(
-                                    'Estado',
-                                    style: FlutterFlowTheme.of(context)
-                                        .labelLarge
-                                        .override(
-                                          fontFamily: 'Manrope',
-                                          color: Colors.white,
-                                          letterSpacing: 0.0,
-                                        ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                            dataRowBuilder: (usersListUItem, usersListUIndex,
-                                    selected, onSelectChanged) =>
-                                DataRow(
-                              color: WidgetStateProperty.all(
-                                usersListUIndex % 2 == 0
-                                    ? FlutterFlowTheme.of(context)
-                                        .secondaryBackground
-                                    : FlutterFlowTheme.of(context)
-                                        .primaryBackground,
-                              ),
-                              cells: [
-                                Text(
-                                  usersListUItem.displayName,
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Manrope',
-                                        letterSpacing: 0.0,
-                                      ),
-                                ),
-                                Text(
-                                  usersListUItem.email,
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Manrope',
-                                        letterSpacing: 0.0,
-                                      ),
-                                ),
-                                Text(
-                                  usersListUItem.cargo,
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Manrope',
-                                        letterSpacing: 0.0,
-                                      ),
-                                ),
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      usersListUItem.estaActivo.toString(),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        width: 1312.4,
+                        height: 620.0,
+                        decoration: BoxDecoration(
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                        ),
+                        child: Builder(
+                          builder: (context) {
+                            final usersListU = _model.usersListT.toList();
+
+                            return FlutterFlowDataTable<UsersRecord>(
+                              controller: _model.paginatedDataTableController,
+                              data: usersListU,
+                              columnsBuilder: (onSortChanged) => [
+                                DataColumn2(
+                                  label: DefaultTextStyle.merge(
+                                    softWrap: true,
+                                    child: Text(
+                                      'Nombre',
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
+                                          .labelLarge
                                           .override(
                                             fontFamily: 'Manrope',
+                                            color: Colors.white,
+                                            fontSize: 20.0,
                                             letterSpacing: 0.0,
                                           ),
                                     ),
-                                    FlutterFlowIconButton(
-                                      borderRadius: 8.0,
-                                      buttonSize: 40.0,
-                                      fillColor:
-                                          FlutterFlowTheme.of(context).primary,
-                                      icon: Icon(
-                                        Icons.arrow_forward_sharp,
-                                        color:
-                                            FlutterFlowTheme.of(context).info,
-                                        size: 24.0,
-                                      ),
-                                      onPressed: () async {
-                                        logFirebaseEvent(
-                                            'INDEX_EMPLEADO_arrow_forward_sharp_ICN_O');
-                                        logFirebaseEvent(
-                                            'IconButton_navigate_to');
-
-                                        context.pushNamed(
-                                          EditEmpleadoWidget.routeName,
-                                          queryParameters: {
-                                            'nombre': serializeParam(
-                                              usersListUItem.displayName,
-                                              ParamType.String,
-                                            ),
-                                            'apellido': serializeParam(
-                                              usersListUItem.apellidos,
-                                              ParamType.String,
-                                            ),
-                                            'email': serializeParam(
-                                              usersListUItem.email,
-                                              ParamType.String,
-                                            ),
-                                            'salario': serializeParam(
-                                              usersListUItem.salario,
-                                              ParamType.double,
-                                            ),
-                                            'estaActivo': serializeParam(
-                                              usersListUItem.estaActivo,
-                                              ParamType.bool,
-                                            ),
-                                            'userRef': serializeParam(
-                                              usersListUItem.reference,
-                                              ParamType.DocumentReference,
-                                            ),
-                                            'img': serializeParam(
-                                              usersListUItem.photoUrl,
-                                              ParamType.String,
-                                            ),
-                                            'cedula': serializeParam(
-                                              usersListUItem.cedula,
-                                              ParamType.String,
-                                            ),
-                                            'numTel': serializeParam(
-                                              usersListUItem.phoneNumber,
-                                              ParamType.String,
-                                            ),
-                                            'fechaNacimiento': serializeParam(
-                                              usersListUItem.fechaNacimiento,
-                                              ParamType.DateTime,
-                                            ),
-                                            'fechaContratacion': serializeParam(
-                                              usersListUItem.fecahContratacion,
-                                              ParamType.DateTime,
-                                            ),
-                                            'role': serializeParam(
-                                              usersListUItem.role,
-                                              ParamType.String,
-                                            ),
-                                          }.withoutNulls,
-                                        );
-                                      },
-                                    ),
-                                  ],
+                                  ),
                                 ),
-                              ].map((c) => DataCell(c)).toList(),
-                            ),
-                            paginated: true,
-                            selectable: false,
-                            hidePaginator: false,
-                            showFirstLastButtons: false,
-                            headingRowHeight: 56.0,
-                            dataRowHeight: 48.0,
-                            columnSpacing: 20.0,
-                            headingRowColor:
-                                FlutterFlowTheme.of(context).primary,
-                            borderRadius: BorderRadius.circular(10.0),
-                            addHorizontalDivider: true,
-                            addTopAndBottomDivider: false,
-                            hideDefaultHorizontalDivider: true,
-                            horizontalDividerColor: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            horizontalDividerThickness: 1.0,
-                            addVerticalDivider: true,
-                            verticalDividerColor: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            verticalDividerThickness: 1.0,
-                          );
-                        },
+                                DataColumn2(
+                                  label: DefaultTextStyle.merge(
+                                    softWrap: true,
+                                    child: Text(
+                                      'Correo',
+                                      style: FlutterFlowTheme.of(context)
+                                          .labelLarge
+                                          .override(
+                                            fontFamily: 'Manrope',
+                                            color: Colors.white,
+                                            fontSize: 20.0,
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
+                                  ),
+                                ),
+                                DataColumn2(
+                                  label: DefaultTextStyle.merge(
+                                    softWrap: true,
+                                    child: Text(
+                                      'Cargo',
+                                      style: FlutterFlowTheme.of(context)
+                                          .labelLarge
+                                          .override(
+                                            fontFamily: 'Manrope',
+                                            color: Colors.white,
+                                            fontSize: 20.0,
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
+                                  ),
+                                ),
+                                DataColumn2(
+                                  label: DefaultTextStyle.merge(
+                                    softWrap: true,
+                                    child: Text(
+                                      'Estado',
+                                      style: FlutterFlowTheme.of(context)
+                                          .labelLarge
+                                          .override(
+                                            fontFamily: 'Manrope',
+                                            color: Colors.white,
+                                            fontSize: 20.0,
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                              dataRowBuilder: (usersListUItem, usersListUIndex,
+                                      selected, onSelectChanged) =>
+                                  DataRow(
+                                color: WidgetStateProperty.all(
+                                  usersListUIndex % 2 == 0
+                                      ? FlutterFlowTheme.of(context)
+                                          .secondaryBackground
+                                      : FlutterFlowTheme.of(context)
+                                          .primaryBackground,
+                                ),
+                                cells: [
+                                  Text(
+                                    usersListUItem.displayName,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Manrope',
+                                          fontSize: 20.0,
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
+                                  Text(
+                                    usersListUItem.email,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Manrope',
+                                          fontSize: 20.0,
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
+                                  Text(
+                                    usersListUItem.cargo,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Manrope',
+                                          fontSize: 20.0,
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        usersListUItem.estaActivo.toString(),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Manrope',
+                                              fontSize: 20.0,
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                      FlutterFlowIconButton(
+                                        borderRadius: 8.0,
+                                        buttonSize: 40.0,
+                                        fillColor: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        icon: Icon(
+                                          Icons.arrow_forward_sharp,
+                                          color:
+                                              FlutterFlowTheme.of(context).info,
+                                          size: 24.0,
+                                        ),
+                                        onPressed: () async {
+                                          logFirebaseEvent(
+                                              'INDEX_EMPLEADO_arrow_forward_sharp_ICN_O');
+                                          logFirebaseEvent(
+                                              'IconButton_navigate_to');
+
+                                          context.pushNamed(
+                                            EditEmpleadoWidget.routeName,
+                                            queryParameters: {
+                                              'nombre': serializeParam(
+                                                usersListUItem.displayName,
+                                                ParamType.String,
+                                              ),
+                                              'apellido': serializeParam(
+                                                usersListUItem.apellidos,
+                                                ParamType.String,
+                                              ),
+                                              'email': serializeParam(
+                                                usersListUItem.email,
+                                                ParamType.String,
+                                              ),
+                                              'salario': serializeParam(
+                                                usersListUItem.salario,
+                                                ParamType.double,
+                                              ),
+                                              'estaActivo': serializeParam(
+                                                usersListUItem.estaActivo,
+                                                ParamType.bool,
+                                              ),
+                                              'userRef': serializeParam(
+                                                usersListUItem.reference,
+                                                ParamType.DocumentReference,
+                                              ),
+                                              'img': serializeParam(
+                                                usersListUItem.photoUrl,
+                                                ParamType.String,
+                                              ),
+                                              'cedula': serializeParam(
+                                                usersListUItem.cedula,
+                                                ParamType.String,
+                                              ),
+                                              'numTel': serializeParam(
+                                                usersListUItem.phoneNumber,
+                                                ParamType.String,
+                                              ),
+                                              'fechaNacimiento': serializeParam(
+                                                usersListUItem.fechaNacimiento,
+                                                ParamType.DateTime,
+                                              ),
+                                              'fechaContratacion':
+                                                  serializeParam(
+                                                usersListUItem
+                                                    .fecahContratacion,
+                                                ParamType.DateTime,
+                                              ),
+                                              'role': serializeParam(
+                                                usersListUItem.role,
+                                                ParamType.String,
+                                              ),
+                                            }.withoutNulls,
+                                          );
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ].map((c) => DataCell(c)).toList(),
+                              ),
+                              paginated: true,
+                              selectable: false,
+                              hidePaginator: false,
+                              showFirstLastButtons: false,
+                              headingRowHeight: 56.0,
+                              dataRowHeight: 48.0,
+                              columnSpacing: 20.0,
+                              headingRowColor:
+                                  FlutterFlowTheme.of(context).primary,
+                              borderRadius: BorderRadius.circular(10.0),
+                              addHorizontalDivider: true,
+                              addTopAndBottomDivider: false,
+                              hideDefaultHorizontalDivider: true,
+                              horizontalDividerColor:
+                                  FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                              horizontalDividerThickness: 1.0,
+                              addVerticalDivider: true,
+                              verticalDividerColor: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              verticalDividerThickness: 1.0,
+                            );
+                          },
+                        ),
                       ),
-                    ),
-                  ],
+                      Align(
+                        alignment: AlignmentDirectional(1.0, 0.0),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 20.0, 35.0, 0.0),
+                          child: FlutterFlowIconButton(
+                            borderRadius: 8.0,
+                            buttonSize: 40.0,
+                            fillColor: FlutterFlowTheme.of(context).primary,
+                            icon: Icon(
+                              Icons.question_mark,
+                              color: FlutterFlowTheme.of(context).info,
+                              size: 24.0,
+                            ),
+                            onPressed: () {
+                              print('IconButton pressed ...');
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               if (responsiveVisibility(
                 context: context,
@@ -488,15 +536,6 @@ class _IndexEmpleadoWidgetState extends State<IndexEmpleadoWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Text(
-                                        'Lista de empleados',
-                                        style: FlutterFlowTheme.of(context)
-                                            .headlineSmall
-                                            .override(
-                                              fontFamily: 'Outfit',
-                                              letterSpacing: 0.0,
-                                            ),
-                                      ),
                                       Align(
                                         alignment:
                                             AlignmentDirectional(0.0, 0.0),

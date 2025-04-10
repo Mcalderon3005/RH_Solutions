@@ -2,8 +2,12 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/walkthroughs/ttlindex_incapacidades_b_u.dart';
 import '/index.dart';
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
+    show TutorialCoachMark;
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'index_incapacidades_b_u_model.dart';
 export 'index_incapacidades_b_u_model.dart';
 
@@ -317,6 +321,29 @@ class _IndexIncapacidadesBUWidgetState
                                   ),
                                 ),
                               ],
+                            ).addWalkthrough(
+                              columnVdlekvvk,
+                              _model.ttlindexIncapacidadesBUController,
+                            ),
+                          ),
+                          Align(
+                            alignment: AlignmentDirectional(1.0, 0.0),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 380.0, 30.0, 0.0),
+                              child: FlutterFlowIconButton(
+                                borderRadius: 8.0,
+                                buttonSize: 40.0,
+                                fillColor: FlutterFlowTheme.of(context).primary,
+                                icon: FaIcon(
+                                  FontAwesomeIcons.question,
+                                  color: FlutterFlowTheme.of(context).info,
+                                  size: 24.0,
+                                ),
+                                onPressed: () {
+                                  print('IconButton pressed ...');
+                                },
+                              ),
                             ),
                           ),
                         ],
@@ -663,7 +690,7 @@ class _IndexIncapacidadesBUWidgetState
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 24.0, 0.0, 20.0),
                                     child: Text(
-                                      'Incapacidades',
+                                      'INCAPACIDADES',
                                       style: FlutterFlowTheme.of(context)
                                           .displaySmall
                                           .override(
@@ -1159,4 +1186,15 @@ class _IndexIncapacidadesBUWidgetState
       ),
     );
   }
+
+  TutorialCoachMark createPageWalkthrough(BuildContext context) =>
+      TutorialCoachMark(
+        targets: createWalkthroughTargets(context),
+        onFinish: () async {
+          safeSetState(() => _model.ttlindexIncapacidadesBUController = null);
+        },
+        onSkip: () {
+          return true;
+        },
+      );
 }

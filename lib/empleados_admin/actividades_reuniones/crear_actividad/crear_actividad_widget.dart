@@ -6,8 +6,11 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/walkthroughs/ttl_crear_actividad.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/index.dart';
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
+    show TutorialCoachMark;
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
@@ -192,8 +195,12 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                         .headlineMedium
                                         .override(
                                           fontFamily: 'Outfit',
+                                          fontSize: 30.0,
                                           letterSpacing: 0.0,
                                         ),
+                                  ).addWalkthrough(
+                                    textSjxylq2j,
+                                    _model.ttlCrearActividadController,
                                   ),
                                 ),
                                 Padding(
@@ -213,6 +220,7 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                                 .bodyMedium
                                                 .override(
                                                   fontFamily: 'Manrope',
+                                                  fontSize: 20.0,
                                                   letterSpacing: 0.0,
                                                 ),
                                           ),
@@ -228,6 +236,7 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                                 .bodyMedium
                                                 .override(
                                                   fontFamily: 'Manrope',
+                                                  fontSize: 20.0,
                                                   letterSpacing: 0.0,
                                                 ),
                                           ),
@@ -390,6 +399,9 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                             },
                                           ),
                                         ],
+                                      ).addWalkthrough(
+                                        rowAe75yonn,
+                                        _model.ttlCrearActividadController,
                                       ),
                                       Container(
                                         width:
@@ -475,6 +487,9 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                               .txtEnlaceTextController1Validator
                                               .asValidator(context),
                                         ),
+                                      ).addWalkthrough(
+                                        textFieldTir948xx,
+                                        _model.ttlCrearActividadController,
                                       ),
                                       Container(
                                         width:
@@ -560,6 +575,9 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                               .txtAsuntoTextController1Validator
                                               .asValidator(context),
                                         ),
+                                      ).addWalkthrough(
+                                        textFieldQ5b8lpnx,
+                                        _model.ttlCrearActividadController,
                                       ),
                                       Container(
                                         width:
@@ -645,6 +663,9 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                               .textController3Validator
                                               .asValidator(context),
                                         ),
+                                      ).addWalkthrough(
+                                        textField7x10cecp,
+                                        _model.ttlCrearActividadController,
                                       ),
                                       Text(
                                         'Agregar participantes',
@@ -652,6 +673,7 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                             .bodyMedium
                                             .override(
                                               fontFamily: 'Manrope',
+                                              fontSize: 20.0,
                                               letterSpacing: 0.0,
                                             ),
                                       ),
@@ -798,6 +820,9 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                               );
                                             },
                                           ),
+                                        ).addWalkthrough(
+                                          listView5nug7ydy,
+                                          _model.ttlCrearActividadController,
                                         ),
                                       ),
                                     ].divide(SizedBox(height: 12.0)),
@@ -929,6 +954,7 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                           .override(
                                             fontFamily: 'Manrope',
                                             color: Colors.white,
+                                            fontSize: 18.0,
                                             letterSpacing: 0.0,
                                           ),
                                       elevation: 4.0,
@@ -938,6 +964,9 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                       ),
                                       borderRadius: BorderRadius.circular(60.0),
                                     ),
+                                  ).addWalkthrough(
+                                    button86om4v9s,
+                                    _model.ttlCrearActividadController,
                                   ),
                                 ),
                               ],
@@ -1007,7 +1036,7 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 4.0, 0.0, 0.0),
                                   child: Text(
-                                    'Formulario de \nregistro de actividades',
+                                    'FORMULARIO DE ACTIVIDADES',
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .headlineMedium
@@ -1782,10 +1811,46 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                     ),
                   ],
                 ),
+              Align(
+                alignment: AlignmentDirectional(1.0, 1.0),
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 20.0, 0.0),
+                  child: FlutterFlowIconButton(
+                    borderRadius: 8.0,
+                    buttonSize: 40.0,
+                    fillColor: FlutterFlowTheme.of(context).primary,
+                    icon: Icon(
+                      Icons.question_mark,
+                      color: FlutterFlowTheme.of(context).info,
+                      size: 24.0,
+                    ),
+                    onPressed: () async {
+                      logFirebaseEvent(
+                          'CREAR_ACTIVIDAD_question_mark_ICN_ON_TAP');
+                      logFirebaseEvent('IconButton_start_walkthrough');
+                      safeSetState(() => _model.ttlCrearActividadController =
+                          createPageWalkthrough(context));
+                      _model.ttlCrearActividadController
+                          ?.show(context: context);
+                    },
+                  ),
+                ),
+              ),
             ],
           ),
         ),
       ),
     );
   }
+
+  TutorialCoachMark createPageWalkthrough(BuildContext context) =>
+      TutorialCoachMark(
+        targets: createWalkthroughTargets(context),
+        onFinish: () async {
+          safeSetState(() => _model.ttlCrearActividadController = null);
+        },
+        onSkip: () {
+          return true;
+        },
+      );
 }

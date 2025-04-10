@@ -1,6 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/index.dart';
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
+    show TutorialCoachMark;
 import 'solicitud_vacaciones_widget.dart' show SolicitudVacacionesWidget;
 import 'package:flutter/material.dart';
 
@@ -8,6 +10,7 @@ class SolicitudVacacionesModel
     extends FlutterFlowModel<SolicitudVacacionesWidget> {
   ///  State fields for stateful widgets in this page.
 
+  TutorialCoachMark? ttlsolicitudVacacionesController;
   // State field(s) for DropDown widget.
   String? dropDownValue1;
   FormFieldController<String>? dropDownValueController1;
@@ -41,6 +44,7 @@ class SolicitudVacacionesModel
 
   @override
   void dispose() {
+    ttlsolicitudVacacionesController?.finish();
     textFieldFocusNode1?.dispose();
     textController1?.dispose();
 

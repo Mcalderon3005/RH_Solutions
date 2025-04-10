@@ -2,9 +2,13 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/walkthroughs/ttmenucliente.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/index.dart';
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
+    show TutorialCoachMark;
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'menu_usuario_model.dart';
 export 'menu_usuario_model.dart';
 
@@ -81,7 +85,7 @@ class _MenuUsuarioWidgetState extends State<MenuUsuarioWidget> {
                           alignment: AlignmentDirectional(0.0, 0.0),
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 20.0, 0.0, 20.0),
+                                0.0, 100.0, 0.0, 20.0),
                             child: Text(
                               'Menú principal',
                               style: FlutterFlowTheme.of(context)
@@ -89,8 +93,12 @@ class _MenuUsuarioWidgetState extends State<MenuUsuarioWidget> {
                                   .override(
                                     fontFamily: 'Outfit',
                                     color: Colors.white,
+                                    fontSize: 40.0,
                                     letterSpacing: 0.0,
                                   ),
+                            ).addWalkthrough(
+                              textQ735g8y4,
+                              _model.ttmenuclienteController,
                             ),
                           ),
                         ),
@@ -134,12 +142,15 @@ class _MenuUsuarioWidgetState extends State<MenuUsuarioWidget> {
                                               .override(
                                                 fontFamily: 'Manrope',
                                                 color: Colors.white,
-                                                fontSize: 18.0,
+                                                fontSize: 20.0,
                                                 letterSpacing: 0.0,
                                               ),
                                         ),
                                       ),
                                     ],
+                                  ).addWalkthrough(
+                                    rowPf8ha404,
+                                    _model.ttmenuclienteController,
                                   ),
                                 ),
                                 Padding(
@@ -193,13 +204,80 @@ class _MenuUsuarioWidgetState extends State<MenuUsuarioWidget> {
                                                       .override(
                                                         fontFamily: 'Manrope',
                                                         color: Colors.white,
-                                                        fontSize: 18.0,
+                                                        fontSize: 20.0,
                                                         letterSpacing: 0.0,
                                                       ),
                                             ),
                                           ),
                                         ],
                                       ),
+                                    ).addWalkthrough(
+                                      rowVyuhqas4,
+                                      _model.ttmenuclienteController,
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 15.0, 0.0, 0.0),
+                                  child: Container(
+                                    width:
+                                        MediaQuery.sizeOf(context).width * 0.4,
+                                    height:
+                                        MediaQuery.sizeOf(context).height * 0.1,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFF2797FF),
+                                      borderRadius: BorderRadius.circular(20.0),
+                                      border: Border.all(
+                                        width: 2.0,
+                                      ),
+                                    ),
+                                    child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        logFirebaseEvent(
+                                            'MENU_USUARIO_PAGE_Row_s45d9hjt_ON_TAP');
+                                        logFirebaseEvent('Row_navigate_to');
+
+                                        context.goNamed(
+                                            GestionHorariosWidget.routeName);
+                                      },
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Icons.schedule,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                            size: 30.0,
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    5.0, 0.0, 0.0, 0.0),
+                                            child: Text(
+                                              'Horario',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Manrope',
+                                                        color: Colors.white,
+                                                        fontSize: 20.0,
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ).addWalkthrough(
+                                      rowS45d9hjt,
+                                      _model.ttmenuclienteController,
                                     ),
                                   ),
                                 ),
@@ -256,12 +334,15 @@ class _MenuUsuarioWidgetState extends State<MenuUsuarioWidget> {
                                                       .override(
                                                         fontFamily: 'Manrope',
                                                         color: Colors.white,
-                                                        fontSize: 18.0,
+                                                        fontSize: 20.0,
                                                         letterSpacing: 0.0,
                                                       ),
                                             ),
                                           ),
                                         ],
+                                      ).addWalkthrough(
+                                        row87n4utkg,
+                                        _model.ttmenuclienteController,
                                       ),
                                     ),
                                   ),
@@ -318,13 +399,16 @@ class _MenuUsuarioWidgetState extends State<MenuUsuarioWidget> {
                                                       .override(
                                                         fontFamily: 'Manrope',
                                                         color: Colors.white,
-                                                        fontSize: 18.0,
+                                                        fontSize: 20.0,
                                                         letterSpacing: 0.0,
                                                       ),
                                             ),
                                           ),
                                         ],
                                       ),
+                                    ).addWalkthrough(
+                                      row8cwabkfz,
+                                      _model.ttmenuclienteController,
                                     ),
                                   ),
                                 ),
@@ -357,6 +441,9 @@ class _MenuUsuarioWidgetState extends State<MenuUsuarioWidget> {
                                           PaginaPrincipalWidget.routeName,
                                           context.mounted);
                                     },
+                                  ).addWalkthrough(
+                                    iconButtonL7r1riia,
+                                    _model.ttmenuclienteController,
                                   ),
                                 ),
                               ],
@@ -383,9 +470,9 @@ class _MenuUsuarioWidgetState extends State<MenuUsuarioWidget> {
                           alignment: AlignmentDirectional(0.0, 0.0),
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 20.0, 0.0, 20.0),
+                                0.0, 80.0, 0.0, 20.0),
                             child: Text(
-                              'Menú principal',
+                              'MENÚ PRINCIPAL',
                               style: FlutterFlowTheme.of(context)
                                   .displaySmall
                                   .override(
@@ -448,6 +535,69 @@ class _MenuUsuarioWidgetState extends State<MenuUsuarioWidget> {
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 15.0, 0.0, 0.0),
+                                  child: InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      logFirebaseEvent(
+                                          'MENU_USUARIO_Container_yv9nnkxq_ON_TAP');
+                                      logFirebaseEvent('Container_navigate_to');
+
+                                      context.pushNamed(
+                                          GestionHorariosWidget.routeName);
+                                    },
+                                    child: Container(
+                                      width: MediaQuery.sizeOf(context).width *
+                                          0.65,
+                                      height:
+                                          MediaQuery.sizeOf(context).height *
+                                              0.1,
+                                      decoration: BoxDecoration(
+                                        color: Color(0xFF2797FF),
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
+                                        border: Border.all(
+                                          width: 2.0,
+                                        ),
+                                      ),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Icons.schedule_outlined,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                            size: 30.0,
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    5.0, 0.0, 0.0, 0.0),
+                                            child: Text(
+                                              'Horarios',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Manrope',
+                                                        color: Colors.white,
+                                                        fontSize: 18.0,
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 15.0, 0.0, 0.0),
                                   child: Container(
                                     width:
                                         MediaQuery.sizeOf(context).width * 0.65,
@@ -467,7 +617,7 @@ class _MenuUsuarioWidgetState extends State<MenuUsuarioWidget> {
                                       highlightColor: Colors.transparent,
                                       onTap: () async {
                                         logFirebaseEvent(
-                                            'MENU_USUARIO_PAGE_Row_oc0w4m1f_ON_TAP');
+                                            'MENU_USUARIO_PAGE_Row_vgvw85jb_ON_TAP');
                                         logFirebaseEvent('Row_navigate_to');
 
                                         context.pushNamed(
@@ -519,8 +669,8 @@ class _MenuUsuarioWidgetState extends State<MenuUsuarioWidget> {
                                           'MENU_USUARIO_Container_pbxg966u_ON_TAP');
                                       logFirebaseEvent('Container_navigate_to');
 
-                                      context.pushNamed(
-                                          IndexActividadesBUWidget.routeName);
+                                      context.goNamed(
+                                          IndexActividadesWidget.routeName);
                                     },
                                     child: Container(
                                       width: MediaQuery.sizeOf(context).width *
@@ -665,6 +815,31 @@ class _MenuUsuarioWidgetState extends State<MenuUsuarioWidget> {
                       ],
                     ),
                   ),
+                Align(
+                  alignment: AlignmentDirectional(1.0, 1.0),
+                  child: Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 30.0, 0.0),
+                    child: FlutterFlowIconButton(
+                      borderRadius: 8.0,
+                      buttonSize: 40.0,
+                      fillColor: FlutterFlowTheme.of(context).primary,
+                      icon: FaIcon(
+                        FontAwesomeIcons.question,
+                        color: FlutterFlowTheme.of(context).info,
+                        size: 24.0,
+                      ),
+                      onPressed: () async {
+                        logFirebaseEvent(
+                            'MENU_USUARIO_PAGE_question_ICN_ON_TAP');
+                        logFirebaseEvent('IconButton_start_walkthrough');
+                        safeSetState(() => _model.ttmenuclienteController =
+                            createPageWalkthrough(context));
+                        _model.ttmenuclienteController?.show(context: context);
+                      },
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -672,4 +847,15 @@ class _MenuUsuarioWidgetState extends State<MenuUsuarioWidget> {
       ),
     );
   }
+
+  TutorialCoachMark createPageWalkthrough(BuildContext context) =>
+      TutorialCoachMark(
+        targets: createWalkthroughTargets(context),
+        onFinish: () async {
+          safeSetState(() => _model.ttmenuclienteController = null);
+        },
+        onSkip: () {
+          return true;
+        },
+      );
 }

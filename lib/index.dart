@@ -1,5 +1,5 @@
 // Export pages
-export '/pages/log_in/pagina_principal/pagina_principal_widget.dart'
+export '/pages/pagina_principal/pagina_principal_widget.dart'
     show PaginaPrincipalWidget;
 export '/pages/log_in/inicio_sesion/inicio_sesion_widget.dart'
     show InicioSesionWidget;
@@ -9,7 +9,7 @@ export '/pages/menu_usuario/menu_usuario/menu_usuario_widget.dart'
     show MenuUsuarioWidget;
 export '/pages/menu_usuario/modulo_vacaciones/modulo_vacaciones_widget.dart'
     show ModuloVacacionesWidget;
-export '/pages/log_in/recuperar_contrasena/recuperar_contrasena_widget.dart'
+export '/pages/recuperar_contrasena/recuperar_contrasena_widget.dart'
     show RecuperarContrasenaWidget;
 export '/empleados_admin/empleados/index_empleado/index_empleado_widget.dart'
     show IndexEmpleadoWidget;
@@ -17,14 +17,12 @@ export '/empleados_admin/menu_admin/home_admin_page/home_admin_page_widget.dart'
     show HomeAdminPageWidget;
 export '/empleados_admin/empleados/crear_empleado/crear_empleado_widget.dart'
     show CrearEmpleadoWidget;
-export '/pages/profile/ver_actividades/ver_actividades_widget.dart'
+export '/pages/ver_actividades/ver_actividades_widget.dart'
     show VerActividadesWidget;
 export '/empleados_admin/empleados/edit_empleado/edit_empleado_widget.dart'
     show EditEmpleadoWidget;
-export '/empleados_admin/empleados/index_empleados_b_u/index_empleados_b_u_widget.dart'
-    show IndexEmpleadosBUWidget;
-export '/empleados_admin/actividades_reuniones/definir_actividad/definir_actividad_widget.dart'
-    show DefinirActividadWidget;
+export '/empleados_admin/actividades_reuniones/definir_actividad_b_u/definir_actividad_b_u_widget.dart'
+    show DefinirActividadBUWidget;
 export '/empleados_admin/actividades_reuniones/crear_actividad/crear_actividad_widget.dart'
     show CrearActividadWidget;
 export '/empleados_admin/vacaciones/solicitudes_vacaciones_admin_b_u/solicitudes_vacaciones_admin_b_u_widget.dart'
@@ -35,7 +33,7 @@ export '/empleados_admin/reportes/log_sesiones_b_u/log_sesiones_b_u_widget.dart'
     show LogSesionesBUWidget;
 export '/empleados_admin/reportes/log_errores_sesion_b_u/log_errores_sesion_b_u_widget.dart'
     show LogErroresSesionBUWidget;
-export '/empleados_admin/empleados/solicitudess/solicitudess_widget.dart'
+export '/empleados_admin/solicitudess/solicitudess_widget.dart'
     show SolicitudessWidget;
 export '/pages/vacaciones_e_incapacidades/solicitud_vacaciones/solicitud_vacaciones_widget.dart'
     show SolicitudVacacionesWidget;
@@ -51,9 +49,7 @@ export '/empleados_admin/vacaciones/solicitudes_incapacidades_detalle/solicitude
     show SolicitudesIncapacidadesDetalleWidget;
 export '/empleados_admin/menu_admin/solicitudes_home_admin/solicitudes_home_admin_widget.dart'
     show SolicitudesHomeAdminWidget;
-export '/pages/actividades/index_actividades_b_u/index_actividades_b_u_widget.dart'
-    show IndexActividadesBUWidget;
-export '/empleados_admin/actividades_reuniones/editar_actividad/editar_actividad_widget.dart'
+export '/empleados_admin/editar_actividad/editar_actividad_widget.dart'
     show EditarActividadWidget;
 export '/empleados_admin/pagos_recibos/crear_pago/crear_pago_widget.dart'
     show CrearPagoWidget;
@@ -81,3 +77,16 @@ export '/pages/actividades/index_actividades/index_actividades_widget.dart'
     show IndexActividadesWidget;
 export '/empleados_admin/pagos_recibos/editar_pago/editar_pago_widget.dart'
     show EditarPagoWidget;
+export '/pages/horarios/gestion_horarios/gestion_horarios_widget.dart'
+    show GestionHorariosWidget;
+export '/pages/horarios/resolucion_problemas/resolucion_problemas_widget.dart'
+    show ResolucionProblemasWidget;
+export '/pages/horarios/horario/horario_widget.dart' show HorarioWidget;
+export '/empleados_admin/actividades_reuniones/definir_actividad_admin/definir_actividad_admin_widget.dart'
+    show DefinirActividadAdminWidget;
+export '/empleados_admin/reportes/log_horarios_errores/log_horarios_errores_widget.dart'
+    show LogHorariosErroresWidget;
+export '/pages/profile/editar_perfil/editar_perfil_widget.dart'
+    show EditarPerfilWidget;
+export '/pages/log_in/cambiar_contrasena/cambiar_contrasena_widget.dart'
+    show CambiarContrasenaWidget;

@@ -9,8 +9,12 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
+import '/walkthroughs/ttlsolicitud_vacaciones.dart';
 import '/index.dart';
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
+    show TutorialCoachMark;
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'solicitud_vacaciones_model.dart';
 export 'solicitud_vacaciones_model.dart';
@@ -156,7 +160,7 @@ class _SolicitudVacacionesWidgetState extends State<SolicitudVacacionesWidget> {
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 24.0, 0.0, 20.0),
                                         child: Text(
-                                          'Vacaciones',
+                                          'VACACIONES',
                                           style: FlutterFlowTheme.of(context)
                                               .displaySmall
                                               .override(
@@ -251,6 +255,9 @@ class _SolicitudVacacionesWidgetState extends State<SolicitudVacacionesWidget> {
                                             ],
                                           ),
                                         ],
+                                      ).addWalkthrough(
+                                        rowKy6twpwf,
+                                        _model.ttlsolicitudVacacionesController,
                                       ),
                                     ),
                                     Align(
@@ -417,6 +424,10 @@ class _SolicitudVacacionesWidgetState extends State<SolicitudVacacionesWidget> {
                                               ),
                                             ),
                                           ],
+                                        ).addWalkthrough(
+                                          rowRodkmi0a,
+                                          _model
+                                              .ttlsolicitudVacacionesController,
                                         ),
                                       ),
                                     ),
@@ -584,6 +595,10 @@ class _SolicitudVacacionesWidgetState extends State<SolicitudVacacionesWidget> {
                                               ),
                                             ),
                                           ],
+                                        ).addWalkthrough(
+                                          rowNbv2g2yf,
+                                          _model
+                                              .ttlsolicitudVacacionesController,
                                         ),
                                       ),
                                     ),
@@ -701,6 +716,9 @@ class _SolicitudVacacionesWidgetState extends State<SolicitudVacacionesWidget> {
                                           ),
                                         ),
                                       ],
+                                    ).addWalkthrough(
+                                      columnEdw22wpm,
+                                      _model.ttlsolicitudVacacionesController,
                                     ),
                                     if (_model.dropDownValue1 ==
                                         TipoSolicitudes.Incapacidad.name)
@@ -813,6 +831,10 @@ class _SolicitudVacacionesWidgetState extends State<SolicitudVacacionesWidget> {
                                               borderRadius:
                                                   BorderRadius.circular(8.0),
                                             ),
+                                          ).addWalkthrough(
+                                            button026k9rer,
+                                            _model
+                                                .ttlsolicitudVacacionesController,
                                           ),
                                         ),
                                       ),
@@ -992,10 +1014,38 @@ class _SolicitudVacacionesWidgetState extends State<SolicitudVacacionesWidget> {
                                             borderRadius:
                                                 BorderRadius.circular(8.0),
                                           ),
+                                        ).addWalkthrough(
+                                          button51yjr5lg,
+                                          _model
+                                              .ttlsolicitudVacacionesController,
                                         ),
                                       ),
                                     ),
                                   ],
+                                ).addWalkthrough(
+                                  columnT4majr1k,
+                                  _model.ttlsolicitudVacacionesController,
+                                ),
+                              ),
+                              Align(
+                                alignment: AlignmentDirectional(1.0, 0.0),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 80.0, 30.0, 0.0),
+                                  child: FlutterFlowIconButton(
+                                    borderRadius: 8.0,
+                                    buttonSize: 40.0,
+                                    fillColor:
+                                        FlutterFlowTheme.of(context).primary,
+                                    icon: FaIcon(
+                                      FontAwesomeIcons.question,
+                                      color: FlutterFlowTheme.of(context).info,
+                                      size: 24.0,
+                                    ),
+                                    onPressed: () {
+                                      print('IconButton pressed ...');
+                                    },
+                                  ),
                                 ),
                               ),
                             ],
@@ -1097,7 +1147,7 @@ class _SolicitudVacacionesWidgetState extends State<SolicitudVacacionesWidget> {
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 24.0, 0.0, 20.0),
                                         child: Text(
-                                          'Vacaciones',
+                                          'VACACIONES',
                                           style: FlutterFlowTheme.of(context)
                                               .displaySmall
                                               .override(
@@ -1952,4 +2002,15 @@ class _SolicitudVacacionesWidgetState extends State<SolicitudVacacionesWidget> {
       ),
     );
   }
+
+  TutorialCoachMark createPageWalkthrough(BuildContext context) =>
+      TutorialCoachMark(
+        targets: createWalkthroughTargets(context),
+        onFinish: () async {
+          safeSetState(() => _model.ttlsolicitudVacacionesController = null);
+        },
+        onSkip: () {
+          return true;
+        },
+      );
 }

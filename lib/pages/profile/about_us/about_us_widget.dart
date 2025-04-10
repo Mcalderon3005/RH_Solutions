@@ -93,6 +93,7 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
                                         .displaySmall
                                         .override(
                                           fontFamily: 'Outfit',
+                                          fontSize: 30.0,
                                           letterSpacing: 0.0,
                                         ),
                                   ),
@@ -120,6 +121,7 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Manrope',
+                                            fontSize: 20.0,
                                             letterSpacing: 0.0,
                                           ),
                                     ),
@@ -149,6 +151,7 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Manrope',
+                                            fontSize: 20.0,
                                             letterSpacing: 0.0,
                                           ),
                                     ),

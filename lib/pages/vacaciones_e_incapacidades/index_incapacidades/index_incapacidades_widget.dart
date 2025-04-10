@@ -3,9 +3,13 @@ import '/flutter_flow/flutter_flow_data_table.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/walkthroughs/ttl_indexincapacidades.dart';
 import '/index.dart';
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
+    show TutorialCoachMark;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'index_incapacidades_model.dart';
 export 'index_incapacidades_model.dart';
 
@@ -70,287 +74,318 @@ class _IndexIncapacidadesWidgetState extends State<IndexIncapacidadesWidget> {
               context: context,
               phone: false,
             ))
-              Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Align(
-                    alignment: AlignmentDirectional(1.0, 0.0),
-                    child: Container(
-                      width: MediaQuery.sizeOf(context).width * 1.0,
-                      height: MediaQuery.sizeOf(context).height * 1.0,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [Color(0xFF013260), Colors.black],
-                          stops: [0.0, 1.0],
-                          begin: AlignmentDirectional(0.0, -1.0),
-                          end: AlignmentDirectional(0, 1.0),
+              SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Align(
+                      alignment: AlignmentDirectional(1.0, 0.0),
+                      child: Container(
+                        width: MediaQuery.sizeOf(context).width * 1.0,
+                        height: MediaQuery.sizeOf(context).height * 1.0,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [Color(0xFF013260), Colors.black],
+                            stops: [0.0, 1.0],
+                            begin: AlignmentDirectional(0.0, -1.0),
+                            end: AlignmentDirectional(0, 1.0),
+                          ),
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.all(24.0),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    width: 70.0,
+                                    height: 52.0,
+                                    decoration: BoxDecoration(
+                                      color: Color(0x00FFFFFF),
+                                    ),
+                                    child: FlutterFlowIconButton(
+                                      borderRadius: 10.0,
+                                      buttonSize: 850.0,
+                                      icon: Icon(
+                                        Icons.arrow_back,
+                                        color: Colors.white,
+                                        size: 28.0,
+                                      ),
+                                      onPressed: () async {
+                                        logFirebaseEvent(
+                                            'INDEX_INCAPACIDADES_arrow_back_ICN_ON_TA');
+                                        logFirebaseEvent(
+                                            'IconButton_navigate_to');
+
+                                        context.pushNamed(
+                                            ModuloVacacionesWidget.routeName);
+                                      },
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: AlignmentDirectional(0.0, 0.0),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 24.0, 0.0, 20.0),
+                                      child: Text(
+                                        'INCAPACIDADES',
+                                        style: FlutterFlowTheme.of(context)
+                                            .displaySmall
+                                            .override(
+                                              fontFamily: 'Outfit',
+                                              color: Colors.white,
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Builder(
+                                      builder: (context) {
+                                        final incapacidadesListUM =
+                                            _model.incapacidadesListU.toList();
+
+                                        return FlutterFlowDataTable<
+                                            IncapacidadesRecord>(
+                                          controller: _model
+                                              .paginatedDataTableController,
+                                          data: incapacidadesListUM,
+                                          columnsBuilder: (onSortChanged) => [
+                                            DataColumn2(
+                                              label: DefaultTextStyle.merge(
+                                                softWrap: true,
+                                                child: Text(
+                                                  'Fecha Solicitud',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .labelLarge
+                                                      .override(
+                                                        fontFamily: 'Manrope',
+                                                        color:
+                                                            Color(0xFF8D97A5),
+                                                        fontSize: 20.0,
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                                ),
+                                              ),
+                                            ),
+                                            DataColumn2(
+                                              label: DefaultTextStyle.merge(
+                                                softWrap: true,
+                                                child: Text(
+                                                  'Inicio',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .labelLarge
+                                                      .override(
+                                                        fontFamily: 'Manrope',
+                                                        color:
+                                                            Color(0xFF8D97A5),
+                                                        fontSize: 20.0,
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                                ),
+                                              ),
+                                            ),
+                                            DataColumn2(
+                                              label: DefaultTextStyle.merge(
+                                                softWrap: true,
+                                                child: Text(
+                                                  'Fin',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .labelLarge
+                                                      .override(
+                                                        fontFamily: 'Manrope',
+                                                        color:
+                                                            Color(0xFF8D97A5),
+                                                        fontSize: 20.0,
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                                ),
+                                              ),
+                                            ),
+                                            DataColumn2(
+                                              label: DefaultTextStyle.merge(
+                                                softWrap: true,
+                                                child: Text(
+                                                  'Revision',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .labelLarge
+                                                      .override(
+                                                        fontFamily: 'Manrope',
+                                                        color:
+                                                            Color(0xFF8D97A5),
+                                                        fontSize: 20.0,
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                          dataRowBuilder:
+                                              (incapacidadesListUMItem,
+                                                      incapacidadesListUMIndex,
+                                                      selected,
+                                                      onSelectChanged) =>
+                                                  DataRow(
+                                            color: WidgetStateProperty.all(
+                                              incapacidadesListUMIndex % 2 == 0
+                                                  ? Color(0x00FFFFFF)
+                                                  : Color(0x00F0F5F9),
+                                            ),
+                                            cells: [
+                                              Text(
+                                                valueOrDefault<String>(
+                                                  dateTimeFormat(
+                                                    "d/M/y",
+                                                    incapacidadesListUMItem
+                                                        .fechaSubida,
+                                                    locale: FFLocalizations.of(
+                                                            context)
+                                                        .languageCode,
+                                                  ),
+                                                  '0/0/0',
+                                                ).maybeHandleOverflow(
+                                                  maxChars: 20,
+                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Manrope',
+                                                          color: Colors.white,
+                                                          fontSize: 20.0,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                              ),
+                                              Text(
+                                                valueOrDefault<String>(
+                                                  dateTimeFormat(
+                                                    "d/M/y",
+                                                    incapacidadesListUMItem
+                                                        .fechaInicio,
+                                                    locale: FFLocalizations.of(
+                                                            context)
+                                                        .languageCode,
+                                                  ),
+                                                  '0/0/0',
+                                                ).maybeHandleOverflow(
+                                                  maxChars: 20,
+                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Manrope',
+                                                          color: Colors.white,
+                                                          fontSize: 20.0,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                              ),
+                                              Text(
+                                                valueOrDefault<String>(
+                                                  dateTimeFormat(
+                                                    "d/M/y",
+                                                    incapacidadesListUMItem
+                                                        .fechaFin,
+                                                    locale: FFLocalizations.of(
+                                                            context)
+                                                        .languageCode,
+                                                  ),
+                                                  '0/0/0',
+                                                ).maybeHandleOverflow(
+                                                  maxChars: 20,
+                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Manrope',
+                                                          color: Colors.white,
+                                                          fontSize: 20.0,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                              ),
+                                              Text(
+                                                incapacidadesListUMItem
+                                                            .estadoRevision ==
+                                                        false
+                                                    ? 'Pendiente'
+                                                    : 'Revisado',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Manrope',
+                                                          color: Colors.white,
+                                                          fontSize: 20.0,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                              ),
+                                            ].map((c) => DataCell(c)).toList(),
+                                          ),
+                                          paginated: true,
+                                          selectable: false,
+                                          hidePaginator: false,
+                                          showFirstLastButtons: false,
+                                          headingRowHeight: 56.0,
+                                          dataRowHeight: 48.0,
+                                          columnSpacing: 20.0,
+                                          headingRowColor: Color(0x002797FF),
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          addHorizontalDivider: true,
+                                          addTopAndBottomDivider: false,
+                                          hideDefaultHorizontalDivider: true,
+                                          horizontalDividerColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryBackground,
+                                          horizontalDividerThickness: 1.0,
+                                          addVerticalDivider: false,
+                                        ).addWalkthrough(
+                                          paginatedDataTable1mnea6np,
+                                          _model
+                                              .ttlIndexincapacidadesController,
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Align(
+                              alignment: AlignmentDirectional(1.0, 0.0),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 300.0, 30.0, 0.0),
+                                child: FlutterFlowIconButton(
+                                  borderRadius: 8.0,
+                                  buttonSize: 40.0,
+                                  fillColor:
+                                      FlutterFlowTheme.of(context).primary,
+                                  icon: FaIcon(
+                                    FontAwesomeIcons.question,
+                                    color: FlutterFlowTheme.of(context).info,
+                                    size: 24.0,
+                                  ),
+                                  onPressed: () {
+                                    print('IconButton pressed ...');
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.all(24.0),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  width: 70.0,
-                                  height: 52.0,
-                                  decoration: BoxDecoration(
-                                    color: Color(0x00FFFFFF),
-                                  ),
-                                  child: FlutterFlowIconButton(
-                                    borderRadius: 10.0,
-                                    buttonSize: 850.0,
-                                    icon: Icon(
-                                      Icons.arrow_back,
-                                      color: Colors.white,
-                                      size: 28.0,
-                                    ),
-                                    onPressed: () async {
-                                      logFirebaseEvent(
-                                          'INDEX_INCAPACIDADES_arrow_back_ICN_ON_TA');
-                                      logFirebaseEvent(
-                                          'IconButton_navigate_to');
-
-                                      context.pushNamed(
-                                          ModuloVacacionesWidget.routeName);
-                                    },
-                                  ),
-                                ),
-                                Align(
-                                  alignment: AlignmentDirectional(0.0, 0.0),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 24.0, 0.0, 20.0),
-                                    child: Text(
-                                      'Solicitudes de Incapacidades',
-                                      style: FlutterFlowTheme.of(context)
-                                          .displaySmall
-                                          .override(
-                                            fontFamily: 'Outfit',
-                                            color: Colors.white,
-                                            letterSpacing: 0.0,
-                                          ),
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Builder(
-                                    builder: (context) {
-                                      final incapacidadesListUM =
-                                          _model.incapacidadesListU.toList();
-
-                                      return FlutterFlowDataTable<
-                                          IncapacidadesRecord>(
-                                        controller:
-                                            _model.paginatedDataTableController,
-                                        data: incapacidadesListUM,
-                                        columnsBuilder: (onSortChanged) => [
-                                          DataColumn2(
-                                            label: DefaultTextStyle.merge(
-                                              softWrap: true,
-                                              child: Text(
-                                                'Fecha Solicitud',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelLarge
-                                                        .override(
-                                                          fontFamily: 'Manrope',
-                                                          color:
-                                                              Color(0xFF8D97A5),
-                                                          fontSize: 18.0,
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                              ),
-                                            ),
-                                          ),
-                                          DataColumn2(
-                                            label: DefaultTextStyle.merge(
-                                              softWrap: true,
-                                              child: Text(
-                                                'Inicio',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelLarge
-                                                        .override(
-                                                          fontFamily: 'Manrope',
-                                                          color:
-                                                              Color(0xFF8D97A5),
-                                                          fontSize: 18.0,
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                              ),
-                                            ),
-                                          ),
-                                          DataColumn2(
-                                            label: DefaultTextStyle.merge(
-                                              softWrap: true,
-                                              child: Text(
-                                                'Fin',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelLarge
-                                                        .override(
-                                                          fontFamily: 'Manrope',
-                                                          color:
-                                                              Color(0xFF8D97A5),
-                                                          fontSize: 18.0,
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                              ),
-                                            ),
-                                          ),
-                                          DataColumn2(
-                                            label: DefaultTextStyle.merge(
-                                              softWrap: true,
-                                              child: Text(
-                                                'Revision',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelLarge
-                                                        .override(
-                                                          fontFamily: 'Manrope',
-                                                          color:
-                                                              Color(0xFF8D97A5),
-                                                          fontSize: 18.0,
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                        dataRowBuilder:
-                                            (incapacidadesListUMItem,
-                                                    incapacidadesListUMIndex,
-                                                    selected,
-                                                    onSelectChanged) =>
-                                                DataRow(
-                                          color: WidgetStateProperty.all(
-                                            incapacidadesListUMIndex % 2 == 0
-                                                ? Color(0x00FFFFFF)
-                                                : Color(0x00F0F5F9),
-                                          ),
-                                          cells: [
-                                            Text(
-                                              valueOrDefault<String>(
-                                                dateTimeFormat(
-                                                  "d/M/y",
-                                                  incapacidadesListUMItem
-                                                      .fechaSubida,
-                                                  locale: FFLocalizations.of(
-                                                          context)
-                                                      .languageCode,
-                                                ),
-                                                '0/0/0',
-                                              ).maybeHandleOverflow(
-                                                maxChars: 20,
-                                              ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Manrope',
-                                                        color: Colors.white,
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                            ),
-                                            Text(
-                                              valueOrDefault<String>(
-                                                dateTimeFormat(
-                                                  "d/M/y",
-                                                  incapacidadesListUMItem
-                                                      .fechaInicio,
-                                                  locale: FFLocalizations.of(
-                                                          context)
-                                                      .languageCode,
-                                                ),
-                                                '0/0/0',
-                                              ).maybeHandleOverflow(
-                                                maxChars: 20,
-                                              ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Manrope',
-                                                        color: Colors.white,
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                            ),
-                                            Text(
-                                              valueOrDefault<String>(
-                                                dateTimeFormat(
-                                                  "d/M/y",
-                                                  incapacidadesListUMItem
-                                                      .fechaFin,
-                                                  locale: FFLocalizations.of(
-                                                          context)
-                                                      .languageCode,
-                                                ),
-                                                '0/0/0',
-                                              ).maybeHandleOverflow(
-                                                maxChars: 20,
-                                              ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Manrope',
-                                                        color: Colors.white,
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                            ),
-                                            Text(
-                                              incapacidadesListUMItem
-                                                          .estadoRevision ==
-                                                      false
-                                                  ? 'Pendiente'
-                                                  : 'Revisado',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Manrope',
-                                                        color: Colors.white,
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                            ),
-                                          ].map((c) => DataCell(c)).toList(),
-                                        ),
-                                        paginated: true,
-                                        selectable: false,
-                                        hidePaginator: false,
-                                        showFirstLastButtons: false,
-                                        headingRowHeight: 56.0,
-                                        dataRowHeight: 48.0,
-                                        columnSpacing: 20.0,
-                                        headingRowColor: Color(0x002797FF),
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                        addHorizontalDivider: true,
-                                        addTopAndBottomDivider: false,
-                                        hideDefaultHorizontalDivider: true,
-                                        horizontalDividerColor:
-                                            FlutterFlowTheme.of(context)
-                                                .secondaryBackground,
-                                        horizontalDividerThickness: 1.0,
-                                        addVerticalDivider: false,
-                                      );
-                                    },
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             if (responsiveVisibility(
               context: context,
@@ -413,9 +448,9 @@ class _IndexIncapacidadesWidgetState extends State<IndexIncapacidadesWidget> {
                                   alignment: AlignmentDirectional(0.0, 0.0),
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 24.0, 0.0, 20.0),
+                                        0.0, 24.0, 0.0, 0.0),
                                     child: Text(
-                                      'Incapacidades',
+                                      'INCAPACIDADES',
                                       style: FlutterFlowTheme.of(context)
                                           .displaySmall
                                           .override(
@@ -775,4 +810,15 @@ class _IndexIncapacidadesWidgetState extends State<IndexIncapacidadesWidget> {
       ),
     );
   }
+
+  TutorialCoachMark createPageWalkthrough(BuildContext context) =>
+      TutorialCoachMark(
+        targets: createWalkthroughTargets(context),
+        onFinish: () async {
+          safeSetState(() => _model.ttlIndexincapacidadesController = null);
+        },
+        onSkip: () {
+          return true;
+        },
+      );
 }

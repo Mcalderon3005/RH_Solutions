@@ -3,9 +3,13 @@ import '/flutter_flow/flutter_flow_data_table.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/walkthroughs/ttlindex_solicitudes.dart';
 import '/index.dart';
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
+    show TutorialCoachMark;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'index_solicitudes_model.dart';
 export 'index_solicitudes_model.dart';
 
@@ -132,6 +136,7 @@ class _IndexSolicitudesWidgetState extends State<IndexSolicitudesWidget> {
                                           .override(
                                             fontFamily: 'Outfit',
                                             color: Colors.white,
+                                            fontSize: 30.0,
                                             letterSpacing: 0.0,
                                           ),
                                     ),
@@ -161,7 +166,7 @@ class _IndexSolicitudesWidgetState extends State<IndexSolicitudesWidget> {
                                                           fontFamily: 'Manrope',
                                                           color:
                                                               Color(0xFF8D97A5),
-                                                          fontSize: 18.0,
+                                                          fontSize: 20.0,
                                                           letterSpacing: 0.0,
                                                         ),
                                               ),
@@ -179,7 +184,7 @@ class _IndexSolicitudesWidgetState extends State<IndexSolicitudesWidget> {
                                                           fontFamily: 'Manrope',
                                                           color:
                                                               Color(0xFF8D97A5),
-                                                          fontSize: 18.0,
+                                                          fontSize: 20.0,
                                                           letterSpacing: 0.0,
                                                         ),
                                               ),
@@ -197,7 +202,7 @@ class _IndexSolicitudesWidgetState extends State<IndexSolicitudesWidget> {
                                                           fontFamily: 'Manrope',
                                                           color:
                                                               Color(0xFF8D97A5),
-                                                          fontSize: 18.0,
+                                                          fontSize: 20.0,
                                                           letterSpacing: 0.0,
                                                         ),
                                               ),
@@ -215,7 +220,7 @@ class _IndexSolicitudesWidgetState extends State<IndexSolicitudesWidget> {
                                                           fontFamily: 'Manrope',
                                                           color:
                                                               Color(0xFF8D97A5),
-                                                          fontSize: 18.0,
+                                                          fontSize: 20.0,
                                                           letterSpacing: 0.0,
                                                         ),
                                               ),
@@ -233,7 +238,7 @@ class _IndexSolicitudesWidgetState extends State<IndexSolicitudesWidget> {
                                                           fontFamily: 'Manrope',
                                                           color:
                                                               Color(0xFF8D97A5),
-                                                          fontSize: 18.0,
+                                                          fontSize: 20.0,
                                                           letterSpacing: 0.0,
                                                         ),
                                               ),
@@ -271,6 +276,7 @@ class _IndexSolicitudesWidgetState extends State<IndexSolicitudesWidget> {
                                                       .override(
                                                         fontFamily: 'Manrope',
                                                         color: Colors.white,
+                                                        fontSize: 20.0,
                                                         letterSpacing: 0.0,
                                                       ),
                                             ),
@@ -294,6 +300,7 @@ class _IndexSolicitudesWidgetState extends State<IndexSolicitudesWidget> {
                                                       .override(
                                                         fontFamily: 'Manrope',
                                                         color: Colors.white,
+                                                        fontSize: 20.0,
                                                         letterSpacing: 0.0,
                                                       ),
                                             ),
@@ -316,6 +323,7 @@ class _IndexSolicitudesWidgetState extends State<IndexSolicitudesWidget> {
                                                       .override(
                                                         fontFamily: 'Manrope',
                                                         color: Colors.white,
+                                                        fontSize: 20.0,
                                                         letterSpacing: 0.0,
                                                       ),
                                             ),
@@ -331,6 +339,7 @@ class _IndexSolicitudesWidgetState extends State<IndexSolicitudesWidget> {
                                                       .override(
                                                         fontFamily: 'Manrope',
                                                         color: Colors.white,
+                                                        fontSize: 20.0,
                                                         letterSpacing: 0.0,
                                                       ),
                                             ),
@@ -346,6 +355,7 @@ class _IndexSolicitudesWidgetState extends State<IndexSolicitudesWidget> {
                                                       .override(
                                                         fontFamily: 'Manrope',
                                                         color: Colors.white,
+                                                        fontSize: 20.0,
                                                         letterSpacing: 0.0,
                                                       ),
                                             ),
@@ -369,11 +379,34 @@ class _IndexSolicitudesWidgetState extends State<IndexSolicitudesWidget> {
                                                 .secondaryBackground,
                                         horizontalDividerThickness: 1.0,
                                         addVerticalDivider: false,
+                                      ).addWalkthrough(
+                                        paginatedDataTableYadrnu78,
+                                        _model.ttlindexSolicitudesController,
                                       );
                                     },
                                   ),
                                 ),
                               ],
+                            ),
+                          ),
+                          Align(
+                            alignment: AlignmentDirectional(1.0, 0.0),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 300.0, 30.0, 0.0),
+                              child: FlutterFlowIconButton(
+                                borderRadius: 8.0,
+                                buttonSize: 40.0,
+                                fillColor: FlutterFlowTheme.of(context).primary,
+                                icon: FaIcon(
+                                  FontAwesomeIcons.question,
+                                  color: FlutterFlowTheme.of(context).info,
+                                  size: 24.0,
+                                ),
+                                onPressed: () {
+                                  print('IconButton pressed ...');
+                                },
+                              ),
                             ),
                           ),
                         ],
@@ -445,9 +478,9 @@ class _IndexSolicitudesWidgetState extends State<IndexSolicitudesWidget> {
                                   alignment: AlignmentDirectional(0.0, 0.0),
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 24.0, 0.0, 20.0),
+                                        0.0, 24.0, 0.0, 0.0),
                                     child: Text(
-                                      'Vaciones',
+                                      'VACACIONES',
                                       style: FlutterFlowTheme.of(context)
                                           .displaySmall
                                           .override(
@@ -851,4 +884,15 @@ class _IndexSolicitudesWidgetState extends State<IndexSolicitudesWidget> {
       ),
     );
   }
+
+  TutorialCoachMark createPageWalkthrough(BuildContext context) =>
+      TutorialCoachMark(
+        targets: createWalkthroughTargets(context),
+        onFinish: () async {
+          safeSetState(() => _model.ttlindexSolicitudesController = null);
+        },
+        onSkip: () {
+          return true;
+        },
+      );
 }

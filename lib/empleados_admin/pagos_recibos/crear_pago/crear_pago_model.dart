@@ -1,3 +1,4 @@
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'crear_pago_widget.dart' show CrearPagoWidget;
@@ -21,6 +22,13 @@ class CrearPagoModel extends FlutterFlowModel<CrearPagoWidget> {
   FocusNode? txtDetalleFocusNode;
   TextEditingController? txtDetalleTextController;
   String? Function(BuildContext, String?)? txtDetalleTextControllerValidator;
+  bool isDataUploading = false;
+  FFUploadedFile uploadedLocalFile =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+  String uploadedFileUrl = '';
+
+  // Stores action output result for [Firestore Query - Query a collection] action in Button widget.
+  UsersRecord? userUid;
 
   @override
   void initState(BuildContext context) {}

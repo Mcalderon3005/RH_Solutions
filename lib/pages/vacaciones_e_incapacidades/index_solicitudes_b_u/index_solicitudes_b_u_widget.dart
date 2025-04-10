@@ -2,8 +2,12 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/walkthroughs/ttlindex_solicitudes_b_u.dart';
 import '/index.dart';
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
+    show TutorialCoachMark;
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'index_solicitudes_b_u_model.dart';
 export 'index_solicitudes_b_u_model.dart';
 
@@ -120,6 +124,7 @@ class _IndexSolicitudesBUWidgetState extends State<IndexSolicitudesBUWidget> {
                                           .override(
                                             fontFamily: 'Outfit',
                                             color: Colors.white,
+                                            fontSize: 30.0,
                                             letterSpacing: 0.0,
                                           ),
                                     ),
@@ -147,6 +152,7 @@ class _IndexSolicitudesBUWidgetState extends State<IndexSolicitudesBUWidget> {
                                                 .bodyMedium
                                                 .override(
                                                   fontFamily: 'Manrope',
+                                                  fontSize: 20.0,
                                                   letterSpacing: 0.0,
                                                 ),
                                           ),
@@ -165,6 +171,7 @@ class _IndexSolicitudesBUWidgetState extends State<IndexSolicitudesBUWidget> {
                                                       .bodyMedium
                                                       .override(
                                                         fontFamily: 'Manrope',
+                                                        fontSize: 20.0,
                                                         letterSpacing: 0.0,
                                                       ),
                                             ),
@@ -184,6 +191,7 @@ class _IndexSolicitudesBUWidgetState extends State<IndexSolicitudesBUWidget> {
                                                       .bodyMedium
                                                       .override(
                                                         fontFamily: 'Manrope',
+                                                        fontSize: 20.0,
                                                         letterSpacing: 0.0,
                                                       ),
                                             ),
@@ -203,6 +211,7 @@ class _IndexSolicitudesBUWidgetState extends State<IndexSolicitudesBUWidget> {
                                                       .bodyMedium
                                                       .override(
                                                         fontFamily: 'Manrope',
+                                                        fontSize: 20.0,
                                                         letterSpacing: 0.0,
                                                       ),
                                             ),
@@ -296,6 +305,8 @@ class _IndexSolicitudesBUWidgetState extends State<IndexSolicitudesBUWidget> {
                                                                       'Manrope',
                                                                   color: Colors
                                                                       .white,
+                                                                  fontSize:
+                                                                      20.0,
                                                                   letterSpacing:
                                                                       0.0,
                                                                 ),
@@ -326,6 +337,8 @@ class _IndexSolicitudesBUWidgetState extends State<IndexSolicitudesBUWidget> {
                                                                       'Manrope',
                                                                   color: Colors
                                                                       .white,
+                                                                  fontSize:
+                                                                      20.0,
                                                                   letterSpacing:
                                                                       0.0,
                                                                 ),
@@ -353,6 +366,8 @@ class _IndexSolicitudesBUWidgetState extends State<IndexSolicitudesBUWidget> {
                                                                       'Manrope',
                                                                   color: Colors
                                                                       .white,
+                                                                  fontSize:
+                                                                      20.0,
                                                                   letterSpacing:
                                                                       0.0,
                                                                 ),
@@ -380,6 +395,8 @@ class _IndexSolicitudesBUWidgetState extends State<IndexSolicitudesBUWidget> {
                                                                       'Manrope',
                                                                   color: Colors
                                                                       .white,
+                                                                  fontSize:
+                                                                      20.0,
                                                                   letterSpacing:
                                                                       0.0,
                                                                 ),
@@ -398,6 +415,29 @@ class _IndexSolicitudesBUWidgetState extends State<IndexSolicitudesBUWidget> {
                                   ),
                                 ),
                               ],
+                            ).addWalkthrough(
+                              columnIi34fqdj,
+                              _model.ttlindexSolicitudesBUController,
+                            ),
+                          ),
+                          Align(
+                            alignment: AlignmentDirectional(1.0, 0.0),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 350.0, 30.0, 0.0),
+                              child: FlutterFlowIconButton(
+                                borderRadius: 8.0,
+                                buttonSize: 40.0,
+                                fillColor: FlutterFlowTheme.of(context).primary,
+                                icon: FaIcon(
+                                  FontAwesomeIcons.question,
+                                  color: FlutterFlowTheme.of(context).info,
+                                  size: 24.0,
+                                ),
+                                onPressed: () {
+                                  print('IconButton pressed ...');
+                                },
+                              ),
                             ),
                           ),
                         ],
@@ -469,7 +509,7 @@ class _IndexSolicitudesBUWidgetState extends State<IndexSolicitudesBUWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 24.0, 0.0, 20.0),
                                     child: Text(
-                                      'Solicitudes',
+                                      'SOLICITUDES',
                                       style: FlutterFlowTheme.of(context)
                                           .displaySmall
                                           .override(
@@ -709,4 +749,15 @@ class _IndexSolicitudesBUWidgetState extends State<IndexSolicitudesBUWidget> {
       ),
     );
   }
+
+  TutorialCoachMark createPageWalkthrough(BuildContext context) =>
+      TutorialCoachMark(
+        targets: createWalkthroughTargets(context),
+        onFinish: () async {
+          safeSetState(() => _model.ttlindexSolicitudesBUController = null);
+        },
+        onSkip: () {
+          return true;
+        },
+      );
 }

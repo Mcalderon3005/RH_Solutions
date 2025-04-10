@@ -8,6 +8,7 @@ import '/index.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'facturacion_model.dart';
 export 'facturacion_model.dart';
 
@@ -132,14 +133,18 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                           ),
                           Align(
                             alignment: AlignmentDirectional(0.0, 0.0),
-                            child: Text(
-                              'Pagos',
-                              style: FlutterFlowTheme.of(context)
-                                  .displaySmall
-                                  .override(
-                                    fontFamily: 'Outfit',
-                                    letterSpacing: 0.0,
-                                  ),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 15.0, 0.0, 0.0),
+                              child: Text(
+                                'Pagos',
+                                style: FlutterFlowTheme.of(context)
+                                    .displaySmall
+                                    .override(
+                                      fontFamily: 'Outfit',
+                                      letterSpacing: 0.0,
+                                    ),
+                              ),
                             ),
                           ),
                           Material(
@@ -167,14 +172,20 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
-                                          Text(
-                                            'Historial de pagos',
-                                            style: FlutterFlowTheme.of(context)
-                                                .headlineSmall
-                                                .override(
-                                                  fontFamily: 'Outfit',
-                                                  letterSpacing: 0.0,
-                                                ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 15.0),
+                                            child: Text(
+                                              'Historial de pagos',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .headlineSmall
+                                                      .override(
+                                                        fontFamily: 'Outfit',
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                            ),
                                           ),
                                           Container(
                                             width: 283.35,
@@ -328,7 +339,7 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                                                   ),
                                                                   Text(
                                                                     listViewPagosRecord
-                                                                        .empleado,
+                                                                        .nombreEmpleado,
                                                                     style: FlutterFlowTheme.of(
                                                                             context)
                                                                         .bodyMedium
@@ -604,7 +615,7 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                                                             'IconButton_download_file');
                                                                         await downloadFile(
                                                                           filename:
-                                                                              'Comprobante_Pago_${listViewPagosRecord.empleado}_${dateTimeFormat(
+                                                                              'Comprobante_Pago_${listViewPagosRecord.nombreEmpleado}_${listViewPagosRecord.apellidoEmpleado}_${dateTimeFormat(
                                                                             "d/M/y",
                                                                             listViewPagosRecord.fechaCreacion,
                                                                             locale:
@@ -673,7 +684,7 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                   .override(
                                     fontFamily: 'Manrope',
                                     color: Colors.white,
-                                    fontSize: 16.0,
+                                    fontSize: 18.0,
                                     letterSpacing: 0.0,
                                   ),
                               elevation: 0.0,
@@ -687,19 +698,30 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                             30.0, 10.0, 30.0, 15.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'Pagos',
+                              'PAGOS',
                               style: FlutterFlowTheme.of(context)
                                   .titleLarge
                                   .override(
                                     fontFamily: 'Outfit',
+                                    fontSize: 30.0,
                                     letterSpacing: 0.0,
                                   ),
                             ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            65.0, 10.0, 30.0, 15.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
                             Align(
-                              alignment: AlignmentDirectional(1.0, 0.0),
+                              alignment: AlignmentDirectional(-1.0, 0.0),
                               child: FlutterFlowIconButton(
                                 borderRadius: 8.0,
                                 buttonSize: 40.0,
@@ -723,7 +745,7 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                       ),
                       Container(
                         width: 1312.4,
-                        height: 723.7,
+                        height: 639.1,
                         decoration: BoxDecoration(
                           color:
                               FlutterFlowTheme.of(context).secondaryBackground,
@@ -747,6 +769,7 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                           .override(
                                             fontFamily: 'Manrope',
                                             color: Colors.white,
+                                            fontSize: 20.0,
                                             letterSpacing: 0.0,
                                           ),
                                     ),
@@ -762,6 +785,7 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                           .override(
                                             fontFamily: 'Manrope',
                                             color: Colors.white,
+                                            fontSize: 20.0,
                                             letterSpacing: 0.0,
                                           ),
                                     ),
@@ -777,6 +801,7 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                           .override(
                                             fontFamily: 'Manrope',
                                             color: Colors.white,
+                                            fontSize: 20.0,
                                             letterSpacing: 0.0,
                                           ),
                                     ),
@@ -792,6 +817,7 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                           .override(
                                             fontFamily: 'Manrope',
                                             color: Colors.white,
+                                            fontSize: 20.0,
                                             letterSpacing: 0.0,
                                           ),
                                     ),
@@ -807,6 +833,7 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                           .override(
                                             fontFamily: 'Manrope',
                                             color: Colors.white,
+                                            fontSize: 20.0,
                                             letterSpacing: 0.0,
                                           ),
                                     ),
@@ -823,6 +850,7 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                             fontFamily: 'Manrope',
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryText,
+                                            fontSize: 20.0,
                                             letterSpacing: 0.0,
                                           ),
                                     ),
@@ -843,11 +871,12 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                 ),
                                 cells: [
                                   Text(
-                                    facturacionListULItem.empleado,
+                                    'Edit Column 1',
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
                                           fontFamily: 'Manrope',
+                                          fontSize: 20.0,
                                           letterSpacing: 0.0,
                                         ),
                                   ),
@@ -862,6 +891,7 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                         .bodyMedium
                                         .override(
                                           fontFamily: 'Manrope',
+                                          fontSize: 20.0,
                                           letterSpacing: 0.0,
                                         ),
                                   ),
@@ -871,6 +901,7 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                         .bodyMedium
                                         .override(
                                           fontFamily: 'Manrope',
+                                          fontSize: 20.0,
                                           letterSpacing: 0.0,
                                         ),
                                   ),
@@ -885,6 +916,7 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                             .bodyMedium
                                             .override(
                                               fontFamily: 'Manrope',
+                                              fontSize: 20.0,
                                               letterSpacing: 0.0,
                                             ),
                                       ),
@@ -896,6 +928,7 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                         .bodyMedium
                                         .override(
                                           fontFamily: 'Manrope',
+                                          fontSize: 20.0,
                                           letterSpacing: 0.0,
                                         ),
                                   ),
@@ -957,7 +990,7 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                             await FirebaseStorage.instance
                                                 .refFromURL(
                                                     facturacionListULItem
-                                                        .empleado)
+                                                        .comprobanrte)
                                                 .delete();
                                             logFirebaseEvent(
                                                 'IconButton_backend_call');
@@ -1021,6 +1054,26 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                               verticalDividerThickness: 1.0,
                             );
                           },
+                        ),
+                      ),
+                      Align(
+                        alignment: AlignmentDirectional(1.0, 0.0),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 10.0, 30.0, 0.0),
+                          child: FlutterFlowIconButton(
+                            borderRadius: 8.0,
+                            buttonSize: 40.0,
+                            fillColor: FlutterFlowTheme.of(context).primary,
+                            icon: FaIcon(
+                              FontAwesomeIcons.question,
+                              color: FlutterFlowTheme.of(context).info,
+                              size: 24.0,
+                            ),
+                            onPressed: () {
+                              print('IconButton pressed ...');
+                            },
+                          ),
                         ),
                       ),
                     ],

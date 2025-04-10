@@ -25,11 +25,6 @@ class PagosRecord extends FirestoreRecord {
   String get detalle => _detalle ?? '';
   bool hasDetalle() => _detalle != null;
 
-  // "empleado" field.
-  String? _empleado;
-  String get empleado => _empleado ?? '';
-  bool hasEmpleado() => _empleado != null;
-
   // "monto" field.
   double? _monto;
   double get monto => _monto ?? 0.0;
@@ -45,13 +40,30 @@ class PagosRecord extends FirestoreRecord {
   String get tipo => _tipo ?? '';
   bool hasTipo() => _tipo != null;
 
+  // "nombre_empleado" field.
+  String? _nombreEmpleado;
+  String get nombreEmpleado => _nombreEmpleado ?? '';
+  bool hasNombreEmpleado() => _nombreEmpleado != null;
+
+  // "apellido_empleado" field.
+  String? _apellidoEmpleado;
+  String get apellidoEmpleado => _apellidoEmpleado ?? '';
+  bool hasApellidoEmpleado() => _apellidoEmpleado != null;
+
+  // "uid" field.
+  String? _uid;
+  String get uid => _uid ?? '';
+  bool hasUid() => _uid != null;
+
   void _initializeFields() {
     _fechaCreacion = snapshotData['fechaCreacion'] as DateTime?;
     _detalle = snapshotData['detalle'] as String?;
-    _empleado = snapshotData['empleado'] as String?;
     _monto = castToType<double>(snapshotData['monto']);
     _comprobanrte = snapshotData['comprobanrte'] as String?;
     _tipo = snapshotData['tipo'] as String?;
+    _nombreEmpleado = snapshotData['nombre_empleado'] as String?;
+    _apellidoEmpleado = snapshotData['apellido_empleado'] as String?;
+    _uid = snapshotData['uid'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -90,19 +102,23 @@ class PagosRecord extends FirestoreRecord {
 Map<String, dynamic> createPagosRecordData({
   DateTime? fechaCreacion,
   String? detalle,
-  String? empleado,
   double? monto,
   String? comprobanrte,
   String? tipo,
+  String? nombreEmpleado,
+  String? apellidoEmpleado,
+  String? uid,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'fechaCreacion': fechaCreacion,
       'detalle': detalle,
-      'empleado': empleado,
       'monto': monto,
       'comprobanrte': comprobanrte,
       'tipo': tipo,
+      'nombre_empleado': nombreEmpleado,
+      'apellido_empleado': apellidoEmpleado,
+      'uid': uid,
     }.withoutNulls,
   );
 
@@ -116,20 +132,24 @@ class PagosRecordDocumentEquality implements Equality<PagosRecord> {
   bool equals(PagosRecord? e1, PagosRecord? e2) {
     return e1?.fechaCreacion == e2?.fechaCreacion &&
         e1?.detalle == e2?.detalle &&
-        e1?.empleado == e2?.empleado &&
         e1?.monto == e2?.monto &&
         e1?.comprobanrte == e2?.comprobanrte &&
-        e1?.tipo == e2?.tipo;
+        e1?.tipo == e2?.tipo &&
+        e1?.nombreEmpleado == e2?.nombreEmpleado &&
+        e1?.apellidoEmpleado == e2?.apellidoEmpleado &&
+        e1?.uid == e2?.uid;
   }
 
   @override
   int hash(PagosRecord? e) => const ListEquality().hash([
         e?.fechaCreacion,
         e?.detalle,
-        e?.empleado,
         e?.monto,
         e?.comprobanrte,
-        e?.tipo
+        e?.tipo,
+        e?.nombreEmpleado,
+        e?.apellidoEmpleado,
+        e?.uid
       ]);
 
   @override

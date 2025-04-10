@@ -1,12 +1,17 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/walkthroughs/ttlinicio_sesion.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/index.dart';
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
+    show TutorialCoachMark;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'inicio_sesion_model.dart';
 export 'inicio_sesion_model.dart';
 
@@ -86,14 +91,18 @@ class _InicioSesionWidgetState extends State<InicioSesionWidget> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Text(
-                                'Inicio de sesión',
-                                style: FlutterFlowTheme.of(context)
-                                    .displaySmall
-                                    .override(
-                                      fontFamily: 'Outfit',
-                                      letterSpacing: 0.0,
-                                    ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 50.0, 0.0, 0.0),
+                                child: Text(
+                                  'INICIO DE SESION',
+                                  style: FlutterFlowTheme.of(context)
+                                      .displaySmall
+                                      .override(
+                                        fontFamily: 'Outfit',
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
                               ),
                               Form(
                                 key: _model.formKey1,
@@ -122,7 +131,7 @@ class _InicioSesionWidgetState extends State<InicioSesionWidget> {
                                                     .fromSTEB(
                                                         0.0, 0.0, 0.0, 4.0),
                                                 child: Text(
-                                                  'Email',
+                                                  'Correo',
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyMedium
@@ -227,6 +236,10 @@ class _InicioSesionWidgetState extends State<InicioSesionWidget> {
                                                       .emailAddressTextControllerValidator
                                                       .asValidator(context),
                                                 ),
+                                              ).addWalkthrough(
+                                                textFieldA4svmzii,
+                                                _model
+                                                    .ttlinicioSesionController,
                                               ),
                                             ),
                                           ],
@@ -361,11 +374,17 @@ class _InicioSesionWidgetState extends State<InicioSesionWidget> {
                                                   .passwordTextControllerValidator
                                                   .asValidator(context),
                                             ),
+                                          ).addWalkthrough(
+                                            textFieldTrzaxjtz,
+                                            _model.ttlinicioSesionController,
                                           ),
                                         ],
                                       ),
                                     ),
                                   ],
+                                ).addWalkthrough(
+                                  columnT0v9mrxa,
+                                  _model.ttlinicioSesionController,
                                 ),
                               ),
                               Align(
@@ -529,6 +548,9 @@ class _InicioSesionWidgetState extends State<InicioSesionWidget> {
                                       ),
                                       borderRadius: BorderRadius.circular(25.0),
                                     ),
+                                  ).addWalkthrough(
+                                    button1ifr5xbr,
+                                    _model.ttlinicioSesionController,
                                   ),
                                 ),
                               ),
@@ -571,15 +593,25 @@ class _InicioSesionWidgetState extends State<InicioSesionWidget> {
                                                     .routeName);
                                           },
                                           child: Text(
-                                            'No recuerdo mi contraseña',
+                                            '¿Olvidaste tu contraseña?',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodySmall
                                                 .override(
-                                                  fontFamily: 'Manrope',
-                                                  fontSize: 14.0,
-                                                  letterSpacing: 0.0,
-                                                ),
+                                              fontFamily: 'Manrope',
+                                              fontSize: 14.0,
+                                              letterSpacing: 0.0,
+                                              shadows: [
+                                                Shadow(
+                                                  color: Color(0xFF919BAB),
+                                                  offset: Offset(2.0, 2.0),
+                                                  blurRadius: 3.0,
+                                                )
+                                              ],
+                                            ),
                                           ),
+                                        ).addWalkthrough(
+                                          textRpq4cq3t,
+                                          _model.ttlinicioSesionController,
                                         ),
                                       ),
                                     ],
@@ -587,6 +619,26 @@ class _InicioSesionWidgetState extends State<InicioSesionWidget> {
                                 ),
                               ),
                             ],
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: AlignmentDirectional(1.0, 1.0),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 30.0, 50.0),
+                          child: FlutterFlowIconButton(
+                            borderRadius: 8.0,
+                            buttonSize: 40.0,
+                            fillColor: FlutterFlowTheme.of(context).primary,
+                            icon: FaIcon(
+                              FontAwesomeIcons.question,
+                              color: FlutterFlowTheme.of(context).info,
+                              size: 24.0,
+                            ),
+                            onPressed: () {
+                              print('IconButton pressed ...');
+                            },
                           ),
                         ),
                       ),
@@ -607,14 +659,15 @@ class _InicioSesionWidgetState extends State<InicioSesionWidget> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            0.0, 180.0, 0.0, 0.0),
                         child: Text(
-                          'Inicio de sesión',
+                          'INICIO DE SESION',
                           style: FlutterFlowTheme.of(context)
                               .displaySmall
                               .override(
                                 fontFamily: 'Outfit',
+                                fontSize: 32.0,
                                 letterSpacing: 0.0,
                               ),
                         ),
@@ -636,7 +689,7 @@ class _InicioSesionWidgetState extends State<InicioSesionWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 4.0),
                                     child: Text(
-                                      'Email',
+                                      'Correo',
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
@@ -981,13 +1034,21 @@ class _InicioSesionWidgetState extends State<InicioSesionWidget> {
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 12.0, 0.0, 12.0),
                                 child: Text(
-                                  'No recuerdo mi contraseña',
+                                  '¿Olvidaste tu contraseña?',
                                   style: FlutterFlowTheme.of(context)
-                                      .bodySmall
+                                      .titleSmall
                                       .override(
-                                        fontFamily: 'Manrope',
-                                        letterSpacing: 0.0,
-                                      ),
+                                    fontFamily: 'Manrope',
+                                    letterSpacing: 0.0,
+                                    decoration: TextDecoration.underline,
+                                    shadows: [
+                                      Shadow(
+                                        color: Colors.white,
+                                        offset: Offset(2.0, 2.0),
+                                        blurRadius: 10.0,
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
                             ],
@@ -1003,4 +1064,15 @@ class _InicioSesionWidgetState extends State<InicioSesionWidget> {
       ),
     );
   }
+
+  TutorialCoachMark createPageWalkthrough(BuildContext context) =>
+      TutorialCoachMark(
+        targets: createWalkthroughTargets(context),
+        onFinish: () async {
+          safeSetState(() => _model.ttlinicioSesionController = null);
+        },
+        onSkip: () {
+          return true;
+        },
+      );
 }

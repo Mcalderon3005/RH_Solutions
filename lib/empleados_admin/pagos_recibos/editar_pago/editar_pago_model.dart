@@ -6,9 +6,6 @@ import 'package:flutter/material.dart';
 class EditarPagoModel extends FlutterFlowModel<EditarPagoWidget> {
   ///  State fields for stateful widgets in this page.
 
-  // State field(s) for drdEmpleado widget.
-  String? drdEmpleadoValue;
-  FormFieldController<String>? drdEmpleadoValueController;
   // State field(s) for drdTipo widget.
   String? drdTipoValue;
   FormFieldController<String>? drdTipoValueController;

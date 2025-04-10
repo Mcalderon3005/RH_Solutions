@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:analisis_y_modelado/flutter_flow/flutter_flow_drop_down.dart';
 import 'package:analisis_y_modelado/flutter_flow/flutter_flow_icon_button.dart';
@@ -41,6 +42,7 @@ void main() async {
         create: (context) => FFAppState(),
         child: const MyApp(),
       ));
+      await GoogleFonts.pendingFonts();
 
       await tester.tap(find.byKey(const ValueKey('Button_4p36')));
     });
