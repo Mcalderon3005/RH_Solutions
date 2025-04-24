@@ -3,6 +3,8 @@ import '/flutter_flow/flutter_flow_data_table.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'log_sesiones_widget.dart' show LogSesionesWidget;
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
+    show TutorialCoachMark;
 import 'package:flutter/material.dart';
 
 class LogSesionesModel extends FlutterFlowModel<LogSesionesWidget> {
@@ -22,6 +24,7 @@ class LogSesionesModel extends FlutterFlowModel<LogSesionesWidget> {
 
   ///  State fields for stateful widgets in this page.
 
+  TutorialCoachMark? ttlLogSesionesController;
   // Stores action output result for [Firestore Query - Query a collection] action in logSesiones widget.
   List<LogSesionRecord>? sesionesList;
   // State field(s) for PaginatedDataTable widget.
@@ -39,6 +42,7 @@ class LogSesionesModel extends FlutterFlowModel<LogSesionesWidget> {
 
   @override
   void dispose() {
+    ttlLogSesionesController?.finish();
     paginatedDataTableController.dispose();
     textFieldFocusNode?.dispose();
     textController?.dispose();

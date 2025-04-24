@@ -106,6 +106,52 @@ class SendPushNotificationCall {
   }
 }
 
+class SendPushNotificationCopyCall {
+  static Future<ApiCallResponse> call({
+    String? contentEs = '',
+    String? headingEs = '',
+    String? contentEn = '',
+    String? headingEn = '',
+    String? segment = 'All',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "app_id": "bdc547d5-edd6-4224-8748-ba0edfdcdb42",
+  "contents": {
+    "en": "${escapeStringForJson(contentEn)}",
+    "es": "${escapeStringForJson(contentEs)}"
+  },
+  "headings": {
+    "en": "${escapeStringForJson(headingEn)}",
+    "es": "${escapeStringForJson(headingEs)}"
+  },
+  "included_segments": [
+    "${escapeStringForJson(segment)}"
+  ]
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'SendPushNotification Copy',
+      apiUrl: 'https://api.onesignal.com/notifications?c=push',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization':
+            'Key os_v2_app_xxcupvpn2zbcjb2ixihn7xg3iijgof4uqaxudenqmphqdvlbqurq635fqekp7bf47u7jcszhrjhv762m3tqe3sdhw6s6ieofwsmpp4a',
+        'accept': 'application/json',
+        'content-type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 class CrearUsuarioCall {
   static Future<ApiCallResponse> call() async {
     final ffApiRequestBody = '''
@@ -150,6 +196,54 @@ class CrearUsuarioCall {
           'https://api.onesignal.com/apps/bdc547d5-edd6-4224-8748-ba0edfdcdb42/users',
       callType: ApiCallType.POST,
       headers: {
+        'accept': 'application/json',
+        'content-type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class SendEmailOneSignalCall {
+  static Future<ApiCallResponse> call({
+    String? emailSubject = '',
+    String? emailPreheader = '',
+    String? emailBody = '',
+    String? fromName = '',
+    String? fromAddress = '',
+    String? name = '',
+    String? emailTo = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "app_id": "bdc547d5-edd6-4224-8748-ba0edfdcdb42",
+  "email_subject": "${escapeStringForJson(emailSubject)}",
+  "email_preheader": "${escapeStringForJson(emailPreheader)}",
+  "email_body": "${escapeStringForJson(emailBody)}",
+  "email_from_name": "HRsolutions",
+  "email_from_address": "${escapeStringForJson(fromAddress)}",
+  "include_unsubscribed": true,
+  "disable_email_click_tracking": true,
+  "name": "${escapeStringForJson(name)}",
+  "email_to": [
+    "${escapeStringForJson(emailTo)}"
+  ]
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'SendEmailOneSignal',
+      apiUrl: 'https://api.onesignal.com/notifications?c=email',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization':
+            'Key os_v2_app_xxcupvpn2zbcjb2ixihn7xg3iijgof4uqaxudenqmphqdvlbqurq635fqekp7bf47u7jcszhrjhv762m3tqe3sdhw6s6ieofwsmpp4a',
         'accept': 'application/json',
         'content-type': 'application/json',
       },

@@ -23,7 +23,7 @@ List<TargetFocus> createWalkthroughTargets(BuildContext context) => [
         color: Colors.black,
         contents: [
           TargetContent(
-            align: ContentAlign.bottom,
+            align: ContentAlign.top,
             builder: (context, __) => TutorialWidget(
               tutorial: 'Bienvenido esta es la seccion para iniciar sesion',
             ),

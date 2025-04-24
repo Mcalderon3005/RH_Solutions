@@ -2,6 +2,8 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'log_errores_sesion_b_u_widget.dart' show LogErroresSesionBUWidget;
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
+    show TutorialCoachMark;
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
@@ -9,6 +11,7 @@ class LogErroresSesionBUModel
     extends FlutterFlowModel<LogErroresSesionBUWidget> {
   ///  State fields for stateful widgets in this page.
 
+  TutorialCoachMark? ttlLogErroresSesionBUController;
   List<UsersRecord> simpleSearchResults = [];
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode;
@@ -26,6 +29,7 @@ class LogErroresSesionBUModel
 
   @override
   void dispose() {
+    ttlLogErroresSesionBUController?.finish();
     textFieldFocusNode?.dispose();
     textController?.dispose();
 

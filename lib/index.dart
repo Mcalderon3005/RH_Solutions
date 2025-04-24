@@ -13,15 +13,13 @@ export '/pages/recuperar_contrasena/recuperar_contrasena_widget.dart'
     show RecuperarContrasenaWidget;
 export '/empleados_admin/empleados/index_empleado/index_empleado_widget.dart'
     show IndexEmpleadoWidget;
-export '/empleados_admin/menu_admin/home_admin_page/home_admin_page_widget.dart'
+export '/empleados_admin/home_admin_page/home_admin_page_widget.dart'
     show HomeAdminPageWidget;
 export '/empleados_admin/empleados/crear_empleado/crear_empleado_widget.dart'
     show CrearEmpleadoWidget;
-export '/pages/ver_actividades/ver_actividades_widget.dart'
-    show VerActividadesWidget;
 export '/empleados_admin/empleados/edit_empleado/edit_empleado_widget.dart'
     show EditEmpleadoWidget;
-export '/empleados_admin/actividades_reuniones/definir_actividad_b_u/definir_actividad_b_u_widget.dart'
+export '/empleados_admin/definir_actividad_b_u/definir_actividad_b_u_widget.dart'
     show DefinirActividadBUWidget;
 export '/empleados_admin/actividades_reuniones/crear_actividad/crear_actividad_widget.dart'
     show CrearActividadWidget;
@@ -33,23 +31,19 @@ export '/empleados_admin/reportes/log_sesiones_b_u/log_sesiones_b_u_widget.dart'
     show LogSesionesBUWidget;
 export '/empleados_admin/reportes/log_errores_sesion_b_u/log_errores_sesion_b_u_widget.dart'
     show LogErroresSesionBUWidget;
-export '/empleados_admin/solicitudess/solicitudess_widget.dart'
-    show SolicitudessWidget;
 export '/pages/vacaciones_e_incapacidades/solicitud_vacaciones/solicitud_vacaciones_widget.dart'
     show SolicitudVacacionesWidget;
 export '/pages/vacaciones_e_incapacidades/index_solicitudes_b_u/index_solicitudes_b_u_widget.dart'
     show IndexSolicitudesBUWidget;
-export '/empleados_admin/vacaciones/index_incapacidades_admin_b_u/index_incapacidades_admin_b_u_widget.dart'
-    show IndexIncapacidadesAdminBUWidget;
 export '/pages/vacaciones_e_incapacidades/index_incapacidades_b_u/index_incapacidades_b_u_widget.dart'
     show IndexIncapacidadesBUWidget;
-export '/empleados_admin/vacaciones/solicitudes_vacaciones_detalle/solicitudes_vacaciones_detalle_widget.dart'
+export '/empleados_admin/solicitudes_vacaciones_detalle/solicitudes_vacaciones_detalle_widget.dart'
     show SolicitudesVacacionesDetalleWidget;
-export '/empleados_admin/vacaciones/solicitudes_incapacidades_detalle/solicitudes_incapacidades_detalle_widget.dart'
+export '/empleados_admin/solicitudes_incapacidades_detalle/solicitudes_incapacidades_detalle_widget.dart'
     show SolicitudesIncapacidadesDetalleWidget;
 export '/empleados_admin/menu_admin/solicitudes_home_admin/solicitudes_home_admin_widget.dart'
     show SolicitudesHomeAdminWidget;
-export '/empleados_admin/editar_actividad/editar_actividad_widget.dart'
+export '/empleados_admin/actividades_reuniones/editar_actividad/editar_actividad_widget.dart'
     show EditarActividadWidget;
 export '/empleados_admin/pagos_recibos/crear_pago/crear_pago_widget.dart'
     show CrearPagoWidget;
@@ -59,7 +53,7 @@ export '/empleados_admin/vacaciones/index_incapacidad_admin/index_incapacidad_ad
     show IndexIncapacidadAdminWidget;
 export '/empleados_admin/vacaciones/solicitudes_vacaciones_admin/solicitudes_vacaciones_admin_widget.dart'
     show SolicitudesVacacionesAdminWidget;
-export '/empleados_admin/reportes/log_errores_sesion/log_errores_sesion_widget.dart'
+export '/empleados_admin/log_errores_sesion/log_errores_sesion_widget.dart'
     show LogErroresSesionWidget;
 export '/empleados_admin/menu_admin/reportes_home_admin/reportes_home_admin_widget.dart'
     show ReportesHomeAdminWidget;
@@ -90,3 +84,25 @@ export '/pages/profile/editar_perfil/editar_perfil_widget.dart'
     show EditarPerfilWidget;
 export '/pages/log_in/cambiar_contrasena/cambiar_contrasena_widget.dart'
     show CambiarContrasenaWidget;
+export '/pages/profile/reporta_error/reporta_error_widget.dart'
+    show ReportaErrorWidget;
+export '/empleados_admin/pagos_recibos/facturacion_empleado/facturacion_empleado_widget.dart'
+    show FacturacionEmpleadoWidget;
+export '/empleados_admin/pagos_recibos/solicitar_correccion/solicitar_correccion_widget.dart'
+    show SolicitarCorreccionWidget;
+export '/empleados_admin/pagos_recibos/solicitudes_index/solicitudes_index_widget.dart'
+    show SolicitudesIndexWidget;
+export '/empleados_admin/actividades_reuniones/calendario_actividades/calendario_actividades_widget.dart'
+    show CalendarioActividadesWidget;
+export '/empleados_admin/pagos_recibos/corregir_pago/corregir_pago_widget.dart'
+    show CorregirPagoWidget;
+export '/empleados_admin/pagos_recibos/solicitudes_index_empleado/solicitudes_index_empleado_widget.dart'
+    show SolicitudesIndexEmpleadoWidget;
+export '/empleados_admin/reportes/log_calendario_actividades/log_calendario_actividades_widget.dart'
+    show LogCalendarioActividadesWidget;
+export '/pages/actividades/calendario_actividades_usuario/calendario_actividades_usuario_widget.dart'
+    show CalendarioActividadesUsuarioWidget;
+export '/empleados_admin/reportes/vaciar_registros/vaciar_registros_widget.dart'
+    show VaciarRegistrosWidget;
+export '/pages/vacaciones_e_incapacidades/index_incapacidades_copy/index_incapacidades_copy_widget.dart'
+    show IndexIncapacidadesCopyWidget;

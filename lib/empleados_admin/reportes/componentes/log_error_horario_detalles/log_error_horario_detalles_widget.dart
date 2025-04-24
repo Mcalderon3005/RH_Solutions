@@ -2,6 +2,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'log_error_horario_detalles_model.dart';
 export 'log_error_horario_detalles_model.dart';
 
@@ -12,9 +13,9 @@ export 'log_error_horario_detalles_model.dart';
 class LogErrorHorarioDetallesWidget extends StatefulWidget {
   const LogErrorHorarioDetallesWidget({
     super.key,
-    required this.fechaCreacion,
-    required this.fechaInicioJornada,
-    required this.descripcionHorario,
+    this.fechaCreacion,
+    this.fechaInicioJornada,
+    this.descripcionHorario,
   });
 
   final DateTime? fechaCreacion;
@@ -41,7 +42,8 @@ class _LogErrorHorarioDetallesWidgetState
     super.initState();
     _model = createModel(context, () => LogErrorHorarioDetallesModel());
 
-    _model.textController ??= TextEditingController();
+    _model.textController ??=
+        TextEditingController(text: widget.descripcionHorario);
     _model.textFieldFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
@@ -88,10 +90,18 @@ class _LogErrorHorarioDetallesWidgetState
                     Text(
                       'Fecha de Creación',
                       style: FlutterFlowTheme.of(context).bodySmall.override(
-                            fontFamily: 'Manrope',
+                            font: GoogleFonts.manrope(
+                              fontWeight: FontWeight.w600,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .bodySmall
+                                  .fontStyle,
+                            ),
                             fontSize: 14.0,
                             letterSpacing: 0.0,
                             fontWeight: FontWeight.w600,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .bodySmall
+                                .fontStyle,
                           ),
                     ),
                     Text(
@@ -104,8 +114,21 @@ class _LogErrorHorarioDetallesWidgetState
                         '0/0/0 hh:mm',
                       ),
                       style: FlutterFlowTheme.of(context).bodyLarge.override(
-                            fontFamily: 'Manrope',
+                            font: GoogleFonts.manrope(
+                              fontWeight: FlutterFlowTheme.of(context)
+                                  .bodyLarge
+                                  .fontWeight,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .bodyLarge
+                                  .fontStyle,
+                            ),
                             letterSpacing: 0.0,
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .bodyLarge
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .bodyLarge
+                                .fontStyle,
                           ),
                     ),
                   ],
@@ -117,10 +140,18 @@ class _LogErrorHorarioDetallesWidgetState
                     Text(
                       'Fecha de Inicio Jornada',
                       style: FlutterFlowTheme.of(context).bodySmall.override(
-                            fontFamily: 'Manrope',
+                            font: GoogleFonts.manrope(
+                              fontWeight: FontWeight.w600,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .bodySmall
+                                  .fontStyle,
+                            ),
                             fontSize: 14.0,
                             letterSpacing: 0.0,
                             fontWeight: FontWeight.w600,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .bodySmall
+                                .fontStyle,
                           ),
                     ),
                     Text(
@@ -133,8 +164,21 @@ class _LogErrorHorarioDetallesWidgetState
                         '0/0/0 h:mm',
                       ),
                       style: FlutterFlowTheme.of(context).bodyLarge.override(
-                            fontFamily: 'Manrope',
+                            font: GoogleFonts.manrope(
+                              fontWeight: FlutterFlowTheme.of(context)
+                                  .bodyLarge
+                                  .fontWeight,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .bodyLarge
+                                  .fontStyle,
+                            ),
                             letterSpacing: 0.0,
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .bodyLarge
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .bodyLarge
+                                .fontStyle,
                           ),
                     ),
                   ],
@@ -148,9 +192,15 @@ class _LogErrorHorarioDetallesWidgetState
                 Text(
                   'Descripción',
                   style: FlutterFlowTheme.of(context).bodySmall.override(
-                        fontFamily: 'Manrope',
+                        font: GoogleFonts.manrope(
+                          fontWeight: FontWeight.w600,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).bodySmall.fontStyle,
+                        ),
                         letterSpacing: 0.0,
                         fontWeight: FontWeight.w600,
+                        fontStyle:
+                            FlutterFlowTheme.of(context).bodySmall.fontStyle,
                       ),
                 ),
                 TextFormField(
@@ -161,8 +211,19 @@ class _LogErrorHorarioDetallesWidgetState
                   obscureText: false,
                   decoration: InputDecoration(
                     hintStyle: FlutterFlowTheme.of(context).bodyLarge.override(
-                          fontFamily: 'Manrope',
+                          font: GoogleFonts.manrope(
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .bodyLarge
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .bodyLarge
+                                .fontStyle,
+                          ),
                           letterSpacing: 0.0,
+                          fontWeight:
+                              FlutterFlowTheme.of(context).bodyLarge.fontWeight,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).bodyLarge.fontStyle,
                         ),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
@@ -198,8 +259,23 @@ class _LogErrorHorarioDetallesWidgetState
                         EdgeInsetsDirectional.fromSTEB(12.0, 12.0, 12.0, 12.0),
                   ),
                   style: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily: 'Manrope',
+                        font: GoogleFonts.manrope(
+                          fontWeight: FlutterFlowTheme.of(context)
+                              .bodyMedium
+                              .fontWeight,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                        ),
+                        color: (Theme.of(context).brightness ==
+                                    Brightness.light) !=
+                                null
+                            ? Color(0xFF040000)
+                            : Colors.white,
                         letterSpacing: 0.0,
+                        fontWeight:
+                            FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                        fontStyle:
+                            FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                       ),
                   maxLines: 4,
                   minLines: 4,
@@ -211,8 +287,10 @@ class _LogErrorHorarioDetallesWidgetState
             Align(
               alignment: AlignmentDirectional(1.0, 0.0),
               child: FFButtonWidget(
-                onPressed: () {
-                  print('Button pressed ...');
+                onPressed: () async {
+                  logFirebaseEvent('LOG_ERROR_HORARIO_DETALLES_OK_BTN_ON_TAP');
+                  logFirebaseEvent('Button_bottom_sheet');
+                  Navigator.pop(context);
                 },
                 text: 'OK',
                 options: FFButtonOptions(
@@ -223,9 +301,19 @@ class _LogErrorHorarioDetallesWidgetState
                       EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   color: FlutterFlowTheme.of(context).primary,
                   textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                        fontFamily: 'Manrope',
+                        font: GoogleFonts.manrope(
+                          fontWeight: FlutterFlowTheme.of(context)
+                              .titleSmall
+                              .fontWeight,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).titleSmall.fontStyle,
+                        ),
                         color: FlutterFlowTheme.of(context).info,
                         letterSpacing: 0.0,
+                        fontWeight:
+                            FlutterFlowTheme.of(context).titleSmall.fontWeight,
+                        fontStyle:
+                            FlutterFlowTheme.of(context).titleSmall.fontStyle,
                       ),
                   elevation: 0.0,
                   borderSide: BorderSide(

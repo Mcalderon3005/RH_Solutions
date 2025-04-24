@@ -3,6 +3,8 @@ import '/flutter_flow/flutter_flow_data_table.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'index_empleado_widget.dart' show IndexEmpleadoWidget;
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
+    show TutorialCoachMark;
 import 'package:flutter/material.dart';
 
 class IndexEmpleadoModel extends FlutterFlowModel<IndexEmpleadoWidget> {
@@ -19,6 +21,7 @@ class IndexEmpleadoModel extends FlutterFlowModel<IndexEmpleadoWidget> {
 
   ///  State fields for stateful widgets in this page.
 
+  TutorialCoachMark? ttlIndexEmpleadoController;
   // Stores action output result for [Firestore Query - Query a collection] action in indexEmpleado widget.
   List<UsersRecord>? usersList;
   // State field(s) for PaginatedDataTable widget.
@@ -37,6 +40,7 @@ class IndexEmpleadoModel extends FlutterFlowModel<IndexEmpleadoWidget> {
 
   @override
   void dispose() {
+    ttlIndexEmpleadoController?.finish();
     paginatedDataTableController.dispose();
     textFieldFocusNode?.dispose();
     textController?.dispose();

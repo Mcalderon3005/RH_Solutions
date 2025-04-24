@@ -145,12 +145,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
               builder: (context, params) => CrearEmpleadoWidget(),
             ),
             FFRoute(
-              name: VerActividadesWidget.routeName,
-              path: VerActividadesWidget.routePath,
-              requireAuth: true,
-              builder: (context, params) => VerActividadesWidget(),
-            ),
-            FFRoute(
               name: EditEmpleadoWidget.routeName,
               path: EditEmpleadoWidget.routePath,
               builder: (context, params) => EditEmpleadoWidget(
@@ -238,11 +232,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
               builder: (context, params) => LogErroresSesionBUWidget(),
             ),
             FFRoute(
-              name: SolicitudessWidget.routeName,
-              path: SolicitudessWidget.routePath,
-              builder: (context, params) => SolicitudessWidget(),
-            ),
-            FFRoute(
               name: SolicitudVacacionesWidget.routeName,
               path: SolicitudVacacionesWidget.routePath,
               requireAuth: true,
@@ -253,11 +242,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
               path: IndexSolicitudesBUWidget.routePath,
               requireAuth: true,
               builder: (context, params) => IndexSolicitudesBUWidget(),
-            ),
-            FFRoute(
-              name: IndexIncapacidadesAdminBUWidget.routeName,
-              path: IndexIncapacidadesAdminBUWidget.routePath,
-              builder: (context, params) => IndexIncapacidadesAdminBUWidget(),
             ),
             FFRoute(
               name: IndexIncapacidadesBUWidget.routeName,
@@ -528,6 +512,80 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
               path: CambiarContrasenaWidget.routePath,
               requireAuth: true,
               builder: (context, params) => CambiarContrasenaWidget(),
+            ),
+            FFRoute(
+              name: ReportaErrorWidget.routeName,
+              path: ReportaErrorWidget.routePath,
+              requireAuth: true,
+              builder: (context, params) => ReportaErrorWidget(),
+            ),
+            FFRoute(
+              name: FacturacionEmpleadoWidget.routeName,
+              path: FacturacionEmpleadoWidget.routePath,
+              builder: (context, params) => FacturacionEmpleadoWidget(),
+            ),
+            FFRoute(
+              name: SolicitarCorreccionWidget.routeName,
+              path: SolicitarCorreccionWidget.routePath,
+              builder: (context, params) => SolicitarCorreccionWidget(
+                pago: params.getParam(
+                  'pago',
+                  ParamType.DocumentReference,
+                  isList: false,
+                  collectionNamePath: ['Pagos'],
+                ),
+              ),
+            ),
+            FFRoute(
+              name: SolicitudesIndexWidget.routeName,
+              path: SolicitudesIndexWidget.routePath,
+              builder: (context, params) => SolicitudesIndexWidget(),
+            ),
+            FFRoute(
+              name: CalendarioActividadesWidget.routeName,
+              path: CalendarioActividadesWidget.routePath,
+              requireAuth: true,
+              builder: (context, params) => CalendarioActividadesWidget(),
+            ),
+            FFRoute(
+              name: CorregirPagoWidget.routeName,
+              path: CorregirPagoWidget.routePath,
+              builder: (context, params) => CorregirPagoWidget(
+                pago: params.getParam(
+                  'pago',
+                  ParamType.DocumentReference,
+                  isList: false,
+                  collectionNamePath: ['Pagos'],
+                ),
+              ),
+            ),
+            FFRoute(
+              name: SolicitudesIndexEmpleadoWidget.routeName,
+              path: SolicitudesIndexEmpleadoWidget.routePath,
+              builder: (context, params) => SolicitudesIndexEmpleadoWidget(),
+            ),
+            FFRoute(
+              name: LogCalendarioActividadesWidget.routeName,
+              path: LogCalendarioActividadesWidget.routePath,
+              builder: (context, params) => LogCalendarioActividadesWidget(),
+            ),
+            FFRoute(
+              name: CalendarioActividadesUsuarioWidget.routeName,
+              path: CalendarioActividadesUsuarioWidget.routePath,
+              requireAuth: true,
+              builder: (context, params) =>
+                  CalendarioActividadesUsuarioWidget(),
+            ),
+            FFRoute(
+              name: VaciarRegistrosWidget.routeName,
+              path: VaciarRegistrosWidget.routePath,
+              builder: (context, params) => VaciarRegistrosWidget(),
+            ),
+            FFRoute(
+              name: IndexIncapacidadesCopyWidget.routeName,
+              path: IndexIncapacidadesCopyWidget.routePath,
+              requireAuth: true,
+              builder: (context, params) => IndexIncapacidadesCopyWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),

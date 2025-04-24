@@ -1,6 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'tutorial_model.dart';
 export 'tutorial_model.dart';
 
@@ -56,9 +57,18 @@ class _TutorialWidgetState extends State<TutorialWidget> {
             widget.tutorial,
             'texto',
           ),
-          style: FlutterFlowTheme.of(context).bodyMedium.override(
-                fontFamily: 'Manrope',
+          style: FlutterFlowTheme.of(context).displaySmall.override(
+                font: GoogleFonts.outfit(
+                  fontWeight:
+                      FlutterFlowTheme.of(context).displaySmall.fontWeight,
+                  fontStyle:
+                      FlutterFlowTheme.of(context).displaySmall.fontStyle,
+                ),
+                fontSize: 20.0,
                 letterSpacing: 0.0,
+                fontWeight:
+                    FlutterFlowTheme.of(context).displaySmall.fontWeight,
+                fontStyle: FlutterFlowTheme.of(context).displaySmall.fontStyle,
               ),
         ),
       ),

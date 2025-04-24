@@ -1,4 +1,5 @@
 import '/backend/backend.dart';
+import '/backend/firebase_storage/storage.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -6,9 +7,16 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/flutter_flow/upload_data.dart';
+import '/walkthroughs/tll_editar_pago.dart';
+import '/index.dart';
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
+    show TutorialCoachMark;
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'editar_pago_model.dart';
 export 'editar_pago_model.dart';
 
@@ -158,14 +166,34 @@ class _EditarPagoWidgetState extends State<EditarPagoWidget>
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 4.0, 0.0, 0.0),
                                   child: Text(
-                                    'FORMULARIO DE REGISTRO',
+                                    'CORREGIR REGISTRO DE PAGO',
                                     style: FlutterFlowTheme.of(context)
                                         .headlineMedium
                                         .override(
-                                          fontFamily: 'Outfit',
+                                          font: GoogleFonts.outfit(
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .headlineMedium
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .headlineMedium
+                                                    .fontStyle,
+                                          ),
                                           fontSize: 30.0,
                                           letterSpacing: 0.0,
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .headlineMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .headlineMedium
+                                                  .fontStyle,
                                         ),
+                                  ).addWalkthrough(
+                                    textDz0pcm06,
+                                    _model.tllEditarPagoController,
                                   ),
                                 ),
                                 Align(
@@ -194,8 +222,10 @@ class _EditarPagoWidgetState extends State<EditarPagoWidget>
                                                         .drdTipoValueController ??=
                                                     FormFieldController<String>(
                                                   _model.drdTipoValue ??=
-                                                      editarPagoPagosRecord
-                                                          .tipo,
+                                                      valueOrDefault<String>(
+                                                    editarPagoPagosRecord.tipo,
+                                                    'tipo',
+                                                  ),
                                                 ),
                                                 options: [
                                                   'Salario',
@@ -206,16 +236,35 @@ class _EditarPagoWidgetState extends State<EditarPagoWidget>
                                                         .drdTipoValue = val),
                                                 width: 200.0,
                                                 height: 60.05,
-                                                textStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Manrope',
-                                                          fontSize: 20.0,
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                hintText:
-                                                    'Seleccione el tipo de pago',
+                                                textStyle: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyMedium
+                                                    .override(
+                                                      font: GoogleFonts.manrope(
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontStyle,
+                                                      ),
+                                                      fontSize: 20.0,
+                                                      letterSpacing: 0.0,
+                                                      fontWeight:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .fontWeight,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .fontStyle,
+                                                    ),
                                                 icon: Icon(
                                                   Icons
                                                       .keyboard_arrow_down_rounded,
@@ -238,6 +287,9 @@ class _EditarPagoWidgetState extends State<EditarPagoWidget>
                                                 isOverButton: false,
                                                 isSearchable: false,
                                                 isMultiSelect: false,
+                                              ).addWalkthrough(
+                                                dropDown22j7p15n,
+                                                _model.tllEditarPagoController,
                                               ),
                                             ),
                                           ],
@@ -267,15 +319,34 @@ class _EditarPagoWidgetState extends State<EditarPagoWidget>
                                                                 15.0, 0.0),
                                                     child: Text(
                                                       'Fecha:',
-                                                      style: FlutterFlowTheme
-                                                              .of(context)
-                                                          .bodyMedium
-                                                          .override(
-                                                            fontFamily:
-                                                                'Manrope',
-                                                            fontSize: 20.0,
-                                                            letterSpacing: 0.0,
-                                                          ),
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                font: GoogleFonts
+                                                                    .manrope(
+                                                                  fontWeight: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontWeight,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
+                                                                ),
+                                                                fontSize: 20.0,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontWeight,
+                                                                fontStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
+                                                              ),
                                                     ),
                                                   ),
                                                 ),
@@ -297,7 +368,19 @@ class _EditarPagoWidgetState extends State<EditarPagoWidget>
                                                             context)
                                                         .bodyMedium
                                                         .override(
-                                                          fontFamily: 'Manrope',
+                                                          font: GoogleFonts
+                                                              .manrope(
+                                                            fontWeight:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontWeight,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
+                                                          ),
                                                           color: valueOrDefault<
                                                               Color>(
                                                             (Theme.of(context)
@@ -311,12 +394,22 @@ class _EditarPagoWidgetState extends State<EditarPagoWidget>
                                                           ),
                                                           fontSize: 20.0,
                                                           letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontStyle,
                                                         ),
                                                   ),
                                                 ),
                                                 FlutterFlowIconButton(
                                                   borderRadius: 8.0,
-                                                  buttonSize: 40.0,
+                                                  buttonSize: 43.0,
                                                   fillColor:
                                                       FlutterFlowTheme.of(
                                                               context)
@@ -326,7 +419,7 @@ class _EditarPagoWidgetState extends State<EditarPagoWidget>
                                                     color: FlutterFlowTheme.of(
                                                             context)
                                                         .info,
-                                                    size: 24.0,
+                                                    size: 22.0,
                                                   ),
                                                   onPressed: () async {
                                                     logFirebaseEvent(
@@ -360,8 +453,16 @@ class _EditarPagoWidgetState extends State<EditarPagoWidget>
                                                                       context)
                                                                   .headlineLarge
                                                                   .override(
-                                                                    fontFamily:
-                                                                        'Outfit',
+                                                                    font: GoogleFonts
+                                                                        .outfit(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w600,
+                                                                      fontStyle: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .headlineLarge
+                                                                          .fontStyle,
+                                                                    ),
                                                                     fontSize:
                                                                         32.0,
                                                                     letterSpacing:
@@ -369,6 +470,10 @@ class _EditarPagoWidgetState extends State<EditarPagoWidget>
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .w600,
+                                                                    fontStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .headlineLarge
+                                                                        .fontStyle,
                                                                   ),
                                                           pickerBackgroundColor:
                                                               FlutterFlowTheme.of(
@@ -416,6 +521,9 @@ class _EditarPagoWidgetState extends State<EditarPagoWidget>
                                                   },
                                                 ),
                                               ],
+                                            ).addWalkthrough(
+                                              rowE2llabhj,
+                                              _model.tllEditarPagoController,
                                             ),
                                           ),
                                         ),
@@ -439,8 +547,31 @@ class _EditarPagoWidgetState extends State<EditarPagoWidget>
                                                   FlutterFlowTheme.of(context)
                                                       .labelMedium
                                                       .override(
-                                                        fontFamily: 'Manrope',
+                                                        font:
+                                                            GoogleFonts.manrope(
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelMedium
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelMedium
+                                                                  .fontStyle,
+                                                        ),
+                                                        fontSize: 16.0,
                                                         letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .labelMedium
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .labelMedium
+                                                                .fontStyle,
                                                       ),
                                               hintText: editarPagoPagosRecord
                                                   .monto
@@ -449,8 +580,30 @@ class _EditarPagoWidgetState extends State<EditarPagoWidget>
                                                   FlutterFlowTheme.of(context)
                                                       .labelMedium
                                                       .override(
-                                                        fontFamily: 'Manrope',
+                                                        font:
+                                                            GoogleFonts.manrope(
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelMedium
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelMedium
+                                                                  .fontStyle,
+                                                        ),
                                                         letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .labelMedium
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .labelMedium
+                                                                .fontStyle,
                                                       ),
                                               enabledBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
@@ -501,8 +654,30 @@ class _EditarPagoWidgetState extends State<EditarPagoWidget>
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Manrope',
+                                                  font: GoogleFonts.manrope(
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontStyle,
+                                                  ),
+                                                  fontSize: 18.0,
                                                   letterSpacing: 0.0,
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontStyle,
                                                 ),
                                             keyboardType: const TextInputType
                                                 .numberWithOptions(
@@ -514,6 +689,9 @@ class _EditarPagoWidgetState extends State<EditarPagoWidget>
                                                 .txtMontoTextControllerValidator
                                                 .asValidator(context),
                                           ),
+                                        ).addWalkthrough(
+                                          textField9gfmoy82,
+                                          _model.tllEditarPagoController,
                                         ),
                                         Container(
                                           width:
@@ -536,15 +714,61 @@ class _EditarPagoWidgetState extends State<EditarPagoWidget>
                                                   FlutterFlowTheme.of(context)
                                                       .labelMedium
                                                       .override(
-                                                        fontFamily: 'Manrope',
+                                                        font:
+                                                            GoogleFonts.manrope(
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelMedium
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelMedium
+                                                                  .fontStyle,
+                                                        ),
+                                                        fontSize: 16.0,
                                                         letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .labelMedium
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .labelMedium
+                                                                .fontStyle,
                                                       ),
                                               hintStyle:
                                                   FlutterFlowTheme.of(context)
                                                       .labelMedium
                                                       .override(
-                                                        fontFamily: 'Manrope',
+                                                        font:
+                                                            GoogleFonts.manrope(
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelMedium
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelMedium
+                                                                  .fontStyle,
+                                                        ),
+                                                        fontSize: 1.0,
                                                         letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .labelMedium
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .labelMedium
+                                                                .fontStyle,
                                                       ),
                                               enabledBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
@@ -595,8 +819,30 @@ class _EditarPagoWidgetState extends State<EditarPagoWidget>
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Manrope',
+                                                  font: GoogleFonts.manrope(
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontStyle,
+                                                  ),
+                                                  fontSize: 18.0,
                                                   letterSpacing: 0.0,
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontStyle,
                                                 ),
                                             cursorColor:
                                                 FlutterFlowTheme.of(context)
@@ -605,6 +851,9 @@ class _EditarPagoWidgetState extends State<EditarPagoWidget>
                                                 .txtDetalleTextControllerValidator
                                                 .asValidator(context),
                                           ),
+                                        ).addWalkthrough(
+                                          textFieldKqd81c39,
+                                          _model.tllEditarPagoController,
                                         ),
                                         Align(
                                           alignment:
@@ -616,14 +865,35 @@ class _EditarPagoWidgetState extends State<EditarPagoWidget>
                                             children: [
                                               Text(
                                                 'Comprobante de pago',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Manrope',
-                                                          fontSize: 18.0,
-                                                          letterSpacing: 0.0,
-                                                        ),
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyMedium
+                                                    .override(
+                                                      font: GoogleFonts.manrope(
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontStyle,
+                                                      ),
+                                                      fontSize: 20.0,
+                                                      letterSpacing: 0.0,
+                                                      fontWeight:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .fontWeight,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .fontStyle,
+                                                    ),
                                               ),
                                             ],
                                           ),
@@ -641,14 +911,40 @@ class _EditarPagoWidgetState extends State<EditarPagoWidget>
                                                     .fromSTEB(
                                                         12.0, 0.0, 0.0, 0.0),
                                                 child: Text(
-                                                  '',
+                                                  editarPagoPagosRecord
+                                                      .comprobanrte
+                                                      .maybeHandleOverflow(
+                                                    maxChars: 50,
+                                                  ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyMedium
                                                       .override(
-                                                        fontFamily: 'Manrope',
+                                                        font:
+                                                            GoogleFonts.manrope(
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontStyle,
+                                                        ),
                                                         fontSize: 20.0,
                                                         letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontStyle,
                                                       ),
                                                 ),
                                               ),
@@ -657,8 +953,132 @@ class _EditarPagoWidgetState extends State<EditarPagoWidget>
                                                     .fromSTEB(
                                                         15.0, 0.0, 0.0, 0.0),
                                                 child: FFButtonWidget(
-                                                  onPressed: () {
-                                                    print('Button pressed ...');
+                                                  onPressed: () async {
+                                                    logFirebaseEvent(
+                                                        'EDITAR_PAGO_PAGE_corregirPagoBtn_ON_TAP');
+                                                    logFirebaseEvent(
+                                                        'corregirPagoBtn_upload_file_to_firebase');
+                                                    final selectedFiles =
+                                                        await selectFiles(
+                                                      multiFile: false,
+                                                    );
+                                                    if (selectedFiles != null) {
+                                                      safeSetState(() => _model
+                                                              .isDataUploading =
+                                                          true);
+                                                      var selectedUploadedFiles =
+                                                          <FFUploadedFile>[];
+
+                                                      var downloadUrls =
+                                                          <String>[];
+                                                      try {
+                                                        selectedUploadedFiles =
+                                                            selectedFiles
+                                                                .map((m) =>
+                                                                    FFUploadedFile(
+                                                                      name: m
+                                                                          .storagePath
+                                                                          .split(
+                                                                              '/')
+                                                                          .last,
+                                                                      bytes: m
+                                                                          .bytes,
+                                                                    ))
+                                                                .toList();
+
+                                                        downloadUrls =
+                                                            (await Future.wait(
+                                                          selectedFiles.map(
+                                                            (f) async =>
+                                                                await uploadData(
+                                                                    f.storagePath,
+                                                                    f.bytes),
+                                                          ),
+                                                        ))
+                                                                .where((u) =>
+                                                                    u != null)
+                                                                .map((u) => u!)
+                                                                .toList();
+                                                      } finally {
+                                                        _model.isDataUploading =
+                                                            false;
+                                                      }
+                                                      if (selectedUploadedFiles
+                                                                  .length ==
+                                                              selectedFiles
+                                                                  .length &&
+                                                          downloadUrls.length ==
+                                                              selectedFiles
+                                                                  .length) {
+                                                        safeSetState(() {
+                                                          _model.uploadedLocalFile =
+                                                              selectedUploadedFiles
+                                                                  .first;
+                                                          _model.uploadedFileUrl =
+                                                              downloadUrls
+                                                                  .first;
+                                                        });
+                                                      } else {
+                                                        safeSetState(() {});
+                                                        return;
+                                                      }
+                                                    }
+
+                                                    logFirebaseEvent(
+                                                        'corregirPagoBtn_delete_data');
+                                                    await FirebaseStorage
+                                                        .instance
+                                                        .refFromURL(
+                                                            editarPagoPagosRecord
+                                                                .comprobanrte)
+                                                        .delete();
+                                                    logFirebaseEvent(
+                                                        'corregirPagoBtn_backend_call');
+
+                                                    await widget.pago!.update(
+                                                        createPagosRecordData(
+                                                      fechaCreacion:
+                                                          _model.datePicked,
+                                                      detalle: _model
+                                                          .txtDetalleTextController
+                                                          .text,
+                                                      monto: double.tryParse(_model
+                                                          .txtMontoTextController
+                                                          .text),
+                                                      comprobanrte: _model
+                                                          .uploadedFileUrl,
+                                                      tipo: _model.drdTipoValue,
+                                                      nombreEmpleado:
+                                                          editarPagoPagosRecord
+                                                              .nombreEmpleado,
+                                                      apellidoEmpleado:
+                                                          editarPagoPagosRecord
+                                                              .apellidoEmpleado,
+                                                      uid: editarPagoPagosRecord
+                                                          .uid,
+                                                    ));
+                                                    logFirebaseEvent(
+                                                        'corregirPagoBtn_alert_dialog');
+                                                    await showDialog(
+                                                      context: context,
+                                                      builder:
+                                                          (alertDialogContext) {
+                                                        return AlertDialog(
+                                                          title: Text(
+                                                              'Se actualizó exitosamente!!'),
+                                                          content: Text(
+                                                              'El archivo del comprobante ha sido reemplazado correctamente.'),
+                                                          actions: [
+                                                            TextButton(
+                                                              onPressed: () =>
+                                                                  Navigator.pop(
+                                                                      alertDialogContext),
+                                                              child: Text('Ok'),
+                                                            ),
+                                                          ],
+                                                        );
+                                                      },
+                                                    );
                                                   },
                                                   text: 'Remplazar',
                                                   options: FFButtonOptions(
@@ -678,16 +1098,42 @@ class _EditarPagoWidgetState extends State<EditarPagoWidget>
                                                             .of(context)
                                                         .titleSmall
                                                         .override(
-                                                          fontFamily: 'Manrope',
+                                                          font: GoogleFonts
+                                                              .manrope(
+                                                            fontWeight:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleSmall
+                                                                    .fontWeight,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleSmall
+                                                                    .fontStyle,
+                                                          ),
                                                           color: Colors.white,
                                                           fontSize: 20.0,
                                                           letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleSmall
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleSmall
+                                                                  .fontStyle,
                                                         ),
                                                     elevation: 0.0,
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             8.0),
                                                   ),
+                                                ).addWalkthrough(
+                                                  button8vrxg0ic,
+                                                  _model
+                                                      .tllEditarPagoController,
                                                 ),
                                               ),
                                             ],
@@ -728,10 +1174,34 @@ class _EditarPagoWidgetState extends State<EditarPagoWidget>
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 24.0, 0.0, 12.0),
                                     child: FFButtonWidget(
-                                      onPressed: () {
-                                        print('Button pressed ...');
+                                      onPressed: () async {
+                                        logFirebaseEvent(
+                                            'EDITAR_PAGO_ACTUALIZAR_PAGO_BTN_ON_TAP');
+                                        logFirebaseEvent('Button_backend_call');
+
+                                        await widget.pago!
+                                            .update(createPagosRecordData(
+                                          fechaCreacion: _model.datePicked,
+                                          detalle: _model
+                                              .txtDetalleTextController.text,
+                                          monto: double.tryParse(_model
+                                              .txtMontoTextController.text),
+                                          comprobanrte: editarPagoPagosRecord
+                                              .comprobanrte,
+                                          tipo: _model.drdTipoValue,
+                                          nombreEmpleado: editarPagoPagosRecord
+                                              .nombreEmpleado,
+                                          apellidoEmpleado:
+                                              editarPagoPagosRecord
+                                                  .apellidoEmpleado,
+                                          uid: editarPagoPagosRecord.uid,
+                                        ));
+                                        logFirebaseEvent('Button_navigate_to');
+
+                                        context.pushNamed(
+                                            FacturacionWidget.routeName);
                                       },
-                                      text: 'Registrar Pago',
+                                      text: 'Actualizar Pago',
                                       icon: Icon(
                                         Icons.receipt_long,
                                         size: 15.0,
@@ -750,10 +1220,27 @@ class _EditarPagoWidgetState extends State<EditarPagoWidget>
                                         textStyle: FlutterFlowTheme.of(context)
                                             .titleSmall
                                             .override(
-                                              fontFamily: 'Manrope',
+                                              font: GoogleFonts.manrope(
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleSmall
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleSmall
+                                                        .fontStyle,
+                                              ),
                                               color: Colors.white,
-                                              fontSize: 18.0,
+                                              fontSize: 20.0,
                                               letterSpacing: 0.0,
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmall
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmall
+                                                      .fontStyle,
                                             ),
                                         elevation: 4.0,
                                         borderSide: BorderSide(
@@ -763,6 +1250,9 @@ class _EditarPagoWidgetState extends State<EditarPagoWidget>
                                         borderRadius:
                                             BorderRadius.circular(60.0),
                                       ),
+                                    ).addWalkthrough(
+                                      buttonF3cdafnz,
+                                      _model.tllEditarPagoController,
                                     ),
                                   ),
                                 ),
@@ -784,8 +1274,16 @@ class _EditarPagoWidgetState extends State<EditarPagoWidget>
                                 color: FlutterFlowTheme.of(context).info,
                                 size: 24.0,
                               ),
-                              onPressed: () {
-                                print('IconButton pressed ...');
+                              onPressed: () async {
+                                logFirebaseEvent(
+                                    'EDITAR_PAGO_PAGE_question_ICN_ON_TAP');
+                                logFirebaseEvent(
+                                    'IconButton_start_walkthrough');
+                                safeSetState(() =>
+                                    _model.tllEditarPagoController =
+                                        createPageWalkthrough(context));
+                                _model.tllEditarPagoController
+                                    ?.show(context: context);
                               },
                             ),
                           ),
@@ -801,4 +1299,15 @@ class _EditarPagoWidgetState extends State<EditarPagoWidget>
       },
     );
   }
+
+  TutorialCoachMark createPageWalkthrough(BuildContext context) =>
+      TutorialCoachMark(
+        targets: createWalkthroughTargets(context),
+        onFinish: () async {
+          safeSetState(() => _model.tllEditarPagoController = null);
+        },
+        onSkip: () {
+          return true;
+        },
+      );
 }

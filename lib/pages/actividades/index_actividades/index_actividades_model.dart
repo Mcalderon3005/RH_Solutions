@@ -3,8 +3,6 @@ import '/flutter_flow/flutter_flow_data_table.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'index_actividades_widget.dart' show IndexActividadesWidget;
-import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
-    show TutorialCoachMark;
 import 'package:flutter/material.dart';
 
 class IndexActividadesModel extends FlutterFlowModel<IndexActividadesWidget> {
@@ -38,7 +36,6 @@ class IndexActividadesModel extends FlutterFlowModel<IndexActividadesWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  TutorialCoachMark? tTLindexActividadesController;
   // Stores action output result for [Firestore Query - Query a collection] action in indexActividades widget.
   List<ReunionesRecord>? actividadesList;
   // State field(s) for txtBuscar widget.
@@ -60,7 +57,6 @@ class IndexActividadesModel extends FlutterFlowModel<IndexActividadesWidget> {
 
   @override
   void dispose() {
-    tTLindexActividadesController?.finish();
     txtBuscarFocusNode1?.dispose();
     txtBuscarTextController1?.dispose();
 

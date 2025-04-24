@@ -1,11 +1,14 @@
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'edit_empleado_widget.dart' show EditEmpleadoWidget;
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
+    show TutorialCoachMark;
 import 'package:flutter/material.dart';
 
 class EditEmpleadoModel extends FlutterFlowModel<EditEmpleadoWidget> {
   ///  State fields for stateful widgets in this page.
 
+  TutorialCoachMark? ttlEditEmpleadoController;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode1;
   TextEditingController? textController1;
@@ -48,6 +51,7 @@ class EditEmpleadoModel extends FlutterFlowModel<EditEmpleadoWidget> {
 
   @override
   void dispose() {
+    ttlEditEmpleadoController?.finish();
     textFieldFocusNode1?.dispose();
     textController1?.dispose();
 

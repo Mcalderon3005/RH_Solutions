@@ -4,6 +4,8 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'log_usuarios_actualizacion_widget.dart'
     show LogUsuariosActualizacionWidget;
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
+    show TutorialCoachMark;
 import 'package:flutter/material.dart';
 
 class LogUsuariosActualizacionModel
@@ -26,6 +28,7 @@ class LogUsuariosActualizacionModel
 
   ///  State fields for stateful widgets in this page.
 
+  TutorialCoachMark? ttlLogUsuarioCreacionController;
   // Stores action output result for [Firestore Query - Query a collection] action in logUsuariosActualizacion widget.
   List<LogActualizacionUsuariosRecord>? userCreationList;
   // State field(s) for PaginatedDataTable widget.
@@ -43,6 +46,7 @@ class LogUsuariosActualizacionModel
 
   @override
   void dispose() {
+    ttlLogUsuarioCreacionController?.finish();
     paginatedDataTableController.dispose();
     textFieldFocusNode?.dispose();
     textController?.dispose();

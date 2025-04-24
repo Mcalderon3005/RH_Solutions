@@ -121,7 +121,6 @@ final parametersBuilderMap =
   'indexEmpleado': ParameterData.none(),
   'HomeAdminPage': ParameterData.none(),
   'Crear_Empleado': ParameterData.none(),
-  'VerActividades': ParameterData.none(),
   'Edit_Empleado': (data) async => ParameterData(
         allParams: {
           'nombre': getParameter<String>(data, 'nombre'),
@@ -145,10 +144,8 @@ final parametersBuilderMap =
   'Facturacion': ParameterData.none(),
   'logSesionesBU': ParameterData.none(),
   'logErroresSesionBU': ParameterData.none(),
-  'solicitudess': ParameterData.none(),
   'solicitudVacaciones': ParameterData.none(),
   'indexSolicitudesBU': ParameterData.none(),
-  'indexIncapacidadesAdminBU': ParameterData.none(),
   'indexIncapacidadesBU': ParameterData.none(),
   'solicitudesVacacionesDetalle': (data) async => ParameterData(
         allParams: {
@@ -191,7 +188,7 @@ final parametersBuilderMap =
           'estadoActividad': getParameter<bool>(data, 'estadoActividad'),
         },
       ),
-  'CrearPago': ParameterData.none(),
+  'crearPago': ParameterData.none(),
   'actividadesHomeAdmin': ParameterData.none(),
   'indexIncapacidadAdmin': ParameterData.none(),
   'solicitudesVacacionesAdmin': ParameterData.none(),
@@ -215,6 +212,25 @@ final parametersBuilderMap =
   'logHorariosErrores': ParameterData.none(),
   'editarPerfil': ParameterData.none(),
   'CambiarContrasena': ParameterData.none(),
+  'reportaError': ParameterData.none(),
+  'FacturacionEmpleado': ParameterData.none(),
+  'solicitarCorreccion': (data) async => ParameterData(
+        allParams: {
+          'pago': getParameter<DocumentReference>(data, 'pago'),
+        },
+      ),
+  'Solicitudes_Index': ParameterData.none(),
+  'CalendarioActividades': ParameterData.none(),
+  'corregirPago': (data) async => ParameterData(
+        allParams: {
+          'pago': getParameter<DocumentReference>(data, 'pago'),
+        },
+      ),
+  'Solicitudes_IndexEmpleado': ParameterData.none(),
+  'logCalendarioActividades': ParameterData.none(),
+  'calendarioActividadesUsuario': ParameterData.none(),
+  'vaciarRegistros': ParameterData.none(),
+  'indexIncapacidadesCopy': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

@@ -4,7 +4,7 @@ import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 import '/tutorialguiado/tutorial/tutorial_widget.dart';
 
 // Focus widget keys for this walkthrough
-final paginatedDataTable1mnea6np = GlobalKey();
+final textUg9ykk4k = GlobalKey();
 
 /// ttlIndexincapacidades
 ///
@@ -12,7 +12,7 @@ final paginatedDataTable1mnea6np = GlobalKey();
 List<TargetFocus> createWalkthroughTargets(BuildContext context) => [
       /// Step 1
       TargetFocus(
-        keyTarget: paginatedDataTable1mnea6np,
+        keyTarget: textUg9ykk4k,
         enableOverlayTab: true,
         alignSkip: Alignment.topRight,
         shape: ShapeLightFocus.RRect,

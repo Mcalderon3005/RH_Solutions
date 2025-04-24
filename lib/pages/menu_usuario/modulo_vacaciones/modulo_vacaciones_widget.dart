@@ -8,6 +8,7 @@ import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
     show TutorialCoachMark;
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'modulo_vacaciones_model.dart';
 export 'modulo_vacaciones_model.dart';
 
@@ -111,10 +112,23 @@ class _ModuloVacacionesWidgetState extends State<ModuloVacacionesWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .displaySmall
                                   .override(
-                                    fontFamily: 'Outfit',
+                                    font: GoogleFonts.outfit(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .displaySmall
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .displaySmall
+                                          .fontStyle,
+                                    ),
                                     color: Colors.white,
                                     fontSize: 40.0,
                                     letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .displaySmall
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .displaySmall
+                                        .fontStyle,
                                   ),
                             ).addWalkthrough(
                               textEjqvvh5y,
@@ -130,8 +144,9 @@ class _ModuloVacacionesWidgetState extends State<ModuloVacacionesWidget> {
                             child: FFButtonWidget(
                               onPressed: () async {
                                 logFirebaseEvent(
-                                    'MODULO_VACACIONES_SOLICITAR_VACACIONES_O');
-                                logFirebaseEvent('Button_navigate_to');
+                                    'MODULO_VACACIONES_btnSolicitarVacaciones');
+                                logFirebaseEvent(
+                                    'btnSolicitarVacaciones_navigate_to');
 
                                 context.pushNamed(
                                     SolicitudVacacionesWidget.routeName);
@@ -144,14 +159,28 @@ class _ModuloVacacionesWidgetState extends State<ModuloVacacionesWidget> {
                                     16.0, 0.0, 16.0, 0.0),
                                 iconPadding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 0.0),
-                                color: FlutterFlowTheme.of(context).primary,
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
                                 textStyle: FlutterFlowTheme.of(context)
                                     .titleSmall
                                     .override(
-                                      fontFamily: 'Manrope',
+                                      font: GoogleFonts.manrope(
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .fontStyle,
+                                      ),
                                       color: Colors.white,
                                       fontSize: 20.0,
                                       letterSpacing: 0.0,
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .fontStyle,
                                     ),
                                 elevation: 0.0,
                                 borderRadius: BorderRadius.circular(20.0),
@@ -170,14 +199,13 @@ class _ModuloVacacionesWidgetState extends State<ModuloVacacionesWidget> {
                             child: FFButtonWidget(
                               onPressed: () async {
                                 logFirebaseEvent(
-                                    'MODULO_VACACIONES_VER_SOLICITUDES_DE_VAC');
+                                    'MODULO_VACACIONES_PAGE_Button_ON_TAP');
                                 logFirebaseEvent('Button_navigate_to');
 
-                                context.pushNamed(
-                                    IndexSolicitudesWidget.routeName);
+                                context
+                                    .goNamed(IndexSolicitudesWidget.routeName);
                               },
-                              text:
-                                  'Ver solicitudes de Vacaciones y Dias Libres',
+                              text: 'Ver Dias Libres',
                               options: FFButtonOptions(
                                 width: MediaQuery.sizeOf(context).width * 0.4,
                                 height: MediaQuery.sizeOf(context).height * 0.1,
@@ -185,14 +213,28 @@ class _ModuloVacacionesWidgetState extends State<ModuloVacacionesWidget> {
                                     16.0, 0.0, 16.0, 0.0),
                                 iconPadding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 0.0),
-                                color: FlutterFlowTheme.of(context).primary,
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
                                 textStyle: FlutterFlowTheme.of(context)
                                     .titleSmall
                                     .override(
-                                      fontFamily: 'Manrope',
+                                      font: GoogleFonts.manrope(
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .fontStyle,
+                                      ),
                                       color: Colors.white,
                                       fontSize: 20.0,
                                       letterSpacing: 0.0,
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .fontStyle,
                                     ),
                                 elevation: 0.0,
                                 borderRadius: BorderRadius.circular(20.0),
@@ -211,8 +253,9 @@ class _ModuloVacacionesWidgetState extends State<ModuloVacacionesWidget> {
                             child: FFButtonWidget(
                               onPressed: () async {
                                 logFirebaseEvent(
-                                    'MODULO_VACACIONES_VER_INCAPACIDADES_BTN_');
-                                logFirebaseEvent('Button_navigate_to');
+                                    'MODULO_VACACIONES_btnIncapacidades_ON_TA');
+                                logFirebaseEvent(
+                                    'btnIncapacidades_navigate_to');
 
                                 context.pushNamed(
                                     IndexIncapacidadesWidget.routeName);
@@ -225,14 +268,28 @@ class _ModuloVacacionesWidgetState extends State<ModuloVacacionesWidget> {
                                     16.0, 0.0, 16.0, 0.0),
                                 iconPadding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 0.0),
-                                color: FlutterFlowTheme.of(context).primary,
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
                                 textStyle: FlutterFlowTheme.of(context)
                                     .titleSmall
                                     .override(
-                                      fontFamily: 'Manrope',
+                                      font: GoogleFonts.manrope(
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .fontStyle,
+                                      ),
                                       color: Colors.white,
                                       fontSize: 20.0,
                                       letterSpacing: 0.0,
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .fontStyle,
                                     ),
                                 elevation: 0.0,
                                 borderRadius: BorderRadius.circular(20.0),
@@ -257,8 +314,16 @@ class _ModuloVacacionesWidgetState extends State<ModuloVacacionesWidget> {
                                 color: FlutterFlowTheme.of(context).info,
                                 size: 24.0,
                               ),
-                              onPressed: () {
-                                print('IconButton pressed ...');
+                              onPressed: () async {
+                                logFirebaseEvent(
+                                    'MODULO_VACACIONES_question_ICN_ON_TAP');
+                                logFirebaseEvent(
+                                    'IconButton_start_walkthrough');
+                                safeSetState(() =>
+                                    _model.ttlModuloVacacionesController =
+                                        createPageWalkthrough(context));
+                                _model.ttlModuloVacacionesController
+                                    ?.show(context: context);
                               },
                             ),
                           ),
@@ -313,9 +378,22 @@ class _ModuloVacacionesWidgetState extends State<ModuloVacacionesWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .displaySmall
                                   .override(
-                                    fontFamily: 'Outfit',
+                                    font: GoogleFonts.outfit(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .displaySmall
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .displaySmall
+                                          .fontStyle,
+                                    ),
                                     color: Colors.white,
                                     letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .displaySmall
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .displaySmall
+                                        .fontStyle,
                                   ),
                             ),
                           ),
@@ -346,10 +424,23 @@ class _ModuloVacacionesWidgetState extends State<ModuloVacacionesWidget> {
                                 textStyle: FlutterFlowTheme.of(context)
                                     .titleSmall
                                     .override(
-                                      fontFamily: 'Manrope',
+                                      font: GoogleFonts.manrope(
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .fontStyle,
+                                      ),
                                       color: Colors.white,
                                       fontSize: 18.0,
                                       letterSpacing: 0.0,
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .fontStyle,
                                     ),
                                 elevation: 0.0,
                                 borderRadius: BorderRadius.circular(8.0),
@@ -365,14 +456,13 @@ class _ModuloVacacionesWidgetState extends State<ModuloVacacionesWidget> {
                             child: FFButtonWidget(
                               onPressed: () async {
                                 logFirebaseEvent(
-                                    'MODULO_VACACIONES_VER_SOLICITUDES_DE_VAC');
+                                    'MODULO_VACACIONES_VER_DIAS_LIBRES_BTN_ON');
                                 logFirebaseEvent('Button_navigate_to');
 
                                 context.pushNamed(
                                     IndexSolicitudesWidget.routeName);
                               },
-                              text:
-                                  'Ver solicitudes de Vacaciones y Dias Libres',
+                              text: 'Ver Dias Libres',
                               options: FFButtonOptions(
                                 width: 450.0,
                                 height: 50.0,
@@ -384,10 +474,23 @@ class _ModuloVacacionesWidgetState extends State<ModuloVacacionesWidget> {
                                 textStyle: FlutterFlowTheme.of(context)
                                     .titleSmall
                                     .override(
-                                      fontFamily: 'Manrope',
+                                      font: GoogleFonts.manrope(
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .fontStyle,
+                                      ),
                                       color: Colors.white,
                                       fontSize: 18.0,
                                       letterSpacing: 0.0,
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .fontStyle,
                                     ),
                                 elevation: 0.0,
                                 borderRadius: BorderRadius.circular(8.0),
@@ -406,7 +509,7 @@ class _ModuloVacacionesWidgetState extends State<ModuloVacacionesWidget> {
                                     'MODULO_VACACIONES_VER_INCAPACIDADES_BTN_');
                                 logFirebaseEvent('Button_navigate_to');
 
-                                context.pushNamed(
+                                context.goNamed(
                                     IndexIncapacidadesWidget.routeName);
                               },
                               text: 'Ver incapacidades',
@@ -421,10 +524,23 @@ class _ModuloVacacionesWidgetState extends State<ModuloVacacionesWidget> {
                                 textStyle: FlutterFlowTheme.of(context)
                                     .titleSmall
                                     .override(
-                                      fontFamily: 'Manrope',
+                                      font: GoogleFonts.manrope(
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .fontStyle,
+                                      ),
                                       color: Colors.white,
                                       fontSize: 18.0,
                                       letterSpacing: 0.0,
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .fontStyle,
                                     ),
                                 elevation: 0.0,
                                 borderRadius: BorderRadius.circular(8.0),

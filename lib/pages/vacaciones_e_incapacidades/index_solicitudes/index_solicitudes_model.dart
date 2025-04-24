@@ -30,7 +30,10 @@ class IndexSolicitudesModel extends FlutterFlowModel<IndexSolicitudesWidget> {
   // Stores action output result for [Firestore Query - Query a collection] action in IndexSolicitudes widget.
   List<SolicitudVacacionesRecord>? vacacionesList;
   // State field(s) for PaginatedDataTable widget.
-  final paginatedDataTableController =
+  final paginatedDataTableController1 =
+      FlutterFlowDataTableController<SolicitudVacacionesRecord>();
+  // State field(s) for PaginatedDataTable widget.
+  final paginatedDataTableController2 =
       FlutterFlowDataTableController<SolicitudVacacionesRecord>();
 
   @override
@@ -39,6 +42,7 @@ class IndexSolicitudesModel extends FlutterFlowModel<IndexSolicitudesWidget> {
   @override
   void dispose() {
     ttlindexSolicitudesController?.finish();
-    paginatedDataTableController.dispose();
+    paginatedDataTableController1.dispose();
+    paginatedDataTableController2.dispose();
   }
 }

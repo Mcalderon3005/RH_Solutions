@@ -1,5 +1,7 @@
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
+    show TutorialCoachMark;
 import 'recuperar_contrasena_widget.dart' show RecuperarContrasenaWidget;
 import 'package:flutter/material.dart';
 
@@ -7,6 +9,7 @@ class RecuperarContrasenaModel
     extends FlutterFlowModel<RecuperarContrasenaWidget> {
   ///  State fields for stateful widgets in this page.
 
+  TutorialCoachMark? ttlRecuperarContrasenaController;
   final formKey1 = GlobalKey<FormState>();
   final formKey2 = GlobalKey<FormState>();
   // State field(s) for emailAddress widget.
@@ -51,6 +54,7 @@ class RecuperarContrasenaModel
 
   @override
   void dispose() {
+    ttlRecuperarContrasenaController?.finish();
     emailAddressFocusNode1?.dispose();
     emailAddressTextController1?.dispose();
 
