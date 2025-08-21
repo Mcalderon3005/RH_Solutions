@@ -127,3 +127,26 @@ List<UsuarioCreacionRecord>? usuarioCreacionRecord(
 
   return usuarioCreacion;
 }
+
+int? calculateVacations(DateTime hireDate) {
+  final DateTime now = DateTime.now();
+  int yearDiff = now.year - hireDate.year;
+  int monthDiff = now.month - hireDate.month;
+  int totalMonths = yearDiff * 12 + monthDiff;
+  // Si el día de hoy aún no llegó al día de contratación, restamos 1 mes.
+  if (now.day < hireDate.day) {
+    totalMonths--;
+  }
+  return totalMonths < 0 ? 0 : totalMonths;
+}
+
+int? calcularVacacionesTotales(
+  int? vacacionesUsadas,
+  int? vacacionesDisponibles,
+  int? vacacionesAdicionales,
+) {
+  if (vacacionesUsadas == null || vacacionesDisponibles == null) {
+    return null;
+  }
+  return vacacionesDisponibles - vacacionesUsadas + vacacionesAdicionales!;
+}

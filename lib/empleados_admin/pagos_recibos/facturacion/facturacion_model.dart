@@ -24,7 +24,7 @@ class FacturacionModel extends FlutterFlowModel<FacturacionWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  TutorialCoachMark? ttlFacturacionController;
+  TutorialCoachMark? facturacionController;
   // Stores action output result for [Firestore Query - Query a collection] action in Facturacion widget.
   List<PagosRecord>? facturacionListU;
   // State field(s) for PaginatedDataTable widget.
@@ -36,7 +36,7 @@ class FacturacionModel extends FlutterFlowModel<FacturacionWidget> {
 
   @override
   void dispose() {
-    ttlFacturacionController?.finish();
+    facturacionController?.finish();
     paginatedDataTableController.dispose();
   }
 }

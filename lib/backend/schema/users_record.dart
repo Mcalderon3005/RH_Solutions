@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import '/backend/algolia/serialization_util.dart';
+import '/backend/algolia/algolia_manager.dart';
 import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
@@ -95,6 +97,46 @@ class UsersRecord extends FirestoreRecord {
   DateTime? get fecahContratacion => _fecahContratacion;
   bool hasFecahContratacion() => _fecahContratacion != null;
 
+  // "Vacaciones" field.
+  int? _vacaciones;
+  int get vacaciones => _vacaciones ?? 0;
+  bool hasVacaciones() => _vacaciones != null;
+
+  // "VacacionesUsadas" field.
+  int? _vacacionesUsadas;
+  int get vacacionesUsadas => _vacacionesUsadas ?? 0;
+  bool hasVacacionesUsadas() => _vacacionesUsadas != null;
+
+  // "IsLoggedIn" field.
+  bool? _isLoggedIn;
+  bool get isLoggedIn => _isLoggedIn ?? false;
+  bool hasIsLoggedIn() => _isLoggedIn != null;
+
+  // "LastLogin" field.
+  DateTime? _lastLogin;
+  DateTime? get lastLogin => _lastLogin;
+  bool hasLastLogin() => _lastLogin != null;
+
+  // "IdDispositivo" field.
+  String? _idDispositivo;
+  String get idDispositivo => _idDispositivo ?? '';
+  bool hasIdDispositivo() => _idDispositivo != null;
+
+  // "TiempoSesion" field.
+  DateTime? _tiempoSesion;
+  DateTime? get tiempoSesion => _tiempoSesion;
+  bool hasTiempoSesion() => _tiempoSesion != null;
+
+  // "timerSesionEstado" field.
+  bool? _timerSesionEstado;
+  bool get timerSesionEstado => _timerSesionEstado ?? false;
+  bool hasTimerSesionEstado() => _timerSesionEstado != null;
+
+  // "vacacionesAdicionales" field.
+  int? _vacacionesAdicionales;
+  int get vacacionesAdicionales => _vacacionesAdicionales ?? 0;
+  bool hasVacacionesAdicionales() => _vacacionesAdicionales != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -112,6 +154,15 @@ class UsersRecord extends FirestoreRecord {
     _estaActivo = snapshotData['estaActivo'] as bool?;
     _fechaNacimiento = snapshotData['fechaNacimiento'] as DateTime?;
     _fecahContratacion = snapshotData['fecahContratacion'] as DateTime?;
+    _vacaciones = castToType<int>(snapshotData['Vacaciones']);
+    _vacacionesUsadas = castToType<int>(snapshotData['VacacionesUsadas']);
+    _isLoggedIn = snapshotData['IsLoggedIn'] as bool?;
+    _lastLogin = snapshotData['LastLogin'] as DateTime?;
+    _idDispositivo = snapshotData['IdDispositivo'] as String?;
+    _tiempoSesion = snapshotData['TiempoSesion'] as DateTime?;
+    _timerSesionEstado = snapshotData['timerSesionEstado'] as bool?;
+    _vacacionesAdicionales =
+        castToType<int>(snapshotData['vacacionesAdicionales']);
   }
 
   static CollectionReference get collection =>
@@ -133,6 +184,91 @@ class UsersRecord extends FirestoreRecord {
     DocumentReference reference,
   ) =>
       UsersRecord._(reference, mapFromFirestore(data));
+
+  static UsersRecord fromAlgolia(AlgoliaObjectSnapshot snapshot) =>
+      UsersRecord.getDocumentFromData(
+        {
+          'email': snapshot.data['email'],
+          'display_name': snapshot.data['display_name'],
+          'photo_url': snapshot.data['photo_url'],
+          'uid': snapshot.data['uid'],
+          'created_time': convertAlgoliaParam(
+            snapshot.data['created_time'],
+            ParamType.DateTime,
+            false,
+          ),
+          'phone_number': snapshot.data['phone_number'],
+          'role': snapshot.data['role'],
+          'estaPresenteActividad': snapshot.data['estaPresenteActividad'],
+          'estaPresenteReunion': snapshot.data['estaPresenteReunion'],
+          'apellidos': snapshot.data['apellidos'],
+          'cargo': snapshot.data['cargo'],
+          'cedula': snapshot.data['cedula'],
+          'salario': convertAlgoliaParam(
+            snapshot.data['salario'],
+            ParamType.double,
+            false,
+          ),
+          'estaActivo': snapshot.data['estaActivo'],
+          'fechaNacimiento': convertAlgoliaParam(
+            snapshot.data['fechaNacimiento'],
+            ParamType.DateTime,
+            false,
+          ),
+          'fecahContratacion': convertAlgoliaParam(
+            snapshot.data['fecahContratacion'],
+            ParamType.DateTime,
+            false,
+          ),
+          'Vacaciones': convertAlgoliaParam(
+            snapshot.data['Vacaciones'],
+            ParamType.int,
+            false,
+          ),
+          'VacacionesUsadas': convertAlgoliaParam(
+            snapshot.data['VacacionesUsadas'],
+            ParamType.int,
+            false,
+          ),
+          'IsLoggedIn': snapshot.data['IsLoggedIn'],
+          'LastLogin': convertAlgoliaParam(
+            snapshot.data['LastLogin'],
+            ParamType.DateTime,
+            false,
+          ),
+          'IdDispositivo': snapshot.data['IdDispositivo'],
+          'TiempoSesion': convertAlgoliaParam(
+            snapshot.data['TiempoSesion'],
+            ParamType.DateTime,
+            false,
+          ),
+          'timerSesionEstado': snapshot.data['timerSesionEstado'],
+          'vacacionesAdicionales': convertAlgoliaParam(
+            snapshot.data['vacacionesAdicionales'],
+            ParamType.int,
+            false,
+          ),
+        },
+        UsersRecord.collection.doc(snapshot.objectID),
+      );
+
+  static Future<List<UsersRecord>> search({
+    String? term,
+    FutureOr<LatLng>? location,
+    int? maxResults,
+    double? searchRadiusMeters,
+    bool useCache = false,
+  }) =>
+      FFAlgoliaManager.instance
+          .algoliaQuery(
+            index: 'users',
+            term: term,
+            maxResults: maxResults,
+            location: location,
+            searchRadiusMeters: searchRadiusMeters,
+            useCache: useCache,
+          )
+          .then((r) => r.map(fromAlgolia).toList());
 
   @override
   String toString() =>
@@ -164,6 +300,14 @@ Map<String, dynamic> createUsersRecordData({
   bool? estaActivo,
   DateTime? fechaNacimiento,
   DateTime? fecahContratacion,
+  int? vacaciones,
+  int? vacacionesUsadas,
+  bool? isLoggedIn,
+  DateTime? lastLogin,
+  String? idDispositivo,
+  DateTime? tiempoSesion,
+  bool? timerSesionEstado,
+  int? vacacionesAdicionales,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -183,6 +327,14 @@ Map<String, dynamic> createUsersRecordData({
       'estaActivo': estaActivo,
       'fechaNacimiento': fechaNacimiento,
       'fecahContratacion': fecahContratacion,
+      'Vacaciones': vacaciones,
+      'VacacionesUsadas': vacacionesUsadas,
+      'IsLoggedIn': isLoggedIn,
+      'LastLogin': lastLogin,
+      'IdDispositivo': idDispositivo,
+      'TiempoSesion': tiempoSesion,
+      'timerSesionEstado': timerSesionEstado,
+      'vacacionesAdicionales': vacacionesAdicionales,
     }.withoutNulls,
   );
 
@@ -209,7 +361,15 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.salario == e2?.salario &&
         e1?.estaActivo == e2?.estaActivo &&
         e1?.fechaNacimiento == e2?.fechaNacimiento &&
-        e1?.fecahContratacion == e2?.fecahContratacion;
+        e1?.fecahContratacion == e2?.fecahContratacion &&
+        e1?.vacaciones == e2?.vacaciones &&
+        e1?.vacacionesUsadas == e2?.vacacionesUsadas &&
+        e1?.isLoggedIn == e2?.isLoggedIn &&
+        e1?.lastLogin == e2?.lastLogin &&
+        e1?.idDispositivo == e2?.idDispositivo &&
+        e1?.tiempoSesion == e2?.tiempoSesion &&
+        e1?.timerSesionEstado == e2?.timerSesionEstado &&
+        e1?.vacacionesAdicionales == e2?.vacacionesAdicionales;
   }
 
   @override
@@ -229,7 +389,15 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.salario,
         e?.estaActivo,
         e?.fechaNacimiento,
-        e?.fecahContratacion
+        e?.fecahContratacion,
+        e?.vacaciones,
+        e?.vacacionesUsadas,
+        e?.isLoggedIn,
+        e?.lastLogin,
+        e?.idDispositivo,
+        e?.tiempoSesion,
+        e?.timerSesionEstado,
+        e?.vacacionesAdicionales
       ]);
 
   @override

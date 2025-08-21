@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import '/backend/algolia/serialization_util.dart';
+import '/backend/algolia/algolia_manager.dart';
 import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
@@ -70,6 +72,45 @@ class ActividadesCalendarioRecord extends FirestoreRecord {
     DocumentReference reference,
   ) =>
       ActividadesCalendarioRecord._(reference, mapFromFirestore(data));
+
+  static ActividadesCalendarioRecord fromAlgolia(
+          AlgoliaObjectSnapshot snapshot) =>
+      ActividadesCalendarioRecord.getDocumentFromData(
+        {
+          'Titulo': snapshot.data['Titulo'],
+          'Descripcion': snapshot.data['Descripcion'],
+          'Fecha': convertAlgoliaParam(
+            snapshot.data['Fecha'],
+            ParamType.DateTime,
+            false,
+          ),
+          'Creador': snapshot.data['Creador'],
+          'FechaCreacion': convertAlgoliaParam(
+            snapshot.data['FechaCreacion'],
+            ParamType.DateTime,
+            false,
+          ),
+        },
+        ActividadesCalendarioRecord.collection.doc(snapshot.objectID),
+      );
+
+  static Future<List<ActividadesCalendarioRecord>> search({
+    String? term,
+    FutureOr<LatLng>? location,
+    int? maxResults,
+    double? searchRadiusMeters,
+    bool useCache = false,
+  }) =>
+      FFAlgoliaManager.instance
+          .algoliaQuery(
+            index: 'actividadesCalendario',
+            term: term,
+            maxResults: maxResults,
+            location: location,
+            searchRadiusMeters: searchRadiusMeters,
+            useCache: useCache,
+          )
+          .then((r) => r.map(fromAlgolia).toList());
 
   @override
   String toString() =>

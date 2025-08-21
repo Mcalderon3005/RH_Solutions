@@ -2,6 +2,8 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_data_table.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
+    show TutorialCoachMark;
 import 'solicitudes_vacaciones_admin_widget.dart'
     show SolicitudesVacacionesAdminWidget;
 import 'package:flutter/material.dart';
@@ -14,15 +16,14 @@ class SolicitudesVacacionesAdminModel
 
   ///  State fields for stateful widgets in this page.
 
+  TutorialCoachMark? solicitudesVacacionesAdminController;
   // Stores action output result for [Firestore Query - Query a collection] action in solicitudesVacacionesAdmin widget.
   List<SolicitudVacacionesRecord>? vacacionesList;
-  // Stores action output result for [Custom Action - deleteVacaciones] action in IconButton widget.
-  String? vacacionesResult2;
+  // Stores action output result for [Firestore Query - Query a collection] action in solicitudesVacacionesAdmin widget.
+  UsersRecord? userInfoSingle;
   // State field(s) for PaginatedDataTable widget.
   final paginatedDataTableController =
       FlutterFlowDataTableController<SolicitudVacacionesRecord>();
-  // Stores action output result for [Custom Action - deleteVacaciones] action in IconButton widget.
-  String? vacacionesResult1;
   List<UsersRecord> simpleSearchResults = [];
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode;
@@ -34,6 +35,7 @@ class SolicitudesVacacionesAdminModel
 
   @override
   void dispose() {
+    solicitudesVacacionesAdminController?.finish();
     paginatedDataTableController.dispose();
     textFieldFocusNode?.dispose();
     textController?.dispose();

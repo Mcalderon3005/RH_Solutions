@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 class EditEmpleadoModel extends FlutterFlowModel<EditEmpleadoWidget> {
   ///  State fields for stateful widgets in this page.
 
-  TutorialCoachMark? ttlEditEmpleadoController;
+  TutorialCoachMark? editEmpleadoController;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode1;
   TextEditingController? textController1;
@@ -40,18 +40,55 @@ class EditEmpleadoModel extends FlutterFlowModel<EditEmpleadoWidget> {
   DateTime? datePicked1;
   DateTime? datePicked2;
   // State field(s) for Switch widget.
-  bool? switchValue;
-  bool isDataUploading = false;
-  FFUploadedFile uploadedLocalFile =
+  bool? switchValue1;
+  bool isDataUploading_fotoActualizada2 = false;
+  FFUploadedFile uploadedLocalFile_fotoActualizada2 =
       FFUploadedFile(bytes: Uint8List.fromList([]));
-  String uploadedFileUrl = '';
+  String uploadedFileUrl_fotoActualizada2 = '';
+
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode8;
+  TextEditingController? textController8;
+  String? Function(BuildContext, String?)? textController8Validator;
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode9;
+  TextEditingController? textController9;
+  String? Function(BuildContext, String?)? textController9Validator;
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode10;
+  TextEditingController? textController10;
+  String? Function(BuildContext, String?)? textController10Validator;
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode11;
+  TextEditingController? textController11;
+  String? Function(BuildContext, String?)? textController11Validator;
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode12;
+  TextEditingController? textController12;
+  String? Function(BuildContext, String?)? textController12Validator;
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode13;
+  TextEditingController? textController13;
+  String? Function(BuildContext, String?)? textController13Validator;
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode14;
+  TextEditingController? textController14;
+  String? Function(BuildContext, String?)? textController14Validator;
+  DateTime? datePicked3;
+  DateTime? datePicked4;
+  // State field(s) for Switch widget.
+  bool? switchValue2;
+  bool isDataUploading_fotoActualizada = false;
+  FFUploadedFile uploadedLocalFile_fotoActualizada =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+  String uploadedFileUrl_fotoActualizada = '';
 
   @override
   void initState(BuildContext context) {}
 
   @override
   void dispose() {
-    ttlEditEmpleadoController?.finish();
+    editEmpleadoController?.finish();
     textFieldFocusNode1?.dispose();
     textController1?.dispose();
 
@@ -72,5 +109,26 @@ class EditEmpleadoModel extends FlutterFlowModel<EditEmpleadoWidget> {
 
     textFieldFocusNode7?.dispose();
     textController7?.dispose();
+
+    textFieldFocusNode8?.dispose();
+    textController8?.dispose();
+
+    textFieldFocusNode9?.dispose();
+    textController9?.dispose();
+
+    textFieldFocusNode10?.dispose();
+    textController10?.dispose();
+
+    textFieldFocusNode11?.dispose();
+    textController11?.dispose();
+
+    textFieldFocusNode12?.dispose();
+    textController12?.dispose();
+
+    textFieldFocusNode13?.dispose();
+    textController13?.dispose();
+
+    textFieldFocusNode14?.dispose();
+    textController14?.dispose();
   }
 }

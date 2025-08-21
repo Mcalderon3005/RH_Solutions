@@ -1,5 +1,5 @@
 // ignore_for_file: unnecessary_getters_setters
-
+import '/backend/algolia/serialization_util.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '/backend/schema/util/firestore_util.dart';
@@ -85,6 +85,28 @@ class ChefsStruct extends FFFirebaseStruct {
           data['bio'],
           ParamType.String,
           false,
+        ),
+      );
+
+  static ChefsStruct fromAlgoliaData(Map<String, dynamic> data) => ChefsStruct(
+        profilePicture: convertAlgoliaParam(
+          data['profile_picture'],
+          ParamType.String,
+          false,
+        ),
+        name: convertAlgoliaParam(
+          data['name'],
+          ParamType.String,
+          false,
+        ),
+        bio: convertAlgoliaParam(
+          data['bio'],
+          ParamType.String,
+          false,
+        ),
+        firestoreUtilData: FirestoreUtilData(
+          clearUnsetFields: false,
+          create: true,
         ),
       );
 

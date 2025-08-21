@@ -1,15 +1,16 @@
 import '/backend/backend.dart';
-import '/empleados_admin/reportes/componentes/log_error_horario_detalles/log_error_horario_detalles_widget.dart';
 import '/flutter_flow/flutter_flow_data_table.dart';
+import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import '/walkthroughs/ttl_log_horarios_errores.dart';
+import '/flutter_flow/form_field_controller.dart';
+import '/walkthroughs/log_horarios_errores.dart';
+import '/actions/actions.dart' as action_blocks;
 import '/index.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
     show TutorialCoachMark;
-import 'package:easy_debounce/easy_debounce.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -47,13 +48,18 @@ class _LogHorariosErroresWidgetState extends State<LogHorariosErroresWidget> {
       logFirebaseEvent('logHorariosErrores_firestore_query');
       _model.horarioErroresList = await queryHorarioErroresRecordOnce();
       logFirebaseEvent('logHorariosErrores_update_page_state');
+      _model.horarioErroresListView =
+          _model.horarioErroresList!.toList().cast<HorarioErroresRecord>();
       _model.horarioErroresListT =
           _model.horarioErroresList!.toList().cast<HorarioErroresRecord>();
       safeSetState(() {});
+      logFirebaseEvent('logHorariosErrores_firestore_query');
+      _model.usersList = await queryUsersRecordOnce();
+      logFirebaseEvent('logHorariosErrores_action_block');
+      await action_blocks.checkUserLogin(context);
+      logFirebaseEvent('logHorariosErrores_action_block');
+      await action_blocks.sesionOutTimer(context);
     });
-
-    _model.textController ??= TextEditingController();
-    _model.textFieldFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -85,89 +91,45 @@ class _LogHorariosErroresWidgetState extends State<LogHorariosErroresWidget> {
               Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(30.0, 15.0, 0.0, 0.0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Align(
-                          alignment: AlignmentDirectional(-1.0, 0.0),
-                          child: FFButtonWidget(
-                            onPressed: () async {
-                              logFirebaseEvent(
-                                  'LOG_HORARIOS_ERRORES_PAGE__BTN_ON_TAP');
-                              logFirebaseEvent('Button_navigate_to');
-
-                              context
-                                  .pushNamed(ReportesHomeAdminWidget.routeName);
-                            },
-                            text: '',
-                            icon: Icon(
-                              Icons.arrow_back,
-                              size: 28.0,
-                            ),
-                            options: FFButtonOptions(
-                              height: 46.6,
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 0.0, 16.0, 0.0),
-                              iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 0.0),
-                              color: Color(0x002797FF),
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .titleSmall
-                                  .override(
-                                    font: GoogleFonts.manrope(
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .fontStyle,
-                                    ),
-                                    color: Colors.white,
-                                    fontSize: 16.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .fontWeight,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .fontStyle,
-                                  ),
-                              elevation: 0.0,
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                          ),
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      FlutterFlowIconButton(
+                        borderRadius: 8.0,
+                        buttonSize: MediaQuery.sizeOf(context).width * 0.04,
+                        fillColor: Color(0x002797FF),
+                        icon: Icon(
+                          Icons.arrow_back,
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          size: 32.0,
                         ),
-                        Flexible(
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 30.0, 0.0),
-                            child: FlutterFlowIconButton(
-                              borderColor: Colors.transparent,
-                              borderRadius: 8.0,
-                              buttonSize: 40.0,
-                              fillColor: Color(0xFFB2332D),
-                              icon: Icon(
-                                Icons.delete,
-                                color: FlutterFlowTheme.of(context).info,
-                                size: 24.0,
-                              ),
-                              onPressed: () async {
-                                logFirebaseEvent(
-                                    'LOG_HORARIOS_ERRORES_delete_ICN_ON_TAP');
-                                logFirebaseEvent('IconButton_navigate_to');
+                        onPressed: () async {
+                          logFirebaseEvent(
+                              'LOG_HORARIOS_ERRORES_arrow_back_ICN_ON_T');
+                          logFirebaseEvent('IconButton_navigate_to');
 
-                                context
-                                    .goNamed(VaciarRegistrosWidget.routeName);
-                              },
-                            ),
+                          context.pushNamed(ReportesHomeAdminWidget.routeName);
+                        },
+                      ),
+                      Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                        child: FlutterFlowIconButton(
+                          borderRadius: 8.0,
+                          buttonSize: MediaQuery.sizeOf(context).width * 0.03,
+                          fillColor: FlutterFlowTheme.of(context).primary,
+                          icon: Icon(
+                            Icons.question_mark,
+                            color: FlutterFlowTheme.of(context).info,
+                            size: 24.0,
                           ),
+                          onPressed: () {
+                            print('IconButton pressed ...');
+                          },
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                   Padding(
                     padding:
@@ -183,26 +145,14 @@ class _LogHorariosErroresWidgetState extends State<LogHorariosErroresWidget> {
                             style: FlutterFlowTheme.of(context)
                                 .titleLarge
                                 .override(
-                                  font: GoogleFonts.outfit(
-                                    fontWeight: FlutterFlowTheme.of(context)
-                                        .titleLarge
-                                        .fontWeight,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .titleLarge
-                                        .fontStyle,
-                                  ),
+                                  fontFamily: 'NimbusSansLight',
                                   fontSize: 30.0,
                                   letterSpacing: 0.0,
-                                  fontWeight: FlutterFlowTheme.of(context)
-                                      .titleLarge
-                                      .fontWeight,
-                                  fontStyle: FlutterFlowTheme.of(context)
-                                      .titleLarge
-                                      .fontStyle,
+                                  fontWeight: FontWeight.bold,
                                 ),
                           ).addWalkthrough(
                             textNcoe5078,
-                            _model.ttlLogHorariosErroresController,
+                            _model.logHorariosErroresController,
                           ),
                         ),
                       ],
@@ -210,158 +160,98 @@ class _LogHorariosErroresWidgetState extends State<LogHorariosErroresWidget> {
                   ),
                   Container(
                     width: MediaQuery.sizeOf(context).width * 0.9,
-                    height: MediaQuery.sizeOf(context).height * 0.749,
+                    height: MediaQuery.sizeOf(context).height * 0.65,
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,
                     ),
-                    child: Visibility(
-                      visible: responsiveVisibility(
-                        context: context,
-                        phone: false,
-                      ),
-                      child: Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
-                        child: Builder(
-                          builder: (context) {
-                            final erroresListU =
-                                _model.horarioErroresListT.toList();
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 15.0, 0.0, 15.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 10.0, 0.0),
+                                child: StreamBuilder<List<UsersRecord>>(
+                                  stream: queryUsersRecord(),
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50.0,
+                                          height: 50.0,
+                                          child: CircularProgressIndicator(
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                    List<UsersRecord> dropDownUsersRecordList =
+                                        snapshot.data!;
 
-                            return FlutterFlowDataTable<HorarioErroresRecord>(
-                              controller: _model.paginatedDataTableController,
-                              data: erroresListU,
-                              columnsBuilder: (onSortChanged) => [
-                                DataColumn2(
-                                  label: DefaultTextStyle.merge(
-                                    softWrap: true,
-                                    child: Text(
-                                      'Usuario',
-                                      style: FlutterFlowTheme.of(context)
-                                          .labelLarge
+                                    return FlutterFlowDropDown<String>(
+                                      controller:
+                                          _model.dropDownValueController1 ??=
+                                              FormFieldController<String>(null),
+                                      options: dropDownUsersRecordList
+                                          .map((e) => valueOrDefault<String>(
+                                                e.email,
+                                                'Correo',
+                                              ))
+                                          .toList(),
+                                      onChanged: (val) => safeSetState(
+                                          () => _model.dropDownValue1 = val),
+                                      width: 200.0,
+                                      height: 40.0,
+                                      searchHintTextStyle: FlutterFlowTheme.of(
+                                              context)
+                                          .labelMedium
                                           .override(
                                             font: GoogleFonts.manrope(
                                               fontWeight:
                                                   FlutterFlowTheme.of(context)
-                                                      .labelLarge
+                                                      .labelMedium
                                                       .fontWeight,
                                               fontStyle:
                                                   FlutterFlowTheme.of(context)
-                                                      .labelLarge
+                                                      .labelMedium
                                                       .fontStyle,
                                             ),
-                                            color: Colors.white,
-                                            fontSize: 22.0,
                                             letterSpacing: 0.0,
                                             fontWeight:
                                                 FlutterFlowTheme.of(context)
-                                                    .labelLarge
+                                                    .labelMedium
                                                     .fontWeight,
                                             fontStyle:
                                                 FlutterFlowTheme.of(context)
-                                                    .labelLarge
+                                                    .labelMedium
                                                     .fontStyle,
                                           ),
-                                    ).addWalkthrough(
-                                      textOcujz7yy,
-                                      _model.ttlLogHorariosErroresController,
-                                    ),
-                                  ),
-                                ),
-                                DataColumn2(
-                                  label: DefaultTextStyle.merge(
-                                    softWrap: true,
-                                    child: Text(
-                                      'Fecha \nReporte',
-                                      style: FlutterFlowTheme.of(context)
-                                          .labelLarge
+                                      searchTextStyle: FlutterFlowTheme.of(
+                                              context)
+                                          .bodyMedium
                                           .override(
                                             font: GoogleFonts.manrope(
                                               fontWeight:
                                                   FlutterFlowTheme.of(context)
-                                                      .labelLarge
+                                                      .bodyMedium
                                                       .fontWeight,
                                               fontStyle:
                                                   FlutterFlowTheme.of(context)
-                                                      .labelLarge
+                                                      .bodyMedium
                                                       .fontStyle,
                                             ),
-                                            color: Colors.white,
-                                            fontSize: 22.0,
                                             letterSpacing: 0.0,
-                                            fontWeight:
-                                                FlutterFlowTheme.of(context)
-                                                    .labelLarge
-                                                    .fontWeight,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .labelLarge
-                                                    .fontStyle,
-                                          ),
-                                    ).addWalkthrough(
-                                      text6zwql1c7,
-                                      _model.ttlLogHorariosErroresController,
-                                    ),
-                                  ),
-                                ),
-                                DataColumn2(
-                                  label: DefaultTextStyle.merge(
-                                    softWrap: true,
-                                    child: Text(
-                                      'Fecha \nInicio',
-                                      style: FlutterFlowTheme.of(context)
-                                          .labelLarge
-                                          .override(
-                                            font: GoogleFonts.manrope(
-                                              fontWeight:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelLarge
-                                                      .fontWeight,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelLarge
-                                                      .fontStyle,
-                                            ),
-                                            color: Colors.white,
-                                            fontSize: 22.0,
-                                            letterSpacing: 0.0,
-                                            fontWeight:
-                                                FlutterFlowTheme.of(context)
-                                                    .labelLarge
-                                                    .fontWeight,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .labelLarge
-                                                    .fontStyle,
-                                          ),
-                                    ).addWalkthrough(
-                                      textZ8bs1i6n,
-                                      _model.ttlLogHorariosErroresController,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                              dataRowBuilder: (erroresListUItem,
-                                      erroresListUIndex,
-                                      selected,
-                                      onSelectChanged) =>
-                                  DataRow(
-                                color: WidgetStateProperty.all(
-                                  erroresListUIndex % 2 == 0
-                                      ? FlutterFlowTheme.of(context)
-                                          .secondaryBackground
-                                      : FlutterFlowTheme.of(context)
-                                          .primaryBackground,
-                                ),
-                                cells: [
-                                  Text(
-                                    valueOrDefault<String>(
-                                      erroresListUItem.usuario,
-                                      'Usuario',
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          font: GoogleFonts.manrope(
                                             fontWeight:
                                                 FlutterFlowTheme.of(context)
                                                     .bodyMedium
@@ -371,72 +261,675 @@ class _LogHorariosErroresWidgetState extends State<LogHorariosErroresWidget> {
                                                     .bodyMedium
                                                     .fontStyle,
                                           ),
-                                          fontSize: 20.0,
-                                          letterSpacing: 0.0,
-                                          fontWeight:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMedium
-                                                  .fontWeight,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMedium
-                                                  .fontStyle,
-                                        ),
-                                  ),
-                                  Text(
-                                    valueOrDefault<String>(
-                                      dateTimeFormat(
-                                        "d/M/y",
-                                        erroresListUItem.fechaActual,
-                                        locale: FFLocalizations.of(context)
-                                            .languageCode,
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            font: GoogleFonts.manrope(
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
+                                            ),
+                                            letterSpacing: 0.0,
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
+                                          ),
+                                      hintText: 'Seleccione usuario...',
+                                      searchHintText: 'Buscar...',
+                                      icon: Icon(
+                                        Icons.keyboard_arrow_down_rounded,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        size: 24.0,
                                       ),
-                                      '0/0/0',
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          font: GoogleFonts.manrope(
-                                            fontWeight:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMedium
-                                                    .fontWeight,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMedium
-                                                    .fontStyle,
-                                          ),
-                                          fontSize: 20.0,
-                                          letterSpacing: 0.0,
+                                      fillColor: FlutterFlowTheme.of(context)
+                                          .primaryBackground,
+                                      elevation: 2.0,
+                                      borderColor: Colors.transparent,
+                                      borderWidth: 0.0,
+                                      borderRadius: 8.0,
+                                      margin: EdgeInsetsDirectional.fromSTEB(
+                                          12.0, 0.0, 12.0, 0.0),
+                                      hidesUnderline: true,
+                                      isOverButton: false,
+                                      isSearchable: true,
+                                      isMultiSelect: false,
+                                    );
+                                  },
+                                ),
+                              ),
+                              FlutterFlowIconButton(
+                                borderRadius: 8.0,
+                                buttonSize: 40.0,
+                                fillColor: FlutterFlowTheme.of(context).primary,
+                                icon: Icon(
+                                  Icons.search,
+                                  color: FlutterFlowTheme.of(context).info,
+                                  size: 24.0,
+                                ),
+                                onPressed: () async {
+                                  logFirebaseEvent(
+                                      'LOG_HORARIOS_ERRORES_search_ICN_ON_TAP');
+                                  logFirebaseEvent(
+                                      'IconButton_firestore_query');
+                                  _model.horarioErroreslistCopy =
+                                      await queryHorarioErroresRecordOnce();
+                                  logFirebaseEvent(
+                                      'IconButton_update_page_state');
+                                  _model.horarioErroresListView = _model
+                                      .horarioErroreslistCopy!
+                                      .where((e) => valueOrDefault<bool>(
+                                            e.usuario == _model.dropDownValue1,
+                                            true,
+                                          ))
+                                      .toList()
+                                      .cast<HorarioErroresRecord>();
+                                  safeSetState(() {});
+
+                                  safeSetState(() {});
+                                },
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 0.0, 0.0, 0.0),
+                                child: FlutterFlowIconButton(
+                                  borderRadius: 8.0,
+                                  buttonSize: 40.0,
+                                  fillColor:
+                                      FlutterFlowTheme.of(context).primary,
+                                  icon: Icon(
+                                    Icons.clear,
+                                    color: FlutterFlowTheme.of(context).info,
+                                    size: 24.0,
+                                  ),
+                                  onPressed: () async {
+                                    logFirebaseEvent(
+                                        'LOG_HORARIOS_ERRORES_clear_ICN_ON_TAP');
+                                    logFirebaseEvent(
+                                        'IconButton_update_page_state');
+                                    _model.horarioErroresListView = _model
+                                        .horarioErroresList!
+                                        .toList()
+                                        .cast<HorarioErroresRecord>();
+                                    safeSetState(() {});
+                                    logFirebaseEvent(
+                                        'IconButton_reset_form_fields');
+                                    safeSetState(() {
+                                      _model.dropDownValueController1?.reset();
+                                    });
+                                  },
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    30.0, 0.0, 0.0, 0.0),
+                                child: Text(
+                                  'Buscar por fecha de reporte:',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyLarge
+                                      .override(
+                                        font: GoogleFonts.manrope(
                                           fontWeight:
                                               FlutterFlowTheme.of(context)
-                                                  .bodyMedium
+                                                  .bodyLarge
                                                   .fontWeight,
                                           fontStyle:
                                               FlutterFlowTheme.of(context)
-                                                  .bodyMedium
+                                                  .bodyLarge
                                                   .fontStyle,
                                         ),
+                                        letterSpacing: 0.0,
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .bodyLarge
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyLarge
+                                            .fontStyle,
+                                      ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    30.0, 0.0, 0.0, 0.0),
+                                child: Text(
+                                  valueOrDefault<String>(
+                                    dateTimeFormat(
+                                      "d/M/y",
+                                      _model.datePicked1,
+                                      locale: FFLocalizations.of(context)
+                                          .languageCode,
+                                    ),
+                                    '0/0/0',
                                   ),
-                                  Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        valueOrDefault<String>(
-                                          dateTimeFormat(
-                                            "d/M/y",
-                                            erroresListUItem.horaEstado,
-                                            locale: FFLocalizations.of(context)
-                                                .languageCode,
-                                          ),
-                                          '0/0/0',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyLarge
+                                      .override(
+                                        font: GoogleFonts.manrope(
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyLarge
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyLarge
+                                                  .fontStyle,
                                         ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              font: GoogleFonts.manrope(
+                                        letterSpacing: 0.0,
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .bodyLarge
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyLarge
+                                            .fontStyle,
+                                      ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 0.0, 0.0, 0.0),
+                                child: FlutterFlowIconButton(
+                                  borderRadius: 8.0,
+                                  buttonSize: 40.0,
+                                  fillColor:
+                                      FlutterFlowTheme.of(context).primary,
+                                  icon: Icon(
+                                    Icons.date_range,
+                                    color: FlutterFlowTheme.of(context).info,
+                                    size: 24.0,
+                                  ),
+                                  onPressed: () async {
+                                    logFirebaseEvent(
+                                        'LOG_HORARIOS_ERRORES_date_range_ICN_ON_T');
+                                    logFirebaseEvent(
+                                        'IconButton_date_time_picker');
+                                    final _datePicked1Date =
+                                        await showDatePicker(
+                                      context: context,
+                                      initialDate: getCurrentTimestamp,
+                                      firstDate: DateTime(1900),
+                                      lastDate: DateTime(2050),
+                                      builder: (context, child) {
+                                        return wrapInMaterialDatePickerTheme(
+                                          context,
+                                          child!,
+                                          headerBackgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                          headerForegroundColor:
+                                              FlutterFlowTheme.of(context).info,
+                                          headerTextStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .headlineLarge
+                                              .override(
+                                                font: GoogleFonts.outfit(
+                                                  fontWeight: FontWeight.w600,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .headlineLarge
+                                                          .fontStyle,
+                                                ),
+                                                fontSize: 32.0,
+                                                letterSpacing: 0.0,
+                                                fontWeight: FontWeight.w600,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .headlineLarge
+                                                        .fontStyle,
+                                              ),
+                                          pickerBackgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryBackground,
+                                          pickerForegroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryText,
+                                          selectedDateTimeBackgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                          selectedDateTimeForegroundColor:
+                                              FlutterFlowTheme.of(context).info,
+                                          actionButtonForegroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryText,
+                                          iconSize: 24.0,
+                                        );
+                                      },
+                                    );
+
+                                    if (_datePicked1Date != null) {
+                                      safeSetState(() {
+                                        _model.datePicked1 = DateTime(
+                                          _datePicked1Date.year,
+                                          _datePicked1Date.month,
+                                          _datePicked1Date.day,
+                                        );
+                                      });
+                                    } else if (_model.datePicked1 != null) {
+                                      safeSetState(() {
+                                        _model.datePicked1 =
+                                            getCurrentTimestamp;
+                                      });
+                                    }
+                                  },
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    30.0, 0.0, 0.0, 0.0),
+                                child: Text(
+                                  valueOrDefault<String>(
+                                    dateTimeFormat(
+                                      "d/M/y",
+                                      _model.datePicked2,
+                                      locale: FFLocalizations.of(context)
+                                          .languageCode,
+                                    ),
+                                    '0/0/0',
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyLarge
+                                      .override(
+                                        font: GoogleFonts.manrope(
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyLarge
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyLarge
+                                                  .fontStyle,
+                                        ),
+                                        letterSpacing: 0.0,
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .bodyLarge
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyLarge
+                                            .fontStyle,
+                                      ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 0.0, 0.0, 0.0),
+                                child: FlutterFlowIconButton(
+                                  borderRadius: 8.0,
+                                  buttonSize: 40.0,
+                                  fillColor:
+                                      FlutterFlowTheme.of(context).primary,
+                                  icon: Icon(
+                                    Icons.date_range,
+                                    color: FlutterFlowTheme.of(context).info,
+                                    size: 24.0,
+                                  ),
+                                  onPressed: () async {
+                                    logFirebaseEvent(
+                                        'LOG_HORARIOS_ERRORES_date_range_ICN_ON_T');
+                                    logFirebaseEvent(
+                                        'IconButton_date_time_picker');
+                                    final _datePicked2Date =
+                                        await showDatePicker(
+                                      context: context,
+                                      initialDate: getCurrentTimestamp,
+                                      firstDate: DateTime(1900),
+                                      lastDate: DateTime(2050),
+                                      builder: (context, child) {
+                                        return wrapInMaterialDatePickerTheme(
+                                          context,
+                                          child!,
+                                          headerBackgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                          headerForegroundColor:
+                                              FlutterFlowTheme.of(context).info,
+                                          headerTextStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .headlineLarge
+                                              .override(
+                                                font: GoogleFonts.outfit(
+                                                  fontWeight: FontWeight.w600,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .headlineLarge
+                                                          .fontStyle,
+                                                ),
+                                                fontSize: 32.0,
+                                                letterSpacing: 0.0,
+                                                fontWeight: FontWeight.w600,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .headlineLarge
+                                                        .fontStyle,
+                                              ),
+                                          pickerBackgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryBackground,
+                                          pickerForegroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryText,
+                                          selectedDateTimeBackgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                          selectedDateTimeForegroundColor:
+                                              FlutterFlowTheme.of(context).info,
+                                          actionButtonForegroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryText,
+                                          iconSize: 24.0,
+                                        );
+                                      },
+                                    );
+
+                                    if (_datePicked2Date != null) {
+                                      safeSetState(() {
+                                        _model.datePicked2 = DateTime(
+                                          _datePicked2Date.year,
+                                          _datePicked2Date.month,
+                                          _datePicked2Date.day,
+                                        );
+                                      });
+                                    } else if (_model.datePicked2 != null) {
+                                      safeSetState(() {
+                                        _model.datePicked2 =
+                                            getCurrentTimestamp;
+                                      });
+                                    }
+                                  },
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 0.0, 0.0, 0.0),
+                                child: FlutterFlowIconButton(
+                                  borderRadius: 8.0,
+                                  buttonSize: 40.0,
+                                  fillColor:
+                                      FlutterFlowTheme.of(context).primary,
+                                  icon: Icon(
+                                    Icons.filter_alt,
+                                    color: FlutterFlowTheme.of(context).info,
+                                    size: 24.0,
+                                  ),
+                                  onPressed: () async {
+                                    logFirebaseEvent(
+                                        'LOG_HORARIOS_ERRORES_filter_alt_ICN_ON_T');
+                                    var _shouldSetState = false;
+                                    if ((_model.datePicked1 != null) &&
+                                        (_model.datePicked2 != null)) {
+                                      logFirebaseEvent(
+                                          'IconButton_firestore_query');
+                                      _model.horarioerroresFix =
+                                          await queryHorarioErroresRecordOnce();
+                                      _shouldSetState = true;
+                                      logFirebaseEvent(
+                                          'IconButton_update_page_state');
+                                      _model.horarioErroresListView = _model
+                                          .horarioerroresFix!
+                                          .where((e) =>
+                                              (e.fechaActual! >=
+                                                  _model.datePicked1!) &&
+                                              (e.fechaActual! <=
+                                                  _model.datePicked2!))
+                                          .toList()
+                                          .cast<HorarioErroresRecord>();
+                                      safeSetState(() {});
+                                    } else {
+                                      logFirebaseEvent(
+                                          'IconButton_alert_dialog');
+                                      await showDialog(
+                                        context: context,
+                                        builder: (alertDialogContext) {
+                                          return AlertDialog(
+                                            title: Text('Error'),
+                                            content: Text(
+                                                'Revise el rango de fechas.'),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext),
+                                                child: Text('Ok'),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                      if (_shouldSetState) safeSetState(() {});
+                                      return;
+                                    }
+
+                                    if (_shouldSetState) safeSetState(() {});
+                                  },
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 0.0, 0.0, 0.0),
+                                child: FlutterFlowIconButton(
+                                  borderRadius: 8.0,
+                                  buttonSize: 40.0,
+                                  fillColor:
+                                      FlutterFlowTheme.of(context).primary,
+                                  icon: Icon(
+                                    Icons.clear_outlined,
+                                    color: FlutterFlowTheme.of(context).info,
+                                    size: 24.0,
+                                  ),
+                                  onPressed: () async {
+                                    logFirebaseEvent(
+                                        'LOG_HORARIOS_ERRORES_clear_outlined_ICN_');
+                                    logFirebaseEvent(
+                                        'IconButton_update_page_state');
+                                    _model.horarioErroresListView = _model
+                                        .horarioErroresList!
+                                        .toList()
+                                        .cast<HorarioErroresRecord>();
+                                    safeSetState(() {});
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                5.0, 0.0, 5.0, 0.0),
+                            child: Builder(
+                              builder: (context) {
+                                final erroresListU =
+                                    _model.horarioErroresListView.toList();
+
+                                return FlutterFlowDataTable<
+                                    HorarioErroresRecord>(
+                                  controller:
+                                      _model.paginatedDataTableController,
+                                  data: erroresListU,
+                                  columnsBuilder: (onSortChanged) => [
+                                    DataColumn2(
+                                      label: DefaultTextStyle.merge(
+                                        softWrap: true,
+                                        child: Align(
+                                          alignment:
+                                              AlignmentDirectional(0.0, 0.0),
+                                          child: Text(
+                                            'Usuario',
+                                            style: FlutterFlowTheme.of(context)
+                                                .labelLarge
+                                                .override(
+                                                  font: GoogleFonts.manrope(
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelLarge
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelLarge
+                                                            .fontStyle,
+                                                  ),
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                  fontSize: 20.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelLarge
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelLarge
+                                                          .fontStyle,
+                                                ),
+                                          ).addWalkthrough(
+                                            textOcujz7yy,
+                                            _model.logHorariosErroresController,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    DataColumn2(
+                                      label: DefaultTextStyle.merge(
+                                        softWrap: true,
+                                        child: Align(
+                                          alignment:
+                                              AlignmentDirectional(0.0, 0.0),
+                                          child: Text(
+                                            'Fecha Reporte',
+                                            style: FlutterFlowTheme.of(context)
+                                                .labelLarge
+                                                .override(
+                                                  font: GoogleFonts.manrope(
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelLarge
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelLarge
+                                                            .fontStyle,
+                                                  ),
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                  fontSize: 20.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelLarge
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelLarge
+                                                          .fontStyle,
+                                                ),
+                                          ).addWalkthrough(
+                                            text6zwql1c7,
+                                            _model.logHorariosErroresController,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    DataColumn2(
+                                      label: DefaultTextStyle.merge(
+                                        softWrap: true,
+                                        child: Align(
+                                          alignment:
+                                              AlignmentDirectional(0.0, 0.0),
+                                          child: Text(
+                                            'Fecha Inicial',
+                                            style: FlutterFlowTheme.of(context)
+                                                .labelLarge
+                                                .override(
+                                                  font: GoogleFonts.manrope(
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelLarge
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelLarge
+                                                            .fontStyle,
+                                                  ),
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                  fontSize: 20.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelLarge
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelLarge
+                                                          .fontStyle,
+                                                ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                  dataRowBuilder: (erroresListUItem,
+                                          erroresListUIndex,
+                                          selected,
+                                          onSelectChanged) =>
+                                      DataRow(
+                                    color: WidgetStateProperty.all(
+                                      erroresListUIndex % 2 == 0
+                                          ? FlutterFlowTheme.of(context)
+                                              .secondaryBackground
+                                          : FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
+                                    ),
+                                    cells: [
+                                      Align(
+                                        alignment:
+                                            AlignmentDirectional(0.0, 0.0),
+                                        child: Text(
+                                          valueOrDefault<String>(
+                                            erroresListUItem.usuario,
+                                            'Usuario',
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                font: GoogleFonts.manrope(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontStyle,
+                                                ),
+                                                fontSize: 20.0,
+                                                letterSpacing: 0.0,
                                                 fontWeight:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyMedium
@@ -446,103 +939,131 @@ class _LogHorariosErroresWidgetState extends State<LogHorariosErroresWidget> {
                                                         .bodyMedium
                                                         .fontStyle,
                                               ),
-                                              fontSize: 20.0,
-                                              letterSpacing: 0.0,
-                                              fontWeight:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .fontWeight,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .fontStyle,
-                                            ),
-                                      ),
-                                      InkWell(
-                                        splashColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onTap: () async {
-                                          logFirebaseEvent(
-                                              'LOG_HORARIOS_ERRORES_Icon_estbpbrz_ON_TA');
-                                          logFirebaseEvent('Icon_bottom_sheet');
-                                          await showModalBottomSheet(
-                                            isScrollControlled: true,
-                                            backgroundColor: Colors.transparent,
-                                            enableDrag: false,
-                                            context: context,
-                                            builder: (context) {
-                                              return GestureDetector(
-                                                onTap: () {
-                                                  FocusScope.of(context)
-                                                      .unfocus();
-                                                  FocusManager
-                                                      .instance.primaryFocus
-                                                      ?.unfocus();
-                                                },
-                                                child: Padding(
-                                                  padding:
-                                                      MediaQuery.viewInsetsOf(
-                                                          context),
-                                                  child:
-                                                      LogErrorHorarioDetallesWidget(
-                                                    fechaCreacion:
-                                                        erroresListUItem
-                                                            .fechaActual,
-                                                    fechaInicioJornada:
-                                                        erroresListUItem
-                                                            .horaEstado,
-                                                    descripcionHorario:
-                                                        valueOrDefault<String>(
-                                                      erroresListUItem
-                                                          .descripcionError,
-                                                      'Vacio',
-                                                    ),
-                                                  ),
-                                                ),
-                                              );
-                                            },
-                                          ).then(
-                                              (value) => safeSetState(() {}));
-                                        },
-                                        child: Icon(
-                                          Icons.info_rounded,
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                          size: 28.0,
                                         ),
                                       ),
-                                    ],
+                                      Align(
+                                        alignment:
+                                            AlignmentDirectional(0.0, 0.0),
+                                        child: Text(
+                                          valueOrDefault<String>(
+                                            dateTimeFormat(
+                                              "d/M/y",
+                                              erroresListUItem.fechaActual,
+                                              locale:
+                                                  FFLocalizations.of(context)
+                                                      .languageCode,
+                                            ),
+                                            '0/0/0',
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                font: GoogleFonts.manrope(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontStyle,
+                                                ),
+                                                fontSize: 20.0,
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
+                                        ),
+                                      ),
+                                      Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Align(
+                                            alignment:
+                                                AlignmentDirectional(0.0, 0.0),
+                                            child: Text(
+                                              valueOrDefault<String>(
+                                                dateTimeFormat(
+                                                  "d/M/y",
+                                                  erroresListUItem.horaEstado,
+                                                  locale: FFLocalizations.of(
+                                                          context)
+                                                      .languageCode,
+                                                ),
+                                                '0/0/0',
+                                              ),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        font:
+                                                            GoogleFonts.manrope(
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontStyle,
+                                                        ),
+                                                        fontSize: 20.0,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontStyle,
+                                                      ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ].map((c) => DataCell(c)).toList(),
                                   ),
-                                ].map((c) => DataCell(c)).toList(),
-                              ),
-                              paginated: true,
-                              selectable: false,
-                              hidePaginator: false,
-                              showFirstLastButtons: false,
-                              height: MediaQuery.sizeOf(context).height * 5.0,
-                              headingRowHeight: 56.0,
-                              dataRowHeight: 48.0,
-                              columnSpacing: 20.0,
-                              headingRowColor:
-                                  FlutterFlowTheme.of(context).primary,
-                              borderRadius: BorderRadius.circular(10.0),
-                              addHorizontalDivider: true,
-                              addTopAndBottomDivider: false,
-                              hideDefaultHorizontalDivider: true,
-                              horizontalDividerColor:
-                                  FlutterFlowTheme.of(context)
+                                  paginated: true,
+                                  selectable: false,
+                                  hidePaginator: false,
+                                  showFirstLastButtons: false,
+                                  headingRowHeight: 56.0,
+                                  dataRowHeight: 48.0,
+                                  columnSpacing: 20.0,
+                                  headingRowColor: FlutterFlowTheme.of(context)
                                       .secondaryBackground,
-                              horizontalDividerThickness: 1.0,
-                              addVerticalDivider: true,
-                              verticalDividerColor: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              verticalDividerThickness: 1.0,
-                            );
-                          },
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  addHorizontalDivider: true,
+                                  addTopAndBottomDivider: true,
+                                  hideDefaultHorizontalDivider: true,
+                                  horizontalDividerColor:
+                                      FlutterFlowTheme.of(context).primary,
+                                  horizontalDividerThickness: 1.0,
+                                  addVerticalDivider: true,
+                                  verticalDividerColor:
+                                      FlutterFlowTheme.of(context).primary,
+                                  verticalDividerThickness: 1.0,
+                                );
+                              },
+                            ),
+                          ),
                         ),
-                      ),
+                      ],
                     ),
                   ),
                 ],
@@ -553,136 +1074,88 @@ class _LogHorariosErroresWidgetState extends State<LogHorariosErroresWidget> {
               tabletLandscape: false,
               desktop: false,
             ))
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(24.0, 24.0, 24.0, 24.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        FFButtonWidget(
-                          onPressed: () async {
-                            logFirebaseEvent(
-                                'LOG_HORARIOS_ERRORES_PAGE__BTN_ON_TAP');
-                            logFirebaseEvent('Button_navigate_to');
-
-                            context
-                                .pushNamed(ReportesHomeAdminWidget.routeName);
-                          },
-                          text: '',
-                          icon: Icon(
-                            Icons.arrow_back,
-                            size: 28.0,
-                          ),
-                          options: FFButtonOptions(
-                            height: 40.0,
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 0.0, 16.0, 0.0),
-                            iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            color: Color(0x002797FF),
-                            textStyle: FlutterFlowTheme.of(context)
-                                .titleSmall
-                                .override(
-                                  font: GoogleFonts.manrope(
-                                    fontWeight: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .fontWeight,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .fontStyle,
-                                  ),
-                                  color: Colors.white,
-                                  fontSize: 16.0,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FlutterFlowTheme.of(context)
-                                      .titleSmall
-                                      .fontWeight,
-                                  fontStyle: FlutterFlowTheme.of(context)
-                                      .titleSmall
-                                      .fontStyle,
-                                ),
-                            elevation: 0.0,
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
+              Column(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      FlutterFlowIconButton(
+                        borderRadius: 8.0,
+                        buttonSize: MediaQuery.sizeOf(context).width * 0.15,
+                        fillColor: Color(0x0000507C),
+                        icon: Icon(
+                          Icons.arrow_back,
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          size: 28.0,
                         ),
-                        Flexible(
-                          child: FlutterFlowIconButton(
-                            borderColor: Colors.transparent,
-                            borderRadius: 8.0,
-                            buttonSize: 40.0,
-                            fillColor: Color(0xFFB2332D),
-                            icon: Icon(
-                              Icons.delete,
-                              color: FlutterFlowTheme.of(context).info,
-                              size: 24.0,
-                            ),
-                            onPressed: () async {
-                              logFirebaseEvent(
-                                  'LOG_HORARIOS_ERRORES_delete_ICN_ON_TAP');
-                              logFirebaseEvent('IconButton_navigate_to');
+                        onPressed: () async {
+                          logFirebaseEvent(
+                              'LOG_HORARIOS_ERRORES_arrow_back_ICN_ON_T');
+                          logFirebaseEvent('IconButton_navigate_to');
 
-                              context.goNamed(VaciarRegistrosWidget.routeName);
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                    Text(
-                      'Error Horarios',
-                      style: FlutterFlowTheme.of(context).displaySmall.override(
-                            font: GoogleFonts.outfit(
-                              fontWeight: FlutterFlowTheme.of(context)
-                                  .displaySmall
-                                  .fontWeight,
-                              fontStyle: FlutterFlowTheme.of(context)
-                                  .displaySmall
-                                  .fontStyle,
-                            ),
-                            letterSpacing: 0.0,
-                            fontWeight: FlutterFlowTheme.of(context)
-                                .displaySmall
-                                .fontWeight,
-                            fontStyle: FlutterFlowTheme.of(context)
-                                .displaySmall
-                                .fontStyle,
-                          ),
-                    ),
-                    Material(
-                      color: Colors.transparent,
-                      elevation: 2.0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.0),
+                          context.pushNamed(ReportesHomeAdminWidget.routeName);
+                        },
                       ),
-                      child: Container(
-                        width: MediaQuery.sizeOf(context).width * 1.0,
-                        height: MediaQuery.sizeOf(context).height * 0.692,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          borderRadius: BorderRadius.circular(12.0),
+                    ],
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Align(
+                          alignment: AlignmentDirectional(0.0, 0.0),
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 20.0),
+                            child: Text(
+                              'ERRORES EN HORARIO',
+                              textAlign: TextAlign.center,
+                              style: FlutterFlowTheme.of(context)
+                                  .displaySmall
+                                  .override(
+                                    fontFamily: 'NimbusSansLight',
+                                    fontSize: 30.0,
+                                    letterSpacing: 0.0,
+                                  ),
+                            ),
+                          ),
                         ),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              16.0, 16.0, 16.0, 16.0),
-                          child: SingleChildScrollView(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Align(
-                                      alignment: AlignmentDirectional(0.0, 0.0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Expanded(
-                                            child: Padding(
+                        Material(
+                          color: Colors.transparent,
+                          elevation: 2.0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          child: Container(
+                            width: MediaQuery.sizeOf(context).width * 1.0,
+                            height: MediaQuery.sizeOf(context).height * 0.82,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  16.0, 16.0, 16.0, 16.0),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Align(
+                                        alignment:
+                                            AlignmentDirectional(0.0, 0.0),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Padding(
                                               padding: EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 3.0, 0.0, 0.0),
                                               child: InkWell(
@@ -727,175 +1200,256 @@ class _LogHorariosErroresWidgetState extends State<LogHorariosErroresWidget> {
                                                           safeSetState(() {}));
                                                 },
                                                 child: Container(
-                                                  width: 247.5,
+                                                  width:
+                                                      MediaQuery.sizeOf(context)
+                                                              .width *
+                                                          0.805,
+                                                  height: 89.72,
                                                   decoration: BoxDecoration(
                                                     color: FlutterFlowTheme.of(
                                                             context)
-                                                        .primaryBackground,
+                                                        .secondary,
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             25.0),
                                                   ),
-                                                  child: Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(8.0, 12.0,
-                                                                8.0, 12.0),
-                                                    child: Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      children: [
-                                                        Icon(
-                                                          Icons.search,
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .secondaryText,
-                                                          size: 20.0,
-                                                        ),
-                                                        Expanded(
-                                                          child: Container(
-                                                            width: 200.0,
-                                                            child:
-                                                                TextFormField(
+                                                  child: Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    8.0,
+                                                                    15.0,
+                                                                    8.0,
+                                                                    10.0),
+                                                        child: Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          children: [
+                                                            FlutterFlowDropDown<
+                                                                String>(
                                                               controller: _model
-                                                                  .textController,
-                                                              focusNode: _model
-                                                                  .textFieldFocusNode,
-                                                              onChanged: (_) =>
-                                                                  EasyDebounce
-                                                                      .debounce(
-                                                                '_model.textController',
-                                                                Duration(
-                                                                    milliseconds:
-                                                                        2000),
-                                                                () async {
-                                                                  logFirebaseEvent(
-                                                                      'LOG_HORARIOS_ERRORES_TextField_h18utfo1_');
-                                                                  logFirebaseEvent(
-                                                                      'TextField_update_app_state');
-                                                                  FFAppState()
-                                                                          .busqueda =
-                                                                      _model
-                                                                          .textController
-                                                                          .text;
-                                                                  safeSetState(
-                                                                      () {});
-                                                                },
+                                                                      .dropDownValueController2 ??=
+                                                                  FormFieldController<
+                                                                          String>(
+                                                                      null),
+                                                              options: _model
+                                                                  .usersList!
+                                                                  .map((e) =>
+                                                                      valueOrDefault<
+                                                                          String>(
+                                                                        e.email,
+                                                                        'Correo',
+                                                                      ))
+                                                                  .toList(),
+                                                              onChanged:
+                                                                  (val) async {
+                                                                safeSetState(() =>
+                                                                    _model.dropDownValue2 =
+                                                                        val);
+                                                                logFirebaseEvent(
+                                                                    'LOG_HORARIOS_ERRORES_DropDown_use3aezv_O');
+                                                                logFirebaseEvent(
+                                                                    'DropDown_firestore_query');
+                                                                _model.userSingleDoc =
+                                                                    await queryUsersRecordOnce(
+                                                                  queryBuilder:
+                                                                      (usersRecord) =>
+                                                                          usersRecord
+                                                                              .where(
+                                                                    'email',
+                                                                    isEqualTo:
+                                                                        _model
+                                                                            .dropDownValue2,
+                                                                  ),
+                                                                  singleRecord:
+                                                                      true,
+                                                                ).then((s) => s
+                                                                        .firstOrNull);
+
+                                                                safeSetState(
+                                                                    () {});
+                                                              },
+                                                              width: 200.0,
+                                                              height: 40.0,
+                                                              textStyle:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                        font: GoogleFonts
+                                                                            .manrope(
+                                                                          fontWeight: FlutterFlowTheme.of(context)
+                                                                              .bodyMedium
+                                                                              .fontWeight,
+                                                                          fontStyle: FlutterFlowTheme.of(context)
+                                                                              .bodyMedium
+                                                                              .fontStyle,
+                                                                        ),
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                        fontWeight: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .fontWeight,
+                                                                        fontStyle: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .fontStyle,
+                                                                      ),
+                                                              hintText:
+                                                                  'Seleccione...',
+                                                              icon: Icon(
+                                                                Icons
+                                                                    .keyboard_arrow_down_rounded,
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryText,
+                                                                size: 24.0,
                                                               ),
-                                                              autofocus: false,
-                                                              obscureText:
+                                                              fillColor: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .primaryBackground,
+                                                              elevation: 2.0,
+                                                              borderColor: Colors
+                                                                  .transparent,
+                                                              borderWidth: 0.0,
+                                                              borderRadius: 8.0,
+                                                              margin:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          12.0,
+                                                                          0.0,
+                                                                          12.0,
+                                                                          0.0),
+                                                              hidesUnderline:
+                                                                  true,
+                                                              isOverButton:
                                                                   false,
-                                                              decoration:
-                                                                  InputDecoration(
-                                                                isDense: true,
-                                                                labelStyle: FlutterFlowTheme.of(
+                                                              isSearchable:
+                                                                  false,
+                                                              isMultiSelect:
+                                                                  false,
+                                                            ),
+                                                            FlutterFlowIconButton(
+                                                              borderRadius: 8.0,
+                                                              buttonSize: 40.0,
+                                                              fillColor:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primary,
+                                                              icon: FaIcon(
+                                                                FontAwesomeIcons
+                                                                    .search,
+                                                                color: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .labelMedium
-                                                                    .override(
-                                                                      font: GoogleFonts
-                                                                          .manrope(
-                                                                        fontWeight: FlutterFlowTheme.of(context)
-                                                                            .labelMedium
-                                                                            .fontWeight,
-                                                                        fontStyle: FlutterFlowTheme.of(context)
-                                                                            .labelMedium
-                                                                            .fontStyle,
-                                                                      ),
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                      fontWeight: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .labelMedium
-                                                                          .fontWeight,
-                                                                      fontStyle: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .labelMedium
-                                                                          .fontStyle,
-                                                                    ),
-                                                                hintText:
-                                                                    'Buscar',
-                                                                hintStyle: FlutterFlowTheme.of(
+                                                                    .info,
+                                                                size: 24.0,
+                                                              ),
+                                                              onPressed:
+                                                                  () async {
+                                                                logFirebaseEvent(
+                                                                    'LOG_HORARIOS_ERRORES_search_ICN_ON_TAP');
+                                                                logFirebaseEvent(
+                                                                    'IconButton_firestore_query');
+                                                                _model.horarioErroreslist =
+                                                                    await queryHorarioErroresRecordOnce();
+                                                                logFirebaseEvent(
+                                                                    'IconButton_update_page_state');
+                                                                _model.horarioErroresListView = _model
+                                                                    .horarioErroreslist!
+                                                                    .where((e) =>
+                                                                        e.usuario ==
+                                                                        _model
+                                                                            .dropDownValue2)
+                                                                    .toList()
+                                                                    .cast<
+                                                                        HorarioErroresRecord>();
+                                                                safeSetState(
+                                                                    () {});
+
+                                                                safeSetState(
+                                                                    () {});
+                                                              },
+                                                            ),
+                                                            FlutterFlowIconButton(
+                                                              borderRadius: 8.0,
+                                                              buttonSize: 40.0,
+                                                              fillColor:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primary,
+                                                              icon: Icon(
+                                                                Icons
+                                                                    .close_rounded,
+                                                                color: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .labelMedium
-                                                                    .override(
-                                                                      font: GoogleFonts
-                                                                          .manrope(
-                                                                        fontWeight: FlutterFlowTheme.of(context)
-                                                                            .labelMedium
-                                                                            .fontWeight,
-                                                                        fontStyle: FlutterFlowTheme.of(context)
-                                                                            .labelMedium
-                                                                            .fontStyle,
-                                                                      ),
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                      fontWeight: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .labelMedium
-                                                                          .fontWeight,
-                                                                      fontStyle: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .labelMedium
-                                                                          .fontStyle,
-                                                                    ),
-                                                                enabledBorder:
-                                                                    OutlineInputBorder(
-                                                                  borderSide:
-                                                                      BorderSide(
-                                                                    color: Color(
-                                                                        0x00000000),
-                                                                    width: 1.0,
-                                                                  ),
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              8.0),
-                                                                ),
-                                                                focusedBorder:
-                                                                    OutlineInputBorder(
-                                                                  borderSide:
-                                                                      BorderSide(
-                                                                    color: Color(
-                                                                        0x00000000),
-                                                                    width: 1.0,
-                                                                  ),
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              8.0),
-                                                                ),
-                                                                errorBorder:
-                                                                    OutlineInputBorder(
-                                                                  borderSide:
-                                                                      BorderSide(
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .error,
-                                                                    width: 1.0,
-                                                                  ),
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              8.0),
-                                                                ),
-                                                                focusedErrorBorder:
-                                                                    OutlineInputBorder(
-                                                                  borderSide:
-                                                                      BorderSide(
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .error,
-                                                                    width: 1.0,
-                                                                  ),
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              8.0),
-                                                                ),
-                                                                filled: true,
-                                                                fillColor: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .secondaryBackground,
+                                                                    .info,
+                                                                size: 24.0,
+                                                              ),
+                                                              onPressed:
+                                                                  () async {
+                                                                logFirebaseEvent(
+                                                                    'LOG_HORARIOS_ERRORES_close_rounded_ICN_O');
+                                                                logFirebaseEvent(
+                                                                    'IconButton_update_page_state');
+                                                                _model.horarioErroresListView = _model
+                                                                    .horarioErroresList!
+                                                                    .toList()
+                                                                    .cast<
+                                                                        HorarioErroresRecord>();
+                                                                safeSetState(
+                                                                    () {});
+                                                                logFirebaseEvent(
+                                                                    'IconButton_reset_form_fields');
+                                                                safeSetState(
+                                                                    () {
+                                                                  _model
+                                                                      .dropDownValueController2
+                                                                      ?.reset();
+                                                                });
+                                                              },
+                                                            ),
+                                                          ].divide(SizedBox(
+                                                              width: 8.0)),
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    8.0,
+                                                                    0.0,
+                                                                    8.0,
+                                                                    0.0),
+                                                        child: Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            Text(
+                                                              valueOrDefault<
+                                                                  String>(
+                                                                '${valueOrDefault<String>(
+                                                                  _model
+                                                                      .userSingleDoc
+                                                                      ?.displayName,
+                                                                  'Nombre',
+                                                                )} ${valueOrDefault<String>(
+                                                                  _model
+                                                                      .userSingleDoc
+                                                                      ?.apellidos,
+                                                                  'Apellidos',
+                                                                )} ${valueOrDefault<String>(
+                                                                  _model
+                                                                      .userSingleDoc
+                                                                      ?.cedula,
+                                                                  'Cedula',
+                                                                )}',
+                                                                'Usuario',
                                                               ),
                                                               style: FlutterFlowTheme
                                                                       .of(context)
@@ -923,405 +1477,315 @@ class _LogHorariosErroresWidgetState extends State<LogHorariosErroresWidget> {
                                                                         .bodyMedium
                                                                         .fontStyle,
                                                                   ),
-                                                              cursorColor:
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primaryText,
-                                                              validator: _model
-                                                                  .textControllerValidator
-                                                                  .asValidator(
-                                                                      context),
                                                             ),
-                                                          ),
+                                                          ].divide(SizedBox(
+                                                              width: 8.0)),
                                                         ),
-                                                      ].divide(
-                                                          SizedBox(width: 8.0)),
-                                                    ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      12.0, 0.0, 12.0, 0.0),
-                                  child: Container(
-                                    width:
-                                        MediaQuery.sizeOf(context).width * 1.0,
-                                    height: MediaQuery.sizeOf(context).height *
-                                        0.618,
-                                    child: SingleChildScrollView(
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 10.0, 0.0, 0.0),
-                                            child: StreamBuilder<
-                                                List<HorarioErroresRecord>>(
-                                              stream:
-                                                  queryHorarioErroresRecord()
-                                                    ..listen((snapshot) {
-                                                      List<HorarioErroresRecord>
-                                                          listViewHorarioErroresRecordList =
-                                                          snapshot;
-                                                      if (_model.listViewPreviousSnapshot !=
-                                                              null &&
-                                                          !const ListEquality(
-                                                                  HorarioErroresRecordDocumentEquality())
-                                                              .equals(
-                                                                  listViewHorarioErroresRecordList,
-                                                                  _model
-                                                                      .listViewPreviousSnapshot)) {
-                                                        () async {}();
-                                                      }
-                                                      _model.listViewPreviousSnapshot =
-                                                          snapshot;
-                                                    }),
-                                              builder: (context, snapshot) {
-                                                // Customize what your widget looks like when it's loading.
-                                                if (!snapshot.hasData) {
-                                                  return Center(
-                                                    child: SizedBox(
-                                                      width: 50.0,
-                                                      height: 50.0,
-                                                      child:
-                                                          CircularProgressIndicator(
-                                                        valueColor:
-                                                            AlwaysStoppedAnimation<
-                                                                Color>(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  );
-                                                }
-                                                List<HorarioErroresRecord>
-                                                    listViewHorarioErroresRecordList =
-                                                    snapshot.data!;
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        12.0, 0.0, 12.0, 0.0),
+                                    child: Container(
+                                      width: MediaQuery.sizeOf(context).width *
+                                          1.0,
+                                      height:
+                                          MediaQuery.sizeOf(context).height *
+                                              0.648,
+                                      child: SingleChildScrollView(
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      0.0, 10.0, 0.0, 0.0),
+                                              child: Builder(
+                                                builder: (context) {
+                                                  final horarioErrores = _model
+                                                      .horarioErroresListView
+                                                      .toList();
 
-                                                return ListView.builder(
-                                                  padding: EdgeInsets.zero,
-                                                  shrinkWrap: true,
-                                                  scrollDirection:
-                                                      Axis.vertical,
-                                                  itemCount:
-                                                      listViewHorarioErroresRecordList
-                                                          .length,
-                                                  itemBuilder:
-                                                      (context, listViewIndex) {
-                                                    final listViewHorarioErroresRecord =
-                                                        listViewHorarioErroresRecordList[
-                                                            listViewIndex];
-                                                    return Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  10.0,
-                                                                  0.0,
-                                                                  10.0),
-                                                      child: Container(
-                                                        height: 150.47,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .secondaryBackground,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      14.0),
-                                                          border: Border.all(
-                                                            color: Colors.black,
+                                                  return ListView.builder(
+                                                    padding: EdgeInsets.zero,
+                                                    shrinkWrap: true,
+                                                    scrollDirection:
+                                                        Axis.vertical,
+                                                    itemCount:
+                                                        horarioErrores.length,
+                                                    itemBuilder: (context,
+                                                        horarioErroresIndex) {
+                                                      final horarioErroresItem =
+                                                          horarioErrores[
+                                                              horarioErroresIndex];
+                                                      return Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    10.0,
+                                                                    0.0,
+                                                                    10.0),
+                                                        child: Container(
+                                                          height: 168.1,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .secondaryBackground,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        14.0),
+                                                            border: Border.all(
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .primary,
+                                                            ),
+                                                          ),
+                                                          child: Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            children: [
+                                                              Padding(
+                                                                padding: EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        5.0,
+                                                                        10.0,
+                                                                        0.0,
+                                                                        10.0),
+                                                                child: Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  children: [
+                                                                    Padding(
+                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                          3.0,
+                                                                          0.0,
+                                                                          10.0,
+                                                                          0.0),
+                                                                      child:
+                                                                          Text(
+                                                                        'Usuario:',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                              font: GoogleFonts.manrope(
+                                                                                fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                              ),
+                                                                              fontSize: 16.0,
+                                                                              letterSpacing: 0.0,
+                                                                              fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                              fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                            ),
+                                                                      ),
+                                                                    ),
+                                                                    Text(
+                                                                      valueOrDefault<
+                                                                          String>(
+                                                                        horarioErroresItem
+                                                                            .usuario,
+                                                                        'Usuario',
+                                                                      ),
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyMedium
+                                                                          .override(
+                                                                            font:
+                                                                                GoogleFonts.manrope(
+                                                                              fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                              fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                            ),
+                                                                            fontSize:
+                                                                                16.0,
+                                                                            letterSpacing:
+                                                                                0.0,
+                                                                            fontWeight:
+                                                                                FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                            fontStyle:
+                                                                                FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                          ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                              Padding(
+                                                                padding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            5.0,
+                                                                            5.0,
+                                                                            0.0,
+                                                                            10.0),
+                                                                child: Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  children: [
+                                                                    Padding(
+                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                          3.0,
+                                                                          0.0,
+                                                                          10.0,
+                                                                          0.0),
+                                                                      child:
+                                                                          Text(
+                                                                        'Hora \nReporte:',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                              font: GoogleFonts.manrope(
+                                                                                fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                              ),
+                                                                              fontSize: 16.0,
+                                                                              letterSpacing: 0.0,
+                                                                              fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                              fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                            ),
+                                                                      ),
+                                                                    ),
+                                                                    Text(
+                                                                      valueOrDefault<
+                                                                          String>(
+                                                                        dateTimeFormat(
+                                                                          "dd/MM/yy HH:mm",
+                                                                          horarioErroresItem
+                                                                              .fechaActual,
+                                                                          locale:
+                                                                              FFLocalizations.of(context).languageCode,
+                                                                        ),
+                                                                        '0/0/0',
+                                                                      ),
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyMedium
+                                                                          .override(
+                                                                            font:
+                                                                                GoogleFonts.manrope(
+                                                                              fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                              fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                            ),
+                                                                            fontSize:
+                                                                                16.0,
+                                                                            letterSpacing:
+                                                                                0.0,
+                                                                            fontWeight:
+                                                                                FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                            fontStyle:
+                                                                                FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                          ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                              Padding(
+                                                                padding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            5.0,
+                                                                            5.0,
+                                                                            0.0,
+                                                                            10.0),
+                                                                child: Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  children: [
+                                                                    Padding(
+                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                          3.0,
+                                                                          0.0,
+                                                                          8.0,
+                                                                          0.0),
+                                                                      child:
+                                                                          Text(
+                                                                        'Hora \nInicio:',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                              font: GoogleFonts.manrope(
+                                                                                fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                              ),
+                                                                              fontSize: 16.0,
+                                                                              letterSpacing: 0.0,
+                                                                              fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                              fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                            ),
+                                                                      ),
+                                                                    ),
+                                                                    Text(
+                                                                      valueOrDefault<
+                                                                          String>(
+                                                                        dateTimeFormat(
+                                                                          "dd/MM/yy HH:mm",
+                                                                          horarioErroresItem
+                                                                              .horaEstado,
+                                                                          locale:
+                                                                              FFLocalizations.of(context).languageCode,
+                                                                        ),
+                                                                        '0/0/0',
+                                                                      ),
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyMedium
+                                                                          .override(
+                                                                            font:
+                                                                                GoogleFonts.manrope(
+                                                                              fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                              fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                            ),
+                                                                            fontSize:
+                                                                                16.0,
+                                                                            letterSpacing:
+                                                                                0.0,
+                                                                            fontWeight:
+                                                                                FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                            fontStyle:
+                                                                                FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                          ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ],
                                                           ),
                                                         ),
-                                                        child: Column(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          children: [
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          5.0,
-                                                                          10.0,
-                                                                          0.0,
-                                                                          10.0),
-                                                              child: Row(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                children: [
-                                                                  Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            3.0,
-                                                                            0.0,
-                                                                            10.0,
-                                                                            0.0),
-                                                                    child: Text(
-                                                                      'Usuario:',
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMedium
-                                                                          .override(
-                                                                            font:
-                                                                                GoogleFonts.manrope(
-                                                                              fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                              fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                            ),
-                                                                            letterSpacing:
-                                                                                0.0,
-                                                                            fontWeight:
-                                                                                FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                            fontStyle:
-                                                                                FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                          ),
-                                                                    ),
-                                                                  ),
-                                                                  Text(
-                                                                    valueOrDefault<
-                                                                        String>(
-                                                                      listViewHorarioErroresRecord
-                                                                          .usuario,
-                                                                      'Usuario',
-                                                                    ),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium
-                                                                        .override(
-                                                                          font:
-                                                                              GoogleFonts.manrope(
-                                                                            fontWeight:
-                                                                                FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                            fontStyle:
-                                                                                FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                          ),
-                                                                          letterSpacing:
-                                                                              0.0,
-                                                                          fontWeight: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .fontWeight,
-                                                                          fontStyle: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .fontStyle,
-                                                                        ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          5.0,
-                                                                          5.0,
-                                                                          0.0,
-                                                                          10.0),
-                                                              child: Row(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                children: [
-                                                                  Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            3.0,
-                                                                            0.0,
-                                                                            10.0,
-                                                                            0.0),
-                                                                    child: Text(
-                                                                      'Hora \nReporte:',
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMedium
-                                                                          .override(
-                                                                            font:
-                                                                                GoogleFonts.manrope(
-                                                                              fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                              fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                            ),
-                                                                            letterSpacing:
-                                                                                0.0,
-                                                                            fontWeight:
-                                                                                FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                            fontStyle:
-                                                                                FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                          ),
-                                                                    ),
-                                                                  ),
-                                                                  Text(
-                                                                    valueOrDefault<
-                                                                        String>(
-                                                                      dateTimeFormat(
-                                                                        "d/M H:mm",
-                                                                        listViewHorarioErroresRecord
-                                                                            .fechaActual,
-                                                                        locale:
-                                                                            FFLocalizations.of(context).languageCode,
-                                                                      ),
-                                                                      '0/0/0',
-                                                                    ),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium
-                                                                        .override(
-                                                                          font:
-                                                                              GoogleFonts.manrope(
-                                                                            fontWeight:
-                                                                                FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                            fontStyle:
-                                                                                FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                          ),
-                                                                          letterSpacing:
-                                                                              0.0,
-                                                                          fontWeight: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .fontWeight,
-                                                                          fontStyle: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .fontStyle,
-                                                                        ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          5.0,
-                                                                          5.0,
-                                                                          0.0,
-                                                                          10.0),
-                                                              child: Row(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                children: [
-                                                                  Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            3.0,
-                                                                            0.0,
-                                                                            8.0,
-                                                                            0.0),
-                                                                    child: Text(
-                                                                      'Hora \nInicio:',
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMedium
-                                                                          .override(
-                                                                            font:
-                                                                                GoogleFonts.manrope(
-                                                                              fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                              fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                            ),
-                                                                            letterSpacing:
-                                                                                0.0,
-                                                                            fontWeight:
-                                                                                FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                            fontStyle:
-                                                                                FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                          ),
-                                                                    ),
-                                                                  ),
-                                                                  Text(
-                                                                    valueOrDefault<
-                                                                        String>(
-                                                                      dateTimeFormat(
-                                                                        "d/M H:mm",
-                                                                        listViewHorarioErroresRecord
-                                                                            .horaEstado,
-                                                                        locale:
-                                                                            FFLocalizations.of(context).languageCode,
-                                                                      ),
-                                                                      '0/0/0',
-                                                                    ),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium
-                                                                        .override(
-                                                                          font:
-                                                                              GoogleFonts.manrope(
-                                                                            fontWeight:
-                                                                                FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                            fontStyle:
-                                                                                FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                          ),
-                                                                          letterSpacing:
-                                                                              0.0,
-                                                                          fontWeight: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .fontWeight,
-                                                                          fontStyle: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .fontStyle,
-                                                                        ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    );
-                                                  },
-                                                );
-                                              },
+                                                      );
+                                                    },
+                                                  );
+                                                },
+                                              ),
                                             ),
-                                          ),
-                                        ].divide(SizedBox(height: 0.0)),
+                                          ].divide(SizedBox(height: 0.0)),
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ].divide(SizedBox(height: 16.0)),
+                                ].divide(SizedBox(height: 16.0)),
+                              ),
                             ),
                           ),
                         ),
-                      ),
+                      ],
                     ),
-                    Align(
-                      alignment: AlignmentDirectional(1.0, 0.0),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            0.0, 20.0, 30.0, 0.0),
-                        child: FlutterFlowIconButton(
-                          borderRadius: 8.0,
-                          buttonSize: 40.0,
-                          fillColor: FlutterFlowTheme.of(context).primary,
-                          icon: FaIcon(
-                            FontAwesomeIcons.question,
-                            color: FlutterFlowTheme.of(context).info,
-                            size: 24.0,
-                          ),
-                          onPressed: () async {
-                            logFirebaseEvent(
-                                'LOG_HORARIOS_ERRORES_question_ICN_ON_TAP');
-                            logFirebaseEvent('IconButton_start_walkthrough');
-                            safeSetState(() =>
-                                _model.ttlLogHorariosErroresController =
-                                    createPageWalkthrough(context));
-                            _model.ttlLogHorariosErroresController
-                                ?.show(context: context);
-                          },
-                        ),
-                      ),
-                    ),
-                  ].divide(SizedBox(height: 24.0)),
-                ),
+                  ),
+                ].divide(SizedBox(height: 24.0)),
               ),
           ],
         ),
@@ -1333,7 +1797,7 @@ class _LogHorariosErroresWidgetState extends State<LogHorariosErroresWidget> {
       TutorialCoachMark(
         targets: createWalkthroughTargets(context),
         onFinish: () async {
-          safeSetState(() => _model.ttlLogHorariosErroresController = null);
+          safeSetState(() => _model.logHorariosErroresController = null);
         },
         onSkip: () {
           return true;

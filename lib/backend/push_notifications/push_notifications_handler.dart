@@ -138,15 +138,9 @@ final parametersBuilderMap =
           'role': getParameter<String>(data, 'role'),
         },
       ),
-  'DefinirActividadBU': ParameterData.none(),
   'CrearActividad': ParameterData.none(),
-  'solicitudesVacacionesAdminBU': ParameterData.none(),
   'Facturacion': ParameterData.none(),
-  'logSesionesBU': ParameterData.none(),
-  'logErroresSesionBU': ParameterData.none(),
   'solicitudVacaciones': ParameterData.none(),
-  'indexSolicitudesBU': ParameterData.none(),
-  'indexIncapacidadesBU': ParameterData.none(),
   'solicitudesVacacionesDetalle': (data) async => ParameterData(
         allParams: {
           'nombre': getParameter<String>(data, 'nombre'),
@@ -230,7 +224,24 @@ final parametersBuilderMap =
   'logCalendarioActividades': ParameterData.none(),
   'calendarioActividadesUsuario': ParameterData.none(),
   'vaciarRegistros': ParameterData.none(),
-  'indexIncapacidadesCopy': ParameterData.none(),
+  'Acerca': ParameterData.none(),
+  'EmpleadoVacacionesAdmin': ParameterData.none(),
+  'informacionSesion': ParameterData.none(),
+  'logReporteErrores': ParameterData.none(),
+  'verReporteError': (data) async => ParameterData(
+        allParams: {
+          'usuarioCreador': getParameter<String>(data, 'usuarioCreador'),
+          'usuarioAsignado': getParameter<String>(data, 'usuarioAsignado'),
+          'fechaCreacion': getParameter<DateTime>(data, 'fechaCreacion'),
+          'fechaCompletado': getParameter<DateTime>(data, 'fechaCompletado'),
+          'ttitulo': getParameter<String>(data, 'ttitulo'),
+          'descripcionError': getParameter<String>(data, 'descripcionError'),
+          'estaActivo': getParameter<bool>(data, 'estaActivo'),
+          'codigo': getParameter<String>(data, 'codigo'),
+          'reporteRef': getParameter<DocumentReference>(data, 'reporteRef'),
+        },
+      ),
+  'horariosAdminSeleccion': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

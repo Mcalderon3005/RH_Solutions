@@ -57,9 +57,13 @@ class FlutterFlowDataTableController<T> extends DataTableSource {
     List<T>? data,
     int? numRows,
     bool notify = true,
+    bool paginated = true,
   }) {
     this.data = data?.toList() ?? this.data;
     _numRows = numRows ?? _numRows;
+    if (!paginated) {
+      paginatorController.setRowsPerPage(_numRows ?? this.data.length);
+    }
     if (notify) {
       notifyListeners();
     }
@@ -229,6 +233,7 @@ class _FlutterFlowDataTableState<T> extends State<FlutterFlowDataTable<T>> {
       data: widget.data,
       numRows: widget.numRows,
       notify: true,
+      paginated: widget.paginated,
     );
   }
 
@@ -273,67 +278,129 @@ class _FlutterFlowDataTableState<T> extends State<FlutterFlowDataTable<T>> {
           )
         : BorderSide.none;
 
-    return ClipRRect(
-      borderRadius: widget.borderRadius ?? BorderRadius.zero,
-      child: SizedBox(
-        width: widget.width,
-        height: widget.height,
-        child: Theme(
-          data: Theme.of(context).copyWith(
-            iconTheme: widget.sortIconColor != null
-                ? IconThemeData(color: widget.sortIconColor)
-                : null,
-          ),
-          child: PaginatedDataTable2(
-            source: controller,
-            controller:
-                widget.paginated ? controller.paginatorController : null,
-            rowsPerPage: widget.paginated ? initialRowsPerPage : rowCount,
-            availableRowsPerPage: const [5, 10, 25, 50, 100],
-            onPageChanged: widget.onPageChanged != null
-                ? (index) => widget.onPageChanged!(index)
-                : null,
-            columnSpacing: widget.columnSpacing,
-            onRowsPerPageChanged: widget.paginated
-                ? (value) {
-                    controller.rowsPerPage = value ?? initialRowsPerPage;
-                    if (widget.onRowsPerPageChanged != null) {
-                      widget.onRowsPerPageChanged!(controller.rowsPerPage);
-                    }
-                  }
-                : null,
-            columns: columns,
-            empty: widget.emptyBuilder != null ? widget.emptyBuilder!() : null,
-            sortColumnIndex: controller.sortColumnIndex,
-            sortAscending: controller.sortAscending,
-            showCheckboxColumn: widget.selectable,
-            datarowCheckboxTheme: checkboxThemeData,
-            headingCheckboxTheme: checkboxThemeData,
-            hidePaginator: !widget.paginated || widget.hidePaginator,
-            wrapInCard: false,
-            renderEmptyRowsInTheEnd: false,
-            border: TableBorder(
-              horizontalInside: horizontalBorder,
-              verticalInside: widget.addVerticalDivider
-                  ? BorderSide(
-                      color: widget.verticalDividerColor ?? Colors.transparent,
-                      width: widget.verticalDividerThickness ?? 1.0,
-                    )
-                  : BorderSide.none,
-              bottom: widget.addTopAndBottomDivider
-                  ? horizontalBorder
-                  : BorderSide.none,
+    if (widget.paginated) {
+      return ClipRRect(
+        borderRadius: widget.borderRadius ?? BorderRadius.zero,
+        child: SizedBox(
+          width: widget.width,
+          height: widget.height,
+          child: Theme(
+            data: Theme.of(context).copyWith(
+              iconTheme: widget.sortIconColor != null
+                  ? IconThemeData(color: widget.sortIconColor)
+                  : null,
             ),
-            dividerThickness: widget.hideDefaultHorizontalDivider ? 0.0 : null,
-            headingRowColor: WidgetStateProperty.all(widget.headingRowColor),
-            headingRowHeight: widget.headingRowHeight,
-            dataRowHeight: widget.dataRowHeight,
-            showFirstLastButtons: widget.showFirstLastButtons,
-            minWidth: math.max(widget.minWidth ?? 0, _getColumnsWidth(columns)),
+            child: PaginatedDataTable2(
+              source: controller,
+              controller: controller.paginatorController,
+              rowsPerPage: initialRowsPerPage,
+              availableRowsPerPage: const [5, 10, 25, 50, 100],
+              onPageChanged: widget.onPageChanged != null
+                  ? (index) => widget.onPageChanged!(index)
+                  : null,
+              columnSpacing: widget.columnSpacing,
+              onRowsPerPageChanged: (value) {
+                controller.rowsPerPage = value ?? initialRowsPerPage;
+                if (widget.onRowsPerPageChanged != null) {
+                  widget.onRowsPerPageChanged!(controller.rowsPerPage);
+                }
+              },
+              columns: columns,
+              empty:
+                  widget.emptyBuilder != null ? widget.emptyBuilder!() : null,
+              sortColumnIndex: controller.sortColumnIndex,
+              sortAscending: controller.sortAscending,
+              showCheckboxColumn: widget.selectable,
+              datarowCheckboxTheme: checkboxThemeData,
+              headingCheckboxTheme: checkboxThemeData,
+              hidePaginator: !widget.paginated || widget.hidePaginator,
+              wrapInCard: false,
+              renderEmptyRowsInTheEnd: false,
+              border: TableBorder(
+                horizontalInside: horizontalBorder,
+                verticalInside: widget.addVerticalDivider
+                    ? BorderSide(
+                        color:
+                            widget.verticalDividerColor ?? Colors.transparent,
+                        width: widget.verticalDividerThickness ?? 1.0,
+                      )
+                    : BorderSide.none,
+                bottom: widget.addTopAndBottomDivider
+                    ? horizontalBorder
+                    : BorderSide.none,
+              ),
+              dividerThickness:
+                  widget.hideDefaultHorizontalDivider ? 0.0 : null,
+              headingRowColor: WidgetStateProperty.all(widget.headingRowColor),
+              headingRowHeight: widget.headingRowHeight,
+              dataRowHeight: widget.dataRowHeight,
+              showFirstLastButtons: widget.showFirstLastButtons,
+              minWidth:
+                  math.max(widget.minWidth ?? 0, _getColumnsWidth(columns)),
+            ),
           ),
         ),
-      ),
-    );
+      );
+    } else {
+      return ClipRRect(
+        borderRadius: widget.borderRadius ?? BorderRadius.zero,
+        child: SizedBox(
+          width: widget.width,
+          height: widget.height,
+          child: Theme(
+            data: Theme.of(context).copyWith(
+              iconTheme: widget.sortIconColor != null
+                  ? IconThemeData(color: widget.sortIconColor)
+                  : null,
+            ),
+            child: PaginatedDataTable2(
+              source: controller,
+              controller: controller.paginatorController,
+              // Pass 1 if there are no rows because PaginatedDataTable2 always
+              // expects rowsPerPage to be at least 1. If an emptyBuilder is
+              // passed, the emptyBuilder will still be shown.
+              rowsPerPage: ((widget.numRows ?? widget.data.length) == 0)
+                  ? 1
+                  : (widget.numRows ?? widget.data.length),
+              columnSpacing: widget.columnSpacing,
+              onRowsPerPageChanged: null,
+              columns: columns,
+              empty:
+                  widget.emptyBuilder != null ? widget.emptyBuilder!() : null,
+              sortColumnIndex: controller.sortColumnIndex,
+              sortAscending: controller.sortAscending,
+              showCheckboxColumn: widget.selectable,
+              datarowCheckboxTheme: checkboxThemeData,
+              headingCheckboxTheme: checkboxThemeData,
+              hidePaginator: !widget.paginated || widget.hidePaginator,
+              wrapInCard: false,
+              renderEmptyRowsInTheEnd: false,
+              border: TableBorder(
+                horizontalInside: horizontalBorder,
+                verticalInside: widget.addVerticalDivider
+                    ? BorderSide(
+                        color:
+                            widget.verticalDividerColor ?? Colors.transparent,
+                        width: widget.verticalDividerThickness ?? 1.0,
+                      )
+                    : BorderSide.none,
+                bottom: widget.addTopAndBottomDivider
+                    ? horizontalBorder
+                    : BorderSide.none,
+              ),
+              dividerThickness:
+                  widget.hideDefaultHorizontalDivider ? 0.0 : null,
+              headingRowColor: WidgetStateProperty.all(widget.headingRowColor),
+              headingRowHeight: widget.headingRowHeight,
+              dataRowHeight: widget.dataRowHeight,
+              showFirstLastButtons: widget.showFirstLastButtons,
+              minWidth:
+                  math.max(widget.minWidth ?? 0, _getColumnsWidth(columns)),
+            ),
+          ),
+        ),
+      );
+    }
   }
 
   // Return the total fixed width of all columns that have a specified width,

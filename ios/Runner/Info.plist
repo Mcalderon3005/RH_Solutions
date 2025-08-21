@@ -58,7 +58,9 @@
 	<key>NSPhotoLibraryUsageDescription</key>
     <string>In order to upload data, this app requires permission to access the photo library.</string>
 	<key>PermissionGroupNotification</key>
-    <string>MealPlanner needs to send you notifications about meal updates and other important messages.</string>
+    <string>HR Solutions requiere permisos de notificaciones</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+    <string>Se nesecita el permiso de ubicacion</string>
     <key>UIBackgroundModes</key>
     <array>
         <string>fetch</string>

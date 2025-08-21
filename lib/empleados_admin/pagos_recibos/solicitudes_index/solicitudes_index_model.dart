@@ -2,6 +2,8 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_data_table.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
+    show TutorialCoachMark;
 import 'solicitudes_index_widget.dart' show SolicitudesIndexWidget;
 import 'package:flutter/material.dart';
 
@@ -24,6 +26,7 @@ class SolicitudesIndexModel extends FlutterFlowModel<SolicitudesIndexWidget> {
 
   ///  State fields for stateful widgets in this page.
 
+  TutorialCoachMark? solicitudesIndexController;
   // Stores action output result for [Firestore Query - Query a collection] action in Solicitudes_Index widget.
   List<SolicitudCambioPagoRecord>? errorFacturasListU;
   // State field(s) for PaginatedDataTable widget.
@@ -35,6 +38,7 @@ class SolicitudesIndexModel extends FlutterFlowModel<SolicitudesIndexWidget> {
 
   @override
   void dispose() {
+    solicitudesIndexController?.finish();
     paginatedDataTableController.dispose();
   }
 }

@@ -4,7 +4,8 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/walkthroughs/ttl_facturacion.dart';
+import '/walkthroughs/facturacion.dart';
+import '/actions/actions.dart' as action_blocks;
 import '/index.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
     show TutorialCoachMark;
@@ -46,6 +47,10 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
       _model.facturacionList =
           _model.facturacionListU!.toList().cast<PagosRecord>();
       safeSetState(() {});
+      logFirebaseEvent('Facturacion_action_block');
+      await action_blocks.checkUserLogin(context);
+      logFirebaseEvent('Facturacion_action_block');
+      await action_blocks.sesionOutTimer(context);
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
@@ -68,897 +73,757 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: SafeArea(
-          top: true,
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                if (responsiveVisibility(
-                  context: context,
-                  tablet: false,
-                  tabletLandscape: false,
-                  desktop: false,
-                ))
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(24.0, 24.0, 24.0, 24.0),
-                    child: SingleChildScrollView(
-                      child: Column(
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              if (responsiveVisibility(
+                context: context,
+                tablet: false,
+                tabletLandscape: false,
+                desktop: false,
+              ))
+                SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
                         mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              FlutterFlowIconButton(
-                                borderRadius: 8.0,
-                                buttonSize: 40.0,
-                                fillColor: Color(0x002797FF),
-                                icon: Icon(
-                                  Icons.arrow_back,
-                                  color: FlutterFlowTheme.of(context).info,
-                                  size: 24.0,
-                                ),
-                                onPressed: () async {
-                                  logFirebaseEvent(
-                                      'FACTURACION_PAGE_arrow_back_ICN_ON_TAP');
-                                  logFirebaseEvent('IconButton_navigate_to');
-
-                                  context
-                                      .pushNamed(HomeAdminPageWidget.routeName);
-                                },
-                              ),
-                              Align(
-                                alignment: AlignmentDirectional(0.0, 0.0),
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 15.0, 0.0, 0.0),
-                                  child: Text(
-                                    'PAGOS',
-                                    style: FlutterFlowTheme.of(context)
-                                        .displaySmall
-                                        .override(
-                                          font: GoogleFonts.outfit(
-                                            fontWeight:
-                                                FlutterFlowTheme.of(context)
-                                                    .displaySmall
-                                                    .fontWeight,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .displaySmall
-                                                    .fontStyle,
-                                          ),
-                                          letterSpacing: 0.0,
-                                          fontWeight:
-                                              FlutterFlowTheme.of(context)
-                                                  .displaySmall
-                                                  .fontWeight,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .displaySmall
-                                                  .fontStyle,
-                                        ),
-                                  ),
-                                ),
-                              ),
-                              FlutterFlowIconButton(
-                                borderRadius: 8.0,
-                                buttonSize: 40.0,
-                                fillColor: FlutterFlowTheme.of(context).primary,
-                                icon: Icon(
-                                  Icons.add_circle_outlined,
-                                  color: FlutterFlowTheme.of(context).info,
-                                  size: 24.0,
-                                ),
-                                onPressed: () async {
-                                  logFirebaseEvent(
-                                      'FACTURACION_add_circle_outlined_ICN_ON_T');
-                                  logFirebaseEvent('IconButton_navigate_to');
-
-                                  context.pushNamed(CrearPagoWidget.routeName);
-                                },
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              FFButtonWidget(
-                                onPressed: () async {
-                                  logFirebaseEvent(
-                                      'FACTURACION_SOLICITUDES_DE_CORRECCIN_BTN');
-                                  logFirebaseEvent('Button_navigate_to');
-
-                                  context.pushNamed(
-                                      SolicitudesIndexWidget.routeName);
-                                },
-                                text: 'Solicitudes de corrección',
-                                options: FFButtonOptions(
-                                  height: 40.0,
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      16.0, 0.0, 16.0, 0.0),
-                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
-                                  color: FlutterFlowTheme.of(context).success,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .titleSmall
-                                      .override(
-                                        font: GoogleFonts.manrope(
-                                          fontWeight:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleSmall
-                                                  .fontWeight,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleSmall
-                                                  .fontStyle,
-                                        ),
-                                        color: Colors.white,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .fontStyle,
-                                      ),
-                                  elevation: 0.0,
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Material(
-                            color: Colors.transparent,
-                            elevation: 2.0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12.0),
+                          FlutterFlowIconButton(
+                            borderRadius: 8.0,
+                            buttonSize: MediaQuery.sizeOf(context).width * 0.15,
+                            fillColor: Color(0x002797FF),
+                            icon: Icon(
+                              Icons.arrow_back,
+                              color: FlutterFlowTheme.of(context).primaryText,
+                              size: 28.0,
                             ),
-                            child: Container(
-                              width: MediaQuery.sizeOf(context).width * 1.0,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                borderRadius: BorderRadius.circular(12.0),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 16.0, 16.0, 16.0),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          12.0, 0.0, 12.0, 0.0),
-                                      child: Container(
-                                        width:
-                                            MediaQuery.sizeOf(context).width *
-                                                1.0,
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            StreamBuilder<List<PagosRecord>>(
-                                              stream: queryPagosRecord(),
-                                              builder: (context, snapshot) {
-                                                // Customize what your widget looks like when it's loading.
-                                                if (!snapshot.hasData) {
-                                                  return Center(
-                                                    child: SizedBox(
-                                                      width: 50.0,
-                                                      height: 50.0,
-                                                      child:
-                                                          CircularProgressIndicator(
-                                                        valueColor:
-                                                            AlwaysStoppedAnimation<
-                                                                Color>(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  );
-                                                }
-                                                List<PagosRecord>
-                                                    listViewPagosRecordList =
-                                                    snapshot.data!;
+                            onPressed: () async {
+                              logFirebaseEvent(
+                                  'FACTURACION_PAGE_arrow_back_ICN_ON_TAP');
+                              logFirebaseEvent('IconButton_navigate_to');
 
-                                                return ListView.builder(
-                                                  padding: EdgeInsets.zero,
-                                                  shrinkWrap: true,
-                                                  scrollDirection:
-                                                      Axis.vertical,
-                                                  itemCount:
-                                                      listViewPagosRecordList
-                                                          .length,
-                                                  itemBuilder:
-                                                      (context, listViewIndex) {
-                                                    final listViewPagosRecord =
-                                                        listViewPagosRecordList[
-                                                            listViewIndex];
-                                                    return Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  10.0,
-                                                                  0.0,
-                                                                  10.0),
-                                                      child: Container(
-                                                        width: 100.0,
-                                                        height: 300.0,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .secondaryBackground,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      0.0),
-                                                          border: Border.all(
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .primaryText,
-                                                          ),
-                                                        ),
-                                                        child: Column(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .center,
-                                                          children: [
-                                                            Padding(
+                              context.pushNamed(HomeAdminPageWidget.routeName);
+                            },
+                          ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 10.0, 0.0),
+                            child: FlutterFlowIconButton(
+                              borderRadius: 8.0,
+                              buttonSize:
+                                  MediaQuery.sizeOf(context).width * 0.1,
+                              fillColor: FlutterFlowTheme.of(context).primary,
+                              icon: Icon(
+                                Icons.add_circle_outlined,
+                                color: FlutterFlowTheme.of(context).info,
+                                size: 24.0,
+                              ),
+                              onPressed: () async {
+                                logFirebaseEvent(
+                                    'FACTURACION_add_circle_outlined_ICN_ON_T');
+                                logFirebaseEvent('IconButton_navigate_to');
+
+                                context.pushNamed(CrearPagoWidget.routeName);
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                      Align(
+                        alignment: AlignmentDirectional(0.0, 0.0),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              10.0, 15.0, 0.0, 0.0),
+                          child: Text(
+                            'PAGOS',
+                            style: FlutterFlowTheme.of(context)
+                                .displaySmall
+                                .override(
+                                  font: GoogleFonts.outfit(
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .displaySmall
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .displaySmall
+                                        .fontStyle,
+                                  ),
+                                  letterSpacing: 0.0,
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .displaySmall
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .displaySmall
+                                      .fontStyle,
+                                ),
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: AlignmentDirectional(0.0, 0.0),
+                        child: FFButtonWidget(
+                          onPressed: () async {
+                            logFirebaseEvent(
+                                'FACTURACION_SOLICITUDES_DE_CORRECCIN_BTN');
+                            logFirebaseEvent('Button_navigate_to');
+
+                            context.pushNamed(SolicitudesIndexWidget.routeName);
+                          },
+                          text: 'Solicitudes de corrección',
+                          options: FFButtonOptions(
+                            height: 40.0,
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                16.0, 0.0, 16.0, 0.0),
+                            iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 0.0),
+                            color: FlutterFlowTheme.of(context).primary,
+                            textStyle: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .override(
+                                  font: GoogleFonts.manrope(
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .fontStyle,
+                                  ),
+                                  color: Colors.white,
+                                  fontSize: 18.0,
+                                  letterSpacing: 0.0,
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .fontStyle,
+                                ),
+                            elevation: 0.0,
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            20.0, 0.0, 20.0, 0.0),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Material(
+                                color: Colors.transparent,
+                                elevation: 2.0,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12.0),
+                                ),
+                                child: Container(
+                                  width: MediaQuery.sizeOf(context).width * 1.0,
+                                  height:
+                                      MediaQuery.sizeOf(context).height * 0.713,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    borderRadius: BorderRadius.circular(12.0),
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        16.0, 16.0, 16.0, 16.0),
+                                    child: SingleChildScrollView(
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    12.0, 0.0, 12.0, 0.0),
+                                            child: Container(
+                                              width: MediaQuery.sizeOf(context)
+                                                      .width *
+                                                  1.0,
+                                              child: SingleChildScrollView(
+                                                child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: [
+                                                    StreamBuilder<
+                                                        List<PagosRecord>>(
+                                                      stream:
+                                                          queryPagosRecord(),
+                                                      builder:
+                                                          (context, snapshot) {
+                                                        // Customize what your widget looks like when it's loading.
+                                                        if (!snapshot.hasData) {
+                                                          return Center(
+                                                            child: SizedBox(
+                                                              width: 50.0,
+                                                              height: 50.0,
+                                                              child:
+                                                                  CircularProgressIndicator(
+                                                                valueColor:
+                                                                    AlwaysStoppedAnimation<
+                                                                        Color>(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primary,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          );
+                                                        }
+                                                        List<PagosRecord>
+                                                            listViewPagosRecordList =
+                                                            snapshot.data!;
+
+                                                        return ListView.builder(
+                                                          padding:
+                                                              EdgeInsets.zero,
+                                                          shrinkWrap: true,
+                                                          scrollDirection:
+                                                              Axis.vertical,
+                                                          itemCount:
+                                                              listViewPagosRecordList
+                                                                  .length,
+                                                          itemBuilder: (context,
+                                                              listViewIndex) {
+                                                            final listViewPagosRecord =
+                                                                listViewPagosRecordList[
+                                                                    listViewIndex];
+                                                            return Padding(
                                                               padding:
                                                                   EdgeInsetsDirectional
                                                                       .fromSTEB(
-                                                                          10.0,
-                                                                          5.0,
                                                                           0.0,
-                                                                          5.0),
-                                                              child: Row(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                children: [
-                                                                  Text(
-                                                                    'Empleado:  ',
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium
-                                                                        .override(
-                                                                          font:
-                                                                              GoogleFonts.manrope(
-                                                                            fontWeight:
-                                                                                FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                            fontStyle:
-                                                                                FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                          ),
-                                                                          letterSpacing:
-                                                                              0.0,
-                                                                          fontWeight: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .fontWeight,
-                                                                          fontStyle: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .fontStyle,
-                                                                        ),
-                                                                  ),
-                                                                  Text(
-                                                                    '${listViewPagosRecord.nombreEmpleado}${listViewPagosRecord.apellidoEmpleado}',
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium
-                                                                        .override(
-                                                                          font:
-                                                                              GoogleFonts.manrope(
-                                                                            fontWeight:
-                                                                                FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                            fontStyle:
-                                                                                FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                          ),
-                                                                          letterSpacing:
-                                                                              0.0,
-                                                                          fontWeight: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .fontWeight,
-                                                                          fontStyle: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .fontStyle,
-                                                                        ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
                                                                           10.0,
-                                                                          5.0,
                                                                           0.0,
-                                                                          5.0),
-                                                              child: Row(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                children: [
-                                                                  Text(
-                                                                    'Fecha de Pago:  ',
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium
-                                                                        .override(
-                                                                          font:
-                                                                              GoogleFonts.manrope(
-                                                                            fontWeight:
-                                                                                FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                            fontStyle:
-                                                                                FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                          ),
-                                                                          letterSpacing:
-                                                                              0.0,
-                                                                          fontWeight: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .fontWeight,
-                                                                          fontStyle: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .fontStyle,
-                                                                        ),
-                                                                  ),
-                                                                  Text(
-                                                                    dateTimeFormat(
-                                                                      "d/M/y",
-                                                                      listViewPagosRecord
-                                                                          .fechaCreacion!,
-                                                                      locale: FFLocalizations.of(
-                                                                              context)
-                                                                          .languageCode,
-                                                                    ),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium
-                                                                        .override(
-                                                                          font:
-                                                                              GoogleFonts.manrope(
-                                                                            fontWeight:
-                                                                                FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                            fontStyle:
-                                                                                FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                          ),
-                                                                          letterSpacing:
-                                                                              0.0,
-                                                                          fontWeight: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .fontWeight,
-                                                                          fontStyle: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .fontStyle,
-                                                                        ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          10.0,
-                                                                          5.0,
-                                                                          0.0,
-                                                                          5.0),
-                                                              child: Row(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                children: [
-                                                                  Text(
-                                                                    'Tipo de Pago:  ',
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium
-                                                                        .override(
-                                                                          font:
-                                                                              GoogleFonts.manrope(
-                                                                            fontWeight:
-                                                                                FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                            fontStyle:
-                                                                                FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                          ),
-                                                                          letterSpacing:
-                                                                              0.0,
-                                                                          fontWeight: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .fontWeight,
-                                                                          fontStyle: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .fontStyle,
-                                                                        ),
-                                                                  ),
-                                                                  Text(
-                                                                    listViewPagosRecord
-                                                                        .tipo,
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium
-                                                                        .override(
-                                                                          font:
-                                                                              GoogleFonts.manrope(
-                                                                            fontWeight:
-                                                                                FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                            fontStyle:
-                                                                                FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                          ),
-                                                                          letterSpacing:
-                                                                              0.0,
-                                                                          fontWeight: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .fontWeight,
-                                                                          fontStyle: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .fontStyle,
-                                                                        ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          10.0,
-                                                                          5.0,
-                                                                          0.0,
-                                                                          5.0),
-                                                              child: Row(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                children: [
-                                                                  Text(
-                                                                    'Detalles:  ',
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium
-                                                                        .override(
-                                                                          font:
-                                                                              GoogleFonts.manrope(
-                                                                            fontWeight:
-                                                                                FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                            fontStyle:
-                                                                                FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                          ),
-                                                                          letterSpacing:
-                                                                              0.0,
-                                                                          fontWeight: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .fontWeight,
-                                                                          fontStyle: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .fontStyle,
-                                                                        ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                            Align(
-                                                              alignment:
-                                                                  AlignmentDirectional(
-                                                                      1.0, 0.0),
-                                                              child: Row(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                children: [
-                                                                  Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            10.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                    child:
-                                                                        Container(
-                                                                      width:
-                                                                          276.35,
-                                                                      height:
-                                                                          100.0,
-                                                                      decoration:
-                                                                          BoxDecoration(
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .secondaryBackground,
+                                                                          10.0),
+                                                              child: Container(
+                                                                width: 100.0,
+                                                                height: 300.0,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .secondaryBackground,
+                                                                  boxShadow: [
+                                                                    BoxShadow(
+                                                                      blurRadius:
+                                                                          4.0,
+                                                                      color: Color(
+                                                                          0x33F8F8F8),
+                                                                      offset:
+                                                                          Offset(
+                                                                        0.0,
+                                                                        2.0,
                                                                       ),
-                                                                      child:
-                                                                          Text(
-                                                                        listViewPagosRecord
-                                                                            .detalle,
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .bodyMedium
-                                                                            .override(
-                                                                              font: GoogleFonts.manrope(
-                                                                                fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                                fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                              ),
-                                                                              letterSpacing: 0.0,
-                                                                              fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                              fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                            ),
-                                                                      ),
-                                                                    ),
+                                                                    )
+                                                                  ],
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              12.0),
+                                                                  border: Border
+                                                                      .all(
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primary,
                                                                   ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                            Align(
-                                                              alignment:
-                                                                  AlignmentDirectional(
-                                                                      1.0, 0.0),
-                                                              child: Padding(
-                                                                padding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            12.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                child: Row(
+                                                                ),
+                                                                child: Column(
                                                                   mainAxisSize:
                                                                       MainAxisSize
                                                                           .max,
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .center,
                                                                   children: [
                                                                     Padding(
                                                                       padding: EdgeInsetsDirectional.fromSTEB(
                                                                           10.0,
+                                                                          5.0,
                                                                           0.0,
-                                                                          0.0,
-                                                                          0.0),
+                                                                          5.0),
                                                                       child:
-                                                                          FlutterFlowIconButton(
-                                                                        borderRadius:
-                                                                            8.0,
-                                                                        buttonSize:
-                                                                            40.0,
-                                                                        fillColor:
-                                                                            Color(0xFFFBE76D),
-                                                                        icon:
-                                                                            Icon(
-                                                                          Icons
-                                                                              .edit_square,
-                                                                          color:
-                                                                              FlutterFlowTheme.of(context).primary,
-                                                                          size:
-                                                                              24.0,
-                                                                        ),
-                                                                        onPressed:
-                                                                            () async {
-                                                                          logFirebaseEvent(
-                                                                              'FACTURACION_PAGE_edit_square_ICN_ON_TAP');
-                                                                          logFirebaseEvent(
-                                                                              'IconButton_navigate_to');
-
-                                                                          context
-                                                                              .pushNamed(
-                                                                            EditarPagoWidget.routeName,
-                                                                            queryParameters:
-                                                                                {
-                                                                              'pago': serializeParam(
-                                                                                listViewPagosRecord.reference,
-                                                                                ParamType.DocumentReference,
-                                                                              ),
-                                                                            }.withoutNulls,
-                                                                          );
-                                                                        },
+                                                                          Row(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.max,
+                                                                        children: [
+                                                                          Text(
+                                                                            'Empleado:  ',
+                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                  font: GoogleFonts.manrope(
+                                                                                    fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                    fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                  ),
+                                                                                  fontSize: 16.0,
+                                                                                  letterSpacing: 0.0,
+                                                                                  fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                ),
+                                                                          ),
+                                                                          Text(
+                                                                            '${listViewPagosRecord.nombreEmpleado}${listViewPagosRecord.apellidoEmpleado}',
+                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                  font: GoogleFonts.manrope(
+                                                                                    fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                    fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                  ),
+                                                                                  fontSize: 16.0,
+                                                                                  letterSpacing: 0.0,
+                                                                                  fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                ),
+                                                                          ),
+                                                                        ],
                                                                       ),
                                                                     ),
                                                                     Padding(
                                                                       padding: EdgeInsetsDirectional.fromSTEB(
                                                                           10.0,
+                                                                          5.0,
                                                                           0.0,
-                                                                          0.0,
-                                                                          0.0),
+                                                                          5.0),
                                                                       child:
-                                                                          FlutterFlowIconButton(
-                                                                        borderRadius:
-                                                                            8.0,
-                                                                        buttonSize:
-                                                                            40.0,
-                                                                        fillColor:
-                                                                            FlutterFlowTheme.of(context).error,
-                                                                        icon:
-                                                                            Icon(
-                                                                          Icons
-                                                                              .delete_sharp,
-                                                                          color:
-                                                                              FlutterFlowTheme.of(context).info,
-                                                                          size:
-                                                                              24.0,
-                                                                        ),
-                                                                        onPressed:
-                                                                            () async {
-                                                                          logFirebaseEvent(
-                                                                              'FACTURACION_PAGE_delete_sharp_ICN_ON_TAP');
-                                                                          logFirebaseEvent(
-                                                                              'IconButton_delete_data');
-                                                                          await FirebaseStorage
-                                                                              .instance
-                                                                              .refFromURL(listViewPagosRecord.comprobanrte)
-                                                                              .delete();
-                                                                          logFirebaseEvent(
-                                                                              'IconButton_backend_call');
-                                                                          await listViewPagosRecord
-                                                                              .reference
-                                                                              .delete();
-                                                                        },
-                                                                      ),
-                                                                    ),
-                                                                    Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                                                          10.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                                      child:
-                                                                          FlutterFlowIconButton(
-                                                                        borderRadius:
-                                                                            8.0,
-                                                                        buttonSize:
-                                                                            40.0,
-                                                                        fillColor:
-                                                                            FlutterFlowTheme.of(context).success,
-                                                                        icon:
-                                                                            Icon(
-                                                                          Icons
-                                                                              .download_sharp,
-                                                                          color:
-                                                                              FlutterFlowTheme.of(context).primaryText,
-                                                                          size:
-                                                                              24.0,
-                                                                        ),
-                                                                        onPressed:
-                                                                            () async {
-                                                                          logFirebaseEvent(
-                                                                              'FACTURACION_download_sharp_ICN_ON_TAP');
-                                                                          logFirebaseEvent(
-                                                                              'IconButton_download_file');
-                                                                          await downloadFile(
-                                                                            filename:
-                                                                                'Comprobante_Pago_${listViewPagosRecord.nombreEmpleado}_${listViewPagosRecord.apellidoEmpleado}_${dateTimeFormat(
+                                                                          Row(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.max,
+                                                                        children: [
+                                                                          Text(
+                                                                            'Fecha de Pago:  ',
+                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                  font: GoogleFonts.manrope(
+                                                                                    fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                    fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                  ),
+                                                                                  fontSize: 16.0,
+                                                                                  letterSpacing: 0.0,
+                                                                                  fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                ),
+                                                                          ),
+                                                                          Text(
+                                                                            dateTimeFormat(
                                                                               "d/M/y",
-                                                                              listViewPagosRecord.fechaCreacion,
+                                                                              listViewPagosRecord.fechaCreacion!,
                                                                               locale: FFLocalizations.of(context).languageCode,
-                                                                            )}',
-                                                                            url:
-                                                                                listViewPagosRecord.comprobanrte,
-                                                                          );
-                                                                        },
+                                                                            ),
+                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                  font: GoogleFonts.manrope(
+                                                                                    fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                    fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                  ),
+                                                                                  fontSize: 16.0,
+                                                                                  letterSpacing: 0.0,
+                                                                                  fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                ),
+                                                                          ),
+                                                                        ],
                                                                       ),
                                                                     ),
                                                                     Padding(
                                                                       padding: EdgeInsetsDirectional.fromSTEB(
                                                                           10.0,
+                                                                          5.0,
                                                                           0.0,
-                                                                          0.0,
-                                                                          0.0),
+                                                                          5.0),
                                                                       child:
-                                                                          FlutterFlowIconButton(
-                                                                        borderRadius:
-                                                                            8.0,
-                                                                        buttonSize:
-                                                                            40.0,
-                                                                        fillColor:
-                                                                            Color(0xFFF1F60A),
-                                                                        icon:
-                                                                            FaIcon(
-                                                                          FontAwesomeIcons
-                                                                              .clipboardList,
-                                                                          color:
-                                                                              FlutterFlowTheme.of(context).primary,
-                                                                          size:
-                                                                              24.0,
-                                                                        ),
-                                                                        onPressed:
-                                                                            () async {
-                                                                          logFirebaseEvent(
-                                                                              'FACTURACION_clipboardList_ICN_ON_TAP');
-                                                                          logFirebaseEvent(
-                                                                              'IconButton_navigate_to');
-
-                                                                          context
-                                                                              .pushNamed(
-                                                                            SolicitarCorreccionWidget.routeName,
-                                                                            queryParameters:
-                                                                                {
-                                                                              'pago': serializeParam(
-                                                                                listViewPagosRecord.reference,
-                                                                                ParamType.DocumentReference,
+                                                                          Row(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.max,
+                                                                        children: [
+                                                                          Text(
+                                                                            'Tipo de Pago:  ',
+                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                  font: GoogleFonts.manrope(
+                                                                                    fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                    fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                  ),
+                                                                                  fontSize: 16.0,
+                                                                                  letterSpacing: 0.0,
+                                                                                  fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                ),
+                                                                          ),
+                                                                          Text(
+                                                                            listViewPagosRecord.tipo,
+                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                  font: GoogleFonts.manrope(
+                                                                                    fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                    fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                  ),
+                                                                                  fontSize: 16.0,
+                                                                                  letterSpacing: 0.0,
+                                                                                  fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                ),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    ),
+                                                                    Padding(
+                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                          10.0,
+                                                                          5.0,
+                                                                          0.0,
+                                                                          5.0),
+                                                                      child:
+                                                                          Row(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.max,
+                                                                        children: [
+                                                                          Text(
+                                                                            'Detalles:  ',
+                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                  font: GoogleFonts.manrope(
+                                                                                    fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                    fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                  ),
+                                                                                  fontSize: 16.0,
+                                                                                  letterSpacing: 0.0,
+                                                                                  fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                ),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    ),
+                                                                    Align(
+                                                                      alignment:
+                                                                          AlignmentDirectional(
+                                                                              1.0,
+                                                                              0.0),
+                                                                      child:
+                                                                          Row(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.max,
+                                                                        children: [
+                                                                          Padding(
+                                                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                                                10.0,
+                                                                                0.0,
+                                                                                0.0,
+                                                                                0.0),
+                                                                            child:
+                                                                                Container(
+                                                                              width: 260.1,
+                                                                              height: 100.0,
+                                                                              decoration: BoxDecoration(
+                                                                                color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                borderRadius: BorderRadius.circular(10.0),
+                                                                                border: Border.all(
+                                                                                  color: FlutterFlowTheme.of(context).primary,
+                                                                                ),
                                                                               ),
-                                                                            }.withoutNulls,
-                                                                          );
-                                                                        },
+                                                                              child: Text(
+                                                                                listViewPagosRecord.detalle,
+                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                      font: GoogleFonts.manrope(
+                                                                                        fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                        fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                      ),
+                                                                                      fontSize: 16.0,
+                                                                                      letterSpacing: 0.0,
+                                                                                      fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                      fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                    ),
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    ),
+                                                                    Align(
+                                                                      alignment:
+                                                                          AlignmentDirectional(
+                                                                              1.0,
+                                                                              0.0),
+                                                                      child:
+                                                                          Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            0.0,
+                                                                            12.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                        child:
+                                                                            Row(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.max,
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.spaceEvenly,
+                                                                          children: [
+                                                                            Padding(
+                                                                              padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                                                                              child: FlutterFlowIconButton(
+                                                                                borderRadius: 8.0,
+                                                                                buttonSize: 40.0,
+                                                                                fillColor: Color(0xFFC9B65F),
+                                                                                icon: Icon(
+                                                                                  Icons.edit_square,
+                                                                                  color: Colors.white,
+                                                                                  size: 24.0,
+                                                                                ),
+                                                                                onPressed: () async {
+                                                                                  logFirebaseEvent('FACTURACION_PAGE_edit_square_ICN_ON_TAP');
+                                                                                  logFirebaseEvent('IconButton_navigate_to');
+
+                                                                                  context.pushNamed(
+                                                                                    EditarPagoWidget.routeName,
+                                                                                    queryParameters: {
+                                                                                      'pago': serializeParam(
+                                                                                        listViewPagosRecord.reference,
+                                                                                        ParamType.DocumentReference,
+                                                                                      ),
+                                                                                    }.withoutNulls,
+                                                                                  );
+                                                                                },
+                                                                              ),
+                                                                            ),
+                                                                            Padding(
+                                                                              padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                                                                              child: FlutterFlowIconButton(
+                                                                                borderRadius: 8.0,
+                                                                                buttonSize: 40.0,
+                                                                                fillColor: FlutterFlowTheme.of(context).error,
+                                                                                icon: Icon(
+                                                                                  Icons.delete_sharp,
+                                                                                  color: FlutterFlowTheme.of(context).info,
+                                                                                  size: 24.0,
+                                                                                ),
+                                                                                onPressed: () async {
+                                                                                  logFirebaseEvent('FACTURACION_PAGE_delete_sharp_ICN_ON_TAP');
+                                                                                  logFirebaseEvent('IconButton_delete_data');
+                                                                                  await FirebaseStorage.instance.refFromURL(listViewPagosRecord.comprobanrte).delete();
+                                                                                  logFirebaseEvent('IconButton_backend_call');
+                                                                                  await listViewPagosRecord.reference.delete();
+                                                                                },
+                                                                              ),
+                                                                            ),
+                                                                            Padding(
+                                                                              padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                                                                              child: FlutterFlowIconButton(
+                                                                                borderRadius: 8.0,
+                                                                                buttonSize: 40.0,
+                                                                                fillColor: FlutterFlowTheme.of(context).success,
+                                                                                icon: Icon(
+                                                                                  Icons.download_sharp,
+                                                                                  color: FlutterFlowTheme.of(context).primaryText,
+                                                                                  size: 24.0,
+                                                                                ),
+                                                                                onPressed: () async {
+                                                                                  logFirebaseEvent('FACTURACION_download_sharp_ICN_ON_TAP');
+                                                                                  logFirebaseEvent('IconButton_download_file');
+                                                                                  await downloadFile(
+                                                                                    filename: 'Comprobante_Pago_${listViewPagosRecord.nombreEmpleado}_${listViewPagosRecord.apellidoEmpleado}_${dateTimeFormat(
+                                                                                      "d/M/y",
+                                                                                      listViewPagosRecord.fechaCreacion,
+                                                                                      locale: FFLocalizations.of(context).languageCode,
+                                                                                    )}',
+                                                                                    url: listViewPagosRecord.comprobanrte,
+                                                                                  );
+                                                                                },
+                                                                              ),
+                                                                            ),
+                                                                            Padding(
+                                                                              padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                                                                              child: FlutterFlowIconButton(
+                                                                                borderRadius: 8.0,
+                                                                                buttonSize: 40.0,
+                                                                                fillColor: Color(0xFFA1A918),
+                                                                                icon: FaIcon(
+                                                                                  FontAwesomeIcons.clipboardList,
+                                                                                  color: Colors.white,
+                                                                                  size: 24.0,
+                                                                                ),
+                                                                                onPressed: () async {
+                                                                                  logFirebaseEvent('FACTURACION_clipboardList_ICN_ON_TAP');
+                                                                                  logFirebaseEvent('IconButton_navigate_to');
+
+                                                                                  context.pushNamed(
+                                                                                    SolicitarCorreccionWidget.routeName,
+                                                                                    queryParameters: {
+                                                                                      'pago': serializeParam(
+                                                                                        listViewPagosRecord.reference,
+                                                                                        ParamType.DocumentReference,
+                                                                                      ),
+                                                                                    }.withoutNulls,
+                                                                                  );
+                                                                                },
+                                                                              ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
                                                                       ),
                                                                     ),
                                                                   ],
                                                                 ),
                                                               ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    );
-                                                  },
-                                                );
-                                              },
+                                                            );
+                                                          },
+                                                        );
+                                                      },
+                                                    ),
+                                                  ].divide(
+                                                      SizedBox(height: 0.0)),
+                                                ),
+                                              ),
                                             ),
-                                          ].divide(SizedBox(height: 0.0)),
-                                        ),
+                                          ),
+                                        ].divide(SizedBox(height: 16.0)),
                                       ),
                                     ),
-                                  ].divide(SizedBox(height: 16.0)),
+                                  ),
                                 ),
                               ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ].divide(SizedBox(height: 24.0)),
+                  ),
+                ),
+              if (responsiveVisibility(
+                context: context,
+                phone: false,
+              ))
+                Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        FlutterFlowIconButton(
+                          borderRadius: 8.0,
+                          buttonSize: MediaQuery.sizeOf(context).width * 0.04,
+                          fillColor: Color(0x002797FF),
+                          icon: Icon(
+                            Icons.arrow_back,
+                            color: FlutterFlowTheme.of(context).primaryText,
+                            size: 32.0,
+                          ),
+                          onPressed: () async {
+                            logFirebaseEvent(
+                                'FACTURACION_PAGE_arrow_back_ICN_ON_TAP');
+                            logFirebaseEvent('IconButton_navigate_to');
+
+                            context.pushNamed(HomeAdminPageWidget.routeName);
+                          },
+                        ),
+                        Align(
+                          alignment: AlignmentDirectional(1.0, 0.0),
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 10.0, 0.0),
+                            child: FlutterFlowIconButton(
+                              borderRadius: 8.0,
+                              buttonSize:
+                                  MediaQuery.sizeOf(context).width * 0.03,
+                              fillColor: FlutterFlowTheme.of(context).primary,
+                              icon: Icon(
+                                Icons.question_mark,
+                                color: FlutterFlowTheme.of(context).info,
+                                size: 24.0,
+                              ),
+                              onPressed: () async {
+                                logFirebaseEvent(
+                                    'FACTURACION_question_mark_ICN_ON_TAP');
+                                logFirebaseEvent(
+                                    'IconButton_start_walkthrough');
+                                safeSetState(() =>
+                                    _model.facturacionController =
+                                        createPageWalkthrough(context));
+                                _model.facturacionController
+                                    ?.show(context: context);
+                              },
                             ),
                           ),
-                        ].divide(SizedBox(height: 24.0)),
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(
+                          30.0, 10.0, 30.0, 15.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'PAGOS',
+                            style: FlutterFlowTheme.of(context)
+                                .titleLarge
+                                .override(
+                                  fontFamily: 'NimbusSansLight',
+                                  fontSize: 30.0,
+                                  letterSpacing: 0.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                          ).addWalkthrough(
+                            text3o6v9a4d,
+                            _model.facturacionController,
+                          ),
+                        ],
                       ),
                     ),
-                  ),
-                if (responsiveVisibility(
-                  context: context,
-                  phone: false,
-                ))
-                  Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Align(
-                        alignment: AlignmentDirectional(-1.0, 0.0),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              30.0, 15.0, 0.0, 0.0),
-                          child: FFButtonWidget(
-                            onPressed: () async {
-                              logFirebaseEvent(
-                                  'FACTURACION_PAGE_VOLVER_BTN_ON_TAP');
-                              logFirebaseEvent('Button_navigate_to');
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(
+                          65.0, 10.0, 30.0, 15.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Align(
+                            alignment: AlignmentDirectional(-1.0, 0.0),
+                            child: FlutterFlowIconButton(
+                              borderRadius: 8.0,
+                              buttonSize:
+                                  MediaQuery.sizeOf(context).width * 0.03,
+                              fillColor: FlutterFlowTheme.of(context).primary,
+                              icon: Icon(
+                                Icons.add,
+                                color: FlutterFlowTheme.of(context).info,
+                                size: 24.0,
+                              ),
+                              onPressed: () async {
+                                logFirebaseEvent(
+                                    'FACTURACION_PAGE_add_ICN_ON_TAP');
+                                logFirebaseEvent('IconButton_navigate_to');
 
-                              context.pushNamed(HomeAdminPageWidget.routeName);
-                            },
-                            text: 'Volver',
-                            options: FFButtonOptions(
-                              height: 46.63,
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 0.0, 16.0, 0.0),
-                              iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 0.0),
-                              color: FlutterFlowTheme.of(context).primary,
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .titleSmall
-                                  .override(
-                                    font: GoogleFonts.manrope(
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .fontStyle,
-                                    ),
-                                    color: Colors.white,
-                                    fontSize: 18.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .fontWeight,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .fontStyle,
-                                  ),
-                              elevation: 0.0,
-                              borderRadius: BorderRadius.circular(8.0),
+                                context.pushNamed(CrearPagoWidget.routeName);
+                              },
+                            ).addWalkthrough(
+                              iconButtonQximsqrl,
+                              _model.facturacionController,
                             ),
                           ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            30.0, 10.0, 30.0, 15.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'PAGOS',
-                              style: FlutterFlowTheme.of(context)
-                                  .titleLarge
-                                  .override(
-                                    font: GoogleFonts.outfit(
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .titleLarge
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .titleLarge
-                                          .fontStyle,
-                                    ),
-                                    fontSize: 30.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FlutterFlowTheme.of(context)
-                                        .titleLarge
-                                        .fontWeight,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .titleLarge
-                                        .fontStyle,
-                                  ),
-                            ).addWalkthrough(
-                              text3o6v9a4d,
-                              _model.ttlFacturacionController,
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            65.0, 10.0, 30.0, 15.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Align(
-                              alignment: AlignmentDirectional(-1.0, 0.0),
-                              child: FlutterFlowIconButton(
-                                borderRadius: 8.0,
-                                buttonSize: 40.0,
-                                fillColor: FlutterFlowTheme.of(context).primary,
-                                icon: Icon(
-                                  Icons.add,
-                                  color: FlutterFlowTheme.of(context).info,
-                                  size: 24.0,
-                                ),
-                                onPressed: () async {
-                                  logFirebaseEvent(
-                                      'FACTURACION_PAGE_add_ICN_ON_TAP');
-                                  logFirebaseEvent('IconButton_navigate_to');
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                12.0, 0.0, 0.0, 0.0),
+                            child: FFButtonWidget(
+                              onPressed: () async {
+                                logFirebaseEvent(
+                                    'FACTURACION_SOLICITUDES_DE_CORRECCIN_BTN');
+                                logFirebaseEvent('Button_navigate_to');
 
-                                  context.pushNamed(CrearPagoWidget.routeName);
-                                },
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  12.0, 0.0, 0.0, 0.0),
-                              child: FFButtonWidget(
-                                onPressed: () async {
-                                  logFirebaseEvent(
-                                      'FACTURACION_SOLICITUDES_DE_CORRECCIN_BTN');
-                                  logFirebaseEvent('Button_navigate_to');
-
-                                  context.pushNamed(
-                                      SolicitudesIndexWidget.routeName);
-                                },
-                                text: 'Solicitudes de corrección',
-                                options: FFButtonOptions(
-                                  height: 40.0,
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      16.0, 0.0, 16.0, 0.0),
-                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
-                                  color: FlutterFlowTheme.of(context).success,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .titleSmall
-                                      .override(
-                                        font: GoogleFonts.manrope(
-                                          fontWeight:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleSmall
-                                                  .fontWeight,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleSmall
-                                                  .fontStyle,
-                                        ),
-                                        color: Colors.white,
-                                        letterSpacing: 0.0,
+                                context.pushNamed(
+                                    SolicitudesIndexWidget.routeName);
+                              },
+                              text: 'Solicitudes de corrección',
+                              options: FFButtonOptions(
+                                width: MediaQuery.sizeOf(context).width * 0.18,
+                                height:
+                                    MediaQuery.sizeOf(context).height * 0.05,
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    16.0, 0.0, 16.0, 0.0),
+                                iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 0.0),
+                                color: FlutterFlowTheme.of(context).primary,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .override(
+                                      font: GoogleFonts.manrope(
                                         fontWeight: FlutterFlowTheme.of(context)
                                             .titleSmall
                                             .fontWeight,
@@ -966,33 +831,47 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                             .titleSmall
                                             .fontStyle,
                                       ),
-                                  elevation: 0.0,
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
+                                      color: Colors.white,
+                                      fontSize: 20.0,
+                                      letterSpacing: 0.0,
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .fontStyle,
+                                    ),
+                                elevation: 0.0,
+                                borderRadius: BorderRadius.circular(8.0),
                               ),
+                            ).addWalkthrough(
+                              buttonAtkx6elk,
+                              _model.facturacionController,
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                      Container(
-                        width: 1312.4,
-                        height: 639.1,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                        ),
-                        child: Builder(
-                          builder: (context) {
-                            final facturacionListUL =
-                                _model.facturacionList.toList();
+                    ),
+                    Container(
+                      width: MediaQuery.sizeOf(context).width * 0.9,
+                      height: MediaQuery.sizeOf(context).height * 0.6,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                      ),
+                      child: Builder(
+                        builder: (context) {
+                          final facturacionListUL =
+                              _model.facturacionList.toList();
 
-                            return FlutterFlowDataTable<PagosRecord>(
-                              controller: _model.paginatedDataTableController,
-                              data: facturacionListUL,
-                              columnsBuilder: (onSortChanged) => [
-                                DataColumn2(
-                                  label: DefaultTextStyle.merge(
-                                    softWrap: true,
+                          return FlutterFlowDataTable<PagosRecord>(
+                            controller: _model.paginatedDataTableController,
+                            data: facturacionListUL,
+                            columnsBuilder: (onSortChanged) => [
+                              DataColumn2(
+                                label: DefaultTextStyle.merge(
+                                  softWrap: true,
+                                  child: Align(
+                                    alignment: AlignmentDirectional(0.0, 0.0),
                                     child: Text(
                                       'Empleado',
                                       style: FlutterFlowTheme.of(context)
@@ -1008,8 +887,11 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                                       .labelLarge
                                                       .fontStyle,
                                             ),
-                                            color: Colors.white,
-                                            fontSize: 20.0,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                            fontSize: kBreakpointMedium != null
+                                                ? 20.0
+                                                : 30.0,
                                             letterSpacing: 0.0,
                                             fontWeight:
                                                 FlutterFlowTheme.of(context)
@@ -1022,13 +904,16 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                           ),
                                     ).addWalkthrough(
                                       text5n7lhfu6,
-                                      _model.ttlFacturacionController,
+                                      _model.facturacionController,
                                     ),
                                   ),
                                 ),
-                                DataColumn2(
-                                  label: DefaultTextStyle.merge(
-                                    softWrap: true,
+                              ),
+                              DataColumn2(
+                                label: DefaultTextStyle.merge(
+                                  softWrap: true,
+                                  child: Align(
+                                    alignment: AlignmentDirectional(0.0, 0.0),
                                     child: Text(
                                       'Fecha',
                                       style: FlutterFlowTheme.of(context)
@@ -1044,8 +929,11 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                                       .labelLarge
                                                       .fontStyle,
                                             ),
-                                            color: Colors.white,
-                                            fontSize: 20.0,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                            fontSize: kBreakpointMedium != null
+                                                ? 20.0
+                                                : 30.0,
                                             letterSpacing: 0.0,
                                             fontWeight:
                                                 FlutterFlowTheme.of(context)
@@ -1058,13 +946,16 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                           ),
                                     ).addWalkthrough(
                                       textSleenpr6,
-                                      _model.ttlFacturacionController,
+                                      _model.facturacionController,
                                     ),
                                   ),
                                 ),
-                                DataColumn2(
-                                  label: DefaultTextStyle.merge(
-                                    softWrap: true,
+                              ),
+                              DataColumn2(
+                                label: DefaultTextStyle.merge(
+                                  softWrap: true,
+                                  child: Align(
+                                    alignment: AlignmentDirectional(0.0, 0.0),
                                     child: Text(
                                       'Monto',
                                       style: FlutterFlowTheme.of(context)
@@ -1080,8 +971,11 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                                       .labelLarge
                                                       .fontStyle,
                                             ),
-                                            color: Colors.white,
-                                            fontSize: 20.0,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                            fontSize: kBreakpointMedium != null
+                                                ? 20.0
+                                                : 30.0,
                                             letterSpacing: 0.0,
                                             fontWeight:
                                                 FlutterFlowTheme.of(context)
@@ -1094,13 +988,16 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                           ),
                                     ).addWalkthrough(
                                       textEuby8ga9,
-                                      _model.ttlFacturacionController,
+                                      _model.facturacionController,
                                     ),
                                   ),
                                 ),
-                                DataColumn2(
-                                  label: DefaultTextStyle.merge(
-                                    softWrap: true,
+                              ),
+                              DataColumn2(
+                                label: DefaultTextStyle.merge(
+                                  softWrap: true,
+                                  child: Align(
+                                    alignment: AlignmentDirectional(0.0, 0.0),
                                     child: Text(
                                       'Detalle',
                                       style: FlutterFlowTheme.of(context)
@@ -1116,8 +1013,11 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                                       .labelLarge
                                                       .fontStyle,
                                             ),
-                                            color: Colors.white,
-                                            fontSize: 20.0,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                            fontSize: kBreakpointMedium != null
+                                                ? 20.0
+                                                : 30.0,
                                             letterSpacing: 0.0,
                                             fontWeight:
                                                 FlutterFlowTheme.of(context)
@@ -1130,13 +1030,16 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                           ),
                                     ).addWalkthrough(
                                       textY8cpcfdo,
-                                      _model.ttlFacturacionController,
+                                      _model.facturacionController,
                                     ),
                                   ),
                                 ),
-                                DataColumn2(
-                                  label: DefaultTextStyle.merge(
-                                    softWrap: true,
+                              ),
+                              DataColumn2(
+                                label: DefaultTextStyle.merge(
+                                  softWrap: true,
+                                  child: Align(
+                                    alignment: AlignmentDirectional(0.0, 0.0),
                                     child: Text(
                                       'Tipo',
                                       style: FlutterFlowTheme.of(context)
@@ -1152,8 +1055,11 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                                       .labelLarge
                                                       .fontStyle,
                                             ),
-                                            color: Colors.white,
-                                            fontSize: 20.0,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                            fontSize: kBreakpointMedium != null
+                                                ? 20.0
+                                                : 30.0,
                                             letterSpacing: 0.0,
                                             fontWeight:
                                                 FlutterFlowTheme.of(context)
@@ -1166,13 +1072,16 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                           ),
                                     ).addWalkthrough(
                                       textQe5ut7w9,
-                                      _model.ttlFacturacionController,
+                                      _model.facturacionController,
                                     ),
                                   ),
                                 ),
-                                DataColumn2(
-                                  label: DefaultTextStyle.merge(
-                                    softWrap: true,
+                              ),
+                              DataColumn2(
+                                label: DefaultTextStyle.merge(
+                                  softWrap: true,
+                                  child: Align(
+                                    alignment: AlignmentDirectional(0.0, 0.0),
                                     child: Text(
                                       'Acciones',
                                       style: FlutterFlowTheme.of(context)
@@ -1190,7 +1099,9 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                             ),
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryText,
-                                            fontSize: 20.0,
+                                            fontSize: kBreakpointMedium != null
+                                                ? 20.0
+                                                : 30.0,
                                             letterSpacing: 0.0,
                                             fontWeight:
                                                 FlutterFlowTheme.of(context)
@@ -1203,25 +1114,28 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                           ),
                                     ).addWalkthrough(
                                       textVmopsmwu,
-                                      _model.ttlFacturacionController,
+                                      _model.facturacionController,
                                     ),
                                   ),
                                 ),
-                              ],
-                              dataRowBuilder: (facturacionListULItem,
-                                      facturacionListULIndex,
-                                      selected,
-                                      onSelectChanged) =>
-                                  DataRow(
-                                color: WidgetStateProperty.all(
-                                  facturacionListULIndex % 2 == 0
-                                      ? FlutterFlowTheme.of(context)
-                                          .secondaryBackground
-                                      : FlutterFlowTheme.of(context)
-                                          .primaryBackground,
-                                ),
-                                cells: [
-                                  Text(
+                              ),
+                            ],
+                            dataRowBuilder: (facturacionListULItem,
+                                    facturacionListULIndex,
+                                    selected,
+                                    onSelectChanged) =>
+                                DataRow(
+                              color: WidgetStateProperty.all(
+                                facturacionListULIndex % 2 == 0
+                                    ? FlutterFlowTheme.of(context)
+                                        .secondaryBackground
+                                    : FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                              ),
+                              cells: [
+                                Align(
+                                  alignment: AlignmentDirectional(0.0, 0.0),
+                                  child: Text(
                                     valueOrDefault<String>(
                                       '${facturacionListULItem.nombreEmpleado} ${facturacionListULItem.apellidoEmpleado}',
                                       'Nombre',
@@ -1239,7 +1153,9 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                                     .bodyMedium
                                                     .fontStyle,
                                           ),
-                                          fontSize: 20.0,
+                                          fontSize: kBreakpointMedium != null
+                                              ? 12.0
+                                              : 18.0,
                                           letterSpacing: 0.0,
                                           fontWeight:
                                               FlutterFlowTheme.of(context)
@@ -1251,7 +1167,10 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                                   .fontStyle,
                                         ),
                                   ),
-                                  Text(
+                                ),
+                                Align(
+                                  alignment: AlignmentDirectional(0.0, 0.0),
+                                  child: Text(
                                     valueOrDefault<String>(
                                       dateTimeFormat(
                                         "d/M/y",
@@ -1274,7 +1193,9 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                                     .bodyMedium
                                                     .fontStyle,
                                           ),
-                                          fontSize: 20.0,
+                                          fontSize: kBreakpointMedium != null
+                                              ? 12.0
+                                              : 18.0,
                                           letterSpacing: 0.0,
                                           fontWeight:
                                               FlutterFlowTheme.of(context)
@@ -1286,7 +1207,10 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                                   .fontStyle,
                                         ),
                                   ),
-                                  Text(
+                                ),
+                                Align(
+                                  alignment: AlignmentDirectional(0.0, 0.0),
+                                  child: Text(
                                     valueOrDefault<String>(
                                       '₡${facturacionListULItem.monto.toString()}',
                                       'Salario',
@@ -1304,7 +1228,9 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                                     .bodyMedium
                                                     .fontStyle,
                                           ),
-                                          fontSize: 20.0,
+                                          fontSize: kBreakpointMedium != null
+                                              ? 12.0
+                                              : 18.0,
                                           letterSpacing: 0.0,
                                           fontWeight:
                                               FlutterFlowTheme.of(context)
@@ -1316,12 +1242,14 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                                   .fontStyle,
                                         ),
                                   ),
-                                  Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
+                                ),
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Align(
+                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                      child: Text(
                                         valueOrDefault<String>(
                                           facturacionListULItem.detalle,
                                           'Detalle',
@@ -1339,7 +1267,10 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                                         .bodyMedium
                                                         .fontStyle,
                                               ),
-                                              fontSize: 20.0,
+                                              fontSize:
+                                                  kBreakpointMedium != null
+                                                      ? 12.0
+                                                      : 18.0,
                                               letterSpacing: 0.0,
                                               fontWeight:
                                                   FlutterFlowTheme.of(context)
@@ -1351,9 +1282,12 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                                       .fontStyle,
                                             ),
                                       ),
-                                    ],
-                                  ),
-                                  Text(
+                                    ),
+                                  ],
+                                ),
+                                Align(
+                                  alignment: AlignmentDirectional(0.0, 0.0),
+                                  child: Text(
                                     valueOrDefault<String>(
                                       facturacionListULItem.tipo,
                                       'Tipo',
@@ -1371,7 +1305,9 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                                     .bodyMedium
                                                     .fontStyle,
                                           ),
-                                          fontSize: 20.0,
+                                          fontSize: kBreakpointMedium != null
+                                              ? 12.0
+                                              : 18.0,
                                           letterSpacing: 0.0,
                                           fontWeight:
                                               FlutterFlowTheme.of(context)
@@ -1383,7 +1319,10 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                                   .fontStyle,
                                         ),
                                   ),
-                                  Row(
+                                ),
+                                SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Padding(
@@ -1391,12 +1330,13 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                             15.0, 0.0, 0.0, 0.0),
                                         child: FlutterFlowIconButton(
                                           borderRadius: 8.0,
-                                          buttonSize: 40.0,
-                                          fillColor: Color(0xFFFBE76D),
+                                          buttonSize:
+                                              MediaQuery.sizeOf(context).width *
+                                                  0.03,
+                                          fillColor: Color(0xFFC1A924),
                                           icon: Icon(
                                             Icons.edit_square,
-                                            color: FlutterFlowTheme.of(context)
-                                                .primary,
+                                            color: Colors.white,
                                             size: 24.0,
                                           ),
                                           onPressed: () async {
@@ -1418,7 +1358,7 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                           },
                                         ).addWalkthrough(
                                           iconButtonGik96y87,
-                                          _model.ttlFacturacionController,
+                                          _model.facturacionController,
                                         ),
                                       ),
                                       Padding(
@@ -1426,7 +1366,9 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                             15.0, 0.0, 0.0, 0.0),
                                         child: FlutterFlowIconButton(
                                           borderRadius: 8.0,
-                                          buttonSize: 40.0,
+                                          buttonSize:
+                                              MediaQuery.sizeOf(context).width *
+                                                  0.03,
                                           fillColor:
                                               FlutterFlowTheme.of(context)
                                                   .error,
@@ -1459,7 +1401,7 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                           },
                                         ).addWalkthrough(
                                           iconButton2fd8khrm,
-                                          _model.ttlFacturacionController,
+                                          _model.facturacionController,
                                         ),
                                       ),
                                       Padding(
@@ -1467,10 +1409,10 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                             15.0, 0.0, 0.0, 0.0),
                                         child: FlutterFlowIconButton(
                                           borderRadius: 8.0,
-                                          buttonSize: 40.0,
-                                          fillColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .success,
+                                          buttonSize:
+                                              MediaQuery.sizeOf(context).width *
+                                                  0.03,
+                                          fillColor: Color(0xFF27AE52),
                                           icon: Icon(
                                             Icons.download_sharp,
                                             color: Colors.white,
@@ -1489,69 +1431,41 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
                                           },
                                         ).addWalkthrough(
                                           iconButtonIubx0058,
-                                          _model.ttlFacturacionController,
+                                          _model.facturacionController,
                                         ),
                                       ),
                                     ],
                                   ),
-                                ].map((c) => DataCell(c)).toList(),
-                              ),
-                              paginated: true,
-                              selectable: false,
-                              hidePaginator: false,
-                              showFirstLastButtons: false,
-                              headingRowHeight: 56.0,
-                              dataRowHeight: 48.0,
-                              columnSpacing: 20.0,
-                              headingRowColor:
-                                  FlutterFlowTheme.of(context).primary,
-                              borderRadius: BorderRadius.circular(10.0),
-                              addHorizontalDivider: true,
-                              addTopAndBottomDivider: false,
-                              hideDefaultHorizontalDivider: true,
-                              horizontalDividerColor:
-                                  FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                              horizontalDividerThickness: 1.0,
-                              addVerticalDivider: true,
-                              verticalDividerColor: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              verticalDividerThickness: 1.0,
-                            );
-                          },
-                        ),
-                      ),
-                      Align(
-                        alignment: AlignmentDirectional(1.0, 0.0),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 10.0, 30.0, 0.0),
-                          child: FlutterFlowIconButton(
-                            borderRadius: 8.0,
-                            buttonSize: 40.0,
-                            fillColor: FlutterFlowTheme.of(context).primary,
-                            icon: FaIcon(
-                              FontAwesomeIcons.question,
-                              color: FlutterFlowTheme.of(context).info,
-                              size: 24.0,
+                                ),
+                              ].map((c) => DataCell(c)).toList(),
                             ),
-                            onPressed: () async {
-                              logFirebaseEvent(
-                                  'FACTURACION_PAGE_question_ICN_ON_TAP');
-                              logFirebaseEvent('IconButton_start_walkthrough');
-                              safeSetState(() =>
-                                  _model.ttlFacturacionController =
-                                      createPageWalkthrough(context));
-                              _model.ttlFacturacionController
-                                  ?.show(context: context);
-                            },
-                          ),
-                        ),
+                            paginated: true,
+                            selectable: false,
+                            hidePaginator: false,
+                            showFirstLastButtons: false,
+                            headingRowHeight: 56.0,
+                            dataRowHeight: 48.0,
+                            columnSpacing: 20.0,
+                            headingRowColor: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            borderRadius: BorderRadius.circular(10.0),
+                            addHorizontalDivider: true,
+                            addTopAndBottomDivider: true,
+                            hideDefaultHorizontalDivider: true,
+                            horizontalDividerColor:
+                                FlutterFlowTheme.of(context).primary,
+                            horizontalDividerThickness: 1.0,
+                            addVerticalDivider: true,
+                            verticalDividerColor:
+                                FlutterFlowTheme.of(context).primary,
+                            verticalDividerThickness: 1.0,
+                          );
+                        },
                       ),
-                    ],
-                  ),
-              ],
-            ),
+                    ),
+                  ],
+                ),
+            ],
           ),
         ),
       ),
@@ -1562,7 +1476,7 @@ class _FacturacionWidgetState extends State<FacturacionWidget> {
       TutorialCoachMark(
         targets: createWalkthroughTargets(context),
         onFinish: () async {
-          safeSetState(() => _model.ttlFacturacionController = null);
+          safeSetState(() => _model.facturacionController = null);
         },
         onSkip: () {
           return true;

@@ -38,7 +38,7 @@ class DefinirActividadAdminModel
 
   ///  State fields for stateful widgets in this page.
 
-  TutorialCoachMark? ttlDefinirActividadAdminController;
+  TutorialCoachMark? definirActividadAdminController;
   // Stores action output result for [Firestore Query - Query a collection] action in DefinirActividadAdmin widget.
   List<ReunionesRecord>? actividadesListU;
   // State field(s) for txtBuscar widget.
@@ -60,7 +60,7 @@ class DefinirActividadAdminModel
 
   @override
   void dispose() {
-    ttlDefinirActividadAdminController?.finish();
+    definirActividadAdminController?.finish();
     txtBuscarFocusNode1?.dispose();
     txtBuscarTextController1?.dispose();
 

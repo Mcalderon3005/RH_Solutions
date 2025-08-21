@@ -27,9 +27,11 @@ class LogUsuariosCreacionModel
 
   ///  State fields for stateful widgets in this page.
 
-  TutorialCoachMark? ttllogUsuariosCreacion11Controller;
+  TutorialCoachMark? logUsuariosCreacionController;
   // Stores action output result for [Firestore Query - Query a collection] action in logUsuariosCreacion widget.
   List<UsuarioCreacionRecord>? userCreationList;
+  // Stores action output result for [Firestore Query - Query a collection] action in logUsuariosCreacion widget.
+  UsersRecord? userInfoSingle;
   // State field(s) for PaginatedDataTable widget.
   final paginatedDataTableController =
       FlutterFlowDataTableController<UsuarioCreacionRecord>();
@@ -45,7 +47,7 @@ class LogUsuariosCreacionModel
 
   @override
   void dispose() {
-    ttllogUsuariosCreacion11Controller?.finish();
+    logUsuariosCreacionController?.finish();
     paginatedDataTableController.dispose();
     textFieldFocusNode?.dispose();
     textController?.dispose();

@@ -6,12 +6,14 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/walkthroughs/ttl_crear_actividad.dart';
+import '/walkthroughs/crear_actividad.dart';
+import '/actions/actions.dart' as action_blocks;
 import '/custom_code/actions/index.dart' as actions;
 import '/index.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
     show TutorialCoachMark;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
@@ -43,6 +45,15 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'CrearActividad'});
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('CREAR_ACTIVIDAD_CrearActividad_ON_INIT_S');
+      logFirebaseEvent('CrearActividad_action_block');
+      await action_blocks.checkUserLogin(context);
+      logFirebaseEvent('CrearActividad_action_block');
+      await action_blocks.sesionOutTimer(context);
+    });
+
     _model.txtEnlaceTextController1 ??= TextEditingController();
     _model.txtEnlaceFocusNode1 ??= FocusNode();
 
@@ -125,11 +136,11 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
         FocusScope.of(context).unfocus();
         FocusManager.instance.primaryFocus?.unfocus();
       },
-      child: WillPopScope(
-        onWillPop: () async => false,
+      child: PopScope(
+        canPop: false,
         child: Scaffold(
           key: scaffoldKey,
-          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           body: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,
@@ -141,57 +152,57 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                   Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Align(
-                        alignment: AlignmentDirectional(-1.0, 0.0),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              15.0, 15.0, 0.0, 0.0),
-                          child: FFButtonWidget(
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          FlutterFlowIconButton(
+                            borderRadius: 8.0,
+                            buttonSize: MediaQuery.sizeOf(context).width * 0.04,
+                            fillColor: Color(0x002797FF),
+                            icon: Icon(
+                              Icons.arrow_back,
+                              color: FlutterFlowTheme.of(context).primaryText,
+                              size: 32.0,
+                            ),
                             onPressed: () async {
                               logFirebaseEvent(
-                                  'CREAR_ACTIVIDAD_PAGE__BTN_ON_TAP');
-                              logFirebaseEvent('Button_navigate_to');
+                                  'CREAR_ACTIVIDAD_arrow_back_ICN_ON_TAP');
+                              logFirebaseEvent('IconButton_navigate_to');
 
                               context.pushNamed(HomeAdminPageWidget.routeName);
                             },
-                            text: '',
-                            icon: Icon(
-                              Icons.arrow_back,
-                              size: 28.0,
-                            ),
-                            options: FFButtonOptions(
-                              height: 40.0,
+                          ),
+                          Align(
+                            alignment: AlignmentDirectional(1.0, 1.0),
+                            child: Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 0.0, 16.0, 0.0),
-                              iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 0.0),
-                              color: Color(0x002797FF),
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .titleSmall
-                                  .override(
-                                    font: GoogleFonts.manrope(
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .fontStyle,
-                                    ),
-                                    color: Colors.white,
-                                    fontSize: 16.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .fontWeight,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .fontStyle,
-                                  ),
-                              elevation: 0.0,
-                              borderRadius: BorderRadius.circular(8.0),
+                                  0.0, 0.0, 10.0, 0.0),
+                              child: FlutterFlowIconButton(
+                                borderRadius: 8.0,
+                                buttonSize:
+                                    MediaQuery.sizeOf(context).width * 0.03,
+                                fillColor: FlutterFlowTheme.of(context).primary,
+                                icon: Icon(
+                                  Icons.question_mark,
+                                  color: FlutterFlowTheme.of(context).info,
+                                  size: 24.0,
+                                ),
+                                onPressed: () async {
+                                  logFirebaseEvent(
+                                      'CREAR_ACTIVIDAD_question_mark_ICN_ON_TAP');
+                                  logFirebaseEvent(
+                                      'IconButton_start_walkthrough');
+                                  safeSetState(() =>
+                                      _model.crearActividadController =
+                                          createPageWalkthrough(context));
+                                  _model.crearActividadController
+                                      ?.show(context: context);
+                                },
+                              ),
                             ),
                           ),
-                        ),
+                        ],
                       ),
                       Column(
                         mainAxisSize: MainAxisSize.max,
@@ -208,35 +219,18 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 4.0, 0.0, 0.0),
                                     child: Text(
-                                      'Formulario de registro de actividad',
+                                      'FOMULARIO DE REGISTRO DE ACTIVIDAD',
                                       textAlign: TextAlign.center,
                                       style: FlutterFlowTheme.of(context)
                                           .headlineMedium
                                           .override(
-                                            font: GoogleFonts.outfit(
-                                              fontWeight:
-                                                  FlutterFlowTheme.of(context)
-                                                      .headlineMedium
-                                                      .fontWeight,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .headlineMedium
-                                                      .fontStyle,
-                                            ),
+                                            fontFamily: 'NimbusSansLight',
                                             fontSize: 30.0,
                                             letterSpacing: 0.0,
-                                            fontWeight:
-                                                FlutterFlowTheme.of(context)
-                                                    .headlineMedium
-                                                    .fontWeight,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .headlineMedium
-                                                    .fontStyle,
                                           ),
                                     ).addWalkthrough(
                                       textSjxylq2j,
-                                      _model.ttlCrearActividadController,
+                                      _model.crearActividadController,
                                     ),
                                   ),
                                   Padding(
@@ -321,10 +315,16 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                                                 .bodyMedium
                                                                 .fontStyle,
                                                       ),
+                                            ).addWalkthrough(
+                                              textO4mrcj1c,
+                                              _model.crearActividadController,
                                             ),
                                             FlutterFlowIconButton(
                                               borderRadius: 8.0,
-                                              buttonSize: 51.1,
+                                              buttonSize:
+                                                  MediaQuery.sizeOf(context)
+                                                          .width *
+                                                      0.03,
                                               fillColor:
                                                   FlutterFlowTheme.of(context)
                                                       .primary,
@@ -333,7 +333,7 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .info,
-                                                size: 30.0,
+                                                size: 26.0,
                                               ),
                                               onPressed: () async {
                                                 logFirebaseEvent(
@@ -506,11 +506,11 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                                   });
                                                 }
                                               },
+                                            ).addWalkthrough(
+                                              iconButtonNkqiz2zi,
+                                              _model.crearActividadController,
                                             ),
                                           ],
-                                        ).addWalkthrough(
-                                          rowAe75yonn,
-                                          _model.ttlCrearActividadController,
                                         ),
                                         Container(
                                           width:
@@ -525,71 +525,75 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                             obscureText: false,
                                             decoration: InputDecoration(
                                               labelText: 'Enlace de Reunion',
-                                              labelStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelMedium
-                                                      .override(
-                                                        font:
-                                                            GoogleFonts.manrope(
-                                                          fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMedium
-                                                                  .fontWeight,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMedium
-                                                                  .fontStyle,
-                                                        ),
-                                                        fontSize: 18.0,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelMedium
-                                                                .fontWeight,
-                                                        fontStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelMedium
-                                                                .fontStyle,
-                                                      ),
-                                              hintStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelMedium
-                                                      .override(
-                                                        font:
-                                                            GoogleFonts.manrope(
-                                                          fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMedium
-                                                                  .fontWeight,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMedium
-                                                                  .fontStyle,
-                                                        ),
-                                                        fontSize: 18.0,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelMedium
-                                                                .fontWeight,
-                                                        fontStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelMedium
-                                                                .fontStyle,
-                                                      ),
+                                              labelStyle: FlutterFlowTheme.of(
+                                                      context)
+                                                  .labelMedium
+                                                  .override(
+                                                    font: GoogleFonts.manrope(
+                                                      fontWeight:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .fontWeight,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .fontStyle,
+                                                    ),
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                    fontSize: 18.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .fontStyle,
+                                                  ),
+                                              hintStyle: FlutterFlowTheme.of(
+                                                      context)
+                                                  .labelMedium
+                                                  .override(
+                                                    font: GoogleFonts.manrope(
+                                                      fontWeight:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .fontWeight,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .fontStyle,
+                                                    ),
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                    fontSize: 18.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .fontStyle,
+                                                  ),
                                               enabledBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .alternate,
+                                                      .secondaryBackground,
                                                   width: 2.0,
                                                 ),
                                                 borderRadius:
@@ -626,6 +630,10 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                                 borderRadius:
                                                     BorderRadius.circular(12.0),
                                               ),
+                                              filled: true,
+                                              fillColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
                                               contentPadding:
                                                   EdgeInsetsDirectional
                                                       .fromSTEB(16.0, 12.0,
@@ -668,7 +676,7 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                           ),
                                         ).addWalkthrough(
                                           textFieldTir948xx,
-                                          _model.ttlCrearActividadController,
+                                          _model.crearActividadController,
                                         ),
                                         Container(
                                           width:
@@ -683,70 +691,74 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                             obscureText: false,
                                             decoration: InputDecoration(
                                               labelText: 'Asunto',
-                                              labelStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelMedium
-                                                      .override(
-                                                        font:
-                                                            GoogleFonts.manrope(
-                                                          fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMedium
-                                                                  .fontWeight,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMedium
-                                                                  .fontStyle,
-                                                        ),
-                                                        fontSize: 18.0,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelMedium
-                                                                .fontWeight,
-                                                        fontStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelMedium
-                                                                .fontStyle,
-                                                      ),
-                                              hintStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelMedium
-                                                      .override(
-                                                        font:
-                                                            GoogleFonts.manrope(
-                                                          fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMedium
-                                                                  .fontWeight,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMedium
-                                                                  .fontStyle,
-                                                        ),
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelMedium
-                                                                .fontWeight,
-                                                        fontStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelMedium
-                                                                .fontStyle,
-                                                      ),
+                                              labelStyle: FlutterFlowTheme.of(
+                                                      context)
+                                                  .labelMedium
+                                                  .override(
+                                                    font: GoogleFonts.manrope(
+                                                      fontWeight:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .fontWeight,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .fontStyle,
+                                                    ),
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                    fontSize: 18.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .fontStyle,
+                                                  ),
+                                              hintStyle: FlutterFlowTheme.of(
+                                                      context)
+                                                  .labelMedium
+                                                  .override(
+                                                    font: GoogleFonts.manrope(
+                                                      fontWeight:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .fontWeight,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .fontStyle,
+                                                    ),
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .fontStyle,
+                                                  ),
                                               enabledBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .alternate,
+                                                      .secondaryBackground,
                                                   width: 2.0,
                                                 ),
                                                 borderRadius:
@@ -783,6 +795,10 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                                 borderRadius:
                                                     BorderRadius.circular(12.0),
                                               ),
+                                              filled: true,
+                                              fillColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
                                               contentPadding:
                                                   EdgeInsetsDirectional
                                                       .fromSTEB(16.0, 12.0,
@@ -825,7 +841,7 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                           ),
                                         ).addWalkthrough(
                                           textFieldQ5b8lpnx,
-                                          _model.ttlCrearActividadController,
+                                          _model.crearActividadController,
                                         ),
                                         Container(
                                           width:
@@ -839,70 +855,74 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                             obscureText: false,
                                             decoration: InputDecoration(
                                               labelText: 'Descripcion',
-                                              labelStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelMedium
-                                                      .override(
-                                                        font:
-                                                            GoogleFonts.manrope(
-                                                          fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMedium
-                                                                  .fontWeight,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMedium
-                                                                  .fontStyle,
-                                                        ),
-                                                        fontSize: 18.0,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelMedium
-                                                                .fontWeight,
-                                                        fontStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelMedium
-                                                                .fontStyle,
-                                                      ),
-                                              hintStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelMedium
-                                                      .override(
-                                                        font:
-                                                            GoogleFonts.manrope(
-                                                          fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMedium
-                                                                  .fontWeight,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMedium
-                                                                  .fontStyle,
-                                                        ),
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelMedium
-                                                                .fontWeight,
-                                                        fontStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelMedium
-                                                                .fontStyle,
-                                                      ),
+                                              labelStyle: FlutterFlowTheme.of(
+                                                      context)
+                                                  .labelMedium
+                                                  .override(
+                                                    font: GoogleFonts.manrope(
+                                                      fontWeight:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .fontWeight,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .fontStyle,
+                                                    ),
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                    fontSize: 18.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .fontStyle,
+                                                  ),
+                                              hintStyle: FlutterFlowTheme.of(
+                                                      context)
+                                                  .labelMedium
+                                                  .override(
+                                                    font: GoogleFonts.manrope(
+                                                      fontWeight:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .fontWeight,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .fontStyle,
+                                                    ),
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .fontStyle,
+                                                  ),
                                               enabledBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .alternate,
+                                                      .secondaryBackground,
                                                   width: 2.0,
                                                 ),
                                                 borderRadius:
@@ -939,6 +959,10 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                                 borderRadius:
                                                     BorderRadius.circular(12.0),
                                               ),
+                                              filled: true,
+                                              fillColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
                                               contentPadding:
                                                   EdgeInsetsDirectional
                                                       .fromSTEB(16.0, 12.0,
@@ -982,7 +1006,7 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                           ),
                                         ).addWalkthrough(
                                           textField7x10cecp,
-                                          _model.ttlCrearActividadController,
+                                          _model.crearActividadController,
                                         ),
                                         Text(
                                           'Agregar participantes',
@@ -1017,7 +1041,9 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                           width:
                                               MediaQuery.sizeOf(context).width *
                                                   0.5,
-                                          height: 153.8,
+                                          height: MediaQuery.sizeOf(context)
+                                                  .height *
+                                              0.2,
                                           decoration: BoxDecoration(),
                                           child: PagedListView<
                                               DocumentSnapshot<Object?>?,
@@ -1091,7 +1117,7 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                                       unselectedWidgetColor:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .alternate,
+                                                              .primaryText,
                                                     ),
                                                     child: CheckboxListTile(
                                                       value: _model
@@ -1155,6 +1181,9 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                                                         .labelMedium
                                                                         .fontStyle,
                                                                   ),
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryText,
                                                                   fontSize:
                                                                       16.0,
                                                                   letterSpacing:
@@ -1204,7 +1233,7 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                             ),
                                           ).addWalkthrough(
                                             listView5nug7ydy,
-                                            _model.ttlCrearActividadController,
+                                            _model.crearActividadController,
                                           ),
                                         ),
                                       ].divide(SizedBox(height: 12.0)),
@@ -1328,13 +1357,15 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                       text: 'Registrar Actividad',
                                       icon: Icon(
                                         Icons.receipt_long,
-                                        size: 15.0,
+                                        size: 28.0,
                                       ),
                                       options: FFButtonOptions(
                                         width:
                                             MediaQuery.sizeOf(context).width *
-                                                0.5,
-                                        height: 48.0,
+                                                0.35,
+                                        height:
+                                            MediaQuery.sizeOf(context).height *
+                                                0.05,
                                         padding: EdgeInsets.all(0.0),
                                         iconPadding:
                                             EdgeInsetsDirectional.fromSTEB(
@@ -1376,7 +1407,7 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                       ),
                                     ).addWalkthrough(
                                       button86om4v9s,
-                                      _model.ttlCrearActividadController,
+                                      _model.crearActividadController,
                                     ),
                                   ),
                                 ],
@@ -1396,57 +1427,28 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                   Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Align(
-                        alignment: AlignmentDirectional(-1.0, 0.0),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              15.0, 15.0, 0.0, 0.0),
-                          child: FFButtonWidget(
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          FlutterFlowIconButton(
+                            borderRadius: 8.0,
+                            buttonSize: MediaQuery.sizeOf(context).width * 0.15,
+                            fillColor: Color(0x0000507C),
+                            icon: Icon(
+                              Icons.arrow_back,
+                              color: FlutterFlowTheme.of(context).primary,
+                              size: 28.0,
+                            ),
                             onPressed: () async {
                               logFirebaseEvent(
-                                  'CREAR_ACTIVIDAD_PAGE__BTN_ON_TAP');
-                              logFirebaseEvent('Button_navigate_to');
+                                  'CREAR_ACTIVIDAD_arrow_back_ICN_ON_TAP');
+                              logFirebaseEvent('IconButton_navigate_to');
 
                               context.pushNamed(HomeAdminPageWidget.routeName);
                             },
-                            text: '',
-                            icon: Icon(
-                              Icons.arrow_back,
-                              size: 28.0,
-                            ),
-                            options: FFButtonOptions(
-                              height: 40.0,
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 0.0, 16.0, 0.0),
-                              iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 0.0),
-                              color: Color(0x002797FF),
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .titleSmall
-                                  .override(
-                                    font: GoogleFonts.manrope(
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .fontStyle,
-                                    ),
-                                    color: Colors.white,
-                                    fontSize: 16.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .fontWeight,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .fontStyle,
-                                  ),
-                              elevation: 0.0,
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
                           ),
-                        ),
+                        ],
                       ),
                       Column(
                         mainAxisSize: MainAxisSize.max,
@@ -1560,17 +1562,9 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                                               .bodyMedium
                                                               .fontStyle,
                                                     ),
-                                                    color:
-                                                        valueOrDefault<Color>(
-                                                      (Theme.of(context)
-                                                                      .brightness ==
-                                                                  Brightness
-                                                                      .light) ==
-                                                              true
-                                                          ? Colors.black
-                                                          : Colors.white,
-                                                      Colors.black,
-                                                    ),
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
                                                     letterSpacing: 0.0,
                                                     fontWeight:
                                                         FlutterFlowTheme.of(
@@ -1784,69 +1778,75 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                             obscureText: false,
                                             decoration: InputDecoration(
                                               labelText: 'Enlace de Reunion',
-                                              labelStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelMedium
-                                                      .override(
-                                                        font:
-                                                            GoogleFonts.manrope(
-                                                          fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMedium
-                                                                  .fontWeight,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMedium
-                                                                  .fontStyle,
-                                                        ),
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelMedium
-                                                                .fontWeight,
-                                                        fontStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelMedium
-                                                                .fontStyle,
-                                                      ),
-                                              hintStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelMedium
-                                                      .override(
-                                                        font:
-                                                            GoogleFonts.manrope(
-                                                          fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMedium
-                                                                  .fontWeight,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMedium
-                                                                  .fontStyle,
-                                                        ),
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelMedium
-                                                                .fontWeight,
-                                                        fontStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelMedium
-                                                                .fontStyle,
-                                                      ),
+                                              labelStyle: FlutterFlowTheme.of(
+                                                      context)
+                                                  .labelMedium
+                                                  .override(
+                                                    font: GoogleFonts.manrope(
+                                                      fontWeight:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .fontWeight,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .fontStyle,
+                                                    ),
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                    fontSize: 16.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .fontStyle,
+                                                  ),
+                                              hintStyle: FlutterFlowTheme.of(
+                                                      context)
+                                                  .labelMedium
+                                                  .override(
+                                                    font: GoogleFonts.manrope(
+                                                      fontWeight:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .fontWeight,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .fontStyle,
+                                                    ),
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                    fontSize: 16.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .fontStyle,
+                                                  ),
                                               enabledBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .alternate,
+                                                      .secondaryBackground,
                                                   width: 2.0,
                                                 ),
                                                 borderRadius:
@@ -1883,6 +1883,10 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                                 borderRadius:
                                                     BorderRadius.circular(12.0),
                                               ),
+                                              filled: true,
+                                              fillColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
                                               contentPadding:
                                                   EdgeInsetsDirectional
                                                       .fromSTEB(16.0, 12.0,
@@ -1903,6 +1907,7 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                                             .bodyMedium
                                                             .fontStyle,
                                                   ),
+                                                  fontSize: 16.0,
                                                   letterSpacing: 0.0,
                                                   fontWeight:
                                                       FlutterFlowTheme.of(
@@ -1936,69 +1941,75 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                             obscureText: false,
                                             decoration: InputDecoration(
                                               labelText: 'Asunto',
-                                              labelStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelMedium
-                                                      .override(
-                                                        font:
-                                                            GoogleFonts.manrope(
-                                                          fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMedium
-                                                                  .fontWeight,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMedium
-                                                                  .fontStyle,
-                                                        ),
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelMedium
-                                                                .fontWeight,
-                                                        fontStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelMedium
-                                                                .fontStyle,
-                                                      ),
-                                              hintStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelMedium
-                                                      .override(
-                                                        font:
-                                                            GoogleFonts.manrope(
-                                                          fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMedium
-                                                                  .fontWeight,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMedium
-                                                                  .fontStyle,
-                                                        ),
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelMedium
-                                                                .fontWeight,
-                                                        fontStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelMedium
-                                                                .fontStyle,
-                                                      ),
+                                              labelStyle: FlutterFlowTheme.of(
+                                                      context)
+                                                  .labelMedium
+                                                  .override(
+                                                    font: GoogleFonts.manrope(
+                                                      fontWeight:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .fontWeight,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .fontStyle,
+                                                    ),
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                    fontSize: 16.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .fontStyle,
+                                                  ),
+                                              hintStyle: FlutterFlowTheme.of(
+                                                      context)
+                                                  .labelMedium
+                                                  .override(
+                                                    font: GoogleFonts.manrope(
+                                                      fontWeight:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .fontWeight,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .fontStyle,
+                                                    ),
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                    fontSize: 16.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .fontStyle,
+                                                  ),
                                               enabledBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .alternate,
+                                                      .secondaryBackground,
                                                   width: 2.0,
                                                 ),
                                                 borderRadius:
@@ -2035,6 +2046,10 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                                 borderRadius:
                                                     BorderRadius.circular(12.0),
                                               ),
+                                              filled: true,
+                                              fillColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
                                               contentPadding:
                                                   EdgeInsetsDirectional
                                                       .fromSTEB(16.0, 12.0,
@@ -2055,6 +2070,7 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                                             .bodyMedium
                                                             .fontStyle,
                                                   ),
+                                                  fontSize: 16.0,
                                                   letterSpacing: 0.0,
                                                   fontWeight:
                                                       FlutterFlowTheme.of(
@@ -2087,69 +2103,75 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                             obscureText: false,
                                             decoration: InputDecoration(
                                               labelText: 'Descripcion',
-                                              labelStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelMedium
-                                                      .override(
-                                                        font:
-                                                            GoogleFonts.manrope(
-                                                          fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMedium
-                                                                  .fontWeight,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMedium
-                                                                  .fontStyle,
-                                                        ),
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelMedium
-                                                                .fontWeight,
-                                                        fontStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelMedium
-                                                                .fontStyle,
-                                                      ),
-                                              hintStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelMedium
-                                                      .override(
-                                                        font:
-                                                            GoogleFonts.manrope(
-                                                          fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMedium
-                                                                  .fontWeight,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMedium
-                                                                  .fontStyle,
-                                                        ),
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelMedium
-                                                                .fontWeight,
-                                                        fontStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelMedium
-                                                                .fontStyle,
-                                                      ),
+                                              labelStyle: FlutterFlowTheme.of(
+                                                      context)
+                                                  .labelMedium
+                                                  .override(
+                                                    font: GoogleFonts.manrope(
+                                                      fontWeight:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .fontWeight,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .fontStyle,
+                                                    ),
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                    fontSize: 16.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .fontStyle,
+                                                  ),
+                                              hintStyle: FlutterFlowTheme.of(
+                                                      context)
+                                                  .labelMedium
+                                                  .override(
+                                                    font: GoogleFonts.manrope(
+                                                      fontWeight:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .fontWeight,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .fontStyle,
+                                                    ),
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                    fontSize: 16.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .fontStyle,
+                                                  ),
                                               enabledBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .alternate,
+                                                      .secondaryBackground,
                                                   width: 2.0,
                                                 ),
                                                 borderRadius:
@@ -2186,6 +2208,10 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                                 borderRadius:
                                                     BorderRadius.circular(12.0),
                                               ),
+                                              filled: true,
+                                              fillColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
                                               contentPadding:
                                                   EdgeInsetsDirectional
                                                       .fromSTEB(16.0, 12.0,
@@ -2206,6 +2232,7 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                                             .bodyMedium
                                                             .fontStyle,
                                                   ),
+                                                  fontSize: 16.0,
                                                   letterSpacing: 0.0,
                                                   fontWeight:
                                                       FlutterFlowTheme.of(
@@ -2244,6 +2271,7 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                                           .bodyMedium
                                                           .fontStyle,
                                                 ),
+                                                fontSize: 16.0,
                                                 letterSpacing: 0.0,
                                                 fontWeight:
                                                     FlutterFlowTheme.of(context)
@@ -2333,7 +2361,7 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                                       unselectedWidgetColor:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .alternate,
+                                                              .primaryText,
                                                     ),
                                                     child: CheckboxListTile(
                                                       value: _model
@@ -2398,6 +2426,9 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                                                                         .labelMedium
                                                                         .fontStyle,
                                                                   ),
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryText,
                                                                   fontSize:
                                                                       12.0,
                                                                   letterSpacing:
@@ -2623,32 +2654,6 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
                       ),
                     ],
                   ),
-                Align(
-                  alignment: AlignmentDirectional(1.0, 1.0),
-                  child: Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 20.0, 0.0),
-                    child: FlutterFlowIconButton(
-                      borderRadius: 8.0,
-                      buttonSize: 40.0,
-                      fillColor: FlutterFlowTheme.of(context).primary,
-                      icon: Icon(
-                        Icons.question_mark,
-                        color: FlutterFlowTheme.of(context).info,
-                        size: 24.0,
-                      ),
-                      onPressed: () async {
-                        logFirebaseEvent(
-                            'CREAR_ACTIVIDAD_question_mark_ICN_ON_TAP');
-                        logFirebaseEvent('IconButton_start_walkthrough');
-                        safeSetState(() => _model.ttlCrearActividadController =
-                            createPageWalkthrough(context));
-                        _model.ttlCrearActividadController
-                            ?.show(context: context);
-                      },
-                    ),
-                  ),
-                ),
               ],
             ),
           ),
@@ -2661,7 +2666,7 @@ class _CrearActividadWidgetState extends State<CrearActividadWidget>
       TutorialCoachMark(
         targets: createWalkthroughTargets(context),
         onFinish: () async {
-          safeSetState(() => _model.ttlCrearActividadController = null);
+          safeSetState(() => _model.crearActividadController = null);
         },
         onSkip: () {
           return true;

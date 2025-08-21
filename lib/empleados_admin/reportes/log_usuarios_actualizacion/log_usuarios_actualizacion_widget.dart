@@ -3,15 +3,14 @@ import '/flutter_flow/flutter_flow_data_table.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import '/walkthroughs/ttl_log_usuario_creacion.dart';
+import '/walkthroughs/log_usuarios_actualizacion.dart';
+import '/actions/actions.dart' as action_blocks;
 import '/index.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
     show TutorialCoachMark;
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:text_search/text_search.dart';
 import 'log_usuarios_actualizacion_model.dart';
@@ -51,6 +50,10 @@ class _LogUsuariosActualizacionWidgetState
           .toList()
           .cast<LogActualizacionUsuariosRecord>();
       safeSetState(() {});
+      logFirebaseEvent('logUsuariosActualizacion_action_block');
+      await action_blocks.checkUserLogin(context);
+      logFirebaseEvent('logUsuariosActualizacion_action_block');
+      await action_blocks.sesionOutTimer(context);
     });
 
     _model.textController ??= TextEditingController();
@@ -73,8 +76,8 @@ class _LogUsuariosActualizacionWidgetState
         FocusScope.of(context).unfocus();
         FocusManager.instance.primaryFocus?.unfocus();
       },
-      child: WillPopScope(
-        onWillPop: () async => false,
+      child: PopScope(
+        canPop: false,
         child: Scaffold(
           key: scaffoldKey,
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -88,85 +91,58 @@ class _LogUsuariosActualizacionWidgetState
                 Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(30.0, 15.0, 0.0, 0.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Align(
-                            alignment: AlignmentDirectional(-1.0, 0.0),
-                            child: FFButtonWidget(
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        FlutterFlowIconButton(
+                          borderRadius: 8.0,
+                          buttonSize: MediaQuery.sizeOf(context).width * 0.04,
+                          fillColor: Color(0x002797FF),
+                          icon: Icon(
+                            Icons.arrow_back,
+                            color: FlutterFlowTheme.of(context).primaryText,
+                            size: 32.0,
+                          ),
+                          onPressed: () async {
+                            logFirebaseEvent(
+                                'LOG_USUARIOS_ACTUALIZACION_arrow_back_IC');
+                            logFirebaseEvent('IconButton_navigate_to');
+
+                            context
+                                .pushNamed(ReportesHomeAdminWidget.routeName);
+                          },
+                        ),
+                        Align(
+                          alignment: AlignmentDirectional(1.0, 0.0),
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 10.0, 0.0),
+                            child: FlutterFlowIconButton(
+                              borderRadius: 8.0,
+                              buttonSize:
+                                  MediaQuery.sizeOf(context).width * 0.03,
+                              fillColor: FlutterFlowTheme.of(context).primary,
+                              icon: Icon(
+                                Icons.question_mark,
+                                color: FlutterFlowTheme.of(context).info,
+                                size: 24.0,
+                              ),
                               onPressed: () async {
                                 logFirebaseEvent(
-                                    'LOG_USUARIOS_ACTUALIZACION_VOLVER_BTN_ON');
-                                logFirebaseEvent('Button_navigate_to');
-
-                                context.pushNamed(
-                                    ReportesHomeAdminWidget.routeName);
+                                    'LOG_USUARIOS_ACTUALIZACION_question_mark');
+                                logFirebaseEvent(
+                                    'IconButton_start_walkthrough');
+                                safeSetState(() =>
+                                    _model.logUsuariosActualizacionController =
+                                        createPageWalkthrough(context));
+                                _model.logUsuariosActualizacionController
+                                    ?.show(context: context);
                               },
-                              text: 'Volver',
-                              options: FFButtonOptions(
-                                height: 46.6,
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 0.0, 16.0, 0.0),
-                                iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                color: FlutterFlowTheme.of(context).primary,
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .override(
-                                      font: GoogleFonts.manrope(
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .fontStyle,
-                                      ),
-                                      color: Colors.white,
-                                      fontSize: 16.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .fontStyle,
-                                    ),
-                                elevation: 0.0,
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
                             ),
                           ),
-                          Flexible(
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 30.0, 0.0),
-                              child: FlutterFlowIconButton(
-                                borderColor: Colors.transparent,
-                                borderRadius: 8.0,
-                                buttonSize: 40.0,
-                                fillColor: Color(0xFFB2332D),
-                                icon: Icon(
-                                  Icons.delete,
-                                  color: FlutterFlowTheme.of(context).info,
-                                  size: 24.0,
-                                ),
-                                onPressed: () async {
-                                  logFirebaseEvent(
-                                      'LOG_USUARIOS_ACTUALIZACION_delete_ICN_ON');
-                                  logFirebaseEvent('IconButton_navigate_to');
-
-                                  context
-                                      .goNamed(VaciarRegistrosWidget.routeName);
-                                },
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(
@@ -178,38 +154,26 @@ class _LogUsuariosActualizacionWidgetState
                           Align(
                             alignment: AlignmentDirectional(0.0, 0.0),
                             child: Text(
-                              'Usuarios Actualizados',
+                              'USUARIOS ACTUALIZADOS',
                               style: FlutterFlowTheme.of(context)
                                   .titleLarge
                                   .override(
-                                    font: GoogleFonts.outfit(
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .titleLarge
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .titleLarge
-                                          .fontStyle,
-                                    ),
+                                    fontFamily: 'NimbusSansLight',
                                     fontSize: 30.0,
                                     letterSpacing: 0.0,
-                                    fontWeight: FlutterFlowTheme.of(context)
-                                        .titleLarge
-                                        .fontWeight,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .titleLarge
-                                        .fontStyle,
+                                    fontWeight: FontWeight.bold,
                                   ),
                             ).addWalkthrough(
                               textKckgn44x,
-                              _model.ttlLogUsuarioCreacionController,
+                              _model.logUsuariosActualizacionController,
                             ),
                           ),
                         ],
                       ),
                     ),
                     Container(
-                      width: 1312.4,
-                      height: 712.5,
+                      width: MediaQuery.sizeOf(context).width * 0.9,
+                      height: MediaQuery.sizeOf(context).height * 0.65,
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).secondaryBackground,
                       ),
@@ -226,12 +190,27 @@ class _LogUsuariosActualizacionWidgetState
                               DataColumn2(
                                 label: DefaultTextStyle.merge(
                                   softWrap: true,
-                                  child: Text(
-                                    'Usuario Actualizador',
-                                    style: FlutterFlowTheme.of(context)
-                                        .labelLarge
-                                        .override(
-                                          font: GoogleFonts.manrope(
+                                  child: Align(
+                                    alignment: AlignmentDirectional(0.0, 0.0),
+                                    child: Text(
+                                      'Administrador',
+                                      style: FlutterFlowTheme.of(context)
+                                          .labelLarge
+                                          .override(
+                                            font: GoogleFonts.manrope(
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelLarge
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelLarge
+                                                      .fontStyle,
+                                            ),
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                            fontSize: 20.0,
+                                            letterSpacing: 0.0,
                                             fontWeight:
                                                 FlutterFlowTheme.of(context)
                                                     .labelLarge
@@ -241,33 +220,37 @@ class _LogUsuariosActualizacionWidgetState
                                                     .labelLarge
                                                     .fontStyle,
                                           ),
-                                          color: Colors.white,
-                                          fontSize: 20.0,
-                                          letterSpacing: 0.0,
-                                          fontWeight:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelLarge
-                                                  .fontWeight,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelLarge
-                                                  .fontStyle,
-                                        ),
-                                  ).addWalkthrough(
-                                    textDs4b3hcr,
-                                    _model.ttlLogUsuarioCreacionController,
+                                    ).addWalkthrough(
+                                      textDs4b3hcr,
+                                      _model.logUsuariosActualizacionController,
+                                    ),
                                   ),
                                 ),
                               ),
                               DataColumn2(
                                 label: DefaultTextStyle.merge(
                                   softWrap: true,
-                                  child: Text(
-                                    'Usuario Actualizado',
-                                    style: FlutterFlowTheme.of(context)
-                                        .labelLarge
-                                        .override(
-                                          font: GoogleFonts.manrope(
+                                  child: Align(
+                                    alignment: AlignmentDirectional(0.0, 0.0),
+                                    child: Text(
+                                      'Colaboradores ',
+                                      style: FlutterFlowTheme.of(context)
+                                          .labelLarge
+                                          .override(
+                                            font: GoogleFonts.manrope(
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelLarge
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelLarge
+                                                      .fontStyle,
+                                            ),
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                            fontSize: 22.0,
+                                            letterSpacing: 0.0,
                                             fontWeight:
                                                 FlutterFlowTheme.of(context)
                                                     .labelLarge
@@ -277,33 +260,37 @@ class _LogUsuariosActualizacionWidgetState
                                                     .labelLarge
                                                     .fontStyle,
                                           ),
-                                          color: Colors.white,
-                                          fontSize: 22.0,
-                                          letterSpacing: 0.0,
-                                          fontWeight:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelLarge
-                                                  .fontWeight,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelLarge
-                                                  .fontStyle,
-                                        ),
-                                  ).addWalkthrough(
-                                    text0k0urxxl,
-                                    _model.ttlLogUsuarioCreacionController,
+                                    ).addWalkthrough(
+                                      text0k0urxxl,
+                                      _model.logUsuariosActualizacionController,
+                                    ),
                                   ),
                                 ),
                               ),
                               DataColumn2(
                                 label: DefaultTextStyle.merge(
                                   softWrap: true,
-                                  child: Text(
-                                    'Fecha',
-                                    style: FlutterFlowTheme.of(context)
-                                        .labelLarge
-                                        .override(
-                                          font: GoogleFonts.manrope(
+                                  child: Align(
+                                    alignment: AlignmentDirectional(0.0, 0.0),
+                                    child: Text(
+                                      'Fecha',
+                                      style: FlutterFlowTheme.of(context)
+                                          .labelLarge
+                                          .override(
+                                            font: GoogleFonts.manrope(
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelLarge
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelLarge
+                                                      .fontStyle,
+                                            ),
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                            fontSize: 22.0,
+                                            letterSpacing: 0.0,
                                             fontWeight:
                                                 FlutterFlowTheme.of(context)
                                                     .labelLarge
@@ -313,21 +300,10 @@ class _LogUsuariosActualizacionWidgetState
                                                     .labelLarge
                                                     .fontStyle,
                                           ),
-                                          color: Colors.white,
-                                          fontSize: 22.0,
-                                          letterSpacing: 0.0,
-                                          fontWeight:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelLarge
-                                                  .fontWeight,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelLarge
-                                                  .fontStyle,
-                                        ),
-                                  ).addWalkthrough(
-                                    text4rkns2h1,
-                                    _model.ttlLogUsuarioCreacionController,
+                                    ).addWalkthrough(
+                                      text4rkns2h1,
+                                      _model.logUsuariosActualizacionController,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -342,18 +318,31 @@ class _LogUsuariosActualizacionWidgetState
                                     ? FlutterFlowTheme.of(context)
                                         .secondaryBackground
                                     : FlutterFlowTheme.of(context)
-                                        .primaryBackground,
+                                        .secondaryBackground,
                               ),
                               cells: [
-                                Text(
-                                  valueOrDefault<String>(
-                                    erroresListUItem.usuarioActualizador,
-                                    'Usuario',
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        font: GoogleFonts.manrope(
+                                Align(
+                                  alignment: AlignmentDirectional(0.0, 0.0),
+                                  child: Text(
+                                    valueOrDefault<String>(
+                                      erroresListUItem.usuarioActualizador,
+                                      'Usuario',
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          font: GoogleFonts.manrope(
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
+                                          ),
+                                          fontSize: 20.0,
+                                          letterSpacing: 0.0,
                                           fontWeight:
                                               FlutterFlowTheme.of(context)
                                                   .bodyMedium
@@ -363,25 +352,30 @@ class _LogUsuariosActualizacionWidgetState
                                                   .bodyMedium
                                                   .fontStyle,
                                         ),
-                                        fontSize: 20.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontStyle,
-                                      ),
+                                  ),
                                 ),
-                                Text(
-                                  valueOrDefault<String>(
-                                    erroresListUItem.usuarioActualizado,
-                                    'Usuario',
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        font: GoogleFonts.manrope(
+                                Align(
+                                  alignment: AlignmentDirectional(0.0, 0.0),
+                                  child: Text(
+                                    valueOrDefault<String>(
+                                      erroresListUItem.usuarioActualizado,
+                                      'Usuario',
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          font: GoogleFonts.manrope(
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
+                                          ),
+                                          fontSize: 20.0,
+                                          letterSpacing: 0.0,
                                           fontWeight:
                                               FlutterFlowTheme.of(context)
                                                   .bodyMedium
@@ -391,26 +385,31 @@ class _LogUsuariosActualizacionWidgetState
                                                   .bodyMedium
                                                   .fontStyle,
                                         ),
-                                        fontSize: 20.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontStyle,
-                                      ),
+                                  ),
                                 ),
-                                Text(
-                                  valueOrDefault<String>(
-                                    erroresListUItem.fechaActualizacion
-                                        ?.toString(),
-                                    '0/0/0',
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        font: GoogleFonts.manrope(
+                                Align(
+                                  alignment: AlignmentDirectional(0.0, 0.0),
+                                  child: Text(
+                                    valueOrDefault<String>(
+                                      erroresListUItem.fechaActualizacion
+                                          ?.toString(),
+                                      '0/0/0',
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          font: GoogleFonts.manrope(
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
+                                          ),
+                                          fontSize: 20.0,
+                                          letterSpacing: 0.0,
                                           fontWeight:
                                               FlutterFlowTheme.of(context)
                                                   .bodyMedium
@@ -420,15 +419,7 @@ class _LogUsuariosActualizacionWidgetState
                                                   .bodyMedium
                                                   .fontStyle,
                                         ),
-                                        fontSize: 20.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontStyle,
-                                      ),
+                                  ),
                                 ),
                               ].map((c) => DataCell(c)).toList(),
                             ),
@@ -439,48 +430,21 @@ class _LogUsuariosActualizacionWidgetState
                             headingRowHeight: 56.0,
                             dataRowHeight: 48.0,
                             columnSpacing: 20.0,
-                            headingRowColor:
-                                FlutterFlowTheme.of(context).primary,
+                            headingRowColor: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
                             borderRadius: BorderRadius.circular(10.0),
                             addHorizontalDivider: true,
-                            addTopAndBottomDivider: false,
+                            addTopAndBottomDivider: true,
                             hideDefaultHorizontalDivider: true,
-                            horizontalDividerColor: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
+                            horizontalDividerColor:
+                                FlutterFlowTheme.of(context).primary,
                             horizontalDividerThickness: 1.0,
                             addVerticalDivider: true,
-                            verticalDividerColor: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
+                            verticalDividerColor:
+                                FlutterFlowTheme.of(context).primary,
                             verticalDividerThickness: 1.0,
                           );
                         },
-                      ),
-                    ),
-                    Align(
-                      alignment: AlignmentDirectional(1.0, 0.0),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            0.0, 15.0, 30.0, 0.0),
-                        child: FlutterFlowIconButton(
-                          borderRadius: 8.0,
-                          buttonSize: 40.0,
-                          fillColor: FlutterFlowTheme.of(context).primary,
-                          icon: FaIcon(
-                            FontAwesomeIcons.question,
-                            color: FlutterFlowTheme.of(context).info,
-                            size: 24.0,
-                          ),
-                          onPressed: () async {
-                            logFirebaseEvent(
-                                'LOG_USUARIOS_ACTUALIZACION_question_ICN_');
-                            logFirebaseEvent('IconButton_start_walkthrough');
-                            safeSetState(() =>
-                                _model.ttlLogUsuarioCreacionController =
-                                    createPageWalkthrough(context));
-                            _model.ttlLogUsuarioCreacionController
-                                ?.show(context: context);
-                          },
-                        ),
                       ),
                     ),
                   ],
@@ -491,672 +455,296 @@ class _LogUsuariosActualizacionWidgetState
                 tabletLandscape: false,
                 desktop: false,
               ))
-                Padding(
-                  padding:
-                      EdgeInsetsDirectional.fromSTEB(24.0, 24.0, 24.0, 24.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          FFButtonWidget(
-                            onPressed: () async {
-                              logFirebaseEvent(
-                                  'LOG_USUARIOS_ACTUALIZACION__BTN_ON_TAP');
-                              logFirebaseEvent('Button_navigate_to');
-
-                              context
-                                  .pushNamed(ReportesHomeAdminWidget.routeName);
-                            },
-                            text: '',
-                            icon: Icon(
-                              Icons.arrow_back,
-                              size: 28.0,
-                            ),
-                            options: FFButtonOptions(
-                              height: 40.0,
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 0.0, 16.0, 0.0),
-                              iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 0.0),
-                              color: Color(0x002797FF),
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .titleSmall
-                                  .override(
-                                    font: GoogleFonts.manrope(
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .fontStyle,
-                                    ),
-                                    color: Colors.white,
-                                    fontSize: 16.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .fontWeight,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .fontStyle,
-                                  ),
-                              elevation: 0.0,
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
+                Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        FlutterFlowIconButton(
+                          borderRadius: 8.0,
+                          buttonSize: MediaQuery.sizeOf(context).width * 0.15,
+                          fillColor: Color(0x0000507C),
+                          icon: Icon(
+                            Icons.arrow_back,
+                            color: FlutterFlowTheme.of(context).primaryText,
+                            size: 28.0,
                           ),
-                          Flexible(
-                            child: FlutterFlowIconButton(
-                              borderColor: Colors.transparent,
-                              borderRadius: 8.0,
-                              buttonSize: 40.0,
-                              fillColor: Color(0xFFB2332D),
-                              icon: Icon(
-                                Icons.delete,
-                                color: FlutterFlowTheme.of(context).info,
-                                size: 24.0,
-                              ),
-                              onPressed: () async {
-                                logFirebaseEvent(
-                                    'LOG_USUARIOS_ACTUALIZACION_delete_ICN_ON');
-                                logFirebaseEvent('IconButton_navigate_to');
+                          onPressed: () async {
+                            logFirebaseEvent(
+                                'LOG_USUARIOS_ACTUALIZACION_arrow_back_IC');
+                            logFirebaseEvent('IconButton_navigate_to');
 
-                                context
-                                    .goNamed(VaciarRegistrosWidget.routeName);
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                      Text(
-                        'Usuarios Actualizados',
-                        style:
-                            FlutterFlowTheme.of(context).displaySmall.override(
-                                  font: GoogleFonts.outfit(
-                                    fontWeight: FlutterFlowTheme.of(context)
-                                        .displaySmall
-                                        .fontWeight,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .displaySmall
-                                        .fontStyle,
-                                  ),
-                                  letterSpacing: 0.0,
-                                  fontWeight: FlutterFlowTheme.of(context)
-                                      .displaySmall
-                                      .fontWeight,
-                                  fontStyle: FlutterFlowTheme.of(context)
-                                      .displaySmall
-                                      .fontStyle,
-                                ),
-                      ),
-                      Material(
-                        color: Colors.transparent,
-                        elevation: 2.0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12.0),
+                            context
+                                .pushNamed(ReportesHomeAdminWidget.routeName);
+                          },
                         ),
-                        child: Container(
-                          width: MediaQuery.sizeOf(context).width * 1.0,
-                          height: MediaQuery.sizeOf(context).height * 0.73,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            borderRadius: BorderRadius.circular(12.0),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 16.0, 16.0, 16.0),
-                            child: SingleChildScrollView(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  SingleChildScrollView(
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Align(
-                                          alignment:
-                                              AlignmentDirectional(0.0, 0.0),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Expanded(
-                                                child: Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 3.0, 0.0, 0.0),
-                                                  child: InkWell(
-                                                    splashColor:
-                                                        Colors.transparent,
-                                                    focusColor:
-                                                        Colors.transparent,
-                                                    hoverColor:
-                                                        Colors.transparent,
-                                                    highlightColor:
-                                                        Colors.transparent,
-                                                    onTap: () async {
-                                                      logFirebaseEvent(
-                                                          'LOG_USUARIOS_ACTUALIZACION_Container_zco');
-                                                      logFirebaseEvent(
-                                                          'Container_simple_search');
-                                                      await queryUsersRecordOnce()
-                                                          .then(
-                                                            (records) => _model
-                                                                    .simpleSearchResults =
-                                                                TextSearch(
-                                                              records
-                                                                  .map(
-                                                                    (record) =>
-                                                                        TextSearchItem.fromTerms(
-                                                                            record,
-                                                                            [
-                                                                          record
-                                                                              .displayName
-                                                                        ]),
-                                                                  )
-                                                                  .toList(),
-                                                            )
-                                                                    .search(
-                                                                        'asdasdasdasd')
-                                                                    .map((r) =>
-                                                                        r.object)
-                                                                    .toList(),
-                                                          )
-                                                          .onError((_, __) =>
-                                                              _model.simpleSearchResults =
-                                                                  [])
-                                                          .whenComplete(() =>
-                                                              safeSetState(
-                                                                  () {}));
-                                                    },
-                                                    child: Container(
-                                                      width: 247.5,
-                                                      decoration: BoxDecoration(
-                                                        color: FlutterFlowTheme
-                                                                .of(context)
-                                                            .primaryBackground,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(25.0),
-                                                      ),
-                                                      child: Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    8.0,
-                                                                    12.0,
-                                                                    8.0,
-                                                                    12.0),
-                                                        child: Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          children: [
-                                                            Icon(
-                                                              Icons.search,
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .secondaryText,
-                                                              size: 20.0,
-                                                            ),
-                                                            Expanded(
-                                                              child: Container(
-                                                                width: 200.0,
-                                                                child:
-                                                                    TextFormField(
-                                                                  controller: _model
-                                                                      .textController,
-                                                                  focusNode: _model
-                                                                      .textFieldFocusNode,
-                                                                  onChanged: (_) =>
-                                                                      EasyDebounce
-                                                                          .debounce(
-                                                                    '_model.textController',
-                                                                    Duration(
-                                                                        milliseconds:
-                                                                            2000),
-                                                                    () async {
-                                                                      logFirebaseEvent(
-                                                                          'LOG_USUARIOS_ACTUALIZACION_TextField_s10');
-                                                                      logFirebaseEvent(
-                                                                          'TextField_update_app_state');
-                                                                      FFAppState()
-                                                                              .busqueda =
-                                                                          _model
-                                                                              .textController
-                                                                              .text;
-                                                                      safeSetState(
-                                                                          () {});
-                                                                    },
-                                                                  ),
-                                                                  autofocus:
-                                                                      false,
-                                                                  obscureText:
-                                                                      false,
-                                                                  decoration:
-                                                                      InputDecoration(
-                                                                    isDense:
-                                                                        true,
-                                                                    labelStyle: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .labelMedium
-                                                                        .override(
-                                                                          font:
-                                                                              GoogleFonts.manrope(
-                                                                            fontWeight:
-                                                                                FlutterFlowTheme.of(context).labelMedium.fontWeight,
-                                                                            fontStyle:
-                                                                                FlutterFlowTheme.of(context).labelMedium.fontStyle,
-                                                                          ),
-                                                                          letterSpacing:
-                                                                              0.0,
-                                                                          fontWeight: FlutterFlowTheme.of(context)
-                                                                              .labelMedium
-                                                                              .fontWeight,
-                                                                          fontStyle: FlutterFlowTheme.of(context)
-                                                                              .labelMedium
-                                                                              .fontStyle,
-                                                                        ),
-                                                                    hintText:
-                                                                        'Buscar',
-                                                                    hintStyle: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .labelMedium
-                                                                        .override(
-                                                                          font:
-                                                                              GoogleFonts.manrope(
-                                                                            fontWeight:
-                                                                                FlutterFlowTheme.of(context).labelMedium.fontWeight,
-                                                                            fontStyle:
-                                                                                FlutterFlowTheme.of(context).labelMedium.fontStyle,
-                                                                          ),
-                                                                          letterSpacing:
-                                                                              0.0,
-                                                                          fontWeight: FlutterFlowTheme.of(context)
-                                                                              .labelMedium
-                                                                              .fontWeight,
-                                                                          fontStyle: FlutterFlowTheme.of(context)
-                                                                              .labelMedium
-                                                                              .fontStyle,
-                                                                        ),
-                                                                    enabledBorder:
-                                                                        OutlineInputBorder(
-                                                                      borderSide:
-                                                                          BorderSide(
-                                                                        color: Color(
-                                                                            0x00000000),
-                                                                        width:
-                                                                            1.0,
-                                                                      ),
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              8.0),
-                                                                    ),
-                                                                    focusedBorder:
-                                                                        OutlineInputBorder(
-                                                                      borderSide:
-                                                                          BorderSide(
-                                                                        color: Color(
-                                                                            0x00000000),
-                                                                        width:
-                                                                            1.0,
-                                                                      ),
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              8.0),
-                                                                    ),
-                                                                    errorBorder:
-                                                                        OutlineInputBorder(
-                                                                      borderSide:
-                                                                          BorderSide(
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .error,
-                                                                        width:
-                                                                            1.0,
-                                                                      ),
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              8.0),
-                                                                    ),
-                                                                    focusedErrorBorder:
-                                                                        OutlineInputBorder(
-                                                                      borderSide:
-                                                                          BorderSide(
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .error,
-                                                                        width:
-                                                                            1.0,
-                                                                      ),
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              8.0),
-                                                                    ),
-                                                                    filled:
-                                                                        true,
-                                                                    fillColor: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .secondaryBackground,
-                                                                  ),
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMedium
-                                                                      .override(
-                                                                        font: GoogleFonts
-                                                                            .manrope(
-                                                                          fontWeight: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .fontWeight,
-                                                                          fontStyle: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .fontStyle,
-                                                                        ),
-                                                                        letterSpacing:
-                                                                            0.0,
-                                                                        fontWeight: FlutterFlowTheme.of(context)
-                                                                            .bodyMedium
-                                                                            .fontWeight,
-                                                                        fontStyle: FlutterFlowTheme.of(context)
-                                                                            .bodyMedium
-                                                                            .fontStyle,
-                                                                      ),
-                                                                  cursorColor:
-                                                                      FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primaryText,
-                                                                  validator: _model
-                                                                      .textControllerValidator
-                                                                      .asValidator(
-                                                                          context),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ].divide(SizedBox(
-                                                              width: 8.0)),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
+                      ],
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Align(
+                            alignment: AlignmentDirectional(0.0, 0.0),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 20.0),
+                              child: Text(
+                                'USUARIOS ACTUALIZADOS',
+                                textAlign: TextAlign.center,
+                                style: FlutterFlowTheme.of(context)
+                                    .displaySmall
+                                    .override(
+                                      fontFamily: 'NimbusSansLight',
+                                      fontSize: 30.0,
+                                      letterSpacing: 0.0,
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        12.0, 0.0, 12.0, 0.0),
-                                    child: Container(
-                                      width: MediaQuery.sizeOf(context).width *
-                                          1.04,
-                                      height:
-                                          MediaQuery.sizeOf(context).height *
-                                              0.6,
-                                      decoration: BoxDecoration(),
-                                      child: SingleChildScrollView(
+                              ),
+                            ),
+                          ),
+                          Material(
+                            color: Colors.transparent,
+                            elevation: 2.0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            child: Container(
+                              width: MediaQuery.sizeOf(context).width * 1.0,
+                              height: MediaQuery.sizeOf(context).height * 0.771,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                borderRadius: BorderRadius.circular(12.0),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    16.0, 16.0, 16.0, 16.0),
+                                child: SingleChildScrollView(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      SingleChildScrollView(
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 10.0, 0.0, 0.0),
-                                              child: StreamBuilder<
-                                                  List<
-                                                      LogActualizacionUsuariosRecord>>(
-                                                stream:
-                                                    queryLogActualizacionUsuariosRecord()
-                                                      ..listen((snapshot) {
-                                                        List<LogActualizacionUsuariosRecord>
-                                                            listViewLogActualizacionUsuariosRecordList =
-                                                            snapshot;
-                                                        if (_model.listViewPreviousSnapshot !=
-                                                                null &&
-                                                            !const ListEquality(
-                                                                    LogActualizacionUsuariosRecordDocumentEquality())
-                                                                .equals(
-                                                                    listViewLogActualizacionUsuariosRecordList,
-                                                                    _model
-                                                                        .listViewPreviousSnapshot)) {
-                                                          () async {}();
-                                                        }
-                                                        _model.listViewPreviousSnapshot =
-                                                            snapshot;
-                                                      }),
-                                                builder: (context, snapshot) {
-                                                  // Customize what your widget looks like when it's loading.
-                                                  if (!snapshot.hasData) {
-                                                    return Center(
-                                                      child: SizedBox(
-                                                        width: 50.0,
-                                                        height: 50.0,
-                                                        child:
-                                                            CircularProgressIndicator(
-                                                          valueColor:
-                                                              AlwaysStoppedAnimation<
-                                                                  Color>(
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    );
-                                                  }
-                                                  List<LogActualizacionUsuariosRecord>
-                                                      listViewLogActualizacionUsuariosRecordList =
-                                                      snapshot.data!;
-
-                                                  return ListView.builder(
-                                                    padding: EdgeInsets.zero,
-                                                    shrinkWrap: true,
-                                                    scrollDirection:
-                                                        Axis.vertical,
-                                                    itemCount:
-                                                        listViewLogActualizacionUsuariosRecordList
-                                                            .length,
-                                                    itemBuilder: (context,
-                                                        listViewIndex) {
-                                                      final listViewLogActualizacionUsuariosRecord =
-                                                          listViewLogActualizacionUsuariosRecordList[
-                                                              listViewIndex];
-                                                      return Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0.0,
-                                                                    10.0,
-                                                                    0.0,
-                                                                    10.0),
+                                            Align(
+                                              alignment: AlignmentDirectional(
+                                                  0.0, 0.0),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Expanded(
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  3.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      child: InkWell(
+                                                        splashColor:
+                                                            Colors.transparent,
+                                                        focusColor:
+                                                            Colors.transparent,
+                                                        hoverColor:
+                                                            Colors.transparent,
+                                                        highlightColor:
+                                                            Colors.transparent,
+                                                        onTap: () async {
+                                                          logFirebaseEvent(
+                                                              'LOG_USUARIOS_ACTUALIZACION_Container_zco');
+                                                          logFirebaseEvent(
+                                                              'Container_simple_search');
+                                                          await queryUsersRecordOnce()
+                                                              .then(
+                                                                (records) => _model
+                                                                        .simpleSearchResults =
+                                                                    TextSearch(
+                                                                  records
+                                                                      .map(
+                                                                        (record) => TextSearchItem.fromTerms(
+                                                                            record,
+                                                                            [
+                                                                              record.displayName
+                                                                            ]),
+                                                                      )
+                                                                      .toList(),
+                                                                )
+                                                                        .search(
+                                                                            'asdasdasdasd')
+                                                                        .map((r) =>
+                                                                            r.object)
+                                                                        .toList(),
+                                                              )
+                                                              .onError((_,
+                                                                      __) =>
+                                                                  _model.simpleSearchResults =
+                                                                      [])
+                                                              .whenComplete(() =>
+                                                                  safeSetState(
+                                                                      () {}));
+                                                        },
                                                         child: Container(
-                                                          height: 154.53,
+                                                          width: 247.5,
                                                           decoration:
                                                               BoxDecoration(
                                                             color: FlutterFlowTheme
                                                                     .of(context)
-                                                                .secondaryBackground,
+                                                                .primary,
                                                             borderRadius:
                                                                 BorderRadius
                                                                     .circular(
-                                                                        14.0),
-                                                            border: Border.all(
-                                                              color:
-                                                                  Colors.black,
-                                                            ),
+                                                                        25.0),
                                                           ),
-                                                          child: Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            children: [
-                                                              Padding(
-                                                                padding: EdgeInsetsDirectional
+                                                          child: Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
                                                                     .fromSTEB(
-                                                                        5.0,
-                                                                        10.0,
-                                                                        0.0,
-                                                                        10.0),
-                                                                child: Row(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  children: [
-                                                                    Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                                                          0.0,
-                                                                          0.0,
-                                                                          10.0,
-                                                                          0.0),
-                                                                      child:
-                                                                          Text(
-                                                                        'Usuario \nActualizador:',
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .bodyMedium
-                                                                            .override(
-                                                                              font: GoogleFonts.manrope(
-                                                                                fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                                fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                              ),
-                                                                              letterSpacing: 0.0,
-                                                                              fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                              fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                            ),
-                                                                      ),
-                                                                    ),
-                                                                    Flexible(
-                                                                      child:
-                                                                          Text(
-                                                                        valueOrDefault<
-                                                                            String>(
-                                                                          listViewLogActualizacionUsuariosRecord
-                                                                              .usuarioActualizador,
-                                                                          'Usuario',
-                                                                        ),
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .bodyMedium
-                                                                            .override(
-                                                                              font: GoogleFonts.manrope(
-                                                                                fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                                fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                              ),
-                                                                              letterSpacing: 0.0,
-                                                                              fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                              fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                            ),
-                                                                      ),
-                                                                    ),
-                                                                  ],
+                                                                        8.0,
+                                                                        12.0,
+                                                                        8.0,
+                                                                        12.0),
+                                                            child: Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              children: [
+                                                                Icon(
+                                                                  Icons.search,
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .secondaryText,
+                                                                  size: 20.0,
                                                                 ),
-                                                              ),
-                                                              Padding(
-                                                                padding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            5.0,
-                                                                            5.0,
-                                                                            0.0,
-                                                                            10.0),
-                                                                child: Row(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  children: [
-                                                                    Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                                                          0.0,
-                                                                          0.0,
-                                                                          10.0,
-                                                                          0.0),
-                                                                      child:
-                                                                          Text(
-                                                                        'Usuario\nActualizado:',
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .bodyMedium
+                                                                Expanded(
+                                                                  child:
+                                                                      Container(
+                                                                    width:
+                                                                        200.0,
+                                                                    child:
+                                                                        TextFormField(
+                                                                      controller:
+                                                                          _model
+                                                                              .textController,
+                                                                      focusNode:
+                                                                          _model
+                                                                              .textFieldFocusNode,
+                                                                      onChanged:
+                                                                          (_) =>
+                                                                              EasyDebounce.debounce(
+                                                                        '_model.textController',
+                                                                        Duration(
+                                                                            milliseconds:
+                                                                                2000),
+                                                                        () async {
+                                                                          logFirebaseEvent(
+                                                                              'LOG_USUARIOS_ACTUALIZACION_TextField_s10');
+                                                                          logFirebaseEvent(
+                                                                              'TextField_update_app_state');
+                                                                          FFAppState().busqueda = _model
+                                                                              .textController
+                                                                              .text;
+                                                                          safeSetState(
+                                                                              () {});
+                                                                        },
+                                                                      ),
+                                                                      autofocus:
+                                                                          false,
+                                                                      obscureText:
+                                                                          false,
+                                                                      decoration:
+                                                                          InputDecoration(
+                                                                        isDense:
+                                                                            true,
+                                                                        labelStyle: FlutterFlowTheme.of(context)
+                                                                            .labelMedium
                                                                             .override(
                                                                               font: GoogleFonts.manrope(
-                                                                                fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                                fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                fontWeight: FlutterFlowTheme.of(context).labelMedium.fontWeight,
+                                                                                fontStyle: FlutterFlowTheme.of(context).labelMedium.fontStyle,
                                                                               ),
+                                                                              color: FlutterFlowTheme.of(context).primaryText,
+                                                                              fontSize: 16.0,
                                                                               letterSpacing: 0.0,
-                                                                              fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                              fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                              fontWeight: FlutterFlowTheme.of(context).labelMedium.fontWeight,
+                                                                              fontStyle: FlutterFlowTheme.of(context).labelMedium.fontStyle,
                                                                             ),
-                                                                      ),
-                                                                    ),
-                                                                    Flexible(
-                                                                      child:
-                                                                          Text(
-                                                                        valueOrDefault<
-                                                                            String>(
-                                                                          listViewLogActualizacionUsuariosRecord
-                                                                              .usuarioActualizado,
-                                                                          'Usuario',
+                                                                        hintText:
+                                                                            'Buscar',
+                                                                        hintStyle: FlutterFlowTheme.of(context)
+                                                                            .labelMedium
+                                                                            .override(
+                                                                              font: GoogleFonts.manrope(
+                                                                                fontWeight: FlutterFlowTheme.of(context).labelMedium.fontWeight,
+                                                                                fontStyle: FlutterFlowTheme.of(context).labelMedium.fontStyle,
+                                                                              ),
+                                                                              color: FlutterFlowTheme.of(context).primaryText,
+                                                                              fontSize: 15.0,
+                                                                              letterSpacing: 0.0,
+                                                                              fontWeight: FlutterFlowTheme.of(context).labelMedium.fontWeight,
+                                                                              fontStyle: FlutterFlowTheme.of(context).labelMedium.fontStyle,
+                                                                            ),
+                                                                        enabledBorder:
+                                                                            OutlineInputBorder(
+                                                                          borderSide:
+                                                                              BorderSide(
+                                                                            color:
+                                                                                Color(0x00000000),
+                                                                            width:
+                                                                                1.0,
+                                                                          ),
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(8.0),
                                                                         ),
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .bodyMedium
-                                                                            .override(
-                                                                              font: GoogleFonts.manrope(
-                                                                                fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                                fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                              ),
-                                                                              letterSpacing: 0.0,
-                                                                              fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                              fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                            ),
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                              Padding(
-                                                                padding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            5.0,
-                                                                            5.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                child: Row(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  children: [
-                                                                    Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                                                          0.0,
-                                                                          0.0,
-                                                                          8.0,
-                                                                          0.0),
-                                                                      child:
-                                                                          Text(
-                                                                        'Fecha:',
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .bodyMedium
-                                                                            .override(
-                                                                              font: GoogleFonts.manrope(
-                                                                                fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                                fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                              ),
-                                                                              letterSpacing: 0.0,
-                                                                              fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                              fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                            ),
-                                                                      ),
-                                                                    ),
-                                                                    Text(
-                                                                      valueOrDefault<
-                                                                          String>(
-                                                                        listViewLogActualizacionUsuariosRecord
-                                                                            .fechaActualizacion
-                                                                            ?.toString(),
-                                                                        '0/0/0',
+                                                                        focusedBorder:
+                                                                            OutlineInputBorder(
+                                                                          borderSide:
+                                                                              BorderSide(
+                                                                            color:
+                                                                                Color(0x00000000),
+                                                                            width:
+                                                                                1.0,
+                                                                          ),
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(8.0),
+                                                                        ),
+                                                                        errorBorder:
+                                                                            OutlineInputBorder(
+                                                                          borderSide:
+                                                                              BorderSide(
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).error,
+                                                                            width:
+                                                                                1.0,
+                                                                          ),
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(8.0),
+                                                                        ),
+                                                                        focusedErrorBorder:
+                                                                            OutlineInputBorder(
+                                                                          borderSide:
+                                                                              BorderSide(
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).error,
+                                                                            width:
+                                                                                1.0,
+                                                                          ),
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(8.0),
+                                                                        ),
+                                                                        filled:
+                                                                            true,
+                                                                        fillColor:
+                                                                            FlutterFlowTheme.of(context).secondaryBackground,
                                                                       ),
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
@@ -1174,32 +762,332 @@ class _LogUsuariosActualizacionWidgetState
                                                                             fontStyle:
                                                                                 FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                           ),
+                                                                      cursorColor:
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .primaryText,
+                                                                      validator: _model
+                                                                          .textControllerValidator
+                                                                          .asValidator(
+                                                                              context),
                                                                     ),
-                                                                  ],
+                                                                  ),
                                                                 ),
-                                                              ),
-                                                            ],
+                                                              ].divide(SizedBox(
+                                                                  width: 8.0)),
+                                                            ),
                                                           ),
                                                         ),
-                                                      );
-                                                    },
-                                                  );
-                                                },
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
                                             ),
-                                          ].divide(SizedBox(height: 0.0)),
+                                          ],
                                         ),
                                       ),
-                                    ),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            12.0, 0.0, 12.0, 0.0),
+                                        child: Container(
+                                          width:
+                                              MediaQuery.sizeOf(context).width *
+                                                  1.04,
+                                          height: MediaQuery.sizeOf(context)
+                                                  .height *
+                                              0.6,
+                                          decoration: BoxDecoration(),
+                                          child: SingleChildScrollView(
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 10.0, 0.0, 0.0),
+                                                  child: StreamBuilder<
+                                                      List<
+                                                          LogActualizacionUsuariosRecord>>(
+                                                    stream:
+                                                        queryLogActualizacionUsuariosRecord()
+                                                          ..listen((snapshot) {
+                                                            List<LogActualizacionUsuariosRecord>
+                                                                listViewLogActualizacionUsuariosRecordList =
+                                                                snapshot;
+                                                            if (_model.listViewPreviousSnapshot !=
+                                                                    null &&
+                                                                !const ListEquality(
+                                                                        LogActualizacionUsuariosRecordDocumentEquality())
+                                                                    .equals(
+                                                                        listViewLogActualizacionUsuariosRecordList,
+                                                                        _model
+                                                                            .listViewPreviousSnapshot)) {
+                                                              () async {}();
+                                                            }
+                                                            _model.listViewPreviousSnapshot =
+                                                                snapshot;
+                                                          }),
+                                                    builder:
+                                                        (context, snapshot) {
+                                                      // Customize what your widget looks like when it's loading.
+                                                      if (!snapshot.hasData) {
+                                                        return Center(
+                                                          child: SizedBox(
+                                                            width: 50.0,
+                                                            height: 50.0,
+                                                            child:
+                                                                CircularProgressIndicator(
+                                                              valueColor:
+                                                                  AlwaysStoppedAnimation<
+                                                                      Color>(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primary,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        );
+                                                      }
+                                                      List<LogActualizacionUsuariosRecord>
+                                                          listViewLogActualizacionUsuariosRecordList =
+                                                          snapshot.data!;
+
+                                                      return ListView.builder(
+                                                        padding:
+                                                            EdgeInsets.zero,
+                                                        shrinkWrap: true,
+                                                        scrollDirection:
+                                                            Axis.vertical,
+                                                        itemCount:
+                                                            listViewLogActualizacionUsuariosRecordList
+                                                                .length,
+                                                        itemBuilder: (context,
+                                                            listViewIndex) {
+                                                          final listViewLogActualizacionUsuariosRecord =
+                                                              listViewLogActualizacionUsuariosRecordList[
+                                                                  listViewIndex];
+                                                          return Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0.0,
+                                                                        10.0,
+                                                                        0.0,
+                                                                        10.0),
+                                                            child: Container(
+                                                              height: 159.55,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryBackground,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            14.0),
+                                                                border:
+                                                                    Border.all(
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primary,
+                                                                ),
+                                                              ),
+                                                              child: Column(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            5.0,
+                                                                            10.0,
+                                                                            0.0,
+                                                                            10.0),
+                                                                    child: Row(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      children: [
+                                                                        Padding(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              0.0,
+                                                                              0.0,
+                                                                              10.0,
+                                                                              0.0),
+                                                                          child:
+                                                                              Text(
+                                                                            'Usuario \nActualizador:',
+                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                  font: GoogleFonts.manrope(
+                                                                                    fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                    fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                  ),
+                                                                                  fontSize: 16.0,
+                                                                                  letterSpacing: 0.0,
+                                                                                  fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                ),
+                                                                          ),
+                                                                        ),
+                                                                        Flexible(
+                                                                          child:
+                                                                              Text(
+                                                                            valueOrDefault<String>(
+                                                                              listViewLogActualizacionUsuariosRecord.usuarioActualizador,
+                                                                              'Usuario',
+                                                                            ),
+                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                  font: GoogleFonts.manrope(
+                                                                                    fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                    fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                  ),
+                                                                                  fontSize: 16.0,
+                                                                                  letterSpacing: 0.0,
+                                                                                  fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                ),
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                  Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            5.0,
+                                                                            5.0,
+                                                                            0.0,
+                                                                            10.0),
+                                                                    child: Row(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      children: [
+                                                                        Padding(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              0.0,
+                                                                              0.0,
+                                                                              10.0,
+                                                                              0.0),
+                                                                          child:
+                                                                              Text(
+                                                                            'Usuario\nActualizado:',
+                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                  font: GoogleFonts.manrope(
+                                                                                    fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                    fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                  ),
+                                                                                  fontSize: 16.0,
+                                                                                  letterSpacing: 0.0,
+                                                                                  fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                ),
+                                                                          ),
+                                                                        ),
+                                                                        Flexible(
+                                                                          child:
+                                                                              Text(
+                                                                            valueOrDefault<String>(
+                                                                              listViewLogActualizacionUsuariosRecord.usuarioActualizado,
+                                                                              'Usuario',
+                                                                            ),
+                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                  font: GoogleFonts.manrope(
+                                                                                    fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                    fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                  ),
+                                                                                  fontSize: 16.0,
+                                                                                  letterSpacing: 0.0,
+                                                                                  fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                ),
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                  Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            5.0,
+                                                                            5.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                    child: Row(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      children: [
+                                                                        Padding(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              0.0,
+                                                                              0.0,
+                                                                              8.0,
+                                                                              0.0),
+                                                                          child:
+                                                                              Text(
+                                                                            'Fecha:',
+                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                  font: GoogleFonts.manrope(
+                                                                                    fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                    fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                  ),
+                                                                                  fontSize: 16.0,
+                                                                                  letterSpacing: 0.0,
+                                                                                  fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                ),
+                                                                          ),
+                                                                        ),
+                                                                        Text(
+                                                                          valueOrDefault<
+                                                                              String>(
+                                                                            listViewLogActualizacionUsuariosRecord.fechaActualizacion?.toString(),
+                                                                            '0/0/0',
+                                                                          ),
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodyMedium
+                                                                              .override(
+                                                                                font: GoogleFonts.manrope(
+                                                                                  fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                ),
+                                                                                fontSize: 16.0,
+                                                                                letterSpacing: 0.0,
+                                                                                fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                              ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          );
+                                                        },
+                                                      );
+                                                    },
+                                                  ),
+                                                ),
+                                              ].divide(SizedBox(height: 0.0)),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ].divide(SizedBox(height: 16.0)),
                                   ),
-                                ].divide(SizedBox(height: 16.0)),
+                                ),
                               ),
                             ),
                           ),
-                        ),
+                        ],
                       ),
-                    ].divide(SizedBox(height: 24.0)),
-                  ),
+                    ),
+                  ].divide(SizedBox(height: 24.0)),
                 ),
             ],
           ),
@@ -1212,7 +1100,7 @@ class _LogUsuariosActualizacionWidgetState
       TutorialCoachMark(
         targets: createWalkthroughTargets(context),
         onFinish: () async {
-          safeSetState(() => _model.ttlLogUsuarioCreacionController = null);
+          safeSetState(() => _model.logUsuariosActualizacionController = null);
         },
         onSkip: () {
           return true;

@@ -28,7 +28,7 @@ class LogUsuariosActualizacionModel
 
   ///  State fields for stateful widgets in this page.
 
-  TutorialCoachMark? ttlLogUsuarioCreacionController;
+  TutorialCoachMark? logUsuariosActualizacionController;
   // Stores action output result for [Firestore Query - Query a collection] action in logUsuariosActualizacion widget.
   List<LogActualizacionUsuariosRecord>? userCreationList;
   // State field(s) for PaginatedDataTable widget.
@@ -46,7 +46,7 @@ class LogUsuariosActualizacionModel
 
   @override
   void dispose() {
-    ttlLogUsuarioCreacionController?.finish();
+    logUsuariosActualizacionController?.finish();
     paginatedDataTableController.dispose();
     textFieldFocusNode?.dispose();
     textController?.dispose();

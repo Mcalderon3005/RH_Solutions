@@ -10,7 +10,7 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 class CrearActividadModel extends FlutterFlowModel<CrearActividadWidget> {
   ///  State fields for stateful widgets in this page.
 
-  TutorialCoachMark? ttlCrearActividadController;
+  TutorialCoachMark? crearActividadController;
   DateTime? datePicked1;
   // State field(s) for txtEnlace widget.
   FocusNode? txtEnlaceFocusNode1;
@@ -75,7 +75,7 @@ class CrearActividadModel extends FlutterFlowModel<CrearActividadWidget> {
 
   @override
   void dispose() {
-    ttlCrearActividadController?.finish();
+    crearActividadController?.finish();
     txtEnlaceFocusNode1?.dispose();
     txtEnlaceTextController1?.dispose();
 

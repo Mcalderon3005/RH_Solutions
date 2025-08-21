@@ -24,9 +24,11 @@ class LogSesionesModel extends FlutterFlowModel<LogSesionesWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  TutorialCoachMark? ttlLogSesionesController;
+  TutorialCoachMark? logSesionesController;
   // Stores action output result for [Firestore Query - Query a collection] action in logSesiones widget.
   List<LogSesionRecord>? sesionesList;
+  // Stores action output result for [Firestore Query - Query a collection] action in logSesiones widget.
+  UsersRecord? userInfoSingle;
   // State field(s) for PaginatedDataTable widget.
   final paginatedDataTableController =
       FlutterFlowDataTableController<LogSesionRecord>();
@@ -42,7 +44,7 @@ class LogSesionesModel extends FlutterFlowModel<LogSesionesWidget> {
 
   @override
   void dispose() {
-    ttlLogSesionesController?.finish();
+    logSesionesController?.finish();
     paginatedDataTableController.dispose();
     textFieldFocusNode?.dispose();
     textController?.dispose();

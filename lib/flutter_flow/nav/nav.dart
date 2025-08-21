@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
+import '/backend/schema/enums/enums.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
@@ -132,11 +133,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
             FFRoute(
               name: IndexEmpleadoWidget.routeName,
               path: IndexEmpleadoWidget.routePath,
+              requireAuth: true,
               builder: (context, params) => IndexEmpleadoWidget(),
             ),
             FFRoute(
               name: HomeAdminPageWidget.routeName,
               path: HomeAdminPageWidget.routePath,
+              requireAuth: true,
               builder: (context, params) => HomeAdminPageWidget(),
             ),
             FFRoute(
@@ -147,6 +150,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
             FFRoute(
               name: EditEmpleadoWidget.routeName,
               path: EditEmpleadoWidget.routePath,
+              requireAuth: true,
               builder: (context, params) => EditEmpleadoWidget(
                 nombre: params.getParam(
                   'nombre',
@@ -201,35 +205,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
               ),
             ),
             FFRoute(
-              name: DefinirActividadBUWidget.routeName,
-              path: DefinirActividadBUWidget.routePath,
-              builder: (context, params) => DefinirActividadBUWidget(),
-            ),
-            FFRoute(
               name: CrearActividadWidget.routeName,
               path: CrearActividadWidget.routePath,
+              requireAuth: true,
               builder: (context, params) => CrearActividadWidget(),
-            ),
-            FFRoute(
-              name: SolicitudesVacacionesAdminBUWidget.routeName,
-              path: SolicitudesVacacionesAdminBUWidget.routePath,
-              builder: (context, params) =>
-                  SolicitudesVacacionesAdminBUWidget(),
             ),
             FFRoute(
               name: FacturacionWidget.routeName,
               path: FacturacionWidget.routePath,
+              requireAuth: true,
               builder: (context, params) => FacturacionWidget(),
-            ),
-            FFRoute(
-              name: LogSesionesBUWidget.routeName,
-              path: LogSesionesBUWidget.routePath,
-              builder: (context, params) => LogSesionesBUWidget(),
-            ),
-            FFRoute(
-              name: LogErroresSesionBUWidget.routeName,
-              path: LogErroresSesionBUWidget.routePath,
-              builder: (context, params) => LogErroresSesionBUWidget(),
             ),
             FFRoute(
               name: SolicitudVacacionesWidget.routeName,
@@ -238,20 +223,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
               builder: (context, params) => SolicitudVacacionesWidget(),
             ),
             FFRoute(
-              name: IndexSolicitudesBUWidget.routeName,
-              path: IndexSolicitudesBUWidget.routePath,
-              requireAuth: true,
-              builder: (context, params) => IndexSolicitudesBUWidget(),
-            ),
-            FFRoute(
-              name: IndexIncapacidadesBUWidget.routeName,
-              path: IndexIncapacidadesBUWidget.routePath,
-              requireAuth: true,
-              builder: (context, params) => IndexIncapacidadesBUWidget(),
-            ),
-            FFRoute(
               name: SolicitudesVacacionesDetalleWidget.routeName,
               path: SolicitudesVacacionesDetalleWidget.routePath,
+              requireAuth: true,
               builder: (context, params) => SolicitudesVacacionesDetalleWidget(
                 nombre: params.getParam(
                   'nombre',
@@ -300,6 +274,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
             FFRoute(
               name: SolicitudesIncapacidadesDetalleWidget.routeName,
               path: SolicitudesIncapacidadesDetalleWidget.routePath,
+              requireAuth: true,
               builder: (context, params) =>
                   SolicitudesIncapacidadesDetalleWidget(
                 nombre: params.getParam(
@@ -349,6 +324,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
             FFRoute(
               name: SolicitudesHomeAdminWidget.routeName,
               path: SolicitudesHomeAdminWidget.routePath,
+              requireAuth: true,
               builder: (context, params) => SolicitudesHomeAdminWidget(),
             ),
             FFRoute(
@@ -396,21 +372,25 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
             FFRoute(
               name: CrearPagoWidget.routeName,
               path: CrearPagoWidget.routePath,
+              requireAuth: true,
               builder: (context, params) => CrearPagoWidget(),
             ),
             FFRoute(
               name: ActividadesHomeAdminWidget.routeName,
               path: ActividadesHomeAdminWidget.routePath,
+              requireAuth: true,
               builder: (context, params) => ActividadesHomeAdminWidget(),
             ),
             FFRoute(
               name: IndexIncapacidadAdminWidget.routeName,
               path: IndexIncapacidadAdminWidget.routePath,
+              requireAuth: true,
               builder: (context, params) => IndexIncapacidadAdminWidget(),
             ),
             FFRoute(
               name: SolicitudesVacacionesAdminWidget.routeName,
               path: SolicitudesVacacionesAdminWidget.routePath,
+              requireAuth: true,
               builder: (context, params) => SolicitudesVacacionesAdminWidget(),
             ),
             FFRoute(
@@ -422,6 +402,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
             FFRoute(
               name: ReportesHomeAdminWidget.routeName,
               path: ReportesHomeAdminWidget.routePath,
+              requireAuth: true,
               builder: (context, params) => ReportesHomeAdminWidget(),
             ),
             FFRoute(
@@ -433,6 +414,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
             FFRoute(
               name: LogUsuariosCreacionWidget.routeName,
               path: LogUsuariosCreacionWidget.routePath,
+              requireAuth: true,
               builder: (context, params) => LogUsuariosCreacionWidget(),
             ),
             FFRoute(
@@ -462,6 +444,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
             FFRoute(
               name: EditarPagoWidget.routeName,
               path: EditarPagoWidget.routePath,
+              requireAuth: true,
               builder: (context, params) => EditarPagoWidget(
                 pago: params.getParam(
                   'pago',
@@ -522,6 +505,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
             FFRoute(
               name: FacturacionEmpleadoWidget.routeName,
               path: FacturacionEmpleadoWidget.routePath,
+              requireAuth: true,
               builder: (context, params) => FacturacionEmpleadoWidget(),
             ),
             FFRoute(
@@ -539,6 +523,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
             FFRoute(
               name: SolicitudesIndexWidget.routeName,
               path: SolicitudesIndexWidget.routePath,
+              requireAuth: true,
               builder: (context, params) => SolicitudesIndexWidget(),
             ),
             FFRoute(
@@ -550,6 +535,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
             FFRoute(
               name: CorregirPagoWidget.routeName,
               path: CorregirPagoWidget.routePath,
+              requireAuth: true,
               builder: (context, params) => CorregirPagoWidget(
                 pago: params.getParam(
                   'pago',
@@ -567,6 +553,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
             FFRoute(
               name: LogCalendarioActividadesWidget.routeName,
               path: LogCalendarioActividadesWidget.routePath,
+              requireAuth: true,
               builder: (context, params) => LogCalendarioActividadesWidget(),
             ),
             FFRoute(
@@ -579,13 +566,96 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
             FFRoute(
               name: VaciarRegistrosWidget.routeName,
               path: VaciarRegistrosWidget.routePath,
+              requireAuth: true,
               builder: (context, params) => VaciarRegistrosWidget(),
             ),
             FFRoute(
-              name: IndexIncapacidadesCopyWidget.routeName,
-              path: IndexIncapacidadesCopyWidget.routePath,
+              name: AcercaWidget.routeName,
+              path: AcercaWidget.routePath,
+              builder: (context, params) => AcercaWidget(),
+            ),
+            FFRoute(
+              name: EmpleadoVacacionesAdminWidget.routeName,
+              path: EmpleadoVacacionesAdminWidget.routePath,
               requireAuth: true,
-              builder: (context, params) => IndexIncapacidadesCopyWidget(),
+              builder: (context, params) => EmpleadoVacacionesAdminWidget(),
+            ),
+            FFRoute(
+              name: InformacionSesionWidget.routeName,
+              path: InformacionSesionWidget.routePath,
+              requireAuth: true,
+              builder: (context, params) => InformacionSesionWidget(),
+            ),
+            FFRoute(
+              name: LogReporteErroresWidget.routeName,
+              path: LogReporteErroresWidget.routePath,
+              requireAuth: true,
+              builder: (context, params) => LogReporteErroresWidget(),
+            ),
+            FFRoute(
+              name: VerReporteErrorWidget.routeName,
+              path: VerReporteErrorWidget.routePath,
+              requireAuth: true,
+              builder: (context, params) => VerReporteErrorWidget(
+                usuarioCreador: params.getParam(
+                  'usuarioCreador',
+                  ParamType.String,
+                ),
+                usuarioAsignado: params.getParam(
+                  'usuarioAsignado',
+                  ParamType.String,
+                ),
+                fechaCreacion: params.getParam(
+                  'fechaCreacion',
+                  ParamType.DateTime,
+                ),
+                fechaCompletado: params.getParam(
+                  'fechaCompletado',
+                  ParamType.DateTime,
+                ),
+                ttitulo: params.getParam(
+                  'ttitulo',
+                  ParamType.String,
+                ),
+                descripcionError: params.getParam(
+                  'descripcionError',
+                  ParamType.String,
+                ),
+                tipoError: params.getParam<TipoError>(
+                  'tipoError',
+                  ParamType.Enum,
+                ),
+                estaActivo: params.getParam(
+                  'estaActivo',
+                  ParamType.bool,
+                ),
+                comentarios: params.getParam<ComentariosStruct>(
+                  'comentarios',
+                  ParamType.DataStruct,
+                  isList: true,
+                  structBuilder: ComentariosStruct.fromSerializableMap,
+                ),
+                codigo: params.getParam(
+                  'codigo',
+                  ParamType.String,
+                ),
+                reporteRef: params.getParam(
+                  'reporteRef',
+                  ParamType.DocumentReference,
+                  isList: false,
+                  collectionNamePath: ['reporteErrores'],
+                ),
+                estadoError: params.getParam<Estados>(
+                  'estadoError',
+                  ParamType.Enum,
+                ),
+              ),
+            ),
+            FFRoute(
+              name: HorariosAdminSeleccionWidget.routeName,
+              path: HorariosAdminSeleccionWidget.routePath,
+              requireAuth: true,
+              builder: (context, params) => HorariosAdminSeleccionWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),

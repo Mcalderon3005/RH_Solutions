@@ -22,6 +22,25 @@ enum CalendarFormat {
   Dia,
 }
 
+enum Estados {
+  Completado,
+  Trabajado,
+  RespuestaPendiente,
+  Cancelado_Incorrecto,
+  Cancelado_NoCompletado,
+  NoAsignado,
+}
+
+enum TipoError {
+  ErrorFuncionalidadesAplicacionWeb,
+  ErrorInicioSesion,
+  ErrorCompatibilidad,
+  ErrorConexion,
+  ErrorInterfaz,
+  ErrorPagosContabilidad,
+  SinAsignar,
+}
+
 extension FFEnumExtensions<T extends Enum> on T {
   String serialize() => name;
 }
@@ -39,6 +58,10 @@ T? deserializeEnum<T>(String? value) {
       return StartingDayOfWeek.values.deserialize(value) as T?;
     case (CalendarFormat):
       return CalendarFormat.values.deserialize(value) as T?;
+    case (Estados):
+      return Estados.values.deserialize(value) as T?;
+    case (TipoError):
+      return TipoError.values.deserialize(value) as T?;
     default:
       return null;
   }

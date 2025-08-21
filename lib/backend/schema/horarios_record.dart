@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import '/backend/algolia/serialization_util.dart';
+import '/backend/algolia/algolia_manager.dart';
 import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
@@ -56,6 +58,42 @@ class HorariosRecord extends FirestoreRecord {
     DocumentReference reference,
   ) =>
       HorariosRecord._(reference, mapFromFirestore(data));
+
+  static HorariosRecord fromAlgolia(AlgoliaObjectSnapshot snapshot) =>
+      HorariosRecord.getDocumentFromData(
+        {
+          'HoraInicio': convertAlgoliaParam(
+            snapshot.data['HoraInicio'],
+            ParamType.DateTime,
+            false,
+          ),
+          'HoraFinal': convertAlgoliaParam(
+            snapshot.data['HoraFinal'],
+            ParamType.DateTime,
+            false,
+          ),
+          'Usuario': snapshot.data['Usuario'],
+        },
+        HorariosRecord.collection.doc(snapshot.objectID),
+      );
+
+  static Future<List<HorariosRecord>> search({
+    String? term,
+    FutureOr<LatLng>? location,
+    int? maxResults,
+    double? searchRadiusMeters,
+    bool useCache = false,
+  }) =>
+      FFAlgoliaManager.instance
+          .algoliaQuery(
+            index: 'Horarios',
+            term: term,
+            maxResults: maxResults,
+            location: location,
+            searchRadiusMeters: searchRadiusMeters,
+            useCache: useCache,
+          )
+          .then((r) => r.map(fromAlgolia).toList());
 
   @override
   String toString() =>

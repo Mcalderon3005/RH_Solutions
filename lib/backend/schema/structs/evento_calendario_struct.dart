@@ -1,5 +1,5 @@
 // ignore_for_file: unnecessary_getters_setters
-
+import '/backend/algolia/serialization_util.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '/backend/schema/util/firestore_util.dart';
@@ -90,6 +90,29 @@ class EventoCalendarioStruct extends FFFirebaseStruct {
           data['color'],
           ParamType.Color,
           false,
+        ),
+      );
+
+  static EventoCalendarioStruct fromAlgoliaData(Map<String, dynamic> data) =>
+      EventoCalendarioStruct(
+        titulo: convertAlgoliaParam(
+          data['titulo'],
+          ParamType.String,
+          false,
+        ),
+        fecha: convertAlgoliaParam(
+          data['fecha'],
+          ParamType.DateTime,
+          false,
+        ),
+        color: convertAlgoliaParam(
+          data['color'],
+          ParamType.Color,
+          false,
+        ),
+        firestoreUtilData: FirestoreUtilData(
+          clearUnsetFields: false,
+          create: true,
         ),
       );
 

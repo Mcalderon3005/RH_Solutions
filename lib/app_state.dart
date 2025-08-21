@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '/backend/schema/enums/enums.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FFAppState extends ChangeNotifier {
@@ -27,6 +28,9 @@ class FFAppState extends ChangeNotifier {
               prefs.getInt('ff_inicioHorario')!)
           : _inicioHorario;
     });
+    _safeInit(() {
+      _IdDispositivo = prefs.getString('ff_IdDispositivo') ?? _IdDispositivo;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -35,6 +39,18 @@ class FFAppState extends ChangeNotifier {
   }
 
   late SharedPreferences prefs;
+
+  TipoError? _tipoError;
+  TipoError? get tipoError => _tipoError;
+  set tipoError(TipoError? value) {
+    _tipoError = value;
+  }
+
+  Estados? _estadoError;
+  Estados? get estadoError => _estadoError;
+  set estadoError(Estados? value) {
+    _estadoError = value;
+  }
 
   String _busqueda = '';
   String get busqueda => _busqueda;
@@ -100,6 +116,13 @@ class FFAppState extends ChangeNotifier {
   bool get isListaCompleta => _isListaCompleta;
   set isListaCompleta(bool value) {
     _isListaCompleta = value;
+  }
+
+  String _IdDispositivo = '';
+  String get IdDispositivo => _IdDispositivo;
+  set IdDispositivo(String value) {
+    _IdDispositivo = value;
+    prefs.setString('ff_IdDispositivo', value);
   }
 }
 

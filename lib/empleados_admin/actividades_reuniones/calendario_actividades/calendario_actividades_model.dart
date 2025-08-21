@@ -3,6 +3,8 @@ import '/flutter_flow/flutter_flow_calendar.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'calendario_actividades_widget.dart' show CalendarioActividadesWidget;
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
+    show TutorialCoachMark;
 import 'package:flutter/material.dart';
 
 class CalendarioActividadesModel
@@ -36,19 +38,28 @@ class CalendarioActividadesModel
 
   ///  State fields for stateful widgets in this page.
 
+  TutorialCoachMark? calendarioActividadesController;
   // Stores action output result for [Firestore Query - Query a collection] action in CalendarioActividades widget.
   List<ReunionesRecord>? actividadesListU;
   // State field(s) for Calendar widget.
-  DateTimeRange? calendarSelectedDay;
+  DateTimeRange? calendarSelectedDay1;
+  // State field(s) for Calendar widget.
+  DateTimeRange? calendarSelectedDay2;
 
   @override
   void initState(BuildContext context) {
-    calendarSelectedDay = DateTimeRange(
+    calendarSelectedDay1 = DateTimeRange(
+      start: DateTime.now().startOfDay,
+      end: DateTime.now().endOfDay,
+    );
+    calendarSelectedDay2 = DateTimeRange(
       start: DateTime.now().startOfDay,
       end: DateTime.now().endOfDay,
     );
   }
 
   @override
-  void dispose() {}
+  void dispose() {
+    calendarioActividadesController?.finish();
+  }
 }
